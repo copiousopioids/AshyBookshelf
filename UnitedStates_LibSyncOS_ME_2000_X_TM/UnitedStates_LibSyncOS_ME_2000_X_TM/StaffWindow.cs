@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
-    public partial class Form1 : Form
+    public partial class StaffWindow : Form
     {
-        public Form1()
+        public StaffWindow()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
