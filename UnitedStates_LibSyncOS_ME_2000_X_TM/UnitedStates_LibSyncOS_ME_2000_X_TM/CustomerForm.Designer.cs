@@ -1,6 +1,6 @@
 ﻿namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
-    partial class ClientForm
+    partial class Customer_Home
     {
         /// <summary>
         /// Required designer variable.
@@ -28,11 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.customer_find_item_button = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // customer_find_item_button
+            // 
+            this.customer_find_item_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customer_find_item_button.Location = new System.Drawing.Point(40, 45);
+            this.customer_find_item_button.Name = "customer_find_item_button";
+            this.customer_find_item_button.Size = new System.Drawing.Size(188, 83);
+            this.customer_find_item_button.TabIndex = 0;
+            this.customer_find_item_button.Text = "Find Item";
+            this.customer_find_item_button.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(282, 45);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(188, 83);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "Account Information";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // Customer_Home
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "ClientForm";
+            this.ClientSize = new System.Drawing.Size(523, 164);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.customer_find_item_button);
+            this.Name = "Customer_Home";
+            this.Text = "Customer Home";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Button customer_find_item_button;
+        private System.Windows.Forms.Button button1;
     }
 }

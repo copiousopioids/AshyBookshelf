@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
-    public partial class Customer_Home : Form
+    public partial class CustomerAccountForm : Form
     {
-        public Customer_Home()
+        public CustomerAccountForm()
         {
             InitializeComponent();
         }
