@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="StaffCustomerSearchWindow.cs">
+		<SubType>Form</SubType>
+    </Compile>
     <Compile Include="CustomerAccountForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,8 +66,6 @@
     </Compile>
     <Compile Include="CustomerLoginForm.Designer.cs">
       <DependentUpon>CustomerLoginForm.cs</DependentUpon>
-    </Compile>
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="StaffCustomerSearchWindow.Designer.cs">
       <DependentUpon>StaffCustomerSearchWindow.cs</DependentUpon>
