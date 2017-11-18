@@ -1,0 +1,7 @@
+# Ignore this shit:
+
+bin/
+
+obj/
+
+Properties/
