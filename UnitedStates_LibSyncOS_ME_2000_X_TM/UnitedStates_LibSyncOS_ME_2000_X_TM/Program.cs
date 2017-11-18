@@ -16,7 +16,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StaffWindow());
+            Application.Run(new CustomerLoginForm());
         }
     }
 }
