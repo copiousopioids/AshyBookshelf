@@ -1,0 +1,9 @@
+# Ignore this shit:
+
+UnitedStates_LibSyncOS_ME_2000_X_TM/UnitedStates_LibSyncOS_ME_2000_X_TM/bin/*
+UnitedStates_LibSyncOS_ME_2000_X_TM/UnitedStates_LibSyncOS_ME_2000_X_TM/obj/*
+UnitedStates_LibSyncOS_ME_2000_X_TM/UnitedStates_LibSyncOS_ME_2000_X_TM/Properties/*
+
+*.rsx
+*.suo
+UnitedStates_LibSyncOS_ME_2000_X_TM/.vs/*

@@ -33,12 +33,14 @@
             this.Customer_Username_Label = new System.Windows.Forms.Label();
             this.Customer_Password_Label = new System.Windows.Forms.Label();
             this.Customer_Login_Submit_Button = new System.Windows.Forms.Button();
+            this.Customer_Login_Cancel_Button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Customer_Username_Textbox
             // 
             this.Customer_Username_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Customer_Username_Textbox.Location = new System.Drawing.Point(142, 56);
+            this.Customer_Username_Textbox.MaxLength = 16;
             this.Customer_Username_Textbox.Name = "Customer_Username_Textbox";
             this.Customer_Username_Textbox.Size = new System.Drawing.Size(189, 29);
             this.Customer_Username_Textbox.TabIndex = 0;
@@ -77,18 +79,29 @@
             // Customer_Login_Submit_Button
             // 
             this.Customer_Login_Submit_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Login_Submit_Button.Location = new System.Drawing.Point(119, 188);
+            this.Customer_Login_Submit_Button.Location = new System.Drawing.Point(36, 188);
             this.Customer_Login_Submit_Button.Name = "Customer_Login_Submit_Button";
             this.Customer_Login_Submit_Button.Size = new System.Drawing.Size(146, 46);
             this.Customer_Login_Submit_Button.TabIndex = 4;
             this.Customer_Login_Submit_Button.Text = "Submit";
             this.Customer_Login_Submit_Button.UseVisualStyleBackColor = true;
             // 
+            // Customer_Login_Cancel_Button
+            // 
+            this.Customer_Login_Cancel_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Login_Cancel_Button.Location = new System.Drawing.Point(217, 188);
+            this.Customer_Login_Cancel_Button.Name = "Customer_Login_Cancel_Button";
+            this.Customer_Login_Cancel_Button.Size = new System.Drawing.Size(146, 46);
+            this.Customer_Login_Cancel_Button.TabIndex = 5;
+            this.Customer_Login_Cancel_Button.Text = "Cancel";
+            this.Customer_Login_Cancel_Button.UseVisualStyleBackColor = true;
+            // 
             // CustomerLoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(396, 260);
+            this.Controls.Add(this.Customer_Login_Cancel_Button);
             this.Controls.Add(this.Customer_Login_Submit_Button);
             this.Controls.Add(this.Customer_Password_Label);
             this.Controls.Add(this.Customer_Username_Label);
@@ -108,5 +121,6 @@
         private System.Windows.Forms.Label Customer_Username_Label;
         private System.Windows.Forms.Label Customer_Password_Label;
         private System.Windows.Forms.Button Customer_Login_Submit_Button;
+        private System.Windows.Forms.Button Customer_Login_Cancel_Button;
     }
 }
