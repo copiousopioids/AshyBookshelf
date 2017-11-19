@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Award.cs" />
+    <Compile Include="Classes\Customer.cs" />
+    <Compile Include="Classes\Fine.cs" />
+    <Compile Include="Classes\Person.cs" />
+    <Compile Include="Classes\Role.cs" />
     <Compile Include="StaffAddBookItemWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +155,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Database\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
