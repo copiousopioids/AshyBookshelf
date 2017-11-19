@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Book.cs" />
+    <Compile Include="Condition.cs" />
+    <Compile Include="Genre.cs" />
+    <Compile Include="Item.cs" />
+    <Compile Include="Movie.cs" />
     <Compile Include="StaffAddBookItemWindow.cs">
       <SubType>Form</SubType>
     </Compile>
