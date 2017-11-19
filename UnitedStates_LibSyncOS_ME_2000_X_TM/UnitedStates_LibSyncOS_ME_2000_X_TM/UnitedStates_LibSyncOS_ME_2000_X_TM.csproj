@@ -51,11 +51,11 @@
     <Compile Include="Classes\Fine.cs" />
     <Compile Include="Classes\Person.cs" />
     <Compile Include="Classes\Role.cs" />
-    <Compile Include="Book.cs" />
-    <Compile Include="Condition.cs" />
-    <Compile Include="Genre.cs" />
-    <Compile Include="Item.cs" />
-    <Compile Include="Movie.cs" />
+    <Compile Include="Classes\Book.cs" />
+    <Compile Include="Classes\Condition.cs" />
+    <Compile Include="Classes\Genre.cs" />
+    <Compile Include="Classes\Item.cs" />
+    <Compile Include="Classes\Movie.cs" />
     <Compile Include="StaffAddBookItemWindow.cs">
       <SubType>Form</SubType>
     </Compile>
