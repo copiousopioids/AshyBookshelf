@@ -72,6 +72,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
+        public List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool VerifyAccount(string username, string password)
         {
             throw new NotImplementedException();

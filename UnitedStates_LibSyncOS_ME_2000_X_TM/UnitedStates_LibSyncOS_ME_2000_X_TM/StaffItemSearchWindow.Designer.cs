@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.staffSearchItemsTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -36,16 +36,16 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.button4 = new System.Windows.Forms.Button();
-            this.genericItems = new System.Windows.Forms.ListBox();
+            this.genericItemsList = new System.Windows.Forms.ListBox();
             this.staffSearchButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // staffSearchItemsTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(126, 9);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(151, 20);
-            this.textBox1.TabIndex = 0;
+            this.staffSearchItemsTextBox.Location = new System.Drawing.Point(126, 9);
+            this.staffSearchItemsTextBox.Name = "staffSearchItemsTextBox";
+            this.staffSearchItemsTextBox.Size = new System.Drawing.Size(151, 20);
+            this.staffSearchItemsTextBox.TabIndex = 0;
             // 
             // label1
             // 
@@ -115,13 +115,13 @@
             this.button4.Text = "Add Movie";
             this.button4.UseVisualStyleBackColor = true;
             // 
-            // genericItems
+            // genericItemsList
             // 
-            this.genericItems.FormattingEnabled = true;
-            this.genericItems.Location = new System.Drawing.Point(15, 38);
-            this.genericItems.Name = "genericItems";
-            this.genericItems.Size = new System.Drawing.Size(464, 173);
-            this.genericItems.TabIndex = 9;
+            this.genericItemsList.FormattingEnabled = true;
+            this.genericItemsList.Location = new System.Drawing.Point(15, 38);
+            this.genericItemsList.Name = "genericItemsList";
+            this.genericItemsList.Size = new System.Drawing.Size(464, 173);
+            this.genericItemsList.TabIndex = 9;
             // 
             // staffSearchButton
             // 
@@ -139,7 +139,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(491, 261);
             this.Controls.Add(this.staffSearchButton);
-            this.Controls.Add(this.genericItems);
+            this.Controls.Add(this.genericItemsList);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
@@ -147,7 +147,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.staffSearchItemsTextBox);
             this.Name = "StaffItemSearchWindow";
             this.Text = "StaffItemSearchWindow";
             this.ResumeLayout(false);
@@ -157,7 +157,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox staffSearchItemsTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
@@ -165,7 +165,7 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ListBox genericItems;
+        private System.Windows.Forms.ListBox genericItemsList;
         private System.Windows.Forms.Button staffSearchButton;
     }
 }

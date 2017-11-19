@@ -58,6 +58,7 @@
     <Compile Include="Classes\Movie.cs" />
     <Compile Include="Database\DatabaseController.cs" />
     <Compile Include="DialogReturn.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="IControllerFunctions.cs" />
     <Compile Include="ILibraryForm.cs" />
     <Compile Include="Library.cs">

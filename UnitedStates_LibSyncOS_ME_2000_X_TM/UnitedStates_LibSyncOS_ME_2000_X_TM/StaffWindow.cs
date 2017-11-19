@@ -42,6 +42,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     var dialogReturn = staffItemSearchWindow.Diplay();
                     switch (dialogReturn) {
                         case DialogReturn.Search:
+                            var searchString = staffItemSearchWindow.staffSearchString;
+                            if (!searchString.Equals(""))
+                            {
+                                
+                            }
+                            else {
+                                MessageBox.Show("Please enter something into the search box before searching");
+                            }
                             break;
                         case DialogReturn.AddBook:
                             break;

@@ -12,6 +12,16 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class StaffItemSearchWindow : Form, ILibraryForm
     {
+
+        public string staffSearchString {
+            get {
+                return staffSearchItemsTextBox.Text.ToString();
+            }
+            set {
+                staffSearchItemsTextBox.Text = value;
+            }
+        }
+
         public StaffItemSearchWindow()
         {
             InitializeComponent();

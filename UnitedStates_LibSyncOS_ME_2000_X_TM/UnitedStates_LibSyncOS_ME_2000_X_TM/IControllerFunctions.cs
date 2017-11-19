@@ -33,6 +33,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         bool PayFine(string username);
 
         bool AddFine(string username);
+        List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria);
 
     }
 }
