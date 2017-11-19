@@ -27,7 +27,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool Available { get; set; }
 
-
         public Condition Condition { get; set; }
 
         public int DamageFine { get; set; }
