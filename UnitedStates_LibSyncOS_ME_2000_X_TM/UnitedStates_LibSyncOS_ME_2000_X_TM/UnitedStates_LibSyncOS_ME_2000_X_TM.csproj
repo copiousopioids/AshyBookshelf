@@ -46,8 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="StaffAddBookItemWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffAddBookItemWindow.Designer.cs">
+      <DependentUpon>StaffAddBookItemWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StaffAddContributorWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffAddContributorWindow.Designer.cs">
+      <DependentUpon>StaffAddContributorWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StaffAddMovieItemWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffAddMovieItemWindow.Designer.cs">
+      <DependentUpon>StaffAddMovieItemWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="StaffCustomerSearchWindow.cs">
-		<SubType>Form</SubType>
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="CustomerAccountForm.cs">
       <SubType>Form</SubType>
@@ -102,6 +120,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="StaffAddBookItemWindow.resx">
+      <DependentUpon>StaffAddBookItemWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaffAddContributorWindow.resx">
+      <DependentUpon>StaffAddContributorWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaffAddMovieItemWindow.resx">
+      <DependentUpon>StaffAddMovieItemWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StaffCustomerSearchWindow.resx">
       <DependentUpon>StaffCustomerSearchWindow.cs</DependentUpon>
     </EmbeddedResource>
