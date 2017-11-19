@@ -56,6 +56,9 @@
     <Compile Include="Classes\Genre.cs" />
     <Compile Include="Classes\Item.cs" />
     <Compile Include="Classes\Movie.cs" />
+    <Compile Include="Database\DatabaseController.cs" />
+    <Compile Include="IControllerFunctions.cs" />
+    <Compile Include="LibraryController.cs" />
     <Compile Include="StaffAddBookItemWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,9 +164,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Database\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

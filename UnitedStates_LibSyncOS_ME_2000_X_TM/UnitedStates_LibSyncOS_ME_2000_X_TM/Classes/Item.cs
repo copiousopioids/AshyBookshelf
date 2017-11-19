@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
+    public enum ItemTypes
+    {
+        Book,
+        Movie
+    }
     public interface Item
     {
         string Title { get; set; }
