@@ -5,10 +5,12 @@ using UnitedStates_LibSyncOS_ME_2000_X_TM.Database;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
-    internal class LibraryController : IControllerFunctions
+    public class LibraryController : IControllerFunctions
     {
         // Initialize a new DB class that implements the IDB interface.
         private DatabaseController databaseController;
+        //private StaffCustomerSearchWindow StaffCustomerSearchWindow;
+        //private StaffItemSearchWindow StaffItemSearchWindow;
 
         public LibraryController()
         {
