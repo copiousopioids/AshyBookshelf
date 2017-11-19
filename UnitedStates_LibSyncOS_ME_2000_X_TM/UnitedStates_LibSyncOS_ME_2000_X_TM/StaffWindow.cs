@@ -12,7 +12,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class StaffWindow : Form
     {
-        LibraryController LibraryController;
+        private StaffAddBookItemWindow staffAddBookItemWindow;
+        private StaffAddContributorWindow staffAddContributorWindow;
+        private StaffAddMovieItemWindow staffAddMovieItemWindow;
+        private StaffCustomerSearchWindow staffCustomerSearchWindow;
+        private StaffItemSearchWindow staffItemSearchWindow;
+        private LibraryController libraryController;
 
         public StaffWindow()
         {
@@ -21,10 +26,42 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public StaffWindow(LibraryController controller) : this()
         {
-            this.LibraryController = controller;
+            this.staffAddBookItemWindow = new StaffAddBookItemWindow();
+            this.staffAddContributorWindow = new StaffAddContributorWindow();
+            this.staffAddMovieItemWindow = new StaffAddMovieItemWindow();
+            this.staffCustomerSearchWindow = new StaffCustomerSearchWindow();
+            this.staffItemSearchWindow = new StaffItemSearchWindow();
+            this.libraryController = controller;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e) // SEARCH ITEMS BUTTON CLICKED
+        {
+            while (true) {
+                try
+                {
+                    var dialogReturn = staffItemSearchWindow.Diplay();
+                    switch (dialogReturn) {
+                        case DialogReturn.Search:
+                            break;
+                        case DialogReturn.AddBook:
+                            break;
+                        case DialogReturn.AddMovie:
+                            break;
+                        case DialogReturn.Cancel:
+                            break;
+                        case DialogReturn.Delete:
+                            break;
+                        case DialogReturn.Undefined:
+                            throw new Exception("Dialog did not return properly");
+                    }
+                }
+                catch (Exception ex) {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+        }
+
+        private void staffSearchCustomerButton_Click(object sender, EventArgs e)
         {
 
         }

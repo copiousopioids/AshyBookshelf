@@ -13,6 +13,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         Login,
         CheckOut,
         Return,
-        Undefined
+        Undefined,
+        AddBook,
+        AddMovie,
+        Delete,
+        Search
     }
 }

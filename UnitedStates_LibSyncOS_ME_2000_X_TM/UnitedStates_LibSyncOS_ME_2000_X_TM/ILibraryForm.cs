@@ -9,7 +9,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     interface ILibraryForm
     {
-        DialogResult Diplay();
+        DialogReturn Diplay();
         void AddDisplayItems();
         void DeleteDisplayItems();
         int SelectedIndex { get; set; }
