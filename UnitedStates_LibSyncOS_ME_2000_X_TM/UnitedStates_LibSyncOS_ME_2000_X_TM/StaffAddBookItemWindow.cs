@@ -30,12 +30,20 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
-        public void AddDisplayItems()
+        public object SelectedItem
         {
-            throw new NotImplementedException();
+            get
+            {
+                throw new NotImplementedException();
+            }
         }
 
-        public void DeleteDisplayItems()
+        public void AddDisplayItems(List<object> displayObjects)
+        {
+            
+        }
+
+        public void ClearDisplayItems()
         {
             throw new NotImplementedException();
         }

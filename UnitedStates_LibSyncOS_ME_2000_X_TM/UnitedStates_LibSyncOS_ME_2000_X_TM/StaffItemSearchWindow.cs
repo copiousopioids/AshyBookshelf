@@ -22,34 +22,70 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
+        public bool staffIsSearchBookCheckBoxSelected
+        {
+            get {
+                return staffSearchBooksCheckBox.Checked;
+            }
+            set {
+                staffSearchBooksCheckBox.Checked = value;
+            }          
+        }
+
+        public bool staffIsSearchMovieCheckBoxSelected
+        {
+            get
+            {
+                return staffSearchMovieCheckBox.Checked;
+            }
+            set
+            {
+                staffSearchMovieCheckBox.Checked = value;
+            }
+        }
+
         public StaffItemSearchWindow()
         {
             InitializeComponent();
         }
 
+        // Inspiration: 501 Bookshop program written by Masaaki Mizuno
         public int SelectedIndex
         {
             get
             {
-                throw new NotImplementedException();
+                if (genericItemsList.SelectedIndex == -1) throw new Exception("Select a Line");
+                return genericItemsList.SelectedIndex;
             }
 
             set
             {
-                throw new NotImplementedException();
+                genericItemsList.SelectedIndex = value; }
+        }
+
+        // Inspiration: 501 Bookshop program written by Masaaki Mizuno
+        public object SelectedItem
+        {
+            get
+            {
+                if (genericItemsList.SelectedItem == null) throw new Exception("Select a line");
+                return genericItemsList.SelectedItem;
             }
         }
 
-        public void AddDisplayItems()
+        // Inspiration: 501 Bookshop program written by Masaaki Mizuno
+        public void AddDisplayItems(List<object> displayObjects)
+        {
+            genericItemsList.Items.AddRange(displayObjects.ToArray());
+        }
+
+        // Inspiration: 501 Bookshop program written by Masaaki Mizuno
+        public void ClearDisplayItems()
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteDisplayItems()
-        {
-            throw new NotImplementedException();
-        }
-
+        // Inspiration: 501 Bookshop program written by Masaaki Mizuno
         public DialogReturn Diplay()
         {
             switch (this.ShowDialog())

@@ -33,8 +33,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.staffSearchBooksCheckBox = new System.Windows.Forms.CheckBox();
+            this.staffSearchMovieCheckBox = new System.Windows.Forms.CheckBox();
             this.button4 = new System.Windows.Forms.Button();
             this.genericItemsList = new System.Windows.Forms.ListBox();
             this.staffSearchButton = new System.Windows.Forms.Button();
@@ -85,25 +85,25 @@
             this.button3.Text = "Return";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // staffSearchBooksCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(386, 12);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(93, 17);
-            this.checkBox1.TabIndex = 6;
-            this.checkBox1.Text = "Search Books";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.staffSearchBooksCheckBox.AutoSize = true;
+            this.staffSearchBooksCheckBox.Location = new System.Drawing.Point(386, 12);
+            this.staffSearchBooksCheckBox.Name = "staffSearchBooksCheckBox";
+            this.staffSearchBooksCheckBox.Size = new System.Drawing.Size(93, 17);
+            this.staffSearchBooksCheckBox.TabIndex = 6;
+            this.staffSearchBooksCheckBox.Text = "Search Books";
+            this.staffSearchBooksCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // staffSearchMovieCheckBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(283, 12);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(97, 17);
-            this.checkBox2.TabIndex = 7;
-            this.checkBox2.Text = "Search Movies";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.staffSearchMovieCheckBox.AutoSize = true;
+            this.staffSearchMovieCheckBox.Location = new System.Drawing.Point(283, 12);
+            this.staffSearchMovieCheckBox.Name = "staffSearchMovieCheckBox";
+            this.staffSearchMovieCheckBox.Size = new System.Drawing.Size(97, 17);
+            this.staffSearchMovieCheckBox.TabIndex = 7;
+            this.staffSearchMovieCheckBox.Text = "Search Movies";
+            this.staffSearchMovieCheckBox.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
@@ -141,8 +141,8 @@
             this.Controls.Add(this.staffSearchButton);
             this.Controls.Add(this.genericItemsList);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.staffSearchMovieCheckBox);
+            this.Controls.Add(this.staffSearchBooksCheckBox);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -162,8 +162,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox staffSearchBooksCheckBox;
+        private System.Windows.Forms.CheckBox staffSearchMovieCheckBox;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ListBox genericItemsList;
         private System.Windows.Forms.Button staffSearchButton;
