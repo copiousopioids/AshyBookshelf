@@ -110,6 +110,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }         
         }
 
+        public void AddItem(object displayItem)
+        {
+        }
+
         public bool CheckDataValidity() {
             if (SelectedIndex == -1)
                 return false;

@@ -14,7 +14,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         bool AddMovie(string title, string description, string genre, 
             string condition, int duration, string barcode, List<Person> contributors);
 
-        bool AddBook(string title, string genre, string isbn, string publisher, int numberOfPages, List<Person> contributors);
+        Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success);
 
         Item GetItem(ItemTypes itemType, string searchTitle);
 

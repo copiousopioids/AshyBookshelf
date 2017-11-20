@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnitedStates_LibSyncOS_ME_2000_X_TM.Classes;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
@@ -15,6 +16,20 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public string UXStaffBookPublisherText {
             get {
                 return uxStaffBookPublisherTextBox.Text.ToString();
+            }
+        }
+
+        public object UXStaffBookGenre {
+            get {
+                if (uxStaffGenreComboBox.SelectedItem == null)
+                    return null;
+                return uxStaffGenreComboBox.SelectedItem;
+            }
+        }
+
+        public string UXStaffBookISBN {
+            get {
+                return uxStaffISBNTextBox.Text.ToString();
             }
         }
 
@@ -76,6 +91,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffGenericItemsListBox.Items.Add(displayItem);
         }
 
+        public List<Person> GetAllItems() {
+            var contributors = new List<Person>();
+            foreach (var item in uxStaffGenericItemsListBox.Items) {
+                contributors.Add((Person)item);
+            }
+            return contributors;
+        }
 
         public DialogReturn Display()
         {
@@ -111,6 +133,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
             if (uxStaffGenericItemsListBox.Items.Count <= 0) {
                 MessageBox.Show("Enter a contributor for the text");
+                return false;
+            }
+            if (uxStaffGenreComboBox.SelectedItem == null) {
+                MessageBox.Show("Select an Item");
                 return false;
             }
             return true;               

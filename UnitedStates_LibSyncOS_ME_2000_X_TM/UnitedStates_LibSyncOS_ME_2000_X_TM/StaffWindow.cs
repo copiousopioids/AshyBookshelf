@@ -49,7 +49,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             SearchItemsButtonPressed();
                             break;
                         case DialogReturn.AddBook:
-                            AddBookThroughAddBookWindow();
+                            var success = false;
+                            var book = AddAndGetBookThroughAddBookWindow(out success);
+                            if (success)
+                                staffItemSearchWindow.AddItem(book);
                             break;
                         case DialogReturn.AddMovie:
                             break;
@@ -102,24 +105,39 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
-        public void AddBookThroughAddBookWindow() {
-
-            var addBookWindowDialogReturn = staffAddBookItemWindow.Display();
-            switch (addBookWindowDialogReturn)
-            {
-                case DialogReturn.AddContributor:
-                    var contributor = PickContributorForItem();
-                    if (contributor != null) 
-                        staffAddBookItemWindow.AddItem(contributor);
-                    break;
-                case DialogReturn.Create:
-
-                    break;
-                case DialogReturn.Cancel:
-                    break;
-                default:
-                    break;
-            }
+        public Book AddAndGetBookThroughAddBookWindow(out bool success) {
+            while (true) {
+                var addBookWindowDialogReturn = staffAddBookItemWindow.Display();
+                switch (addBookWindowDialogReturn)
+                {
+                    case DialogReturn.AddContributor:
+                        var contributor = PickContributorForItem();
+                        if (contributor != null)
+                            staffAddBookItemWindow.AddItem(contributor);
+                        break;
+                    case DialogReturn.Create:
+                        var title = staffAddBookItemWindow.UXStaffBookTitleText;
+                        var numberOfPages = Convert.ToInt32(staffAddBookItemWindow.UXStaffBookNumberOfPagesText);
+                        var publisher = staffAddBookItemWindow.UXStaffBookPublisherText;
+                        var contributors = staffAddBookItemWindow.GetAllItems();
+                        var genre = (Genre)staffAddBookItemWindow.UXStaffBookGenre;
+                        var isbn = staffAddBookItemWindow.UXStaffBookISBN;
+                        success = false;
+                        var book = libraryController.AddBook(title, genre, isbn, publisher, numberOfPages, contributors, out success);
+                        if (success == false)
+                        {
+                            MessageBox.Show("The book could not be added. We're sorry");
+                        }
+                        else
+                            success = true;
+                        return book;
+                    case DialogReturn.Cancel:
+                        success = false;
+                        return null;
+                    default:
+                        break;
+                }
+            }           
         }
 
         public Person PickContributorForItem() {

@@ -10,7 +10,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
         }
 
-        public bool AddBook(string title, string genre, string isbn, string publisher, int numberOfPages, List<Person> contributors)
+        public Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success)
         {
             throw new NotImplementedException();
         }
