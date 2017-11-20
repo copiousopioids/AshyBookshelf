@@ -56,6 +56,12 @@
     <Compile Include="Classes\Genre.cs" />
     <Compile Include="Classes\Item.cs" />
     <Compile Include="Classes\Movie.cs" />
+    <Compile Include="CreateContributorWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateContributorWindow.Designer.cs">
+      <DependentUpon>CreateContributorWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database\DatabaseController.cs" />
     <Compile Include="DialogReturn.cs" />
     <Compile Include="Enums.cs" />
@@ -124,6 +130,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CreateContributorWindow.resx">
+      <DependentUpon>CreateContributorWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CustomerAccountForm.resx">
       <DependentUpon>CustomerAccountForm.cs</DependentUpon>
     </EmbeddedResource>

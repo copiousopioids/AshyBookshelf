@@ -45,6 +45,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             SearchItemsButtonPressed();
                             break;
                         case DialogReturn.AddBook:
+                            AddBookThroughAddBookWindow();
                             break;
                         case DialogReturn.AddMovie:
                             break;
@@ -98,6 +99,15 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
+        public void AddBookThroughAddBookWindow() {
+            try
+            {
+
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
         public void SearchItemsButtonPressed()
         {  
             var searchString = staffItemSearchWindow.staffSearchString;
@@ -119,7 +129,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     MessageBox.Show("Check one or both of the following checkboxes: Movies, Books");
                     return;
                 }
-
                 staffItemSearchWindow.AddDisplayItems(bookAndMovieDisplayObjects);
             }
             else
