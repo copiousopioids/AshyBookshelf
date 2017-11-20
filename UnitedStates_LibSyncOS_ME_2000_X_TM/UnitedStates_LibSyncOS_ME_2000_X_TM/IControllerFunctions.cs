@@ -11,8 +11,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
     {
         bool VerifyAccount(string username, string password);
 
-        bool AddMovie(string title, string description, string genre, 
-            string condition, int duration, string barcode, List<Person> contributors);
+        Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success);
 
         Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success);
 

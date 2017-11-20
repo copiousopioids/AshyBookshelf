@@ -55,7 +55,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public bool CheckDataValidity() {
-            if (SelectedIndex == -1) {
+            if (uxStaffGenericItemsListBox.SelectedItem == null) {
+                MessageBox.Show("Please selet a contributor to add");
                 return false;
             }             
             return true;

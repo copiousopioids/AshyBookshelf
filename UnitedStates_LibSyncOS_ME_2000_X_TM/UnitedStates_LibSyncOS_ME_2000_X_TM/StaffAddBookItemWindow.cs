@@ -104,13 +104,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             while (true) {
                 switch (this.ShowDialog())
                 {
-                    case DialogResult.OK: return DialogReturn.Create;
-                    case DialogResult.Yes:
+                    case DialogResult.OK: 
                         if (CheckDataValidity())
                         {
-                            return DialogReturn.AddContributor;
+                            return DialogReturn.Create;
                         }
                         break;
+                    case DialogResult.Yes:
+                        return DialogReturn.AddContributor;
                     case DialogResult.Cancel: return DialogReturn.Cancel;
                     default: return DialogReturn.Undefined;
                 }

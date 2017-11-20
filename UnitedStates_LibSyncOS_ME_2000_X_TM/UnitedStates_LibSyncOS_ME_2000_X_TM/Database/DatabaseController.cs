@@ -30,7 +30,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             throw new NotImplementedException();
         }
 
-        public bool AddMovie(string title, string description, string genre, string condition, int duration, string barcode, List<Person> contributors)
+        public Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success)
         {
             throw new NotImplementedException();
         }

@@ -43,18 +43,21 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             while (true) {
                 try
                 {
+                    var success = false;
                     var dialogReturn = staffItemSearchWindow.Display();
                     switch (dialogReturn) {
                         case DialogReturn.Search:
                             SearchItemsButtonPressed();
                             break;
-                        case DialogReturn.AddBook:
-                            var success = false;
+                        case DialogReturn.AddBook:                           
                             var book = AddAndGetBookThroughAddBookWindow(out success);
                             if (success)
                                 staffItemSearchWindow.AddItem(book);
                             break;
                         case DialogReturn.AddMovie:
+                            var movie = AddAndGetMovieThroughAddMoviekWindow(out success);
+                            if (success)
+                                staffItemSearchWindow.AddItem(movie);
                             break;
                         case DialogReturn.Cancel:
                             this.Hide();
@@ -105,7 +108,52 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
+        public Movie AddAndGetMovieThroughAddMoviekWindow(out bool success) {
+            staffAddMovieItemWindow.ClearDisplayItems();
+            try
+            {
+                while (true)
+                {
+                    var addMovieWindowDialogReturn = staffAddMovieItemWindow.Display();
+                    switch (addMovieWindowDialogReturn)
+                    {
+                        case DialogReturn.AddContributor:
+                            var contributor = PickContributorForItem();
+                            if (contributor != null)
+                                staffAddMovieItemWindow.AddItem(contributor);
+                            break;
+                        case DialogReturn.Create:
+                            success = false;
+                            var title = staffAddMovieItemWindow.UXStaffMovieTitle;
+                            var duration = staffAddMovieItemWindow.UXStaffMovieDuration;
+                            var description = staffAddMovieItemWindow.UXStaffMovieDescription;
+                            var studio = staffAddMovieItemWindow.UXStaffMovieStudio;
+                            var genre = staffAddMovieItemWindow.UXStaffMovieGenre;
+                            var contributors = staffAddMovieItemWindow.GetAllItems();
+                            var barcode = staffAddMovieItemWindow.UXStaffMovieBarcode;
+                            var movie = libraryController.AddMovie(title, description, genre, duration, barcode, contributors, out success);
+                            if (!success)
+                                MessageBox.Show("Movie could not be addede");
+                            return movie;
+                        case DialogReturn.Cancel:
+                            success = false;
+                            return null;
+                        default:
+                            break;
+                    }
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+                success = false;
+                return null;
+            }
+            
+        }
+
         public Book AddAndGetBookThroughAddBookWindow(out bool success) {
+
+            staffAddBookItemWindow.ClearDisplayItems();
             while (true) {
                 var addBookWindowDialogReturn = staffAddBookItemWindow.Display();
                 switch (addBookWindowDialogReturn)
@@ -141,27 +189,34 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public Person PickContributorForItem() {
-
-            var addContributorDialogReturn = staffAddContributorWindow.Display();
-            switch (addContributorDialogReturn) {
-                case DialogReturn.AddContributor:
-                    var contributor = staffAddContributorWindow.SelectedItem;
-                    if (contributor is Person)
-                        return (Person)contributor;
-                    else
-                    {
-                        MessageBox.Show("A contributor was not selected");
-                    }
-                    break;
-                case DialogReturn.Create:
-                    var newContributor = LaunchCreateContributorWindowAndCreateContributor();
-                    return newContributor;
-                case DialogReturn.Cancel:
-                    break;
-                default:
-                    break;
+            try
+            {
+                var addContributorDialogReturn = staffAddContributorWindow.Display();
+                switch (addContributorDialogReturn)
+                {
+                    case DialogReturn.AddContributor:
+                        var contributor = staffAddContributorWindow.SelectedItem;
+                        if (contributor is Person)
+                            return (Person)contributor;
+                        else
+                        {
+                            MessageBox.Show("A contributor was not selected");
+                            return null;
+                        }
+                        break;
+                    case DialogReturn.Create:
+                        var newContributor = LaunchCreateContributorWindowAndCreateContributor();
+                        return newContributor;
+                    case DialogReturn.Cancel:
+                        return null;
+                    default:
+                        return null;
+                }
             }
-            return null;
+            catch (Exception ex){
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
         }
 
         public Person LaunchCreateContributorWindowAndCreateContributor() {

@@ -163,6 +163,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         private void AddRewardToContributorAwardsListBox() {
 
             var awardToAdd = uxStaffAvailableRewardsGenericItemsListBox.SelectedItem;
+            if (awardToAdd == null)
+            {
+                MessageBox.Show("No award was selected");
+                return;
+            }              
             uxStaffAwardsReceivedGenericItemsListBox.Items.Add(awardToAdd);
             uxStaffAvailableRewardsGenericItemsListBox.Items.Remove(awardToAdd);
         }
