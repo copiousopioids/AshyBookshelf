@@ -133,13 +133,20 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     }
                     break;
                 case DialogReturn.Create:
-                    var newContributor = LaunchAndCreateContributor();
+                    var newContributor = LaunchCreateContributorWindowAndCreateContributor();
                     break;
                 case DialogReturn.Cancel:
                     break;
                 default:
                     break;
             }
+            return null;
+        }
+
+        public Person LaunchCreateContributorWindowAndCreateContributor() {
+
+            //var createContributorDialogReturn = staffCreateContributorWindow.Display()
+            return null;
         }
 
         public void SearchItemsButtonPressed()
