@@ -109,7 +109,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 var isMovieCheckBoxChecked = staffItemSearchWindow.staffIsSearchMovieCheckBoxSelected;
                 var bookAndMovieDisplayObjects = new List<object>();
 
-                if (isBookCheckBoxChecked && isBookCheckBoxChecked) {
+                if (isBookCheckBoxChecked && isMovieCheckBoxChecked) {
                     bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.BookAndMovie);
                 } else if (isBookCheckBoxChecked) {
                     bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Book);
