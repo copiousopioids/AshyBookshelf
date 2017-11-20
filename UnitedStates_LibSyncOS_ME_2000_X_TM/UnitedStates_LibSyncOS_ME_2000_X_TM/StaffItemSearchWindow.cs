@@ -115,8 +115,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public bool CheckDataValidity() {
-            if (SelectedIndex == -1)
+            if (genericItemsList.SelectedItem == null) {
+                MessageBox.Show("Please select an item");
                 return false;
+            }
             return true;
         }
 

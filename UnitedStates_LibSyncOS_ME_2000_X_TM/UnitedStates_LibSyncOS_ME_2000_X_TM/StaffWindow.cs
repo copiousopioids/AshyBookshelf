@@ -60,8 +60,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                                 staffItemSearchWindow.AddItem(movie);
                             break;
                         case DialogReturn.Cancel:
-                            this.Hide();
-                            break;
+                            return;
                         case DialogReturn.Delete:
                             DeleteItemFromLibrary();
                             return;
@@ -273,6 +272,47 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         private void staffSearchCustomerButton_Click(object sender, EventArgs e)
         {
+            while (true)
+            {
+                try
+                {
+                    var success = false;
+                    var dialogReturn = staffCustomerSearchWindow.Display();
+                    switch (dialogReturn)
+                    {
+                        case DialogReturn.Search:
+                            SearchByCustomerIDButtonPressedInStaffCustomerSearchWindow();
+                            break;
+                        case DialogReturn.AddCustomer:
+                            //var customer = AddAndGetBookThroughAddBookWindow(out success);
+                            //if (success)
+                                //staffItemSearchWindow.AddItem(book);
+                            break;
+                        case DialogReturn.Cancel:
+                            return;
+                        case DialogReturn.Delete:
+                            var customer = (Customer)staffCustomerSearchWindow.SelectedItem;
+                            if (libraryController.DeleteCustomer(customer.Username))
+                            {
+                                staffCustomerSearchWindow.ClearDisplayItems();
+                            }
+                            else {
+                                MessageBox.Show("Customer could not be deleted.");
+                            }
+                            return;
+                        case DialogReturn.Undefined:
+                            throw new Exception("Dialog did not return properly");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
+
+        }
+
+        public void SearchByCustomerIDButtonPressedInStaffCustomerSearchWindow() {
 
         }
     }

@@ -20,6 +20,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         Search,
         AddContributor,
         Create,
-        LinkReward
+        LinkReward,
+        AddCustomer
     }
 }
