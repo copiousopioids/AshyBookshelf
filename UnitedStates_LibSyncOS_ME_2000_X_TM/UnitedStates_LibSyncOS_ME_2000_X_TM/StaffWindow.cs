@@ -109,6 +109,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             {
                 case DialogReturn.AddContributor:
                     var contributor = PickContributorForItem();
+                    if (contributor != null) 
+                        staffAddBookItemWindow.AddItem(contributor);
                     break;
                 case DialogReturn.Create:
                     break;
@@ -134,7 +136,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     break;
                 case DialogReturn.Create:
                     var newContributor = LaunchCreateContributorWindowAndCreateContributor();
-                    break;
+                    return newContributor;
                 case DialogReturn.Cancel:
                     break;
                 default:
@@ -153,10 +155,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     var twitterHandle = staffCreateContributorWindow.UXStaffContributorTwitterHandle;
                     var dateOfBirth = staffCreateContributorWindow.UXStaffContributorDateOfBirth;
                     var role = staffCreateContributorWindow.UXStaffRoleSelected;
-                    var success = libraryController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, role);
+                    var success = false;
+                    var contributor = libraryController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, role, out success);
                     if (!success)
                         MessageBox.Show("Contributor could not be created");
-                    break;
+                    return contributor;
                 case DialogReturn.Cancel:
                     break;
                 default:

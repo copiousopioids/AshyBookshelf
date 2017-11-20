@@ -50,6 +50,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffGenericItemsListBox.Items.Clear();
         }
 
+        public void AddItem(object displayItem) {
+            uxStaffGenericItemsListBox.Items.Add(displayItem);
+        }
+
         public DialogReturn Display()
         {
             switch (this.ShowDialog())

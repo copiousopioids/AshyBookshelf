@@ -82,7 +82,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
-        public bool AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role) {
+        public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, out bool success) {
             throw new NotImplementedException();
         }
     }
