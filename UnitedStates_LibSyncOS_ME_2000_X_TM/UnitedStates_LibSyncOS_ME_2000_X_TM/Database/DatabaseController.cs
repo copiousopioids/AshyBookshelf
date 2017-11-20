@@ -15,6 +15,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             throw new NotImplementedException();
         }
 
+        public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, out bool success)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool AddCustomer(string username, string password, string name, string address, string phoneNumber)
         {
             throw new NotImplementedException();

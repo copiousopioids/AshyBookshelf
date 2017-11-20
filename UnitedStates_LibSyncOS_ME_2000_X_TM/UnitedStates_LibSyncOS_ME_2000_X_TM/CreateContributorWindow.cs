@@ -128,7 +128,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 switch (this.ShowDialog())
                 {
                     case DialogResult.OK:
-                        var isAllInformationFilled = CheckContributorInformationFilled();
+                        var isAllInformationFilled = CheckDataValidity();
                         if (isAllInformationFilled)
                             return DialogReturn.Create;
                         else
@@ -143,7 +143,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
-        public bool CheckContributorInformationFilled()
+        public bool CheckDataValidity()
         {
             if (string.IsNullOrEmpty(uxStaffDOBTextBox.Text))
                 return false;

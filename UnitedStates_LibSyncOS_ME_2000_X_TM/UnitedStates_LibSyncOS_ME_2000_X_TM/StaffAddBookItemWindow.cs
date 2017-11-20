@@ -76,14 +76,44 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffGenericItemsListBox.Items.Add(displayItem);
         }
 
+
         public DialogReturn Display()
         {
-            switch (this.ShowDialog()) {
-                case DialogResult.OK: return DialogReturn.Create;
-                case DialogResult.Yes: return DialogReturn.AddContributor;
-                case DialogResult.Cancel: return DialogReturn.Cancel;
-                default: return DialogReturn.Undefined;
+            while (true) {
+                switch (this.ShowDialog())
+                {
+                    case DialogResult.OK: return DialogReturn.Create;
+                    case DialogResult.Yes:
+                        if (CheckDataValidity())
+                        {
+                            return DialogReturn.AddContributor;
+                        }
+                        break;
+                    case DialogResult.Cancel: return DialogReturn.Cancel;
+                    default: return DialogReturn.Undefined;
+                }
+            }          
+        }
+
+        public bool CheckDataValidity()
+        {
+            if (string.IsNullOrEmpty(uxStaffBookTitleTextBox.Text)) {
+                MessageBox.Show("Enter a valid title");
+                return false;
             }
+            if (string.IsNullOrEmpty(uxStaffBookNumberOfPagesTextBox.Text)) {
+                MessageBox.Show("Enter how many pages are in the book");
+                return false;
+            }
+            if (string.IsNullOrEmpty(uxStaffBookPublisherTextBox.Text)) {
+                MessageBox.Show("Enter the publisher for the text");
+                return false;
+            }
+            if (uxStaffGenericItemsListBox.Items.Count <= 0) {
+                MessageBox.Show("Enter a contributor for the text");
+                return false;
+            }
+            return true;               
         }
     }
 }

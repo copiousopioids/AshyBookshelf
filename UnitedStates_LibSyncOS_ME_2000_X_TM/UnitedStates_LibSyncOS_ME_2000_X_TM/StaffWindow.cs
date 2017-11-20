@@ -113,6 +113,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         staffAddBookItemWindow.AddItem(contributor);
                     break;
                 case DialogReturn.Create:
+
                     break;
                 case DialogReturn.Cancel:
                     break;

@@ -14,5 +14,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         void ClearDisplayItems();
         int SelectedIndex { get; set; }
         object SelectedItem { get; }
+        bool CheckDataValidity();
     }
 }

@@ -54,16 +54,28 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffGenericItemsListBox.Items.Add(displayItem);
         }
 
+        public bool CheckDataValidity() {
+            if (SelectedIndex == -1) {
+                return false;
+            }             
+            return true;
+        }
+
         public DialogReturn Display()
         {
-            switch (this.ShowDialog())
-            {
-                case DialogResult.OK: return DialogReturn.AddContributor;
-                case DialogResult.Yes:
-                    return DialogReturn.Create;
-                case DialogResult.Cancel: return DialogReturn.Cancel;
-                default: return DialogReturn.Undefined;
-            }
+            while (true) {
+                switch (this.ShowDialog())
+                {
+                    case DialogResult.OK:
+                        if (CheckDataValidity())
+                            return DialogReturn.AddContributor;
+                        break;
+                    case DialogResult.Yes:
+                        return DialogReturn.Create;
+                    case DialogResult.Cancel: return DialogReturn.Cancel;
+                    default: return DialogReturn.Undefined;
+                }
+            }          
         }
     }
 }
