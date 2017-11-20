@@ -127,7 +127,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             while (true) {
                 switch (this.ShowDialog())
                 {
-                    case DialogResult.OK: return DialogReturn.Create;
+                    case DialogResult.OK:
+                        var isAllInformationFilled = CheckContributorInformationFilled();
+                        if (isAllInformationFilled)
+                            return DialogReturn.Create;
+                        else
+                            MessageBox.Show("Please make sure all fields are filled out before continuing");
+                        break;
                     case DialogResult.Yes:
                         AddRewardToContributorAwardsListBox();
                         break;
@@ -135,6 +141,23 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     default: return DialogReturn.Undefined;
                 }
             }
+        }
+
+        public bool CheckContributorInformationFilled()
+        {
+            if (string.IsNullOrEmpty(uxStaffDOBTextBox.Text))
+                return false;
+            if (string.IsNullOrEmpty(uxStaffFirstNameTextBox.Text))
+                return false;
+            if (string.IsNullOrEmpty(uxStaffLastNameTextBox.Text))
+                return false;
+            if (string.IsNullOrEmpty(uxStaffTwitterHandleTextBox.Text))
+                return false;
+            if (uxStaffAwardsReceivedGenericItemsListBox.SelectedItem == null) {
+                MessageBox.Show("Enter a role");
+                return false;
+            }              
+            return true;
         }
 
         private void AddRewardToContributorAwardsListBox() {

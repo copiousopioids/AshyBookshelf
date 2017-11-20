@@ -145,7 +145,23 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public Person LaunchCreateContributorWindowAndCreateContributor() {
 
-            //var createContributorDialogReturn = staffCreateContributorWindow.Display()
+            var createContributorDialogReturn = staffCreateContributorWindow.Display();
+            switch (createContributorDialogReturn) {
+                case DialogReturn.Create:
+                    var firstName = staffCreateContributorWindow.UXStaffContributorFirstName;
+                    var lastName = staffCreateContributorWindow.UXStaffContributorLastName;
+                    var twitterHandle = staffCreateContributorWindow.UXStaffContributorTwitterHandle;
+                    var dateOfBirth = staffCreateContributorWindow.UXStaffContributorDateOfBirth;
+                    var role = staffCreateContributorWindow.UXStaffRoleSelected;
+                    var success = libraryController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, role);
+                    if (!success)
+                        MessageBox.Show("Contributor could not be created");
+                    break;
+                case DialogReturn.Cancel:
+                    break;
+                default:
+                    throw new Exception("An unregistered Dialog Return was created");
+            }
             return null;
         }
 

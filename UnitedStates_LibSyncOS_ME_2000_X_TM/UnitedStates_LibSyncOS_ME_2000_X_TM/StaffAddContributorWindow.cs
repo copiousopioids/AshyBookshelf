@@ -55,7 +55,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             switch (this.ShowDialog())
             {
                 case DialogResult.OK: return DialogReturn.AddContributor;
-                case DialogResult.Yes: return DialogReturn.Create;
+                case DialogResult.Yes:
+                    return DialogReturn.Create;
                 case DialogResult.Cancel: return DialogReturn.Cancel;
                 default: return DialogReturn.Undefined;
             }
