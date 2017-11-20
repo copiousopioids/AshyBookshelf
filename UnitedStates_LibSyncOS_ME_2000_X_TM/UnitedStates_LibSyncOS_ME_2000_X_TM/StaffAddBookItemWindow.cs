@@ -21,12 +21,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             get
             {
-                throw new NotImplementedException();
+                if (uxStaffGenericItemsListBox.SelectedIndex == -1) throw new Exception("Select a Line");
+                return uxStaffGenericItemsListBox.SelectedIndex;
             }
 
             set
             {
-                throw new NotImplementedException();
+                uxStaffGenericItemsListBox.SelectedIndex = value;
             }
         }
 
@@ -34,25 +35,32 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             get
             {
-                throw new NotImplementedException();
+                if (uxStaffGenericItemsListBox.SelectedItem == null) throw new Exception("Select a line");
+                return uxStaffGenericItemsListBox.SelectedItem;
             }
         }
 
         public void AddDisplayItems(List<object> displayObjects)
         {
-            
+            uxStaffGenericItemsListBox.Items.AddRange(displayObjects.ToArray());
         }
 
         public void ClearDisplayItems()
         {
-            throw new NotImplementedException();
+            uxStaffBookPublisherTextBox.Clear();
+            uxStaffBookTitleTextBox.Clear();
+            uxStaffGenericItemsListBox.Items.Clear();
+            uxStaffBookNumberOfPagesTextBox.Clear();
+
         }
 
         public DialogReturn Diplay()
         {
             switch (this.ShowDialog()) {
-                default:
-                    return DialogReturn.Undefined;
+                case DialogResult.OK: return DialogReturn.Create;
+                case DialogResult.Yes: return DialogReturn.AddContributor;
+                case DialogResult.Cancel: return DialogReturn.Cancel;
+                default: return DialogReturn.Undefined;
             }
         }
     }

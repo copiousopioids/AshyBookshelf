@@ -60,7 +60,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
             set
             {
-                genericItemsList.SelectedIndex = value; }
+                genericItemsList.SelectedIndex = value;
+            }
         }
 
         // Inspiration: 501 Bookshop program written by Masaaki Mizuno

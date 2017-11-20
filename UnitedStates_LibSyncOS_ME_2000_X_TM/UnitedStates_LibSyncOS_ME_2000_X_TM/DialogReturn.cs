@@ -17,6 +17,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         AddBook,
         AddMovie,
         Delete,
-        Search
+        Search,
+        AddContributor,
+        Create
     }
 }
