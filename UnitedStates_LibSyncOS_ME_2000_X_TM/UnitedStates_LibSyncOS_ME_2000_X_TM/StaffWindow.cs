@@ -53,6 +53,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             break;
                         case DialogReturn.Delete:
                             DeleteItemFromLibrary();
+                            return;
                             break;
                         case DialogReturn.Undefined:
                             throw new Exception("Dialog did not return properly");

@@ -82,7 +82,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         // Inspiration: 501 Bookshop program written by Masaaki Mizuno
         public void ClearDisplayItems()
         {
-            throw new NotImplementedException();
+            genericItemsList.Items.Clear();
         }
 
         // Inspiration: 501 Bookshop program written by Masaaki Mizuno
@@ -98,7 +98,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     return DialogReturn.Delete;
                 case DialogResult.Cancel:
                     return DialogReturn.Cancel;
-                case DialogResult.Ignore:
+                case DialogResult.Retry:
                     return DialogReturn.Search;
                 default:
                     return DialogReturn.Undefined;
