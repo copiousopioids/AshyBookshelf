@@ -12,6 +12,24 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class StaffAddBookItemWindow : Form, ILibraryForm 
     {
+        public string UXStaffBookPublisherText {
+            get {
+                return uxStaffBookPublisherTextBox.Text.ToString();
+            }
+        }
+
+        public string UXStaffBookTitleText {
+            get {
+                return uxStaffBookTitleTextBox.Text.ToString();
+            }
+        }
+
+        public string UXStaffBookNumberOfPagesText {
+            get {
+                return uxStaffBookNumberOfPagesTextBox.Text.ToString();
+            }
+        }
+
         public StaffAddBookItemWindow()
         {
             InitializeComponent();
@@ -54,7 +72,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         }
 
-        public DialogReturn Diplay()
+        public DialogReturn Display()
         {
             switch (this.ShowDialog()) {
                 case DialogResult.OK: return DialogReturn.Create;

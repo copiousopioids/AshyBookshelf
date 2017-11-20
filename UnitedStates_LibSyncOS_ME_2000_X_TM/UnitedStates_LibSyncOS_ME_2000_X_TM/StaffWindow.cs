@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnitedStates_LibSyncOS_ME_2000_X_TM.Classes;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
@@ -18,6 +19,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         private StaffCustomerSearchWindow staffCustomerSearchWindow;
         private StaffItemSearchWindow staffItemSearchWindow;
         private LibraryController libraryController;
+        private CreateContributorWindow staffCreateContributorWindow;
 
         public StaffWindow()
         {
@@ -31,6 +33,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             this.staffAddMovieItemWindow = new StaffAddMovieItemWindow();
             this.staffCustomerSearchWindow = new StaffCustomerSearchWindow();
             this.staffItemSearchWindow = new StaffItemSearchWindow();
+            this.staffCreateContributorWindow = new CreateContributorWindow();
+            
             this.libraryController = controller;
         }
 
@@ -39,7 +43,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             while (true) {
                 try
                 {
-                    var dialogReturn = staffItemSearchWindow.Diplay();
+                    var dialogReturn = staffItemSearchWindow.Display();
                     switch (dialogReturn) {
                         case DialogReturn.Search:
                             SearchItemsButtonPressed();
@@ -55,7 +59,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         case DialogReturn.Delete:
                             DeleteItemFromLibrary();
                             return;
-                            break;
                         case DialogReturn.Undefined:
                             throw new Exception("Dialog did not return properly");
                     }
@@ -68,43 +71,74 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public void DeleteItemFromLibrary()
         {
-            try
+            var selectedItem = staffItemSearchWindow.SelectedItem;
+            if (selectedItem is Movie)
             {
-                var selectedItem = staffItemSearchWindow.SelectedItem;
-                if (selectedItem is Movie) {
 
-                    var bookItem = (Book)selectedItem;
-                    if (libraryController.DeleteItem(ItemTypes.Movie, bookItem.ID))
-                    {
-                        MessageBox.Show("Book Deleted");
-                        staffItemSearchWindow.ClearDisplayItems();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Could not delete item from the library catalog");
-                    }
-                } else if (selectedItem is Movie) {
-
-                    var movieItem = (Movie)selectedItem;
-                    if (libraryController.DeleteItem(ItemTypes.Movie, movieItem.ID)) {
-                        MessageBox.Show("Movie Deleted");
-                        staffItemSearchWindow.ClearDisplayItems();
-                    } else {
-                        MessageBox.Show("Could not delete item from the library catalog");
-                    }
+                var bookItem = (Book)selectedItem;
+                if (libraryController.DeleteItem(ItemTypes.Movie, bookItem.ID))
+                {
+                    MessageBox.Show("Book Deleted");
+                    staffItemSearchWindow.ClearDisplayItems();
+                }
+                else
+                {
+                    MessageBox.Show("Could not delete item from the library catalog");
                 }
             }
-            catch (Exception ex) {
-                MessageBox.Show(ex.ToString());
+            else if (selectedItem is Movie)
+            {
+
+                var movieItem = (Movie)selectedItem;
+                if (libraryController.DeleteItem(ItemTypes.Movie, movieItem.ID))
+                {
+                    MessageBox.Show("Movie Deleted");
+                    staffItemSearchWindow.ClearDisplayItems();
+                }
+                else
+                {
+                    MessageBox.Show("Could not delete item from the library catalog");
+                }
             }
         }
 
         public void AddBookThroughAddBookWindow() {
-            try
+
+            var addBookWindowDialogReturn = staffAddBookItemWindow.Display();
+            switch (addBookWindowDialogReturn)
             {
-                
-            } catch (Exception ex) {
-                MessageBox.Show(ex.ToString());
+                case DialogReturn.AddContributor:
+                    var contributor = PickContributorForItem();
+                    break;
+                case DialogReturn.Create:
+                    break;
+                case DialogReturn.Cancel:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public Person PickContributorForItem() {
+
+            var addContributorDialogReturn = staffAddContributorWindow.Display();
+            switch (addContributorDialogReturn) {
+                case DialogReturn.AddContributor:
+                    var contributor = staffAddContributorWindow.SelectedItem;
+                    if (contributor is Person)
+                        return (Person)contributor;
+                    else
+                    {
+                        MessageBox.Show("A contributor was not selected");
+                    }
+                    break;
+                case DialogReturn.Create:
+                    var newContributor = LaunchAndCreateContributor();
+                    break;
+                case DialogReturn.Cancel:
+                    break;
+                default:
+                    break;
             }
         }
 

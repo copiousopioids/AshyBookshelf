@@ -87,7 +87,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         // Inspiration: 501 Bookshop program written by Masaaki Mizuno
-        public DialogReturn Diplay()
+        public DialogReturn Display()
         {
             switch (this.ShowDialog())
             {
