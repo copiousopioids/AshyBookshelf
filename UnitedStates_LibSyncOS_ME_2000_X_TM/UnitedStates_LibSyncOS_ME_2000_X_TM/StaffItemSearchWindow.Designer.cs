@@ -28,44 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.staffSearchItemsTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.staffSearchBooksCheckBox = new System.Windows.Forms.CheckBox();
+            this.staffSearchMovieCheckBox = new System.Windows.Forms.CheckBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.genericItemsList = new System.Windows.Forms.ListBox();
+            this.staffSearchButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // staffSearchItemsTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(82, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(151, 20);
-            this.textBox1.TabIndex = 0;
+            this.staffSearchItemsTextBox.Location = new System.Drawing.Point(126, 9);
+            this.staffSearchItemsTextBox.Name = "staffSearchItemsTextBox";
+            this.staffSearchItemsTextBox.Size = new System.Drawing.Size(151, 20);
+            this.staffSearchItemsTextBox.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Search Item";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(12, 39);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(467, 170);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // button1
             // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.button1.Location = new System.Drawing.Point(12, 215);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(94, 23);
@@ -75,6 +67,7 @@
             // 
             // button2
             // 
+            this.button2.DialogResult = System.Windows.Forms.DialogResult.No;
             this.button2.Location = new System.Drawing.Point(282, 215);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 23);
@@ -84,6 +77,7 @@
             // 
             // button3
             // 
+            this.button3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button3.Location = new System.Drawing.Point(388, 215);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(91, 23);
@@ -91,28 +85,29 @@
             this.button3.Text = "Return";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // staffSearchBooksCheckBox
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(342, 12);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(93, 17);
-            this.checkBox1.TabIndex = 6;
-            this.checkBox1.Text = "Search Books";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.staffSearchBooksCheckBox.AutoSize = true;
+            this.staffSearchBooksCheckBox.Location = new System.Drawing.Point(386, 12);
+            this.staffSearchBooksCheckBox.Name = "staffSearchBooksCheckBox";
+            this.staffSearchBooksCheckBox.Size = new System.Drawing.Size(93, 17);
+            this.staffSearchBooksCheckBox.TabIndex = 6;
+            this.staffSearchBooksCheckBox.Text = "Search Books";
+            this.staffSearchBooksCheckBox.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // staffSearchMovieCheckBox
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(239, 12);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(97, 17);
-            this.checkBox2.TabIndex = 7;
-            this.checkBox2.Text = "Search Movies";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.staffSearchMovieCheckBox.AutoSize = true;
+            this.staffSearchMovieCheckBox.Location = new System.Drawing.Point(283, 12);
+            this.staffSearchMovieCheckBox.Name = "staffSearchMovieCheckBox";
+            this.staffSearchMovieCheckBox.Size = new System.Drawing.Size(97, 17);
+            this.staffSearchMovieCheckBox.TabIndex = 7;
+            this.staffSearchMovieCheckBox.Text = "Search Movies";
+            this.staffSearchMovieCheckBox.UseVisualStyleBackColor = true;
             // 
             // button4
             // 
+            this.button4.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.button4.Location = new System.Drawing.Point(112, 215);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(94, 23);
@@ -120,20 +115,39 @@
             this.button4.Text = "Add Movie";
             this.button4.UseVisualStyleBackColor = true;
             // 
+            // genericItemsList
+            // 
+            this.genericItemsList.FormattingEnabled = true;
+            this.genericItemsList.Location = new System.Drawing.Point(15, 38);
+            this.genericItemsList.Name = "genericItemsList";
+            this.genericItemsList.Size = new System.Drawing.Size(464, 173);
+            this.genericItemsList.TabIndex = 9;
+            // 
+            // staffSearchButton
+            // 
+            this.staffSearchButton.DialogResult = System.Windows.Forms.DialogResult.Retry;
+            this.staffSearchButton.Location = new System.Drawing.Point(15, 7);
+            this.staffSearchButton.Name = "staffSearchButton";
+            this.staffSearchButton.Size = new System.Drawing.Size(91, 23);
+            this.staffSearchButton.TabIndex = 10;
+            this.staffSearchButton.Text = "Press to Search";
+            this.staffSearchButton.UseVisualStyleBackColor = true;
+            // 
             // StaffItemSearchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(491, 261);
+            this.Controls.Add(this.staffSearchButton);
+            this.Controls.Add(this.genericItemsList);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.staffSearchMovieCheckBox);
+            this.Controls.Add(this.staffSearchBooksCheckBox);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.staffSearchItemsTextBox);
             this.Name = "StaffItemSearchWindow";
             this.Text = "StaffItemSearchWindow";
             this.ResumeLayout(false);
@@ -143,14 +157,15 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox staffSearchItemsTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox staffSearchBooksCheckBox;
+        private System.Windows.Forms.CheckBox staffSearchMovieCheckBox;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ListBox genericItemsList;
+        private System.Windows.Forms.Button staffSearchButton;
     }
 }

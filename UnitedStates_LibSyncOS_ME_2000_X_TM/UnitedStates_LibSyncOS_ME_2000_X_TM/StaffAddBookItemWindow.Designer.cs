@@ -28,43 +28,45 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.uxStaffFinishBookButton = new System.Windows.Forms.Button();
+            this.uxStaffCancelButton = new System.Windows.Forms.Button();
+            this.uxStaffBookTitleTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.uxStaffBookNumberOfPagesTextBox = new System.Windows.Forms.TextBox();
+            this.uxStaffBookPublisherTextBox = new System.Windows.Forms.TextBox();
+            this.uxStaffAddContributorButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.uxStaffGenericItemsListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // button1
+            // uxStaffFinishBookButton
             // 
-            this.button1.Location = new System.Drawing.Point(13, 226);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Add Book";
-            this.button1.UseVisualStyleBackColor = true;
+            this.uxStaffFinishBookButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.uxStaffFinishBookButton.Location = new System.Drawing.Point(13, 226);
+            this.uxStaffFinishBookButton.Name = "uxStaffFinishBookButton";
+            this.uxStaffFinishBookButton.Size = new System.Drawing.Size(75, 23);
+            this.uxStaffFinishBookButton.TabIndex = 0;
+            this.uxStaffFinishBookButton.Text = "Create Book";
+            this.uxStaffFinishBookButton.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // uxStaffCancelButton
             // 
-            this.button2.Location = new System.Drawing.Point(493, 226);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.uxStaffCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.uxStaffCancelButton.Location = new System.Drawing.Point(274, 222);
+            this.uxStaffCancelButton.Name = "uxStaffCancelButton";
+            this.uxStaffCancelButton.Size = new System.Drawing.Size(75, 23);
+            this.uxStaffCancelButton.TabIndex = 1;
+            this.uxStaffCancelButton.Text = "Cancel";
+            this.uxStaffCancelButton.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // uxStaffBookTitleTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(64, 29);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 2;
+            this.uxStaffBookTitleTextBox.Location = new System.Drawing.Point(64, 29);
+            this.uxStaffBookTitleTextBox.Name = "uxStaffBookTitleTextBox";
+            this.uxStaffBookTitleTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffBookTitleTextBox.TabIndex = 2;
             // 
             // label1
             // 
@@ -93,28 +95,29 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "Publisher:";
             // 
-            // textBox2
+            // uxStaffBookNumberOfPagesTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(121, 55);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 6;
+            this.uxStaffBookNumberOfPagesTextBox.Location = new System.Drawing.Point(121, 55);
+            this.uxStaffBookNumberOfPagesTextBox.Name = "uxStaffBookNumberOfPagesTextBox";
+            this.uxStaffBookNumberOfPagesTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffBookNumberOfPagesTextBox.TabIndex = 6;
             // 
-            // textBox3
+            // uxStaffBookPublisherTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(82, 81);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 7;
+            this.uxStaffBookPublisherTextBox.Location = new System.Drawing.Point(82, 81);
+            this.uxStaffBookPublisherTextBox.Name = "uxStaffBookPublisherTextBox";
+            this.uxStaffBookPublisherTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffBookPublisherTextBox.TabIndex = 7;
             // 
-            // button3
+            // uxStaffAddContributorButton
             // 
-            this.button3.Location = new System.Drawing.Point(107, 226);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Add Contributor";
-            this.button3.UseVisualStyleBackColor = true;
+            this.uxStaffAddContributorButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.uxStaffAddContributorButton.Location = new System.Drawing.Point(107, 226);
+            this.uxStaffAddContributorButton.Name = "uxStaffAddContributorButton";
+            this.uxStaffAddContributorButton.Size = new System.Drawing.Size(100, 23);
+            this.uxStaffAddContributorButton.TabIndex = 8;
+            this.uxStaffAddContributorButton.Text = "Add Contributor";
+            this.uxStaffAddContributorButton.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -125,30 +128,30 @@
             this.label4.TabIndex = 12;
             this.label4.Text = "Contributors:";
             // 
-            // textBox4
+            // uxStaffGenericItemsListBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(95, 110);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(343, 91);
-            this.textBox4.TabIndex = 13;
+            this.uxStaffGenericItemsListBox.FormattingEnabled = true;
+            this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(96, 108);
+            this.uxStaffGenericItemsListBox.Name = "uxStaffGenericItemsListBox";
+            this.uxStaffGenericItemsListBox.Size = new System.Drawing.Size(253, 108);
+            this.uxStaffGenericItemsListBox.TabIndex = 13;
             // 
             // StaffAddBookItemWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 261);
-            this.Controls.Add(this.textBox4);
+            this.ClientSize = new System.Drawing.Size(366, 261);
+            this.Controls.Add(this.uxStaffGenericItemsListBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.uxStaffAddContributorButton);
+            this.Controls.Add(this.uxStaffBookPublisherTextBox);
+            this.Controls.Add(this.uxStaffBookNumberOfPagesTextBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.uxStaffBookTitleTextBox);
+            this.Controls.Add(this.uxStaffCancelButton);
+            this.Controls.Add(this.uxStaffFinishBookButton);
             this.Name = "StaffAddBookItemWindow";
             this.Text = "StaffAddBookItemWindow";
             this.ResumeLayout(false);
@@ -158,16 +161,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button uxStaffFinishBookButton;
+        private System.Windows.Forms.Button uxStaffCancelButton;
+        private System.Windows.Forms.TextBox uxStaffBookTitleTextBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox uxStaffBookNumberOfPagesTextBox;
+        private System.Windows.Forms.TextBox uxStaffBookPublisherTextBox;
+        private System.Windows.Forms.Button uxStaffAddContributorButton;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.ListBox uxStaffGenericItemsListBox;
     }
 }
