@@ -314,6 +314,15 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public void SearchByCustomerIDButtonPressedInStaffCustomerSearchWindow() {
 
+            var searchString = staffCustomerSearchWindow.UXStaffCustomerSearchIdString;
+            staffCustomerSearchWindow.ClearDisplayItems();
+            var success = false;
+            var customerDisplayObjects = libraryController.SearchCustomers(searchString, out success);
+            if (!success)
+            {
+                MessageBox.Show("No Customers could be found");
+            }
+            staffItemSearchWindow.AddDisplayItems(customerDisplayObjects);
         }
     }
 }

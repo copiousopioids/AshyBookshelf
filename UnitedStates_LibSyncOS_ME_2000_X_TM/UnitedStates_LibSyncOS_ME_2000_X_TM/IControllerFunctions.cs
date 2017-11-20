@@ -35,6 +35,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         bool AddFine(string username);
         List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria);
+        List<Customer> SearchCustomers(string searchCriteria, out bool success);
 
     }
 }

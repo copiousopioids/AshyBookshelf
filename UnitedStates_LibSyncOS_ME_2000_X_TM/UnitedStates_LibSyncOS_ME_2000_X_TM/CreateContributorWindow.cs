@@ -106,7 +106,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
-        public void AddDisplayItems(List<object> displayObjects)
+        public void AddDisplayItems(params object [] displayObjects)
         {
             uxStaffAwardsReceivedGenericItemsListBox.Items.AddRange(displayObjects.ToArray());
         }

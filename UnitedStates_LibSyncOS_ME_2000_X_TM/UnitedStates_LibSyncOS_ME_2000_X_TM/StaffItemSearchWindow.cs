@@ -75,7 +75,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         // Inspiration: 501 Bookshop program written by Masaaki Mizuno
-        public void AddDisplayItems(List<object> displayObjects)
+        public void AddDisplayItems(params object [] displayObjects)
         {
             genericItemsList.Items.AddRange(displayObjects.ToArray());
         }

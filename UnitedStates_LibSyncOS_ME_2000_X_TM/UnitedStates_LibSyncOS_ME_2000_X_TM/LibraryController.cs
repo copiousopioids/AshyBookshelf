@@ -77,6 +77,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
+        public List<Customer> SearchCustomers(string searchCriteria, out bool success) {
+            var searchOption = ItemSearchOptions.Customer;
+            success = false; // or true depending on if the result succceeds in being queried
+            return null;
+        }
+
         public bool VerifyAccount(string username, string password)
         {
             throw new NotImplementedException();

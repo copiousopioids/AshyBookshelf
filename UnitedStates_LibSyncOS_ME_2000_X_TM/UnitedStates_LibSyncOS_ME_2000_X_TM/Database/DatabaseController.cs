@@ -70,6 +70,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             throw new NotImplementedException();
         }
 
+        public List<Customer> SearchCustomers(string searchCriteria, out bool success)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria)
         {
             throw new NotImplementedException();

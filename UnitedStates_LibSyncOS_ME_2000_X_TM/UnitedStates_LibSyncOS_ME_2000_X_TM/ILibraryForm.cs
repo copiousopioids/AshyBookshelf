@@ -10,7 +10,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
     interface ILibraryForm
     {
         DialogReturn Display();
-        void AddDisplayItems(List<object> displayObjects);
+        void AddDisplayItems(params object [] displayObjects);
         void ClearDisplayItems();
         int SelectedIndex { get; set; }
         object SelectedItem { get; }
