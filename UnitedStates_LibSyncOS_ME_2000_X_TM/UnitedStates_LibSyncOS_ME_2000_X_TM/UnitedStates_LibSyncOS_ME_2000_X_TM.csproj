@@ -62,6 +62,12 @@
     <Compile Include="CreateContributorWindow.Designer.cs">
       <DependentUpon>CreateContributorWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomerItemSearchWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerItemSearchWindow.Designer.cs">
+      <DependentUpon>CustomerItemSearchWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database\DatabaseController.cs" />
     <Compile Include="DialogReturn.cs" />
     <Compile Include="Enums.cs" />
@@ -144,6 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerItemSearchWindow.resx">
+      <DependentUpon>CustomerItemSearchWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerLoginForm.resx">
       <DependentUpon>CustomerLoginForm.cs</DependentUpon>

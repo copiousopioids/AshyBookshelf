@@ -83,6 +83,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         // Inspiration: 501 Bookshop program written by Masaaki Mizuno
         public void ClearDisplayItems()
         {
+            staffSearchBooksCheckBox.Checked = false;
+            staffSearchMovieCheckBox.Checked = false;
+            staffSearchItemsTextBox.Text = "";
             genericItemsList.Items.Clear();
         }
 
