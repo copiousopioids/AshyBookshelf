@@ -98,6 +98,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                                 if (result)
                                 {
                                     MessageBox.Show("Item returned");
+                                    customerAccountForm.RemoveItem(bookItemToReturn);
                                 }
                                 else
                                 {
@@ -111,6 +112,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                                 if (result)
                                 {
                                     MessageBox.Show("Item Returned");
+                                    customerAccountForm.RemoveItem(movieItemToReturn);
                                 }
                                 else
                                 {
@@ -238,7 +240,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 return;
             }
             customerItemSearchWindow.ClearDisplayItems();
-            customerItemSearchWindow.AddDisplayItems(bookAndMovieDisplayObjects);
+            customerItemSearchWindow.AddDisplayItems(bookAndMovieDisplayObjects.ToArray());
         }
     }
 }

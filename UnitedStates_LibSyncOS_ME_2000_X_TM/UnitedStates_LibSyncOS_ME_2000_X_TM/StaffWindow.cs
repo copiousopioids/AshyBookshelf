@@ -42,7 +42,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             this.libraryController = controller;
         }
 
-        private void button1_Click(object sender, EventArgs e) // SEARCH ITEMS BUTTON CLICKED
+        private void button1_Click(object sender, EventArgs e) // SEARCH ITEMS BUTTON CLICKED IN STAFF WINDOW
         {
             while (true) {
                 try

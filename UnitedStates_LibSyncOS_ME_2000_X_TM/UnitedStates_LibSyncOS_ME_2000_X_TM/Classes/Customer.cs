@@ -15,8 +15,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public List<Fine> fines { get; set; }
+        public List<Item> ItemsCheckoutOut { get; set; }
 
-        public Customer (int customerId, string username, string password, string name, string address, string phoneNumber, List<Fine> fines)
+        public Customer(int customerId, string username, string password, string name, string address, string phoneNumber, List<Fine> fines, List<Item> itemsCheckedOut)
         {
             CustomerId = customerId;
             Username = username;
@@ -25,6 +26,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
             Address = address;
             PhoneNumber = phoneNumber;
             this.fines = fines;
+            this.ItemsCheckoutOut = itemsCheckedOut;
         }
 
         public override string ToString()

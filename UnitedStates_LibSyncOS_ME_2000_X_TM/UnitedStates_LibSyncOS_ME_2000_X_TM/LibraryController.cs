@@ -109,13 +109,39 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public Customer GetCustomer(string username, out bool success)
         {
+            var itemsCheckedOut = new List<Item>();
+            var contributors1 = new List<Person>();
+            var awards = new List<Award>();
+            var award1 = new Award(1, "pooAward", 21);
+            var award2 = new Award(1, "pooAward", 21);
+            var award3 = new Award(1, "pooAward", 21);
+            var award4 = new Award(1, "pooAward", 21);
+            awards.Add(award1);
+            awards.Add(award2);
+            awards.Add(award3);
+            awards.Add(award4);
+
+            var person1 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+            var person2 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+            var person3 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+            contributors1.Add(person1);
+            contributors1.Add(person2);
+            contributors1.Add(person3);
+
+            var book1 = new Book(new Condition("good", 1), true, 2, new Genre("gospel", 1), 1, "YOLO", 2, 123445, "Happy Tree Friends", 432, contributors1);
+            var book2 = new Book(new Condition("good", 1), true, 2, new Genre("gospel", 1), 1, "YOLO", 2, 123445, "Happy Tree Friends", 432, contributors1);
+            var movie1 = new Movie(new Condition("Good", 1), true, 2, new Genre("thisGenre", 1), 1, "This is the title", 2, 2, "This is the studio", 3, "This is the description", contributors1);
+
+            itemsCheckedOut.Add(book1);
+            itemsCheckedOut.Add(book2);
+            itemsCheckedOut.Add(movie1);
             var fineList = new List<Fine>();
             fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
             fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
             fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
             fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
             success = true;
-            return new Customer(12234, "reaganwood1", "poopoo", "Reagan", "123 Abduction Lane", "1234566", fineList);
+            return new Customer(12234, "reaganwood1", "poopoo", "Reagan", "123 Abduction Lane", "1234566", fineList, itemsCheckedOut);
             throw new NotImplementedException();
         }
 
@@ -160,12 +186,39 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public LoggedInInformation GetUserIfLoggedIn() {
+            var itemsCheckedOut = new List<Item>();
+            var contributors1 = new List<Person>();
+            var awards = new List<Award>();
+            var award1 = new Award(1, "pooAward", 21);
+            var award2 = new Award(1, "pooAward", 21);
+            var award3 = new Award(1, "pooAward", 21);
+            var award4 = new Award(1, "pooAward", 21);
+            awards.Add(award1);
+            awards.Add(award2);
+            awards.Add(award3);
+            awards.Add(award4);
+
+            var person1 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+            var person2 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+            var person3 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+            contributors1.Add(person1);
+            contributors1.Add(person2);
+            contributors1.Add(person3);
+
+            var book1 = new Book(new Condition("good", 1), true, 2, new Genre("gospel", 1), 1, "YOLO", 2, 123445, "Happy Tree Friends", 432, contributors1);
+            var book2 = new Book(new Condition("good", 1), true, 2, new Genre("gospel", 1), 1, "YOLO", 2, 123445, "Happy Tree Friends", 432, contributors1);
+            var movie1 = new Movie(new Condition("Good", 1), true, 2, new Genre("thisGenre", 1), 1, "This is the title", 2, 2, "This is the studio", 3, "This is the description", contributors1);
+
+            itemsCheckedOut.Add(book1);
+            itemsCheckedOut.Add(book2);
+            itemsCheckedOut.Add(movie1);
             var fineList = new List<Fine>();
-            fineList.Add(new Fine(1, 2, DateTime.Now, false, "this is a fine!"));
-            fineList.Add(new Fine(1, 2, DateTime.Now, false, "this is a fine!"));
-            fineList.Add(new Fine(1, 2, DateTime.Now, false, "this is a fine!"));
-            fineList.Add(new Fine(1, 2, DateTime.Now, false, "this is a fine!"));
-            loggedInCustomer = new Customer(12234, "reaganwood1", "poopoo", "Reagan", "123 Abduction Lane", "1234566", fineList);
+            fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
+            fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
+            fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
+            fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
+
+            loggedInCustomer = new Customer(12234, "reaganwood1", "poopoo", "Reagan", "123 Abduction Lane", "1234566", fineList, itemsCheckedOut);
             if (loggedInCustomer == null)
                 return new LoggedInInformation(false, null);
             else

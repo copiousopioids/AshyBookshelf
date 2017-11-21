@@ -25,6 +25,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxCustomerPasswordTextBox.Text = customerLoggedIn.Password;
             uxCustomerPhoneNumberTextBox.Text = customerLoggedIn.PhoneNumber;
             uxCustomerUsernameTextBox.Text = customerLoggedIn.Username;
+            uxCustomerGenericItemsListBox.Items.AddRange(customerLoggedIn.ItemsCheckoutOut.ToArray());
         }
 
         public CustomerAccountForm()
@@ -72,7 +73,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 MessageBox.Show("Please select an item to return and try again");
                 return false;
             }
-            return false;
+            return true;
         }
 
         public void RemoveItem(object objectToRemove) {

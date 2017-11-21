@@ -45,6 +45,7 @@
             this.uxCustomerCloseButton = new System.Windows.Forms.Button();
             this.uxCustomerGenericItemsListBox = new System.Windows.Forms.ListBox();
             this.uxCustomerReturnItemButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Customer_Account_Title
@@ -53,9 +54,9 @@
             this.Customer_Account_Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Customer_Account_Title.Location = new System.Drawing.Point(30, 19);
             this.Customer_Account_Title.Name = "Customer_Account_Title";
-            this.Customer_Account_Title.Size = new System.Drawing.Size(339, 29);
+            this.Customer_Account_Title.Size = new System.Drawing.Size(259, 29);
             this.Customer_Account_Title.TabIndex = 0;
-            this.Customer_Account_Title.Text = "Customer Account Information:";
+            this.Customer_Account_Title.Text = "Customer Account Info:";
             // 
             // Customer_Account_Name_Label
             // 
@@ -212,11 +213,22 @@
             this.uxCustomerReturnItemButton.Text = "Return Item";
             this.uxCustomerReturnItemButton.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(359, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(175, 24);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Checked Out Items:";
+            // 
             // CustomerAccountForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(669, 370);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.uxCustomerReturnItemButton);
             this.Controls.Add(this.uxCustomerGenericItemsListBox);
             this.Controls.Add(this.uxCustomerCloseButton);
@@ -260,5 +272,6 @@
         private System.Windows.Forms.Button uxCustomerCloseButton;
         private System.Windows.Forms.ListBox uxCustomerGenericItemsListBox;
         private System.Windows.Forms.Button uxCustomerReturnItemButton;
+        private System.Windows.Forms.Label label1;
     }
 }
