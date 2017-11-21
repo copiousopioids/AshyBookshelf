@@ -272,5 +272,29 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             return awards;
             throw new NotImplementedException();
         }
+
+        public List<Role> GetAllRoles(out bool success) {
+            success = true;
+            var roles = new List<Role>();
+            var role1 = new Role(1, "director");
+            var role2 = new Role(2, "producer");
+            var role3 = new Role(3, "author");
+            roles.Add(role1);
+            roles.Add(role2);
+            roles.Add(role3);
+            return roles;
+        }
+
+        public List<Genre> GetAllGenres(out bool success) {
+            success = true;
+            var genres = new List<Genre>();
+            var genre1 = new Genre("Rap", 1);
+            var genre2 = new Genre("Rock", 1);
+            var genre3 = new Genre("Action", 1);
+            genres.Add(genre1);
+            genres.Add(genre2);
+            genres.Add(genre3);
+            return genres;
+        }
     }
 }

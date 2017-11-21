@@ -43,5 +43,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
             
             RoleId = roleId;
         }
+
+        public override string ToString()
+        {
+            return "Role: " + Type.ToString();
+        }
     }
 }

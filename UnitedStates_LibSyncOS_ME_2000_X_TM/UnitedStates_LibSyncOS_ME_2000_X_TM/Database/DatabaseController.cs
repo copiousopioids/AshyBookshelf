@@ -98,5 +98,15 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         public List<Award> GetAllAwards(out bool success) {
             throw new NotImplementedException();
         }
+
+        public List<Role> GetAllRoles(out bool success)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Genre> GetAllGenres(out bool success)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

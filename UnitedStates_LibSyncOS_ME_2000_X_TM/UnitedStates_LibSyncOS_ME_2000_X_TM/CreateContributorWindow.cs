@@ -14,8 +14,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
     public partial class CreateContributorWindow : Form, ILibraryForm
     {
 
-        public void SetDisplayItems(Award [] availableAwards) {
+        public void SetDisplayItems(List<Award> availableAwards, List<Role> roles) {
             uxStaffAvailableRewardsGenericItemsListBox.Items.AddRange(availableAwards.ToArray());
+            uxStaffRoleComboBox.Items.AddRange(roles.ToArray());
         }
 
         public string UXStaffContributorTwitterHandle
@@ -158,7 +159,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 return false;
             if (string.IsNullOrEmpty(uxStaffTwitterHandleTextBox.Text))
                 return false;
-            if (uxStaffAwardsReceivedGenericItemsListBox.SelectedItem == null) {
+            if (uxStaffRoleComboBox.SelectedItem == null) {
                 MessageBox.Show("Enter a role");
                 return false;
             }              

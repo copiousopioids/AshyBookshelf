@@ -39,6 +39,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         bool PayIndividualFine(string username, Fine fine);
         List<Person> GetAllContributors(out bool success);
         List<Award> GetAllAwards(out bool success);
+        List<Role> GetAllRoles(out bool success);
+        List<Genre> GetAllGenres(out bool success);
 
     }
 }

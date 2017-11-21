@@ -13,6 +13,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class StaffAddMovieItemWindow : Form, ILibraryForm
     {
+        public void SetGenreItems(List<Genre> genres)
+        {
+            uxStaffGenreComboBox.Items.AddRange(genres.ToArray());
+        }
+
         public StaffAddMovieItemWindow()
         {
             InitializeComponent();
@@ -132,7 +137,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 MessageBox.Show("Please enter a studio and try again");
                 return false;
             }
-            if (uxStaffGenericItemsListBox.SelectedItem == null)
+            if (uxStaffGenreComboBox.SelectedItem == null)
             {
                 MessageBox.Show("Please enter a genre and try again");
                 return false;

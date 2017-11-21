@@ -107,5 +107,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     break;
             }
         }
+
+        public override string ToString()
+        {
+            return "Genre: " + Type.ToString();
+        }
     }
 }

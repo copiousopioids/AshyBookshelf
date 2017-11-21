@@ -113,6 +113,17 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public Movie AddAndGetMovieThroughAddMoviekWindow(out bool success) {
             staffAddMovieItemWindow.ClearDisplayItems();
+
+            success = false;
+            var genres = libraryController.GetAllGenres(out success);
+            if (!success)
+            {
+                MessageBox.Show("Genres could not be retrieved");
+                success = false;
+                return null;
+            }
+
+            staffAddMovieItemWindow.SetGenreItems(genres);
             try
             {
                 while (true)
@@ -125,7 +136,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             if (contributor != null)
                                 staffAddMovieItemWindow.AddItem(contributor);
                             break;
-                        case DialogReturn.Create:
+                        case DialogReturn.AddMovie:
                             success = false;
                             var title = staffAddMovieItemWindow.UXStaffMovieTitle;
                             var duration = staffAddMovieItemWindow.UXStaffMovieDuration;
@@ -135,8 +146,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             var contributors = staffAddMovieItemWindow.GetAllItems();
                             var barcode = staffAddMovieItemWindow.UXStaffMovieBarcode;
                             var movie = libraryController.AddMovie(title, description, genre, duration, barcode, contributors, out success);
-                            if (!success)
+                            if (!success) {
                                 MessageBox.Show("Movie could not be addede");
+                                return null;
+                            }
+
+                            MessageBox.Show("Movie Added");
                             return movie;
                         case DialogReturn.Cancel:
                             success = false;
@@ -157,6 +172,16 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public Book AddAndGetBookThroughAddBookWindow(out bool success) {
 
             staffAddBookItemWindow.ClearDisplayItems();
+            success = false;
+            var genres = libraryController.GetAllGenres(out success);
+            if (!success) {
+                MessageBox.Show("Genres could not be retrieved");
+                success = false;
+                return null;
+            }
+
+            staffAddBookItemWindow.SetGenreItems(genres);
+
             while (true) {
                 var addBookWindowDialogReturn = staffAddBookItemWindow.Display();
                 switch (addBookWindowDialogReturn)
@@ -179,8 +204,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         {
                             MessageBox.Show("The book could not be added. We're sorry");
                         }
-                        else
-                            success = true;
+
+                        success = true;
+                        MessageBox.Show("Book added");
                         return book;
                     case DialogReturn.Cancel:
                         success = false;
@@ -236,13 +262,21 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public Person LaunchCreateContributorWindowAndCreateContributor() {
 
             staffCreateContributorWindow.ClearDisplayItems();
+
             var success = false;
             var existingAwards = libraryController.GetAllAwards(out success);
             if (!success) {
                 MessageBox.Show("Awards could not be retrieved");
                 return null;
             }
-            staffCreateContributorWindow.SetDisplayItems(existingAwards.ToArray());
+
+            var roles = libraryController.GetAllRoles(out success);
+            if (!success) {
+                MessageBox.Show("Roles could not be retrieved");
+                return null;
+            }
+
+            staffCreateContributorWindow.SetDisplayItems(existingAwards, roles);
 
             while (true) {
                 var createContributorDialogReturn = staffCreateContributorWindow.Display();

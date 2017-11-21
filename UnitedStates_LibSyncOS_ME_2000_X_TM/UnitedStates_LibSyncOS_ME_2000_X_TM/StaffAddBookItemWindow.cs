@@ -13,6 +13,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class StaffAddBookItemWindow : Form, ILibraryForm 
     {
+        public void SetGenreItems(List<Genre> genres) {
+            uxStaffGenreComboBox.Items.AddRange(genres.ToArray());
+        }
+
         public string UXStaffBookPublisherText {
             get {
                 return uxStaffBookPublisherTextBox.Text.ToString();
@@ -84,6 +88,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffBookTitleTextBox.Clear();
             uxStaffGenericItemsListBox.Items.Clear();
             uxStaffBookNumberOfPagesTextBox.Clear();
+            uxStaffISBNTextBox.Text = "";
 
         }
 
@@ -138,6 +143,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
             if (uxStaffGenreComboBox.SelectedItem == null) {
                 MessageBox.Show("Select an Item");
+                return false;
+            }
+            if (uxStaffGenreComboBox.SelectedItem == null) {
+                MessageBox.Show("Enter a genre and try again");
                 return false;
             }
             return true;               
