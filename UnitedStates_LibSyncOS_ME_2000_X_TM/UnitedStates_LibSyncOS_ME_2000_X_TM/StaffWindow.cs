@@ -375,7 +375,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public void LaunchAndDisplayCustomerManager(Customer customer) {
             staffCustomerManager.ClearDisplayItems();
-            staffCustomerManager.AddDisplayItems(customer);
+            staffCustomerManager.SetDisplay(customer);
 
             while (true) {
                 var dialogResult = staffCustomerManager.Display();
@@ -447,7 +447,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             {
                 MessageBox.Show("No Customers could be found");
             }
-            staffItemSearchWindow.AddDisplayItems(customerDisplayObjects);
+            staffCustomerSearchWindow.AddDisplayItems(customerDisplayObjects);
         }
     }
 }

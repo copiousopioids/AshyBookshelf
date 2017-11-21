@@ -26,5 +26,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
             PhoneNumber = phoneNumber;
             this.fines = fines;
         }
+
+        public override string ToString()
+        {
+            return "Customer: " + Name;
+        }
     }
 }

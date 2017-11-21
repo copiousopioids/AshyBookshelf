@@ -14,13 +14,18 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
         public bool Paid { get; set; }
         public string Description { get; set; }
 
-        public Fine( int fineId, int amount, DateTime dueDate, string paid, string description)
+        public Fine( int fineId, int amount, DateTime dueDate, bool paid, string description)
         {
             this.FineId = fineId;
             this.Amount = amount;
             this.DueDate = dueDate;
-            this.Paid = bool.Parse(paid);
+            this.Paid = paid;
             this.Description = description;
+        }
+
+        public override string ToString()
+        {
+            return "Fine: " + Amount;
         }
     }
 }

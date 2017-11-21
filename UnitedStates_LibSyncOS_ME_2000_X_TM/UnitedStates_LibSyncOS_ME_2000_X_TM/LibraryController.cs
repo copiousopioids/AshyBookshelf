@@ -60,7 +60,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public Fine AddFine(string username, int amount, out bool result)
         {
             result = true;
-            return new Fine(1, 23, DateTime.Now, "1", "This is the description");
+            return new Fine(1, 23, DateTime.Now, false, "This is the description");
             throw new NotImplementedException();
         }
 
@@ -110,10 +110,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public Customer GetCustomer(string username, out bool success)
         {
             var fineList = new List<Fine>();
-            fineList.Add(new Fine(1, 2, DateTime.Now, "what", "this is a fine!"));
-            fineList.Add(new Fine(1, 2, DateTime.Now, "what", "this is a fine!"));
-            fineList.Add(new Fine(1, 2, DateTime.Now, "what", "this is a fine!"));
-            fineList.Add(new Fine(1, 2, DateTime.Now, "what", "this is a fine!"));
+            fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
+            fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
+            fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
+            fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
             success = true;
             return new Customer(12234, "reaganwood1", "poopoo", "Reagan", "123 Abduction Lane", "1234566", fineList);
             throw new NotImplementedException();
@@ -161,10 +161,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public LoggedInInformation GetUserIfLoggedIn() {
             var fineList = new List<Fine>();
-            fineList.Add(new Fine(1, 2, DateTime.Now, "what", "this is a fine!"));
-            fineList.Add(new Fine(1, 2, DateTime.Now, "what", "this is a fine!"));
-            fineList.Add(new Fine(1, 2, DateTime.Now, "what", "this is a fine!"));
-            fineList.Add(new Fine(1, 2, DateTime.Now, "what", "this is a fine!"));
+            fineList.Add(new Fine(1, 2, DateTime.Now, false, "this is a fine!"));
+            fineList.Add(new Fine(1, 2, DateTime.Now, false, "this is a fine!"));
+            fineList.Add(new Fine(1, 2, DateTime.Now, false, "this is a fine!"));
+            fineList.Add(new Fine(1, 2, DateTime.Now, false, "this is a fine!"));
             loggedInCustomer = new Customer(12234, "reaganwood1", "poopoo", "Reagan", "123 Abduction Lane", "1234566", fineList);
             if (loggedInCustomer == null)
                 return new LoggedInInformation(false, null);
