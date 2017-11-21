@@ -39,12 +39,16 @@
             this.uxStaffAddContributorButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.uxStaffGenericItemsListBox = new System.Windows.Forms.ListBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.uxStaffGenreComboBox = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.uxStaffISBNTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // uxStaffFinishBookButton
             // 
             this.uxStaffFinishBookButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.uxStaffFinishBookButton.Location = new System.Drawing.Point(13, 226);
+            this.uxStaffFinishBookButton.Location = new System.Drawing.Point(12, 303);
             this.uxStaffFinishBookButton.Name = "uxStaffFinishBookButton";
             this.uxStaffFinishBookButton.Size = new System.Drawing.Size(75, 23);
             this.uxStaffFinishBookButton.TabIndex = 0;
@@ -54,7 +58,7 @@
             // uxStaffCancelButton
             // 
             this.uxStaffCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.uxStaffCancelButton.Location = new System.Drawing.Point(274, 222);
+            this.uxStaffCancelButton.Location = new System.Drawing.Point(274, 303);
             this.uxStaffCancelButton.Name = "uxStaffCancelButton";
             this.uxStaffCancelButton.Size = new System.Drawing.Size(75, 23);
             this.uxStaffCancelButton.TabIndex = 1;
@@ -112,7 +116,7 @@
             // uxStaffAddContributorButton
             // 
             this.uxStaffAddContributorButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.uxStaffAddContributorButton.Location = new System.Drawing.Point(107, 226);
+            this.uxStaffAddContributorButton.Location = new System.Drawing.Point(93, 303);
             this.uxStaffAddContributorButton.Name = "uxStaffAddContributorButton";
             this.uxStaffAddContributorButton.Size = new System.Drawing.Size(100, 23);
             this.uxStaffAddContributorButton.TabIndex = 8;
@@ -122,7 +126,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 110);
+            this.label4.Location = new System.Drawing.Point(12, 189);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(66, 13);
             this.label4.TabIndex = 12;
@@ -131,16 +135,53 @@
             // uxStaffGenericItemsListBox
             // 
             this.uxStaffGenericItemsListBox.FormattingEnabled = true;
-            this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(96, 108);
+            this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(93, 189);
             this.uxStaffGenericItemsListBox.Name = "uxStaffGenericItemsListBox";
             this.uxStaffGenericItemsListBox.Size = new System.Drawing.Size(253, 108);
             this.uxStaffGenericItemsListBox.TabIndex = 13;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 116);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(42, 13);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Genre: ";
+            // 
+            // uxStaffGenreComboBox
+            // 
+            this.uxStaffGenreComboBox.FormattingEnabled = true;
+            this.uxStaffGenreComboBox.Location = new System.Drawing.Point(60, 113);
+            this.uxStaffGenreComboBox.Name = "uxStaffGenreComboBox";
+            this.uxStaffGenreComboBox.Size = new System.Drawing.Size(121, 21);
+            this.uxStaffGenreComboBox.TabIndex = 15;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 159);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(38, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "ISBN: ";
+            // 
+            // uxStaffISBNTextBox
+            // 
+            this.uxStaffISBNTextBox.Location = new System.Drawing.Point(71, 156);
+            this.uxStaffISBNTextBox.Name = "uxStaffISBNTextBox";
+            this.uxStaffISBNTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffISBNTextBox.TabIndex = 17;
             // 
             // StaffAddBookItemWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(366, 261);
+            this.ClientSize = new System.Drawing.Size(366, 338);
+            this.Controls.Add(this.uxStaffISBNTextBox);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.uxStaffGenreComboBox);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.uxStaffGenericItemsListBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.uxStaffAddContributorButton);
@@ -172,5 +213,9 @@
         private System.Windows.Forms.Button uxStaffAddContributorButton;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox uxStaffGenericItemsListBox;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox uxStaffGenreComboBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox uxStaffISBNTextBox;
     }
 }

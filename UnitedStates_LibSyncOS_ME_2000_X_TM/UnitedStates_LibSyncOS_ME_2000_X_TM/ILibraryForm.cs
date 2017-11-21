@@ -7,12 +7,19 @@ using System.Windows.Forms;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
+    interface ILibraryNoListBoxForm {
+        DialogReturn Display();
+        bool CheckDataValidity();
+        void ClearDisplayItems();
+    }
+
     interface ILibraryForm
     {
-        DialogReturn Diplay();
-        void AddDisplayItems(List<object> displayObjects);
+        DialogReturn Display();
+        void AddDisplayItems(params object [] displayObjects);
         void ClearDisplayItems();
         int SelectedIndex { get; set; }
         object SelectedItem { get; }
+        bool CheckDataValidity();
     }
 }

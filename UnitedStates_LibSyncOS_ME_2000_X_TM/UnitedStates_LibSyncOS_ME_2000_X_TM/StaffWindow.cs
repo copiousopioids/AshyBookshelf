@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnitedStates_LibSyncOS_ME_2000_X_TM.Classes;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
@@ -18,6 +19,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         private StaffCustomerSearchWindow staffCustomerSearchWindow;
         private StaffItemSearchWindow staffItemSearchWindow;
         private LibraryController libraryController;
+        private CreateContributorWindow staffCreateContributorWindow;
+        private StaffCreateCustomerWindow staffCreateCustomerWindow;
 
         public StaffWindow()
         {
@@ -31,6 +34,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             this.staffAddMovieItemWindow = new StaffAddMovieItemWindow();
             this.staffCustomerSearchWindow = new StaffCustomerSearchWindow();
             this.staffItemSearchWindow = new StaffItemSearchWindow();
+            this.staffCreateContributorWindow = new CreateContributorWindow();
+            this.staffCreateCustomerWindow = new StaffCreateCustomerWindow();
+            
             this.libraryController = controller;
         }
 
@@ -39,23 +45,27 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             while (true) {
                 try
                 {
-                    var dialogReturn = staffItemSearchWindow.Diplay();
+                    var success = false;
+                    var dialogReturn = staffItemSearchWindow.Display();
                     switch (dialogReturn) {
                         case DialogReturn.Search:
                             SearchItemsButtonPressed();
                             break;
-                        case DialogReturn.AddBook:
-                            AddBookThroughAddBookWindow();
+                        case DialogReturn.AddBook:                           
+                            var book = AddAndGetBookThroughAddBookWindow(out success);
+                            if (success)
+                                staffItemSearchWindow.AddItem(book);
                             break;
                         case DialogReturn.AddMovie:
+                            var movie = AddAndGetMovieThroughAddMoviekWindow(out success);
+                            if (success)
+                                staffItemSearchWindow.AddItem(movie);
                             break;
                         case DialogReturn.Cancel:
-                            this.Hide();
-                            break;
+                            return;
                         case DialogReturn.Delete:
                             DeleteItemFromLibrary();
                             return;
-                            break;
                         case DialogReturn.Undefined:
                             throw new Exception("Dialog did not return properly");
                     }
@@ -68,44 +78,169 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public void DeleteItemFromLibrary()
         {
+            var selectedItem = staffItemSearchWindow.SelectedItem;
+            if (selectedItem is Movie)
+            {
+
+                var bookItem = (Book)selectedItem;
+                if (libraryController.DeleteItem(ItemTypes.Movie, bookItem.ID))
+                {
+                    MessageBox.Show("Book Deleted");
+                    staffItemSearchWindow.ClearDisplayItems();
+                }
+                else
+                {
+                    MessageBox.Show("Could not delete item from the library catalog");
+                }
+            }
+            else if (selectedItem is Movie)
+            {
+
+                var movieItem = (Movie)selectedItem;
+                if (libraryController.DeleteItem(ItemTypes.Movie, movieItem.ID))
+                {
+                    MessageBox.Show("Movie Deleted");
+                    staffItemSearchWindow.ClearDisplayItems();
+                }
+                else
+                {
+                    MessageBox.Show("Could not delete item from the library catalog");
+                }
+            }
+        }
+
+        public Movie AddAndGetMovieThroughAddMoviekWindow(out bool success) {
+            staffAddMovieItemWindow.ClearDisplayItems();
             try
             {
-                var selectedItem = staffItemSearchWindow.SelectedItem;
-                if (selectedItem is Movie) {
-
-                    var bookItem = (Book)selectedItem;
-                    if (libraryController.DeleteItem(ItemTypes.Movie, bookItem.ID))
+                while (true)
+                {
+                    var addMovieWindowDialogReturn = staffAddMovieItemWindow.Display();
+                    switch (addMovieWindowDialogReturn)
                     {
-                        MessageBox.Show("Book Deleted");
-                        staffItemSearchWindow.ClearDisplayItems();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Could not delete item from the library catalog");
-                    }
-                } else if (selectedItem is Movie) {
-
-                    var movieItem = (Movie)selectedItem;
-                    if (libraryController.DeleteItem(ItemTypes.Movie, movieItem.ID)) {
-                        MessageBox.Show("Movie Deleted");
-                        staffItemSearchWindow.ClearDisplayItems();
-                    } else {
-                        MessageBox.Show("Could not delete item from the library catalog");
+                        case DialogReturn.AddContributor:
+                            var contributor = PickContributorForItem();
+                            if (contributor != null)
+                                staffAddMovieItemWindow.AddItem(contributor);
+                            break;
+                        case DialogReturn.Create:
+                            success = false;
+                            var title = staffAddMovieItemWindow.UXStaffMovieTitle;
+                            var duration = staffAddMovieItemWindow.UXStaffMovieDuration;
+                            var description = staffAddMovieItemWindow.UXStaffMovieDescription;
+                            var studio = staffAddMovieItemWindow.UXStaffMovieStudio;
+                            var genre = staffAddMovieItemWindow.UXStaffMovieGenre;
+                            var contributors = staffAddMovieItemWindow.GetAllItems();
+                            var barcode = staffAddMovieItemWindow.UXStaffMovieBarcode;
+                            var movie = libraryController.AddMovie(title, description, genre, duration, barcode, contributors, out success);
+                            if (!success)
+                                MessageBox.Show("Movie could not be addede");
+                            return movie;
+                        case DialogReturn.Cancel:
+                            success = false;
+                            return null;
+                        default:
+                            break;
                     }
                 }
             }
             catch (Exception ex) {
                 MessageBox.Show(ex.ToString());
+                success = false;
+                return null;
+            }
+            
+        }
+
+        public Book AddAndGetBookThroughAddBookWindow(out bool success) {
+
+            staffAddBookItemWindow.ClearDisplayItems();
+            while (true) {
+                var addBookWindowDialogReturn = staffAddBookItemWindow.Display();
+                switch (addBookWindowDialogReturn)
+                {
+                    case DialogReturn.AddContributor:
+                        var contributor = PickContributorForItem();
+                        if (contributor != null)
+                            staffAddBookItemWindow.AddItem(contributor);
+                        break;
+                    case DialogReturn.Create:
+                        var title = staffAddBookItemWindow.UXStaffBookTitleText;
+                        var numberOfPages = Convert.ToInt32(staffAddBookItemWindow.UXStaffBookNumberOfPagesText);
+                        var publisher = staffAddBookItemWindow.UXStaffBookPublisherText;
+                        var contributors = staffAddBookItemWindow.GetAllItems();
+                        var genre = (Genre)staffAddBookItemWindow.UXStaffBookGenre;
+                        var isbn = staffAddBookItemWindow.UXStaffBookISBN;
+                        success = false;
+                        var book = libraryController.AddBook(title, genre, isbn, publisher, numberOfPages, contributors, out success);
+                        if (success == false)
+                        {
+                            MessageBox.Show("The book could not be added. We're sorry");
+                        }
+                        else
+                            success = true;
+                        return book;
+                    case DialogReturn.Cancel:
+                        success = false;
+                        return null;
+                    default:
+                        break;
+                }
+            }           
+        }
+
+        public Person PickContributorForItem() {
+            try
+            {
+                var addContributorDialogReturn = staffAddContributorWindow.Display();
+                switch (addContributorDialogReturn)
+                {
+                    case DialogReturn.AddContributor:
+                        var contributor = staffAddContributorWindow.SelectedItem;
+                        if (contributor is Person)
+                            return (Person)contributor;
+                        else
+                        {
+                            MessageBox.Show("A contributor was not selected");
+                            return null;
+                        }
+                        break;
+                    case DialogReturn.Create:
+                        var newContributor = LaunchCreateContributorWindowAndCreateContributor();
+                        return newContributor;
+                    case DialogReturn.Cancel:
+                        return null;
+                    default:
+                        return null;
+                }
+            }
+            catch (Exception ex){
+                MessageBox.Show(ex.ToString());
+                return null;
             }
         }
 
-        public void AddBookThroughAddBookWindow() {
-            try
-            {
-                
-            } catch (Exception ex) {
-                MessageBox.Show(ex.ToString());
+        public Person LaunchCreateContributorWindowAndCreateContributor() {
+
+            var createContributorDialogReturn = staffCreateContributorWindow.Display();
+            switch (createContributorDialogReturn) {
+                case DialogReturn.Create:
+                    var firstName = staffCreateContributorWindow.UXStaffContributorFirstName;
+                    var lastName = staffCreateContributorWindow.UXStaffContributorLastName;
+                    var twitterHandle = staffCreateContributorWindow.UXStaffContributorTwitterHandle;
+                    var dateOfBirth = staffCreateContributorWindow.UXStaffContributorDateOfBirth;
+                    var role = staffCreateContributorWindow.UXStaffRoleSelected;
+                    var success = false;
+                    var contributor = libraryController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, role, out success);
+                    if (!success)
+                        MessageBox.Show("Contributor could not be created");
+                    return contributor;
+                case DialogReturn.Cancel:
+                    break;
+                default:
+                    throw new Exception("An unregistered Dialog Return was created");
             }
+            return null;
         }
 
         public void SearchItemsButtonPressed()
@@ -139,7 +274,80 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         private void staffSearchCustomerButton_Click(object sender, EventArgs e)
         {
+            while (true)
+            {
+                try
+                {
+                    var success = false;
+                    var dialogReturn = staffCustomerSearchWindow.Display();
+                    switch (dialogReturn)
+                    {
+                        case DialogReturn.Search:
+                            SearchByCustomerIDButtonPressedInStaffCustomerSearchWindow();
+                            break;
+                        case DialogReturn.AddCustomer:
+                            AddCustomerThroughStaffCreateCusomterWindow();
+                            break;
+                        case DialogReturn.Cancel:
+                            return;
+                        case DialogReturn.Delete:
+                            var customer = (Customer)staffCustomerSearchWindow.SelectedItem;
+                            if (libraryController.DeleteCustomer(customer.Username))
+                            {
+                                staffCustomerSearchWindow.ClearDisplayItems();
+                            }
+                            else {
+                                MessageBox.Show("Customer could not be deleted.");
+                            }
+                            return;
+                        case DialogReturn.Undefined:
+                            throw new Exception("Dialog did not return properly");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            }
 
+        }
+
+        public void AddCustomerThroughStaffCreateCusomterWindow() {
+
+            staffCreateCustomerWindow.ClearDisplayItems();
+            var addCustomerDialogReturn = staffCreateCustomerWindow.Display();
+
+            switch (addCustomerDialogReturn) {
+                case DialogReturn.Create:
+                    var username = staffCreateCustomerWindow.UXStaffUsername;
+                    var password = staffCreateCustomerWindow.UXStaffPassword;
+                    var name = staffCreateCustomerWindow.UXStaffPassword;
+                    var address = staffCreateCustomerWindow.UXStaffAddress;
+                    var phoneNumber = staffCreateCustomerWindow.UXStaffPhoneNumber;
+                    var success = libraryController.AddCustomer(username, password, name, address, phoneNumber);
+                    if (!success)
+                        MessageBox.Show("User could not be added");
+                    else
+                        MessageBox.Show("User created");
+                    break;
+                case DialogReturn.Cancel:
+                    return;
+                default:
+                    break;
+            }
+        }
+
+        public void SearchByCustomerIDButtonPressedInStaffCustomerSearchWindow() {
+
+            var searchString = staffCustomerSearchWindow.UXStaffCustomerSearchIdString;
+            staffCustomerSearchWindow.ClearDisplayItems();
+            var success = false;
+            var customerDisplayObjects = libraryController.GetCustomer(searchString, out success);
+            if (!success)
+            {
+                MessageBox.Show("No Customers could be found");
+            }
+            staffItemSearchWindow.AddDisplayItems(customerDisplayObjects);
         }
     }
 }

@@ -28,39 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.uxStaffRoleComboBox = new System.Windows.Forms.ComboBox();
+            this.uxStaffFirstNameTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.uxStaffTwitterHandleTextBox = new System.Windows.Forms.TextBox();
+            this.uxStaffLastNameTextBox = new System.Windows.Forms.TextBox();
+            this.uxStaffDOBTextBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.uxStaffCreateContributorButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.uxStaffAwardsReceivedGenericItemsListBox = new System.Windows.Forms.ListBox();
+            this.uxStaffLinkAwardButton = new System.Windows.Forms.Button();
+            this.uxStaffAvailableRewardsGenericItemsListBox = new System.Windows.Forms.ListBox();
+            this.uxStaffCancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBox2
+            // uxStaffRoleComboBox
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(52, 150);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 16;
+            this.uxStaffRoleComboBox.FormattingEnabled = true;
+            this.uxStaffRoleComboBox.Location = new System.Drawing.Point(52, 150);
+            this.uxStaffRoleComboBox.Name = "uxStaffRoleComboBox";
+            this.uxStaffRoleComboBox.Size = new System.Drawing.Size(121, 21);
+            this.uxStaffRoleComboBox.TabIndex = 16;
             // 
-            // textBox5
+            // uxStaffFirstNameTextBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(80, 70);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 17;
+            this.uxStaffFirstNameTextBox.Location = new System.Drawing.Point(80, 70);
+            this.uxStaffFirstNameTextBox.Name = "uxStaffFirstNameTextBox";
+            this.uxStaffFirstNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffFirstNameTextBox.TabIndex = 17;
             // 
             // label3
             // 
@@ -107,26 +108,26 @@
             this.label11.TabIndex = 22;
             this.label11.Text = "Twitter:";
             // 
-            // textBox6
+            // uxStaffTwitterHandleTextBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(60, 33);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 23;
+            this.uxStaffTwitterHandleTextBox.Location = new System.Drawing.Point(60, 33);
+            this.uxStaffTwitterHandleTextBox.Name = "uxStaffTwitterHandleTextBox";
+            this.uxStaffTwitterHandleTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffTwitterHandleTextBox.TabIndex = 23;
             // 
-            // textBox7
+            // uxStaffLastNameTextBox
             // 
-            this.textBox7.Location = new System.Drawing.Point(81, 114);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 20);
-            this.textBox7.TabIndex = 24;
+            this.uxStaffLastNameTextBox.Location = new System.Drawing.Point(81, 114);
+            this.uxStaffLastNameTextBox.Name = "uxStaffLastNameTextBox";
+            this.uxStaffLastNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffLastNameTextBox.TabIndex = 24;
             // 
-            // textBox8
+            // uxStaffDOBTextBox
             // 
-            this.textBox8.Location = new System.Drawing.Point(52, 204);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 20);
-            this.textBox8.TabIndex = 25;
+            this.uxStaffDOBTextBox.Location = new System.Drawing.Point(52, 204);
+            this.uxStaffDOBTextBox.Name = "uxStaffDOBTextBox";
+            this.uxStaffDOBTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffDOBTextBox.TabIndex = 25;
             // 
             // label12
             // 
@@ -137,14 +138,15 @@
             this.label12.TabIndex = 26;
             this.label12.Text = "Add New Contributor";
             // 
-            // button1
+            // uxStaffCreateContributorButton
             // 
-            this.button1.Location = new System.Drawing.Point(13, 266);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 23);
-            this.button1.TabIndex = 27;
-            this.button1.Text = "Create Contributor";
-            this.button1.UseVisualStyleBackColor = true;
+            this.uxStaffCreateContributorButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.uxStaffCreateContributorButton.Location = new System.Drawing.Point(12, 288);
+            this.uxStaffCreateContributorButton.Name = "uxStaffCreateContributorButton";
+            this.uxStaffCreateContributorButton.Size = new System.Drawing.Size(104, 23);
+            this.uxStaffCreateContributorButton.TabIndex = 27;
+            this.uxStaffCreateContributorButton.Text = "Create Contributor";
+            this.uxStaffCreateContributorButton.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -164,53 +166,65 @@
             this.label2.TabIndex = 29;
             this.label2.Text = "Available Rewards";
             // 
-            // listBox1
+            // uxStaffAwardsReceivedGenericItemsListBox
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(239, 36);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(188, 238);
-            this.listBox1.TabIndex = 30;
+            this.uxStaffAwardsReceivedGenericItemsListBox.FormattingEnabled = true;
+            this.uxStaffAwardsReceivedGenericItemsListBox.Location = new System.Drawing.Point(239, 36);
+            this.uxStaffAwardsReceivedGenericItemsListBox.Name = "uxStaffAwardsReceivedGenericItemsListBox";
+            this.uxStaffAwardsReceivedGenericItemsListBox.Size = new System.Drawing.Size(188, 238);
+            this.uxStaffAwardsReceivedGenericItemsListBox.TabIndex = 30;
             // 
-            // button2
+            // uxStaffLinkAwardButton
             // 
-            this.button2.Location = new System.Drawing.Point(433, 143);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(88, 23);
-            this.button2.TabIndex = 31;
-            this.button2.Text = " << Link Award";
-            this.button2.UseVisualStyleBackColor = true;
+            this.uxStaffLinkAwardButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.uxStaffLinkAwardButton.Location = new System.Drawing.Point(433, 143);
+            this.uxStaffLinkAwardButton.Name = "uxStaffLinkAwardButton";
+            this.uxStaffLinkAwardButton.Size = new System.Drawing.Size(88, 23);
+            this.uxStaffLinkAwardButton.TabIndex = 31;
+            this.uxStaffLinkAwardButton.Text = " << Link Award";
+            this.uxStaffLinkAwardButton.UseVisualStyleBackColor = true;
             // 
-            // listBox2
+            // uxStaffAvailableRewardsGenericItemsListBox
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(527, 36);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(188, 238);
-            this.listBox2.TabIndex = 32;
+            this.uxStaffAvailableRewardsGenericItemsListBox.FormattingEnabled = true;
+            this.uxStaffAvailableRewardsGenericItemsListBox.Location = new System.Drawing.Point(527, 36);
+            this.uxStaffAvailableRewardsGenericItemsListBox.Name = "uxStaffAvailableRewardsGenericItemsListBox";
+            this.uxStaffAvailableRewardsGenericItemsListBox.Size = new System.Drawing.Size(188, 238);
+            this.uxStaffAvailableRewardsGenericItemsListBox.TabIndex = 32;
+            // 
+            // uxStaffCancelButton
+            // 
+            this.uxStaffCancelButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.uxStaffCancelButton.Location = new System.Drawing.Point(611, 288);
+            this.uxStaffCancelButton.Name = "uxStaffCancelButton";
+            this.uxStaffCancelButton.Size = new System.Drawing.Size(104, 23);
+            this.uxStaffCancelButton.TabIndex = 33;
+            this.uxStaffCancelButton.Text = "Cancel";
+            this.uxStaffCancelButton.UseVisualStyleBackColor = true;
             // 
             // CreateContributorWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(727, 301);
-            this.Controls.Add(this.listBox2);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.listBox1);
+            this.ClientSize = new System.Drawing.Size(727, 323);
+            this.Controls.Add(this.uxStaffCancelButton);
+            this.Controls.Add(this.uxStaffAvailableRewardsGenericItemsListBox);
+            this.Controls.Add(this.uxStaffLinkAwardButton);
+            this.Controls.Add(this.uxStaffAwardsReceivedGenericItemsListBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.uxStaffCreateContributorButton);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.textBox8);
-            this.Controls.Add(this.textBox7);
-            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.uxStaffDOBTextBox);
+            this.Controls.Add(this.uxStaffLastNameTextBox);
+            this.Controls.Add(this.uxStaffTwitterHandleTextBox);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.uxStaffFirstNameTextBox);
+            this.Controls.Add(this.uxStaffRoleComboBox);
             this.Name = "CreateContributorWindow";
             this.Text = "CreateContributorWindow";
             this.ResumeLayout(false);
@@ -220,22 +234,23 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.ComboBox uxStaffRoleComboBox;
+        private System.Windows.Forms.TextBox uxStaffFirstNameTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox uxStaffTwitterHandleTextBox;
+        private System.Windows.Forms.TextBox uxStaffLastNameTextBox;
+        private System.Windows.Forms.TextBox uxStaffDOBTextBox;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button uxStaffCreateContributorButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox uxStaffAwardsReceivedGenericItemsListBox;
+        private System.Windows.Forms.Button uxStaffLinkAwardButton;
+        private System.Windows.Forms.ListBox uxStaffAvailableRewardsGenericItemsListBox;
+        private System.Windows.Forms.Button uxStaffCancelButton;
     }
 }

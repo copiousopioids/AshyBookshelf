@@ -9,7 +9,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
     public enum ItemSearchOptions {
         Book,
         Movie,
-        BookAndMovie
+        BookAndMovie,
+        Customer
     }
     class Enums
     {

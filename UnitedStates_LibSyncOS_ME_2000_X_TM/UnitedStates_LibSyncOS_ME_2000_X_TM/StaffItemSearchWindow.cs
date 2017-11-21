@@ -75,7 +75,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         // Inspiration: 501 Bookshop program written by Masaaki Mizuno
-        public void AddDisplayItems(List<object> displayObjects)
+        public void AddDisplayItems(params object [] displayObjects)
         {
             genericItemsList.Items.AddRange(displayObjects.ToArray());
         }
@@ -87,23 +87,39 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         // Inspiration: 501 Bookshop program written by Masaaki Mizuno
-        public DialogReturn Diplay()
+        public DialogReturn Display()
         {
-            switch (this.ShowDialog())
-            {
-                case DialogResult.OK: // ADD BOOK
-                    return DialogReturn.AddBook;
-                case DialogResult.Yes: // ADD MOVIE
-                    return DialogReturn.AddMovie;
-                case DialogResult.No: // DELETE GENERIC ITEM
-                    return DialogReturn.Delete;
-                case DialogResult.Cancel:
-                    return DialogReturn.Cancel;
-                case DialogResult.Retry:
-                    return DialogReturn.Search;
-                default:
-                    return DialogReturn.Undefined;
+            while (true) {
+                switch (this.ShowDialog())
+                {
+                    case DialogResult.OK: // ADD BOOK
+                        return DialogReturn.AddBook;
+                    case DialogResult.Yes: // ADD MOVIE
+                        return DialogReturn.AddMovie;
+                    case DialogResult.No: // DELETE GENERIC ITEM
+                        if (CheckDataValidity())
+                            return DialogReturn.Delete;
+                        break;
+                    case DialogResult.Cancel:
+                        return DialogReturn.Cancel;
+                    case DialogResult.Retry:
+                        return DialogReturn.Search;
+                    default:
+                        return DialogReturn.Undefined;
+                }
+            }         
+        }
+
+        public void AddItem(object displayItem)
+        {
+        }
+
+        public bool CheckDataValidity() {
+            if (genericItemsList.SelectedItem == null) {
+                MessageBox.Show("Please select an item");
+                return false;
             }
+            return true;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

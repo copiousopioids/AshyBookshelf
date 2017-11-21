@@ -17,7 +17,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             databaseController = new DatabaseController();
         }
 
-        public bool AddBook(string title, string genre, string isbn, string publisher, int numberOfPages, List<Person> contributors)
+        public Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success)
         {
             throw new NotImplementedException();
         }
@@ -32,7 +32,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
-        public bool AddMovie(string title, string description, string genre, string condition, int duration, string barcode, List<Person> contributors)
+        public Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success)
         {
             throw new NotImplementedException();
         }
@@ -52,8 +52,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
-        public Customer GetCustomer(string username)
+        public Customer GetCustomer(string username, out bool success)
         {
+
             throw new NotImplementedException();
         }
 
@@ -79,6 +80,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool VerifyAccount(string username, string password)
         {
+            throw new NotImplementedException();
+        }
+
+        public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, out bool success) {
             throw new NotImplementedException();
         }
     }

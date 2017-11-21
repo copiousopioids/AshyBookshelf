@@ -11,10 +11,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
     {
         bool VerifyAccount(string username, string password);
 
-        bool AddMovie(string title, string description, string genre, 
-            string condition, int duration, string barcode, List<Person> contributors);
+        Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success);
 
-        bool AddBook(string title, string genre, string isbn, string publisher, int numberOfPages, List<Person> contributors);
+        Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success);
 
         Item GetItem(ItemTypes itemType, string searchTitle);
 
@@ -24,9 +23,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         bool ReturnItem(ItemTypes itemType, int itemId);
 
-        Customer GetCustomer(string username);
+        Customer GetCustomer(string username, out bool success);
 
         bool AddCustomer(string username, string password, string name, string address, string phoneNumber);
+
+        Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, out bool success);
 
         bool DeleteCustomer(string username);
 
