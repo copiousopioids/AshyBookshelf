@@ -33,9 +33,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         bool PayFine(string username);
 
-        bool AddFine(string username);
+        Fine AddFine(string username, int amount, out bool result);
         List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria);
         bool CheckUserLoginCredentials(string username, string password);
+        bool PayIndividualFine(string username, Fine fine);
 
     }
 }

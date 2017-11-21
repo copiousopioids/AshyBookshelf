@@ -35,6 +35,7 @@
             this.uxStaffGenericItemsListBox = new System.Windows.Forms.ListBox();
             this.uxStaffCancelButton = new System.Windows.Forms.Button();
             this.uxStaffSearchCustomerIDButton = new System.Windows.Forms.Button();
+            this.uxStaffCustomerSelectButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uxStaffCustomerSearchTextBox
@@ -100,11 +101,22 @@
             this.uxStaffSearchCustomerIDButton.Text = "Search by Customer Username";
             this.uxStaffSearchCustomerIDButton.UseVisualStyleBackColor = true;
             // 
+            // uxStaffCustomerSelectButton
+            // 
+            this.uxStaffCustomerSelectButton.DialogResult = System.Windows.Forms.DialogResult.Ignore;
+            this.uxStaffCustomerSelectButton.Location = new System.Drawing.Point(240, 226);
+            this.uxStaffCustomerSelectButton.Name = "uxStaffCustomerSelectButton";
+            this.uxStaffCustomerSelectButton.Size = new System.Drawing.Size(100, 23);
+            this.uxStaffCustomerSelectButton.TabIndex = 8;
+            this.uxStaffCustomerSelectButton.Text = "Select Customer";
+            this.uxStaffCustomerSelectButton.UseVisualStyleBackColor = true;
+            // 
             // StaffCustomerSearchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 261);
+            this.Controls.Add(this.uxStaffCustomerSelectButton);
             this.Controls.Add(this.uxStaffSearchCustomerIDButton);
             this.Controls.Add(this.uxStaffCancelButton);
             this.Controls.Add(this.uxStaffGenericItemsListBox);
@@ -128,5 +140,6 @@
         private System.Windows.Forms.ListBox uxStaffGenericItemsListBox;
         private System.Windows.Forms.Button uxStaffCancelButton;
         private System.Windows.Forms.Button uxStaffSearchCustomerIDButton;
+        private System.Windows.Forms.Button uxStaffCustomerSelectButton;
     }
 }

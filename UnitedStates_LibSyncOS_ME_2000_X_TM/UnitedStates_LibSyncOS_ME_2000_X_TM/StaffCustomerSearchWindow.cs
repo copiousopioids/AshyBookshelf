@@ -76,6 +76,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             return true;
         }
 
+        public bool CheckSelectCustomerValidity () {
+            if (uxStaffGenericItemsListBox.SelectedItem == null) {
+                MessageBox.Show("Please select a customer to continue with this action");
+                return false;
+            }
+            return true;
+        }
+
         public DialogReturn Display()
         {
             while (true)
@@ -97,6 +105,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         }
                         else
                             break;
+                    case DialogResult.Ignore:
+                        if (CheckSelectCustomerValidity()) {
+                            return DialogReturn.Select;
+                        }
+                        break;
                     default:
                         return DialogReturn.Undefined;
                 }

@@ -14,8 +14,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
         public string Name { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
+        public List<Fine> fines { get; set; }
 
-        public Customer (int customerId, string username, string password, string name, string address, string phoneNumber)
+        public Customer (int customerId, string username, string password, string name, string address, string phoneNumber, List<Fine> fines)
         {
             CustomerId = customerId;
             Username = username;
@@ -23,6 +24,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
             Name = name;
             Address = address;
             PhoneNumber = phoneNumber;
+            this.fines = fines;
         }
     }
 }

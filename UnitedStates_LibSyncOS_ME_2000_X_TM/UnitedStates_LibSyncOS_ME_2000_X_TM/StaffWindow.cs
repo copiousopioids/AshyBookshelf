@@ -21,6 +21,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         private LibraryController libraryController;
         private CreateContributorWindow staffCreateContributorWindow;
         private StaffCreateCustomerWindow staffCreateCustomerWindow;
+        private StaffCustomerManager staffCustomerManager;
 
         public StaffWindow()
         {
@@ -36,6 +37,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             this.staffItemSearchWindow = new StaffItemSearchWindow();
             this.staffCreateContributorWindow = new CreateContributorWindow();
             this.staffCreateCustomerWindow = new StaffCreateCustomerWindow();
+            this.staffCustomerManager = new StaffCustomerManager();
             
             this.libraryController = controller;
         }
@@ -300,6 +302,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                                 MessageBox.Show("Customer could not be deleted.");
                             }
                             return;
+                        case DialogReturn.Select:
+                            var customerToEdit = (Customer)staffCustomerSearchWindow.SelectedItem;
+                            LaunchAndDisplayCustomerManager(customerToEdit);
+                            break;
                         case DialogReturn.Undefined:
                             throw new Exception("Dialog did not return properly");
                     }
@@ -312,6 +318,43 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         }
 
+        public void LaunchAndDisplayCustomerManager(Customer customer) {
+            staffCustomerManager.ClearDisplayItems();
+            while (true) {
+                var dialogResult = staffCustomerManager.Display();
+                switch (dialogResult) {
+                    case DialogReturn.CreateFine:
+                        var fineAmount = staffCustomerManager.NewFineAmount;
+                        var success = false;
+                        var fine = libraryController.AddFine(customer.Username, fineAmount, out success);
+                        if (success)
+                        {
+                            MessageBox.Show("Fine Added");
+                            staffCustomerManager.AddItem(fine);
+                        }
+                        else {
+                            MessageBox.Show("Fine could not be added");
+                        }
+                        break;
+                    case DialogReturn.RemoveFine:
+                        var fineToRemove = (Fine)staffCustomerManager.SelectedItem;
+                        var result = libraryController.PayIndividualFine(customer.Username, fineToRemove);
+                        if (result)
+                        {
+                            MessageBox.Show("Fine removed");
+                            staffCustomerManager.RemoveItem(fineToRemove);
+                        }
+                        else {
+                            MessageBox.Show("Fine could not be removed");
+                        }
+                        break;
+                    case DialogReturn.Cancel:
+                        return;
+                    default:
+                        return;
+                }
+            }
+        }
         public void AddCustomerThroughStaffCreateCusomterWindow() {
 
             staffCreateCustomerWindow.ClearDisplayItems();

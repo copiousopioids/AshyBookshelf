@@ -78,7 +78,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public void ClearDisplayItems()
         {
-            uxStaffBalanceTextBox.Text = "";
             uxStaffGenericItemsListBox.Items.Clear();
             uxStaffNameTextBox.Text = "";
             uxStaffUsernameTextBox.Text = "";

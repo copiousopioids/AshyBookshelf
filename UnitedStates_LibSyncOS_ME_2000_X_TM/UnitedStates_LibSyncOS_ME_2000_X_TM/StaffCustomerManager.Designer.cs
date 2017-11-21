@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.uxCustomerReturnItemButton = new System.Windows.Forms.Button();
-            this.uxStaffBalanceTextBox = new System.Windows.Forms.TextBox();
-            this.Customer_Account_Balance_Label = new System.Windows.Forms.Label();
             this.uxStaffUsernameTextBox = new System.Windows.Forms.TextBox();
             this.uxStaffNameTextBox = new System.Windows.Forms.TextBox();
             this.Customer_Account_Username_Label = new System.Windows.Forms.Label();
@@ -41,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.uxStaffNewFineAmount = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // uxCustomerReturnItemButton
@@ -53,25 +52,6 @@
             this.uxCustomerReturnItemButton.TabIndex = 27;
             this.uxCustomerReturnItemButton.Text = "Return";
             this.uxCustomerReturnItemButton.UseVisualStyleBackColor = true;
-            // 
-            // uxStaffBalanceTextBox
-            // 
-            this.uxStaffBalanceTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxStaffBalanceTextBox.Location = new System.Drawing.Point(103, 56);
-            this.uxStaffBalanceTextBox.Name = "uxStaffBalanceTextBox";
-            this.uxStaffBalanceTextBox.ReadOnly = true;
-            this.uxStaffBalanceTextBox.Size = new System.Drawing.Size(151, 29);
-            this.uxStaffBalanceTextBox.TabIndex = 26;
-            // 
-            // Customer_Account_Balance_Label
-            // 
-            this.Customer_Account_Balance_Label.AutoSize = true;
-            this.Customer_Account_Balance_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Balance_Label.Location = new System.Drawing.Point(14, 56);
-            this.Customer_Account_Balance_Label.Name = "Customer_Account_Balance_Label";
-            this.Customer_Account_Balance_Label.Size = new System.Drawing.Size(83, 24);
-            this.Customer_Account_Balance_Label.TabIndex = 25;
-            this.Customer_Account_Balance_Label.Text = "Balance:";
             // 
             // uxStaffUsernameTextBox
             // 
@@ -114,9 +94,9 @@
             // uxStaffGenericItemsListBox
             // 
             this.uxStaffGenericItemsListBox.FormattingEnabled = true;
-            this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(359, 9);
+            this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(359, 35);
             this.uxStaffGenericItemsListBox.Name = "uxStaffGenericItemsListBox";
-            this.uxStaffGenericItemsListBox.Size = new System.Drawing.Size(294, 251);
+            this.uxStaffGenericItemsListBox.Size = new System.Drawing.Size(294, 225);
             this.uxStaffGenericItemsListBox.TabIndex = 28;
             // 
             // uxCreateFineButton
@@ -171,11 +151,22 @@
             this.label2.Text = "If item, remove fine and add new one";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(355, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(168, 24);
+            this.label3.TabIndex = 34;
+            this.label3.Text = "Outstanding Fines:";
+            // 
             // StaffCustomerManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(685, 309);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.uxStaffNewFineAmount);
             this.Controls.Add(this.label1);
@@ -183,8 +174,6 @@
             this.Controls.Add(this.uxCreateFineButton);
             this.Controls.Add(this.uxStaffGenericItemsListBox);
             this.Controls.Add(this.uxCustomerReturnItemButton);
-            this.Controls.Add(this.uxStaffBalanceTextBox);
-            this.Controls.Add(this.Customer_Account_Balance_Label);
             this.Controls.Add(this.uxStaffUsernameTextBox);
             this.Controls.Add(this.uxStaffNameTextBox);
             this.Controls.Add(this.Customer_Account_Username_Label);
@@ -199,8 +188,6 @@
         #endregion
 
         private System.Windows.Forms.Button uxCustomerReturnItemButton;
-        private System.Windows.Forms.TextBox uxStaffBalanceTextBox;
-        private System.Windows.Forms.Label Customer_Account_Balance_Label;
         private System.Windows.Forms.TextBox uxStaffUsernameTextBox;
         private System.Windows.Forms.TextBox uxStaffNameTextBox;
         private System.Windows.Forms.Label Customer_Account_Username_Label;
@@ -211,5 +198,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox uxStaffNewFineAmount;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }

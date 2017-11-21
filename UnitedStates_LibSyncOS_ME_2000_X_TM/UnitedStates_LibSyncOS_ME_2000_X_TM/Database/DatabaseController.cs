@@ -25,7 +25,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             throw new NotImplementedException();
         }
 
-        public bool AddFine(string username)
+        public Fine AddFine(string username, int amount, out bool success)
         {
             throw new NotImplementedException();
         }
@@ -86,6 +86,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         }
 
         public bool CheckUserLoginCredentials(string username, string password) {
+            throw new NotImplementedException();
+        }
+        public bool PayIndividualFine(string username, Fine fine) {
             throw new NotImplementedException();
         }
     }
