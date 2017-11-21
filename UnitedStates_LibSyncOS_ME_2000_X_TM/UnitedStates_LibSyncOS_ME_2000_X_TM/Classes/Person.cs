@@ -21,20 +21,25 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
             int personId, 
             string firstName, 
             string lastName, 
-            string dateOfBirth, 
+            DateTime dateOfBirth, 
             string twitterHandle, 
-            string deathDate,
+            DateTime deathDate,
             List<Award> award,
             Role role)
         {
             PersonId = personId;
             FirstName = firstName;
             LastName = lastName;
-            DateOfBirth = DateTime.Parse(dateOfBirth);
+            DateOfBirth = dateOfBirth;
             TwitterHandle = twitterHandle;
-            DeathDate = DateTime.Parse(deathDate);
+            DeathDate = deathDate;
             Award = award;
             Role = role;
+        }
+
+        public override string ToString()
+        {
+            return "Person: Name: " + FirstName + " " + LastName;
         }
     }
 }

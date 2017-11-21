@@ -14,11 +14,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
         public bool Paid { get; set; }
         public string Description { get; set; }
 
-        public Fine( int fineId, int amount, string dueDate, string paid, string description)
+        public Fine( int fineId, int amount, DateTime dueDate, string paid, string description)
         {
             this.FineId = fineId;
             this.Amount = amount;
-            this.DueDate = DateTime.Parse(dueDate);
+            this.DueDate = dueDate;
             this.Paid = bool.Parse(paid);
             this.Description = description;
         }

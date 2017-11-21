@@ -18,5 +18,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
             Name = name;
             Year = year;
         }
+
+        public override string ToString()
+        {
+            return "Award: " + Name;
+        }
     }
 }

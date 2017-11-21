@@ -67,7 +67,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             return;
                         case DialogReturn.Delete:
                             DeleteItemFromLibrary();
-                            return;
+                            break;
                         case DialogReturn.Undefined:
                             throw new Exception("Dialog did not return properly");
                     }
@@ -81,7 +81,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public void DeleteItemFromLibrary()
         {
             var selectedItem = staffItemSearchWindow.SelectedItem;
-            if (selectedItem is Movie)
+            if (selectedItem is Book)
             {
 
                 var bookItem = (Book)selectedItem;
@@ -203,7 +203,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 }
 
                 staffAddContributorWindow.ClearDisplayItems();
-                staffAddContributorWindow.AddDisplayItems(existingContributors);
+                staffAddContributorWindow.AddDisplayItems(existingContributors.ToArray());
 
                 var addContributorDialogReturn = staffAddContributorWindow.Display();
                 switch (addContributorDialogReturn)
@@ -242,7 +242,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 MessageBox.Show("Awards could not be retrieved");
                 return null;
             }
-            staffCreateContributorWindow.SetDisplayItems(existingAwards);
+            staffCreateContributorWindow.SetDisplayItems(existingAwards.ToArray());
 
             while (true) {
                 var createContributorDialogReturn = staffCreateContributorWindow.Display();
@@ -269,7 +269,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public void SearchItemsButtonPressed()
         {  
             var searchString = staffItemSearchWindow.staffSearchString;
-            staffItemSearchWindow.ClearDisplayItems();
 
             if (!searchString.Equals(""))
             {
@@ -287,7 +286,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     MessageBox.Show("Check one or both of the following checkboxes: Movies, Books");
                     return;
                 }
-                staffItemSearchWindow.AddDisplayItems(bookAndMovieDisplayObjects);
+                staffItemSearchWindow.ClearDisplayItems();
+                staffItemSearchWindow.AddDisplayItems(bookAndMovieDisplayObjects.ToArray());
             }
             else
             {
@@ -408,7 +408,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             var searchString = staffCustomerSearchWindow.UXStaffCustomerSearchIdString;
             staffCustomerSearchWindow.ClearDisplayItems();
             var success = false;
-            var customerDisplayObjects = libraryController.GetCustomer(searchString, out success);
+            var customerDisplayObjects = (Customer)libraryController.GetCustomer(searchString, out success);
             if (!success)
             {
                 MessageBox.Show("No Customers could be found");

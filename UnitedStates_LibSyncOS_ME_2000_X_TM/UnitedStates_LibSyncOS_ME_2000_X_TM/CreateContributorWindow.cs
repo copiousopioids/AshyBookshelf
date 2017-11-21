@@ -14,7 +14,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
     public partial class CreateContributorWindow : Form, ILibraryForm
     {
 
-        public void SetDisplayItems(List<Award> availableAwards) {
+        public void SetDisplayItems(Award [] availableAwards) {
             uxStaffAvailableRewardsGenericItemsListBox.Items.AddRange(availableAwards.ToArray());
         }
 
