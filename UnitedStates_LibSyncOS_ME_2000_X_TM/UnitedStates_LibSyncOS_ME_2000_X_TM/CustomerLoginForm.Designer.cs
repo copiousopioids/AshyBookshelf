@@ -28,33 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Customer_Username_Textbox = new System.Windows.Forms.TextBox();
-            this.Customer_Password_Textbox = new System.Windows.Forms.TextBox();
+            this.uxCustomerUsernameTextBox = new System.Windows.Forms.TextBox();
+            this.uxCustomerPasswordTextBox = new System.Windows.Forms.TextBox();
             this.Customer_Username_Label = new System.Windows.Forms.Label();
             this.Customer_Password_Label = new System.Windows.Forms.Label();
-            this.Customer_Login_Submit_Button = new System.Windows.Forms.Button();
-            this.Customer_Login_Cancel_Button = new System.Windows.Forms.Button();
+            this.uxCustomerSubmitButton = new System.Windows.Forms.Button();
+            this.uxCustomerCancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Customer_Username_Textbox
+            // uxCustomerUsernameTextBox
             // 
-            this.Customer_Username_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Username_Textbox.Location = new System.Drawing.Point(142, 56);
-            this.Customer_Username_Textbox.MaxLength = 16;
-            this.Customer_Username_Textbox.Name = "Customer_Username_Textbox";
-            this.Customer_Username_Textbox.Size = new System.Drawing.Size(189, 29);
-            this.Customer_Username_Textbox.TabIndex = 0;
+            this.uxCustomerUsernameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerUsernameTextBox.Location = new System.Drawing.Point(142, 56);
+            this.uxCustomerUsernameTextBox.MaxLength = 16;
+            this.uxCustomerUsernameTextBox.Name = "uxCustomerUsernameTextBox";
+            this.uxCustomerUsernameTextBox.Size = new System.Drawing.Size(189, 29);
+            this.uxCustomerUsernameTextBox.TabIndex = 0;
             // 
-            // Customer_Password_Textbox
+            // uxCustomerPasswordTextBox
             // 
-            this.Customer_Password_Textbox.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
-            this.Customer_Password_Textbox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Password_Textbox.Location = new System.Drawing.Point(142, 124);
-            this.Customer_Password_Textbox.MaxLength = 16;
-            this.Customer_Password_Textbox.Name = "Customer_Password_Textbox";
-            this.Customer_Password_Textbox.PasswordChar = '*';
-            this.Customer_Password_Textbox.Size = new System.Drawing.Size(189, 29);
-            this.Customer_Password_Textbox.TabIndex = 1;
+            this.uxCustomerPasswordTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Lower;
+            this.uxCustomerPasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerPasswordTextBox.Location = new System.Drawing.Point(142, 124);
+            this.uxCustomerPasswordTextBox.MaxLength = 16;
+            this.uxCustomerPasswordTextBox.Name = "uxCustomerPasswordTextBox";
+            this.uxCustomerPasswordTextBox.PasswordChar = '*';
+            this.uxCustomerPasswordTextBox.Size = new System.Drawing.Size(189, 29);
+            this.uxCustomerPasswordTextBox.TabIndex = 1;
             // 
             // Customer_Username_Label
             // 
@@ -76,37 +76,39 @@
             this.Customer_Password_Label.TabIndex = 3;
             this.Customer_Password_Label.Text = "Password:";
             // 
-            // Customer_Login_Submit_Button
+            // uxCustomerSubmitButton
             // 
-            this.Customer_Login_Submit_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Login_Submit_Button.Location = new System.Drawing.Point(36, 188);
-            this.Customer_Login_Submit_Button.Name = "Customer_Login_Submit_Button";
-            this.Customer_Login_Submit_Button.Size = new System.Drawing.Size(146, 46);
-            this.Customer_Login_Submit_Button.TabIndex = 4;
-            this.Customer_Login_Submit_Button.Text = "Submit";
-            this.Customer_Login_Submit_Button.UseVisualStyleBackColor = true;
+            this.uxCustomerSubmitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.uxCustomerSubmitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerSubmitButton.Location = new System.Drawing.Point(36, 188);
+            this.uxCustomerSubmitButton.Name = "uxCustomerSubmitButton";
+            this.uxCustomerSubmitButton.Size = new System.Drawing.Size(146, 46);
+            this.uxCustomerSubmitButton.TabIndex = 4;
+            this.uxCustomerSubmitButton.Text = "Submit";
+            this.uxCustomerSubmitButton.UseVisualStyleBackColor = true;
             // 
-            // Customer_Login_Cancel_Button
+            // uxCustomerCancelButton
             // 
-            this.Customer_Login_Cancel_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Login_Cancel_Button.Location = new System.Drawing.Point(217, 188);
-            this.Customer_Login_Cancel_Button.Name = "Customer_Login_Cancel_Button";
-            this.Customer_Login_Cancel_Button.Size = new System.Drawing.Size(146, 46);
-            this.Customer_Login_Cancel_Button.TabIndex = 5;
-            this.Customer_Login_Cancel_Button.Text = "Cancel";
-            this.Customer_Login_Cancel_Button.UseVisualStyleBackColor = true;
+            this.uxCustomerCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.uxCustomerCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerCancelButton.Location = new System.Drawing.Point(217, 188);
+            this.uxCustomerCancelButton.Name = "uxCustomerCancelButton";
+            this.uxCustomerCancelButton.Size = new System.Drawing.Size(146, 46);
+            this.uxCustomerCancelButton.TabIndex = 5;
+            this.uxCustomerCancelButton.Text = "Cancel";
+            this.uxCustomerCancelButton.UseVisualStyleBackColor = true;
             // 
             // CustomerLoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(396, 260);
-            this.Controls.Add(this.Customer_Login_Cancel_Button);
-            this.Controls.Add(this.Customer_Login_Submit_Button);
+            this.Controls.Add(this.uxCustomerCancelButton);
+            this.Controls.Add(this.uxCustomerSubmitButton);
             this.Controls.Add(this.Customer_Password_Label);
             this.Controls.Add(this.Customer_Username_Label);
-            this.Controls.Add(this.Customer_Password_Textbox);
-            this.Controls.Add(this.Customer_Username_Textbox);
+            this.Controls.Add(this.uxCustomerPasswordTextBox);
+            this.Controls.Add(this.uxCustomerUsernameTextBox);
             this.Name = "CustomerLoginForm";
             this.Text = "Customer Login";
             this.ResumeLayout(false);
@@ -116,11 +118,11 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox Customer_Username_Textbox;
-        private System.Windows.Forms.TextBox Customer_Password_Textbox;
+        private System.Windows.Forms.TextBox uxCustomerUsernameTextBox;
+        private System.Windows.Forms.TextBox uxCustomerPasswordTextBox;
         private System.Windows.Forms.Label Customer_Username_Label;
         private System.Windows.Forms.Label Customer_Password_Label;
-        private System.Windows.Forms.Button Customer_Login_Submit_Button;
-        private System.Windows.Forms.Button Customer_Login_Cancel_Button;
+        private System.Windows.Forms.Button uxCustomerSubmitButton;
+        private System.Windows.Forms.Button uxCustomerCancelButton;
     }
 }

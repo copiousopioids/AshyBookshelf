@@ -9,8 +9,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
     {
         // Initialize a new DB class that implements the IDB interface.
         private DatabaseController databaseController;
-        //private StaffCustomerSearchWindow StaffCustomerSearchWindow;
-        //private StaffItemSearchWindow StaffItemSearchWindow;
+        private Customer loggedInCustomer;
 
         public LibraryController()
         {
@@ -65,6 +64,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool PayFine(string username)
         {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckLoginCredentials(string username, string password) {
+            throw new NotImplementedException();
+        }
+
+        public bool IsUserLoggedIn() {
             throw new NotImplementedException();
         }
 

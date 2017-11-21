@@ -42,7 +42,19 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     switch (dialogReturn)
                     {
                         case DialogReturn.CheckOut:
-
+                            var checkoutItem = customerItemSearchWindow.SelectedItem;
+                            if (checkoutItem is Book) {
+                                var bookToCheckout = (Book)checkoutItem;
+                                success = libraryController.DeleteItem(ItemTypes.Book, bookToCheckout.ID);
+                                if (success)
+                                {
+                                    MessageBox.Show("Item Checked out");
+                                    customerItemSearchWindow.ClearDisplayItems();
+                                }
+                                else {
+                                    MessageBox.Show("Item could not be checked out");
+                                }
+                            }
                             break;
                         case DialogReturn.Cancel:
                             return;
@@ -67,7 +79,36 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         private void customerLoginButton_Click(object sender, EventArgs e)
         {
-
+            try {
+                customerLoginForm.ClearDisplayItems();
+                while (true)
+                {
+                    var dialogResult = customerLoginForm.Display();
+                    switch (dialogResult)
+                    {
+                        case DialogReturn.Login:
+                            var username = customerLoginForm.UXCustomerUsername;
+                            var password = customerLoginForm.UXCustomerPassword;
+                            var isLoginASuccess = libraryController.CheckLoginCredentials(username, password);
+                            if (isLoginASuccess)
+                            {
+                                MessageBox.Show("User logged in");
+                                return;
+                            }
+                            else
+                            {
+                                MessageBox.Show("User could not be logged in");
+                                break;
+                            }
+                        case DialogReturn.Cancel:
+                            return;
+                        default:
+                            return;
+                    }
+                }
+            } catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void customerExitButton_Click(object sender, EventArgs e)
