@@ -63,7 +63,7 @@
             this.customerExitButton.Name = "customerExitButton";
             this.customerExitButton.Size = new System.Drawing.Size(130, 47);
             this.customerExitButton.TabIndex = 2;
-            this.customerExitButton.Text = "Exit";
+            this.customerExitButton.Text = "Logout";
             this.customerExitButton.UseVisualStyleBackColor = true;
             this.customerExitButton.Click += new System.EventHandler(this.customerExitButton_Click);
             // 

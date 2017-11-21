@@ -5,6 +5,16 @@ using UnitedStates_LibSyncOS_ME_2000_X_TM.Database;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
+    public class LoggedInInformation {
+        public bool isLoggedIn;
+        public Customer loggedInCustomer;
+
+        public LoggedInInformation(bool loggedIn, Customer loggedInCustomer) {
+            this.isLoggedIn = loggedIn;
+            this.loggedInCustomer = loggedInCustomer;
+        }
+    }
+
     public class LibraryController : IControllerFunctions
     {
         // Initialize a new DB class that implements the IDB interface.
@@ -67,12 +77,16 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
-        public bool CheckLoginCredentials(string username, string password) {
+        public bool CheckUserLoginCredentials(string username, string password) {
             throw new NotImplementedException();
         }
 
-        public bool IsUserLoggedIn() {
-            throw new NotImplementedException();
+        public LoggedInInformation GetUserIfLoggedIn() {
+
+            if (loggedInCustomer == null)
+                return new LoggedInInformation(false, null);
+            else
+                return new LoggedInInformation(true, loggedInCustomer);
         }
 
         public bool ReturnItem(ItemTypes itemType, int itemId)
@@ -92,6 +106,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, out bool success) {
             throw new NotImplementedException();
+        }
+
+        public bool LogoutUser() {
+            loggedInCustomer = null;
+            return true;
         }
     }
 }

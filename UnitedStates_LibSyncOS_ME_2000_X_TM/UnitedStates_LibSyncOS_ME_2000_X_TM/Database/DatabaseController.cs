@@ -84,5 +84,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             throw new NotImplementedException();
         }
+
+        public bool CheckUserLoginCredentials(string username, string password) {
+            throw new NotImplementedException();
+        }
     }
 }

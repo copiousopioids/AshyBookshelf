@@ -104,6 +104,12 @@
     <Compile Include="StaffCreateCustomerWindow.Designer.cs">
       <DependentUpon>StaffCreateCustomerWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="StaffCustomerManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffCustomerManager.Designer.cs">
+      <DependentUpon>StaffCustomerManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="StaffCustomerSearchWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +186,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StaffCreateCustomerWindow.resx">
       <DependentUpon>StaffCreateCustomerWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaffCustomerManager.resx">
+      <DependentUpon>StaffCustomerManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StaffCustomerSearchWindow.resx">
       <DependentUpon>StaffCustomerSearchWindow.cs</DependentUpon>

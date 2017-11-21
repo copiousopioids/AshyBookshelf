@@ -21,6 +21,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         AddContributor,
         Create,
         LinkReward,
-        AddCustomer
+        AddCustomer,
+        PayFine,
+        RemoveFine,
+        CreateFine
     }
 }

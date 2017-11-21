@@ -74,7 +74,78 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         private void customerAccountInformationButton_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                customerAccountForm.ClearDisplayItems();
+                while (true)
+                {
+                    var dialogResult = customerAccountForm.Display();
+                    switch (dialogResult)
+                    {
+                        case DialogReturn.Return:
+                            var itemToReturn = customerAccountForm.SelectedItem;
+                            if (itemToReturn is Book)
+                            {
+                                var bookItemToReturn = (Book)itemToReturn;
+                                var result = libraryController.ReturnItem(ItemTypes.Book, bookItemToReturn.ID);
+                                if (result)
+                                {
+                                    MessageBox.Show("Item returned");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Item could not be returned");
+                                }
+                            }
+                            else if (itemToReturn is Movie)
+                            {
+                                var movieItemToReturn = (Movie)itemToReturn;
+                                var result = libraryController.ReturnItem(ItemTypes.Movie, movieItemToReturn.ID);
+                                if (result)
+                                {
+                                    MessageBox.Show("Item Returned");
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Item could not be returned");
+                                }
+                            }
+                            else
+                            {
+                                throw new Exception("Item type could not be located");
+                            }
+                            break;
+                        case DialogReturn.PayFine:
+                            var userLoggedIn = libraryController.GetUserIfLoggedIn();
+                            if (userLoggedIn.isLoggedIn)
+                            {
+                                var result = libraryController.PayFine(userLoggedIn.loggedInCustomer.Username);
+                                if (result)
+                                {
+                                    MessageBox.Show("Fine has been payed");
+                                    customerAccountForm.uxCustomerFine = "0";
+                                }
+                                else
+                                {
+                                    MessageBox.Show("User fine could not be payed");
+                                }
+                                break;
+                            }
+                            else
+                            {
+                                MessageBox.Show("User is not logged in");
+                                break;
+                            }
+                        case DialogReturn.Cancel:
+                            return;
+                        default:
+                            return;
+                    }
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }          
         }
 
         private void customerLoginButton_Click(object sender, EventArgs e)
@@ -89,7 +160,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         case DialogReturn.Login:
                             var username = customerLoginForm.UXCustomerUsername;
                             var password = customerLoginForm.UXCustomerPassword;
-                            var isLoginASuccess = libraryController.CheckLoginCredentials(username, password);
+                            var isLoginASuccess = libraryController.CheckUserLoginCredentials(username, password);
                             if (isLoginASuccess)
                             {
                                 MessageBox.Show("User logged in");
@@ -111,9 +182,22 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
-        private void customerExitButton_Click(object sender, EventArgs e)
+        private void customerExitButton_Click(object sender, EventArgs e) // LOGOUT
         {
-
+            try
+            {
+                var logoutResult = libraryController.LogoutUser();
+                if (logoutResult)
+                {
+                    MessageBox.Show("User logged out");
+                }
+                else {
+                    MessageBox.Show("User could not be logged out");
+                }
+            }
+            catch (Exception ex) {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         //////////////////////////// HELPER FUNCTIONS //////////////////////////
