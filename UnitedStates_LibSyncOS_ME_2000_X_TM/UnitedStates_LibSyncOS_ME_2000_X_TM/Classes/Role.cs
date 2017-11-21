@@ -46,6 +46,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
 
         public override string ToString()
         {
+            // TODO: Create tostring how you would like element to display in listboxes
             return "Role: " + Type.ToString();
         }
     }
