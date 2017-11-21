@@ -116,5 +116,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             loggedInCustomer = null;
             return true;
         }
+
+        public List<Person> GetAllContributors(out bool success) {
+            throw new NotImplementedException();
+        }
+
+        public List<Award> GetAllAwards(out bool success) {
+            throw new NotImplementedException();
+        }
     }
 }

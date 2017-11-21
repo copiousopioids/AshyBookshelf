@@ -77,6 +77,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             try
             {
                 customerAccountForm.ClearDisplayItems();
+                var loggedInUser = libraryController.GetUserIfLoggedIn();
+                if (!loggedInUser.isLoggedIn) {
+                    MessageBox.Show("User is not logged in");
+                    return;
+                }
+                customerAccountForm.SetDisplayItems(loggedInUser.loggedInCustomer);
+
                 while (true)
                 {
                     var dialogResult = customerAccountForm.Display();

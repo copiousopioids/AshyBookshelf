@@ -194,6 +194,17 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public Person PickContributorForItem() {
             try
             {
+
+                var success = false;
+                var existingContributors = libraryController.GetAllContributors(out success);
+                if (!success) {
+                    MessageBox.Show("Contributors could not be retrieved");
+                    return null;
+                }
+
+                staffAddContributorWindow.ClearDisplayItems();
+                staffAddContributorWindow.AddDisplayItems(existingContributors);
+
                 var addContributorDialogReturn = staffAddContributorWindow.Display();
                 switch (addContributorDialogReturn)
                 {
@@ -224,25 +235,35 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public Person LaunchCreateContributorWindowAndCreateContributor() {
 
-            var createContributorDialogReturn = staffCreateContributorWindow.Display();
-            switch (createContributorDialogReturn) {
-                case DialogReturn.Create:
-                    var firstName = staffCreateContributorWindow.UXStaffContributorFirstName;
-                    var lastName = staffCreateContributorWindow.UXStaffContributorLastName;
-                    var twitterHandle = staffCreateContributorWindow.UXStaffContributorTwitterHandle;
-                    var dateOfBirth = staffCreateContributorWindow.UXStaffContributorDateOfBirth;
-                    var role = staffCreateContributorWindow.UXStaffRoleSelected;
-                    var success = false;
-                    var contributor = libraryController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, role, out success);
-                    if (!success)
-                        MessageBox.Show("Contributor could not be created");
-                    return contributor;
-                case DialogReturn.Cancel:
-                    break;
-                default:
-                    throw new Exception("An unregistered Dialog Return was created");
+            staffCreateContributorWindow.ClearDisplayItems();
+            var success = false;
+            var existingAwards = libraryController.GetAllAwards(out success);
+            if (!success) {
+                MessageBox.Show("Awards could not be retrieved");
+                return null;
             }
-            return null;
+            staffCreateContributorWindow.SetDisplayItems(existingAwards);
+
+            while (true) {
+                var createContributorDialogReturn = staffCreateContributorWindow.Display();
+                switch (createContributorDialogReturn)
+                {
+                    case DialogReturn.Create:
+                        var firstName = staffCreateContributorWindow.UXStaffContributorFirstName;
+                        var lastName = staffCreateContributorWindow.UXStaffContributorLastName;
+                        var twitterHandle = staffCreateContributorWindow.UXStaffContributorTwitterHandle;
+                        var dateOfBirth = staffCreateContributorWindow.UXStaffContributorDateOfBirth;
+                        var role = staffCreateContributorWindow.UXStaffRoleSelected;
+                        var contributor = libraryController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, role, out success);
+                        if (!success)
+                            MessageBox.Show("Contributor could not be created");
+                        return contributor;
+                    case DialogReturn.Cancel:
+                        return null;
+                    default:
+                        throw new Exception("An unregistered Dialog Return was created");
+                }
+            }          
         }
 
         public void SearchItemsButtonPressed()
@@ -320,6 +341,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public void LaunchAndDisplayCustomerManager(Customer customer) {
             staffCustomerManager.ClearDisplayItems();
+            staffCustomerManager.AddDisplayItems(customer);
+
             while (true) {
                 var dialogResult = staffCustomerManager.Display();
                 switch (dialogResult) {

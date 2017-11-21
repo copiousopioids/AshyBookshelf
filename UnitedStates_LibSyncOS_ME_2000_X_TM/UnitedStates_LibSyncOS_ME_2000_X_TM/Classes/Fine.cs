@@ -9,12 +9,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
     public class Fine
     {
         public int FineId { get; set; }
-        public double Amount { get; set; }
+        public int Amount { get; set; }
         public DateTime DueDate { get; set; }
         public bool Paid { get; set; }
         public string Description { get; set; }
 
-        public Fine( int fineId, double amount, string dueDate, string paid, string description)
+        public Fine( int fineId, int amount, string dueDate, string paid, string description)
         {
             this.FineId = fineId;
             this.Amount = amount;

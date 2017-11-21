@@ -37,6 +37,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria);
         bool CheckUserLoginCredentials(string username, string password);
         bool PayIndividualFine(string username, Fine fine);
+        List<Person> GetAllContributors(out bool success);
+        List<Award> GetAllAwards(out bool success);
 
     }
 }

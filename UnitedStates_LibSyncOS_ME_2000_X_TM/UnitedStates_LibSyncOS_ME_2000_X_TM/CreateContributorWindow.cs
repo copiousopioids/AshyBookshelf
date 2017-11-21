@@ -13,6 +13,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class CreateContributorWindow : Form, ILibraryForm
     {
+
+        public void SetDisplayItems(List<Award> availableAwards) {
+            uxStaffAvailableRewardsGenericItemsListBox.Items.AddRange(availableAwards.ToArray());
+        }
+
         public string UXStaffContributorTwitterHandle
         {
             get
@@ -106,7 +111,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
-        public void AddDisplayItems(params object [] displayObjects)
+        public void AddDisplayItems(params object[] displayObjects)
         {
             uxStaffAwardsReceivedGenericItemsListBox.Items.AddRange(displayObjects.ToArray());
         }

@@ -13,6 +13,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class StaffCustomerManager : Form, ILibraryForm
     {
+        public void SetDisplay(Customer customer) {
+            uxStaffNameTextBox.Text = customer.Name;
+            uxStaffUsernameTextBox.Text = customer.Username;
+            this.AddDisplayItems(customer.fines);
+        }
 
         public int NewFineAmount {
             get {

@@ -7,11 +7,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnitedStates_LibSyncOS_ME_2000_X_TM.Classes;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class CustomerAccountForm : Form, ILibraryForm
     {
+        public void SetDisplayItems(Customer customerLoggedIn) {
+            var balance = 0;
+            foreach (var fine in customerLoggedIn.fines)
+            {
+                balance += fine.Amount;
+            }
+            uxCustomerBalanceTextBox.Text = balance.ToString();
+            uxCustomerAddressTextBox.Text = customerLoggedIn.Address;
+            uxCustomerNameTextBox.Text = customerLoggedIn.Name;
+            uxCustomerPasswordTextBox.Text = customerLoggedIn.Password;
+            uxCustomerPhoneNumberTextBox.Text = customerLoggedIn.PhoneNumber;
+            uxCustomerUsernameTextBox.Text = customerLoggedIn.Username;
+        }
+
         public CustomerAccountForm()
         {
             InitializeComponent();

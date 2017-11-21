@@ -91,5 +91,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         public bool PayIndividualFine(string username, Fine fine) {
             throw new NotImplementedException();
         }
+        public List<Person> GetAllContributors(out bool success) {
+            throw new NotImplementedException();
+        }
+
+        public List<Award> GetAllAwards(out bool success) {
+            throw new NotImplementedException();
+        }
     }
 }
