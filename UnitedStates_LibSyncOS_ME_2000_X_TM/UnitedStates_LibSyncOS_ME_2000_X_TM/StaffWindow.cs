@@ -351,6 +351,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             var customer = (Customer)staffCustomerSearchWindow.SelectedItem;
                             if (libraryController.DeleteCustomer(customer.Username))
                             {
+                                MessageBox.Show("Customer Deleted");
                                 staffCustomerSearchWindow.ClearDisplayItems();
                             }
                             else {

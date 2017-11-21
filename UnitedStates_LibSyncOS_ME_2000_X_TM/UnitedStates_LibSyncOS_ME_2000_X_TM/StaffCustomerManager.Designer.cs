@@ -136,7 +136,6 @@
             this.uxStaffNewFineAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxStaffNewFineAmount.Location = new System.Drawing.Point(186, 236);
             this.uxStaffNewFineAmount.Name = "uxStaffNewFineAmount";
-            this.uxStaffNewFineAmount.ReadOnly = true;
             this.uxStaffNewFineAmount.Size = new System.Drawing.Size(151, 29);
             this.uxStaffNewFineAmount.TabIndex = 32;
             // 
