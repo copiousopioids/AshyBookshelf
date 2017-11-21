@@ -16,7 +16,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         CustomerAccountForm customerAccountForm;
         CustomerLoginForm customerLoginForm;
         CustomerItemSearchWindow customerItemSearchWindow;
-
+        string errorMessage = "";
         public Customer_Home()
         {
             InitializeComponent();
@@ -45,14 +45,15 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             var checkoutItem = customerItemSearchWindow.SelectedItem;
                             if (checkoutItem is Book) {
                                 var bookToCheckout = (Book)checkoutItem;
-                                success = libraryController.DeleteItem(ItemTypes.Book, bookToCheckout.ID);
+                                success = libraryController.DeleteItem(ItemTypes.Book, bookToCheckout.ID, out errorMessage);
                                 if (success)
                                 {
                                     MessageBox.Show("Item Checked out");
                                     customerItemSearchWindow.ClearDisplayItems();
                                 }
                                 else {
-                                    MessageBox.Show("Item could not be checked out");
+                                    // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                                    MessageBox.Show("Item could not be checked out " + errorMessage);
                                 }
                             }
                             break;
@@ -94,7 +95,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             if (itemToReturn is Book)
                             {
                                 var bookItemToReturn = (Book)itemToReturn;
-                                var result = libraryController.ReturnItem(ItemTypes.Book, bookItemToReturn.ID);
+                                var result = libraryController.ReturnItem(ItemTypes.Book, bookItemToReturn.ID, out errorMessage);
                                 if (result)
                                 {
                                     MessageBox.Show("Item returned");
@@ -102,13 +103,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Item could not be returned");
+                                    // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                                    MessageBox.Show("Item could not be returned " + errorMessage);
                                 }
                             }
                             else if (itemToReturn is Movie)
                             {
                                 var movieItemToReturn = (Movie)itemToReturn;
-                                var result = libraryController.ReturnItem(ItemTypes.Movie, movieItemToReturn.ID);
+                                var result = libraryController.ReturnItem(ItemTypes.Movie, movieItemToReturn.ID, out errorMessage);
                                 if (result)
                                 {
                                     MessageBox.Show("Item Returned");
@@ -116,7 +118,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Item could not be returned");
+                                    // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                                    MessageBox.Show("Item could not be returned " + errorMessage);
                                 }
                             }
                             else
@@ -128,7 +131,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             var userLoggedIn = libraryController.GetUserIfLoggedIn();
                             if (userLoggedIn.isLoggedIn)
                             {
-                                var result = libraryController.PayFine(userLoggedIn.loggedInCustomer.Username);
+                                var result = libraryController.PayFine(userLoggedIn.loggedInCustomer.Username, out errorMessage);
                                 if (result)
                                 {
                                     MessageBox.Show("Fine has been payed");
@@ -136,7 +139,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                                 }
                                 else
                                 {
-                                    MessageBox.Show("User fine could not be payed");
+                                    // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                                    MessageBox.Show("User fine could not be payed " + errorMessage);
                                 }
                                 break;
                             }
@@ -169,7 +173,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         case DialogReturn.Login:
                             var username = customerLoginForm.UXCustomerUsername;
                             var password = customerLoginForm.UXCustomerPassword;
-                            var isLoginASuccess = libraryController.CheckUserLoginCredentials(username, password);
+                            var isLoginASuccess = libraryController.CheckUserLoginCredentials(username, password, out errorMessage);
                             if (isLoginASuccess)
                             {
                                 MessageBox.Show("User logged in");
@@ -177,7 +181,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             }
                             else
                             {
-                                MessageBox.Show("User could not be logged in");
+                                // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                                MessageBox.Show("User could not be logged in " + errorMessage);
                                 break;
                             }
                         case DialogReturn.Cancel:
@@ -220,15 +225,15 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
             if (isBookCheckBoxChecked && isMovieCheckBoxChecked)
             {
-                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.BookAndMovie);
+                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.BookAndMovie, out errorMessage);
             }
             else if (isBookCheckBoxChecked)
             {
-                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Book);
+                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Book, out errorMessage);
             }
             else if (isMovieCheckBoxChecked)
             {
-                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Movie);
+                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Movie, out errorMessage);
             }
             else
             {
@@ -236,7 +241,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 return;
             }
             if (bookAndMovieDisplayObjects.Count == 0 || bookAndMovieDisplayObjects == null) {
-                MessageBox.Show("No objects were found");
+                MessageBox.Show("No objects were found " + errorMessage);
                 return;
             }
             customerItemSearchWindow.ClearDisplayItems();

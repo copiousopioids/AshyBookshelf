@@ -26,7 +26,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             databaseController = new DatabaseController();
         }
 
-        public Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success)
+        public Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success, out string errorMessage)
         {
             success = true;
             var contributors1 = new List<Person>();
@@ -46,26 +46,29 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             contributors.Add(person1);
             contributors.Add(person2);
             contributors.Add(person3);
-
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return new Book(new Condition("good", 1), true, 2, new Genre("gospel", 1), 1, "YOLO", 2, 123445, "Happy Tree Friends", 432, contributors1);
             throw new NotImplementedException();
         }
 
-        public bool AddCustomer(string username, string password, string name, string address, string phoneNumber)
+        public bool AddCustomer(string username, string password, string name, string address, string phoneNumber, out string errorMessage)
         {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
         }
 
-        public Fine AddFine(string username, int amount, out bool result)
+        public Fine AddFine(string username, int amount, out bool result, out string errorMessage)
         {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             result = true;
             return new Fine(1, 23, DateTime.Now, false, "This is the description");
             throw new NotImplementedException();
         }
 
-        public Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success)
+        public Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success, out string errorMessage)
         {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             success = true;
             var contributors1 = new List<Person>();
             var awards = new List<Award>();
@@ -89,26 +92,30 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
-        public bool CheckoutItem(ItemTypes itemType, int itemId)
+        public bool CheckoutItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
         }
 
-        public bool DeleteCustomer(string username)
+        public bool DeleteCustomer(string username, out string errorMessage)
         {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
         }
 
-        public bool DeleteItem(ItemTypes itemType, int itemId)
+        public bool DeleteItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
         }
 
-        public Customer GetCustomer(string username, out bool success)
+        public Customer GetCustomer(string username, out bool success, out string errorMessage)
         {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             var itemsCheckedOut = new List<Item>();
             var contributors1 = new List<Person>();
             var awards = new List<Award>();
@@ -169,18 +176,21 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
-        public bool PayFine(string username)
+        public bool PayFine(string username, out string errorMessage)
         {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
         }
 
-        public bool PayIndividualFine(string username, Fine fine) {
+        public bool PayIndividualFine(string username, Fine fine, out string errorMessage) {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
         }
 
-        public bool CheckUserLoginCredentials(string username, string password) {
+        public bool CheckUserLoginCredentials(string username, string password, out string errorMessage) {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
         }
@@ -225,14 +235,16 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 return new LoggedInInformation(true,loggedInCustomer);
         }
 
-        public bool ReturnItem(ItemTypes itemType, int itemId)
+        public bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
         }
 
-        public List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria)
+        public List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria, out string errorMessage)
         {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             var objectList = new List<object>();
             var contributors = new List<Person>();
             var awards = new List<Award>();
@@ -260,14 +272,16 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
-        public bool VerifyAccount(string username, string password)
+        public bool VerifyAccount(string username, string password, out string errorMessage)
         {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
         }
 
-        public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, out bool success) {
-            var awards = new List<Award>();
+        public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage) {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
+            awards = new List<Award>();
             var award1 = new Award(1, "pooAward", 21);
             var award2 = new Award(1, "pooAward", 21);
             var award3 = new Award(1, "pooAward", 21);
@@ -288,7 +302,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             return true;
         }
 
-        public List<Person> GetAllContributors(out bool success) {
+        public List<Person> GetAllContributors(out bool success, out string errorMessage) {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             var contributors = new List<Person>();
             var awards = new List<Award>();
             var award1 = new Award(1, "pooAward", 21);
@@ -311,7 +326,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
-        public List<Award> GetAllAwards(out bool success) {
+        public List<Award> GetAllAwards(out bool success, out string errorMessage) {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             var awards = new List<Award>();
             var award1 = new Award(1, "pooAward", 21);
             var award2 = new Award(1, "pooAward", 21);
@@ -326,7 +342,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
-        public List<Role> GetAllRoles(out bool success) {
+        public List<Role> GetAllRoles(out bool success, out string errorMessage) {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             success = true;
             var roles = new List<Role>();
             var role1 = new Role(1, "director");
@@ -338,7 +355,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             return roles;
         }
 
-        public List<Genre> GetAllGenres(out bool success) {
+        public List<Genre> GetAllGenres(out bool success, out string errorMessage) {
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             success = true;
             var genres = new List<Genre>();
             var genre1 = new Genre("Rap", 1);

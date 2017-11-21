@@ -13,7 +13,16 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class CreateContributorWindow : Form, ILibraryForm
     {
-
+        public List<Award> UXStaffGetAllRewardsContributorReceived {
+            get {
+                var awardList = new List<Award>();
+                foreach (var award in uxStaffAwardsReceivedGenericItemsListBox.Items) {
+                    var awardCasted = (Award)award;
+                    awardList.Add(awardCasted);
+                }
+                return awardList;
+            }       
+        }
         public void SetDisplayItems(List<Award> availableAwards, List<Role> roles) {
             uxStaffAvailableRewardsGenericItemsListBox.Items.AddRange(availableAwards.ToArray());
             uxStaffRoleComboBox.Items.AddRange(roles.ToArray());

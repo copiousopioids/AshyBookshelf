@@ -22,6 +22,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         private CreateContributorWindow staffCreateContributorWindow;
         private StaffCreateCustomerWindow staffCreateCustomerWindow;
         private StaffCustomerManager staffCustomerManager;
+        private string errorMessage = "";
 
         public StaffWindow()
         {
@@ -85,28 +86,30 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             {
 
                 var bookItem = (Book)selectedItem;
-                if (libraryController.DeleteItem(ItemTypes.Movie, bookItem.ID))
+                if (libraryController.DeleteItem(ItemTypes.Movie, bookItem.ID, out errorMessage))
                 {
                     MessageBox.Show("Book Deleted");
                     staffItemSearchWindow.ClearDisplayItems();
                 }
                 else
                 {
-                    MessageBox.Show("Could not delete item from the library catalog");
+                    // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                    MessageBox.Show("Could not delete item from the library catalog " + errorMessage);
                 }
             }
             else if (selectedItem is Movie)
             {
 
                 var movieItem = (Movie)selectedItem;
-                if (libraryController.DeleteItem(ItemTypes.Movie, movieItem.ID))
+                if (libraryController.DeleteItem(ItemTypes.Movie, movieItem.ID, out errorMessage))
                 {
                     MessageBox.Show("Movie Deleted");
                     staffItemSearchWindow.ClearDisplayItems();
                 }
                 else
                 {
-                    MessageBox.Show("Could not delete item from the library catalog");
+                    // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                    MessageBox.Show("Could not delete item from the library catalog " + errorMessage);
                 }
             }
         }
@@ -115,10 +118,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             staffAddMovieItemWindow.ClearDisplayItems();
 
             success = false;
-            var genres = libraryController.GetAllGenres(out success);
+            var genres = libraryController.GetAllGenres(out success, out errorMessage);
             if (!success)
             {
-                MessageBox.Show("Genres could not be retrieved");
+                // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                MessageBox.Show("Genres could not be retrieved " + errorMessage);
                 success = false;
                 return null;
             }
@@ -145,9 +149,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             var genre = staffAddMovieItemWindow.UXStaffMovieGenre;
                             var contributors = staffAddMovieItemWindow.GetAllItems();
                             var barcode = staffAddMovieItemWindow.UXStaffMovieBarcode;
-                            var movie = libraryController.AddMovie(title, description, genre, duration, barcode, contributors, out success);
+                            var movie = libraryController.AddMovie(title, description, genre, duration, barcode, contributors, out success, out errorMessage);
                             if (!success) {
-                                MessageBox.Show("Movie could not be addede");
+                                // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                                MessageBox.Show("Movie could not be added " + errorMessage);
                                 return null;
                             }
 
@@ -173,9 +178,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
             staffAddBookItemWindow.ClearDisplayItems();
             success = false;
-            var genres = libraryController.GetAllGenres(out success);
+            var genres = libraryController.GetAllGenres(out success, out errorMessage);
             if (!success) {
-                MessageBox.Show("Genres could not be retrieved");
+                MessageBox.Show("Genres could not be retrieved " + errorMessage);
                 success = false;
                 return null;
             }
@@ -199,10 +204,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         var genre = (Genre)staffAddBookItemWindow.UXStaffBookGenre;
                         var isbn = staffAddBookItemWindow.UXStaffBookISBN;
                         success = false;
-                        var book = libraryController.AddBook(title, genre, isbn, publisher, numberOfPages, contributors, out success);
+                        var book = libraryController.AddBook(title, genre, isbn, publisher, numberOfPages, contributors, out success, out errorMessage);
                         if (success == false)
                         {
-                            MessageBox.Show("The book could not be added. We're sorry");
+                            // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                            MessageBox.Show("The book could not be added. We're sorry " + errorMessage);
                         }
 
                         success = true;
@@ -222,9 +228,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             {
 
                 var success = false;
-                var existingContributors = libraryController.GetAllContributors(out success);
+                var existingContributors = libraryController.GetAllContributors(out success, out errorMessage);
                 if (!success) {
-                    MessageBox.Show("Contributors could not be retrieved");
+                    // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                    MessageBox.Show("Contributors could not be retrieved " + errorMessage);
                     return null;
                 }
 
@@ -264,15 +271,17 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             staffCreateContributorWindow.ClearDisplayItems();
 
             var success = false;
-            var existingAwards = libraryController.GetAllAwards(out success);
+            var existingAwards = libraryController.GetAllAwards(out success, out errorMessage);
             if (!success) {
-                MessageBox.Show("Awards could not be retrieved");
+                // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                MessageBox.Show("Awards could not be retrieved " + errorMessage);
                 return null;
             }
 
-            var roles = libraryController.GetAllRoles(out success);
+            var roles = libraryController.GetAllRoles(out success, out errorMessage);
             if (!success) {
-                MessageBox.Show("Roles could not be retrieved");
+                // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                MessageBox.Show("Roles could not be retrieved " + errorMessage);
                 return null;
             }
 
@@ -288,9 +297,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         var twitterHandle = staffCreateContributorWindow.UXStaffContributorTwitterHandle;
                         var dateOfBirth = staffCreateContributorWindow.UXStaffContributorDateOfBirth;
                         var role = staffCreateContributorWindow.UXStaffRoleSelected;
-                        var contributor = libraryController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, role, out success);
+                        var awards = staffCreateContributorWindow.UXStaffGetAllRewardsContributorReceived;
+                        var contributor = libraryController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, role, awards, out success, out errorMessage);
                         if (!success)
-                            MessageBox.Show("Contributor could not be created");
+                        {
+                            // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                            MessageBox.Show("Contributor could not be created " + errorMessage);
+                        }
                         return contributor;
                     case DialogReturn.Cancel:
                         return null;
@@ -311,16 +324,20 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 var bookAndMovieDisplayObjects = new List<object>();
 
                 if (isBookCheckBoxChecked && isMovieCheckBoxChecked) {
-                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.BookAndMovie);
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.BookAndMovie, out errorMessage);
                 } else if (isBookCheckBoxChecked) {
-                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Book);
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Book, out errorMessage);
                 } else if (isMovieCheckBoxChecked) {
-                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Movie);
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Movie, out errorMessage);
                 } else {
                     MessageBox.Show("Check one or both of the following checkboxes: Movies, Books");
                     return;
                 }
                 staffItemSearchWindow.ClearDisplayItems();
+                if (bookAndMovieDisplayObjects == null || bookAndMovieDisplayObjects.Count <= 0) {
+                    // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                    MessageBox.Show("The list of items could not be retrieved or was not found " + errorMessage);
+                }
                 staffItemSearchWindow.AddDisplayItems(bookAndMovieDisplayObjects.ToArray());
             }
             else
@@ -349,13 +366,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             return;
                         case DialogReturn.Delete:
                             var customer = (Customer)staffCustomerSearchWindow.SelectedItem;
-                            if (libraryController.DeleteCustomer(customer.Username))
+                            if (libraryController.DeleteCustomer(customer.Username, out errorMessage))
                             {
                                 MessageBox.Show("Customer Deleted");
                                 staffCustomerSearchWindow.ClearDisplayItems();
                             }
                             else {
-                                MessageBox.Show("Customer could not be deleted.");
+                                // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                                MessageBox.Show("Customer could not be deleted. " + errorMessage);
                             }
                             return;
                         case DialogReturn.Select:
@@ -384,26 +402,28 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     case DialogReturn.CreateFine:
                         var fineAmount = staffCustomerManager.NewFineAmount;
                         var success = false;
-                        var fine = libraryController.AddFine(customer.Username, fineAmount, out success);
+                        var fine = libraryController.AddFine(customer.Username, fineAmount, out success, out errorMessage);
                         if (success)
                         {
                             MessageBox.Show("Fine Added");
                             staffCustomerManager.AddItem(fine);
                         }
                         else {
-                            MessageBox.Show("Fine could not be added");
+                            // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                            MessageBox.Show("Fine could not be added " + errorMessage);
                         }
                         break;
                     case DialogReturn.RemoveFine:
                         var fineToRemove = (Fine)staffCustomerManager.SelectedItem;
-                        var result = libraryController.PayIndividualFine(customer.Username, fineToRemove);
+                        var result = libraryController.PayIndividualFine(customer.Username, fineToRemove, out errorMessage);
                         if (result)
                         {
                             MessageBox.Show("Fine removed");
                             staffCustomerManager.RemoveItem(fineToRemove);
                         }
                         else {
-                            MessageBox.Show("Fine could not be removed");
+                            // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                            MessageBox.Show("Fine could not be removed " + errorMessage);
                         }
                         break;
                     case DialogReturn.Cancel:
@@ -425,9 +445,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     var name = staffCreateCustomerWindow.UXStaffPassword;
                     var address = staffCreateCustomerWindow.UXStaffAddress;
                     var phoneNumber = staffCreateCustomerWindow.UXStaffPhoneNumber;
-                    var success = libraryController.AddCustomer(username, password, name, address, phoneNumber);
-                    if (!success)
-                        MessageBox.Show("User could not be added");
+                    var success = libraryController.AddCustomer(username, password, name, address, phoneNumber, out errorMessage);
+                    if (!success) {
+                        // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                        MessageBox.Show("User could not be added " + errorMessage);
+                    }                  
                     else
                         MessageBox.Show("User created");
                     break;
@@ -443,10 +465,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             var searchString = staffCustomerSearchWindow.UXStaffCustomerSearchIdString;
             staffCustomerSearchWindow.ClearDisplayItems();
             var success = false;
-            var customerDisplayObjects = (Customer)libraryController.GetCustomer(searchString, out success);
+            var customerDisplayObjects = (Customer)libraryController.GetCustomer(searchString, out success, out errorMessage);
             if (!success)
             {
-                MessageBox.Show("No Customers could be found");
+                // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                MessageBox.Show("No Customers could be found " + errorMessage);
             }
             staffCustomerSearchWindow.AddDisplayItems(customerDisplayObjects);
         }
