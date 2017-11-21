@@ -50,7 +50,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             throw new NotImplementedException();
         }
 
-        public Customer GetCustomer(string username)
+        public Customer GetCustomer(string username, out bool success)
         {
             throw new NotImplementedException();
         }

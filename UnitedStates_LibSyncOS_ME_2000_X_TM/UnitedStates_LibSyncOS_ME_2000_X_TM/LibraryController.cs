@@ -52,8 +52,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
-        public Customer GetCustomer(string username)
+        public Customer GetCustomer(string username, out bool success)
         {
+
             throw new NotImplementedException();
         }
 
@@ -75,12 +76,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria)
         {
             throw new NotImplementedException();
-        }
-
-        public List<Customer> SearchCustomers(string searchCriteria, out bool success) {
-            var searchOption = ItemSearchOptions.Customer;
-            success = false; // or true depending on if the result succceeds in being queried
-            return null;
         }
 
         public bool VerifyAccount(string username, string password)

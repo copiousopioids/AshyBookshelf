@@ -20,6 +20,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         private StaffItemSearchWindow staffItemSearchWindow;
         private LibraryController libraryController;
         private CreateContributorWindow staffCreateContributorWindow;
+        private StaffCreateCustomerWindow staffCreateCustomerWindow;
 
         public StaffWindow()
         {
@@ -34,6 +35,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             this.staffCustomerSearchWindow = new StaffCustomerSearchWindow();
             this.staffItemSearchWindow = new StaffItemSearchWindow();
             this.staffCreateContributorWindow = new CreateContributorWindow();
+            this.staffCreateCustomerWindow = new StaffCreateCustomerWindow();
             
             this.libraryController = controller;
         }
@@ -284,9 +286,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             SearchByCustomerIDButtonPressedInStaffCustomerSearchWindow();
                             break;
                         case DialogReturn.AddCustomer:
-                            //var customer = AddAndGetBookThroughAddBookWindow(out success);
-                            //if (success)
-                                //staffItemSearchWindow.AddItem(book);
+                            AddCustomerThroughStaffCreateCusomterWindow();
                             break;
                         case DialogReturn.Cancel:
                             return;
@@ -312,12 +312,37 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         }
 
+        public void AddCustomerThroughStaffCreateCusomterWindow() {
+
+            staffCreateCustomerWindow.ClearDisplayItems();
+            var addCustomerDialogReturn = staffCreateCustomerWindow.Display();
+
+            switch (addCustomerDialogReturn) {
+                case DialogReturn.Create:
+                    var username = staffCreateCustomerWindow.UXStaffUsername;
+                    var password = staffCreateCustomerWindow.UXStaffPassword;
+                    var name = staffCreateCustomerWindow.UXStaffPassword;
+                    var address = staffCreateCustomerWindow.UXStaffAddress;
+                    var phoneNumber = staffCreateCustomerWindow.UXStaffPhoneNumber;
+                    var success = libraryController.AddCustomer(username, password, name, address, phoneNumber);
+                    if (!success)
+                        MessageBox.Show("User could not be added");
+                    else
+                        MessageBox.Show("User created");
+                    break;
+                case DialogReturn.Cancel:
+                    return;
+                default:
+                    break;
+            }
+        }
+
         public void SearchByCustomerIDButtonPressedInStaffCustomerSearchWindow() {
 
             var searchString = staffCustomerSearchWindow.UXStaffCustomerSearchIdString;
             staffCustomerSearchWindow.ClearDisplayItems();
             var success = false;
-            var customerDisplayObjects = libraryController.SearchCustomers(searchString, out success);
+            var customerDisplayObjects = libraryController.GetCustomer(searchString, out success);
             if (!success)
             {
                 MessageBox.Show("No Customers could be found");

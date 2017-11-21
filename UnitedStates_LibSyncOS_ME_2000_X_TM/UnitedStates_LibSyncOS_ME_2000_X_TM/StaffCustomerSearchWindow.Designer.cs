@@ -39,7 +39,7 @@
             // 
             // uxStaffCustomerSearchTextBox
             // 
-            this.uxStaffCustomerSearchTextBox.Location = new System.Drawing.Point(160, 9);
+            this.uxStaffCustomerSearchTextBox.Location = new System.Drawing.Point(191, 9);
             this.uxStaffCustomerSearchTextBox.Name = "uxStaffCustomerSearchTextBox";
             this.uxStaffCustomerSearchTextBox.Size = new System.Drawing.Size(100, 20);
             this.uxStaffCustomerSearchTextBox.TabIndex = 0;
@@ -69,9 +69,8 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(13, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(141, 13);
+            this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Search Customer by User ID";
             // 
             // uxStaffGenericItemsListBox
             // 
@@ -94,7 +93,7 @@
             // uxStaffSearchCustomerIDButton
             // 
             this.uxStaffSearchCustomerIDButton.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            this.uxStaffSearchCustomerIDButton.Location = new System.Drawing.Point(266, 9);
+            this.uxStaffSearchCustomerIDButton.Location = new System.Drawing.Point(12, 7);
             this.uxStaffSearchCustomerIDButton.Name = "uxStaffSearchCustomerIDButton";
             this.uxStaffSearchCustomerIDButton.Size = new System.Drawing.Size(173, 23);
             this.uxStaffSearchCustomerIDButton.TabIndex = 7;

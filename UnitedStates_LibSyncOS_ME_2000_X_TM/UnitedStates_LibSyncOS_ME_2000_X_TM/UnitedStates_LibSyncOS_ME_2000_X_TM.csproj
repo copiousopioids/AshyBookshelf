@@ -92,6 +92,12 @@
     <Compile Include="StaffAddMovieItemWindow.Designer.cs">
       <DependentUpon>StaffAddMovieItemWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="StaffCreateCustomerWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffCreateCustomerWindow.Designer.cs">
+      <DependentUpon>StaffCreateCustomerWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="StaffCustomerSearchWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="StaffAddMovieItemWindow.resx">
       <DependentUpon>StaffAddMovieItemWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaffCreateCustomerWindow.resx">
+      <DependentUpon>StaffCreateCustomerWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StaffCustomerSearchWindow.resx">
       <DependentUpon>StaffCustomerSearchWindow.cs</DependentUpon>
