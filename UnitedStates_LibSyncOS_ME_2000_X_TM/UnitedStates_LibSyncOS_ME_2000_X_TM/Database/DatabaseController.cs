@@ -1,13 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnitedStates_LibSyncOS_ME_2000_X_TM.Classes;
+using MySql.Data.MySqlClient;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 {
     public class DatabaseController : IControllerFunctions
     {
+        private string mysqlConnectionString;
+        private MySqlConnection _mysqlConnection;
+        
+        // Be sure to be on the K-State network or will not be able to connect
         public DatabaseController()
         {
+            mysqlConnectionString = "SERVER=mysql.cis.ksu.edu;PORT=3306;DATABASE=zmarcolesco;UID=zmarcolesco;PASSWORD=password;";
+            try
+            {
+                _mysqlConnection = new MySqlConnection();
+                _mysqlConnection.ConnectionString = mysqlConnectionString;
+                _mysqlConnection.Open();
+            }
+            catch (MySql.Data.MySqlClient.MySqlException ex)
+            {
+                throw new Exception(ex.ToString());
+            }
         }
 
         public bool AddBook(string title, string genre, string isbn, string publisher, int numberOfPages, List<Person> contributors)
