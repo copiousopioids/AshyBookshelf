@@ -46,7 +46,7 @@ CREATE TABLE Books(
 
 CREATE TABLE Cardholders(
   c_id          INT NOT NULL,
-  username      VARCHAR(30) NOT NULL,
+  username      VARCHAR(80) NOT NULL,
   password      VARCHAR(30) NOT NULL,
   phone         VARCHAR(30),
   name          VARCHAR(50) NOT NULL,
