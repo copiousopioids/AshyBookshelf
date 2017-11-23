@@ -155,7 +155,7 @@ CREATE TABLE Cardholder_Item(
   item_id         INT NOT NULL,
   due_date        DATE NOT NULL,
   time		  INT NOT NULL,
-  PRIMARY KEY(c_id,item_id),
+  PRIMARY KEY(c_id,item_id,time),
   FOREIGN KEY(c_id) REFERENCES Cardholders(c_id),
   FOREIGN KEY(item_id) REFERENCES Items(item_id)
 );
