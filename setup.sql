@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS People;
 DROP TABLE IF EXISTS Items;
 
 CREATE TABLE Items(
-	item_id       INT NOT NULL,
+  item_id       INT NOT NULL,
   title         VARCHAR(75) NOT NULL,
   available     BIT NOT NULL,
   weekly_fine   DOUBLE NOT NULL,
@@ -28,9 +28,9 @@ CREATE TABLE Items(
 CREATE TABLE Movies(
   item_id       INT NOT NULL,
   description   VARCHAR(400),
-  duration      DECIMAL, /* Int for minutes? */
+  duration      DECIMAL(3,2), /* Int for minutes? */
   studio        VARCHAR(50),
-  barcode_no    VARCHAR(30) NOT NULL,
+  barcode_no    VARCHAR(50) NOT NULL,
   PRIMARY KEY(item_id),
   FOREIGN KEY(item_id) REFERENCES Items(item_id)
 );
@@ -85,7 +85,7 @@ CREATE TABLE Roles(
 
 CREATE TABLE Awards(
   award_id      INT NOT NULL,
-  name          VARCHAR(30) NOT NULL,
+  name          VARCHAR(60) NOT NULL,
   PRIMARY KEY(award_id)
 );
 
@@ -154,6 +154,7 @@ CREATE TABLE Cardholder_Item(
   c_id            INT NOT NULL,
   item_id         INT NOT NULL,
   due_date        DATE NOT NULL,
+  time		  INT NOT NULL,
   PRIMARY KEY(c_id,item_id),
   FOREIGN KEY(c_id) REFERENCES Cardholders(c_id),
   FOREIGN KEY(item_id) REFERENCES Items(item_id)
