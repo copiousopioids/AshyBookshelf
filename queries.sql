@@ -65,3 +65,100 @@ on ig.item_id = i.item_id
 join Genres g
 on g.genre_id = ig.genre_id
 where g.genre = "Action";
+
+/*who is borrowing item with title like %X% ? */
+/* only returns users-wouldn't be able to distinguish if multiple books
+match the title. Could force them to search by exact title instead:
+where i.title='X' 
+otherwise, use joins so you can show which user checked out which book */
+select name, username from Cardholders c
+where c.c_id in
+	( select c_id from Cardholder_Item ci
+    where ci.item_id in
+        ( select item_id from Items i
+        where i.title like '%the%' )
+     );
+
+/* which items with property Y are available */
+select * from Items where available=true;
+select * from Items where available=false;
+
+select * from Items i
+join Item_Condition ic
+on ic.item_id=i.item_id
+join Condit c
+on c.code=ic.code
+where c.condit='Excellent'/*or Good or Fair or Poor */;
+
+
+/* showing all unpaid fines for current user - do need this if just displaying all fines in the listbox? */
+select c.name, c.username, c.c_id, f.amount, f.due_date, f.paid, f.description from Fines f
+join Owes o
+on o.fine_id=f.fine_id
+join Cardholders c
+on c.c_id=o.c_id
+where c.c_id=2 and paid=false; /* or where c.username=? */
+
+/* show all fines for current user */
+select c.name, c.username, c.c_id, f.amount, f.due_date, f.paid, f.description from Fines f
+join Owes o
+on o.fine_id=f.fine_id
+join Cardholders c
+on c.c_id=o.c_id
+where c.c_id=2;
+
+/* Reports */
+
+/* list all awards in alph order with all recips in year order */
+/* use left outer joins to include all awards and fill with nulls */
+select a.name, p.first_name, p.last_name, aw.year_won
+from Awards a
+join Awards_Won aw
+on aw.award_id=a.award_id
+join People p
+on p.person_id=aw.person_id
+order by a.name asc, aw.year_won asc;
+
+/* list what each person has borrowed (list people in alph order, and the items in alph order ) */
+select c.name, i.title, ci.due_date, ci.time
+from Cardholders c
+join Cardholder_Item ci
+on ci.c_id=c.c_id
+join Items i
+on i.item_id=ci.item_id
+order by c.name asc, i.title asc;
+
+
+/* list what current user has checked out at the moment */
+select i.title,ci.time, ci.due_date from Cardholder_Item ci
+join Items i
+on i.item_id=ci.item_id
+where ci.c_id=2 and i.available=false; /*our current Cardholder_Item table
+doesn't track whether it's been returned so we need to check the Items table
+to see if it is still unavailable */
+
+/* list all outstanding fines for all users */ /* what makes it outstanding? -unpaid for now */
+select c.name, f.fine_id, f.description, f.amount, f.due_date, f.paid from 
+Fines f join Owes o
+on o.fine_id=f.fine_id
+join Cardholders c
+on c.c_id=o.c_id
+where paid=false
+order by c.name asc, fine_id asc;
+
+/* list all cardholders in alph order with their contact info */
+select c.name,c.phone, c.address from Cardholders c
+order by c.name asc;
+
+/* list what all items are checked out -i.e. unavailable */
+/* 1st one just lists titles of all checked out */
+select i.title from Items i
+where available=false;
+/* 2nd lists title and who checked it out, followed by due_date */
+select i.title, c.name, ci.due_date
+from Cardholders c
+join Cardholder_Item ci
+on ci.c_id=c.c_id
+join Items i
+on i.item_id=ci.item_id
+where i.available=false;
