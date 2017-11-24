@@ -90,6 +90,14 @@ join Condit c
 on c.code=ic.code
 where c.condit='Excellent'/*or Good or Fair or Poor */;
 
+/* show total amount user owes in unpaid fines (to use sum() function) */
+select c.c_id, c.name, sum(f.amount) from Fines f
+join Owes o
+on o.fine_id=f.fine_id
+join Cardholders c
+on c.c_id=o.c_id
+where f.paid=false
+group by c.c_id
 
 /* showing all unpaid fines for current user - do need this if just displaying all fines in the listbox? */
 select c.name, c.username, c.c_id, f.amount, f.due_date, f.paid, f.description from Fines f
