@@ -42,6 +42,44 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
         }
 
+        /// <summary>
+        /// Generic insert function for the database.
+        /// </summary>
+        /// <param name="strSQL">the sql string using parameters.</param>
+        /// <param name="parameterValue">A two-dimensional array holding the parameter in the first 'column'
+        ///                              (e.g. '@title'), and the value in the second column.</param>
+        public bool Insert(string strSQL, string[,] parameterValue)
+        {
+            MySqlCommand cmd = new MySqlCommand(strSQL, _mysqlConnection);
+
+            for (int i = 0; i < (parameterValue.Length / 2); i++)
+            {
+                cmd.Parameters.AddWithValue(parameterValue[i, 0], parameterValue[i, 1]);
+            }
+            int success = -1;
+            success = cmd.ExecuteNonQuery();
+            if (success > 0) return true;
+            else return false;
+        }
+
+        /// <summary>
+        /// Insert statement for queries that use OUTPUT on an integer.
+        /// </summary>
+        /// <param name="strSQL"></param>
+        /// <param name="parameterValue"></param>
+        /// <returns></returns>
+        public int InsertScalarInt(string strSQL, string[,] parameterValue)
+        {
+            MySqlCommand cmd = new MySqlCommand(strSQL, _mysqlConnection);
+
+            for (int i = 0; i < (parameterValue.Length / 2); i++)
+            {
+                cmd.Parameters.AddWithValue(parameterValue[i, 0], parameterValue[i, 1]);
+            }
+            int modified = (int)cmd.ExecuteScalar();
+            return modified;
+        }
+
         public Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success, out string errorMessage)
         {
             throw new NotImplementedException();
