@@ -82,7 +82,88 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success, out string errorMessage)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string strSQL = "INSERT INTO Items(title, available, weekly_fine, damage_fine) OUTPUT INSERTED.item_id VALUES (@title, true, 2.0, 10.0);";
+                string[,] itemValues = new string[,] { { "@title", title } };
+                int itemID = -1;
+                itemID = InsertScalarInt(strSQL, itemValues);
+                if (itemID > 0)
+                {
+                    string bookSQL = "INSERT INTO Books(item_id, num_pages, publisher, isbn) VALUES (@item_id, @num_pages, @publisher, @isbn);";
+                    string[,] bookValues = new string[,]
+                    {
+                        {"@item_id", itemID.ToString()  }, //No idea if this'll work
+                        {"@num_pages", numberOfPages.ToString() },
+                        {"@publisher", publisher },
+                        {"@isbn", isbn }
+                    };
+                    if (Insert(bookSQL, bookValues))
+                    {
+                        //add to relational tables
+                        //Item_people and People_Roles_Items
+                        string ipSQL = "INSERT INTO Item_People(item_id, person_id) VALUES (@item_id, @person_id);";
+                        string[,] ipValues = new string[,]
+                        {
+                            {"@item_id", itemID.ToString() },
+                            {"@person_id", "placeholder" }
+                        };
+
+                        string priSQL = "INSERT INTO People_Roles_Items(person_id, role_code, item_id) VALUES (@personID, @role_code, @item_id)";
+                        string[,] priValues = new string[,]
+                        {
+                            { "@personID", "placeholder" },
+                            { "@role_code", "placeholder" },
+                            { "@item_id", itemID.ToString() }
+                        };
+
+                        foreach (Person p in contributors)
+                        {
+                            ipValues[1, 1] = p.PersonId.ToString();
+                            priValues[0, 1] = p.PersonId.ToString();
+                            priValues[1, 1] = p.Role.RoleId.ToString();
+                            if (!(Insert(ipSQL, ipValues) && Insert(priSQL, priValues)))
+                                throw new Exception("Item not added to item_people or people_roles_items");
+                        }
+
+                        //Item_condition
+                        string icSQL = "INSERT INTO Item_Condition(item_id, code) VALUES (@item_id, @code)";
+                        string[,] icValues =
+                        {
+                            { "@item_id", itemID.ToString() },
+                            { "@code", "1" }
+                        };
+
+
+                        //Item_genre
+                        string igSQL = "INSERT INTO Item_Genre(item_id, genre_id) VALUES (@item_id, @genre_id)";
+                        string[,] igValues =
+                        {
+                            { "@item_id", itemID.ToString() },
+                            { "@genre_id", genre.ID.ToString() }
+                        };
+
+                        //insert item cond and item genre
+                        if (!(Insert(igSQL, igValues) && Insert(icSQL, icValues)))
+                            throw new Exception("Item not added to igSQL or icValues");
+
+                        //if you get to here, you've inserted successfully into all tables
+                        errorMessage = "no error";
+                        success = true;
+                        //return book here
+                        return new Book(new Condition("Brand New", 0), true, 10, genre, itemID, title, 2, Convert.ToInt32(isbn), publisher, numberOfPages, contributors);
+                    }
+                    else throw new Exception("Item not added to table Book");
+                    
+                }
+                else throw new Exception("Item not added to table Item");
+            }
+            catch (Exception e)
+            {
+                success = false;
+                errorMessage = e.Message;
+                throw;
+            }
         }
 
         public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage)
