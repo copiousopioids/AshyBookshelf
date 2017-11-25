@@ -268,8 +268,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             var book = new Book(new Condition("Good", 1), true, 2, new Genre("thisGenre", 1), 1, "This is the title", 2, 2, "This is the publisher", 3, contributors);
             objectList.Add(book);
             objectList.Add(movie);
-            return objectList;
-            throw new NotImplementedException();
+            //return objectList;
+            return databaseController.searchItems(searchTitle, searchCriteria, out errorMessage);
+            //throw new NotImplementedException();
         }
 
         public bool VerifyAccount(string username, string password, out string errorMessage)

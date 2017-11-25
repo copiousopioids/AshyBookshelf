@@ -43,6 +43,7 @@ on g.genre_id = ig.genre_id
 where g.genre = "Fantasy";
 
 /*search movies by title-different way than above, not sure which is better */
+/* join seems faster */
 select * from Items i
 where i.item_id in (select m.item_id from Movies m)
 and i.title like '%The%';
