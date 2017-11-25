@@ -28,49 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.customer_find_item_button = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.Customer_Home_Exit_Button = new System.Windows.Forms.Button();
+            this.customerFindItemButton = new System.Windows.Forms.Button();
+            this.customerAccountInformationButton = new System.Windows.Forms.Button();
+            this.customerExitButton = new System.Windows.Forms.Button();
+            this.customerLoginButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // customer_find_item_button
+            // customerFindItemButton
             // 
-            this.customer_find_item_button.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customer_find_item_button.Location = new System.Drawing.Point(40, 45);
-            this.customer_find_item_button.Name = "customer_find_item_button";
-            this.customer_find_item_button.Size = new System.Drawing.Size(188, 83);
-            this.customer_find_item_button.TabIndex = 0;
-            this.customer_find_item_button.Text = "Find Item";
-            this.customer_find_item_button.UseVisualStyleBackColor = true;
+            this.customerFindItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerFindItemButton.Location = new System.Drawing.Point(40, 45);
+            this.customerFindItemButton.Name = "customerFindItemButton";
+            this.customerFindItemButton.Size = new System.Drawing.Size(188, 83);
+            this.customerFindItemButton.TabIndex = 0;
+            this.customerFindItemButton.Text = "Find Item";
+            this.customerFindItemButton.UseVisualStyleBackColor = true;
+            this.customerFindItemButton.Click += new System.EventHandler(this.customerFindItemButton_Click);
             // 
-            // button1
+            // customerAccountInformationButton
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(282, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(188, 83);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Account Information";
-            this.button1.UseVisualStyleBackColor = true;
+            this.customerAccountInformationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerAccountInformationButton.Location = new System.Drawing.Point(282, 45);
+            this.customerAccountInformationButton.Name = "customerAccountInformationButton";
+            this.customerAccountInformationButton.Size = new System.Drawing.Size(188, 83);
+            this.customerAccountInformationButton.TabIndex = 1;
+            this.customerAccountInformationButton.Text = "Account Information";
+            this.customerAccountInformationButton.UseVisualStyleBackColor = true;
+            this.customerAccountInformationButton.Click += new System.EventHandler(this.customerAccountInformationButton_Click);
             // 
-            // Customer_Home_Exit_Button
+            // customerExitButton
             // 
-            this.Customer_Home_Exit_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Home_Exit_Button.Location = new System.Drawing.Point(315, 151);
-            this.Customer_Home_Exit_Button.Name = "Customer_Home_Exit_Button";
-            this.Customer_Home_Exit_Button.Size = new System.Drawing.Size(130, 47);
-            this.Customer_Home_Exit_Button.TabIndex = 2;
-            this.Customer_Home_Exit_Button.Text = "Exit";
-            this.Customer_Home_Exit_Button.UseVisualStyleBackColor = true;
+            this.customerExitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerExitButton.Location = new System.Drawing.Point(315, 151);
+            this.customerExitButton.Name = "customerExitButton";
+            this.customerExitButton.Size = new System.Drawing.Size(130, 47);
+            this.customerExitButton.TabIndex = 2;
+            this.customerExitButton.Text = "Logout";
+            this.customerExitButton.UseVisualStyleBackColor = true;
+            this.customerExitButton.Click += new System.EventHandler(this.customerExitButton_Click);
+            // 
+            // customerLoginButton
+            // 
+            this.customerLoginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerLoginButton.Location = new System.Drawing.Point(61, 151);
+            this.customerLoginButton.Name = "customerLoginButton";
+            this.customerLoginButton.Size = new System.Drawing.Size(130, 47);
+            this.customerLoginButton.TabIndex = 3;
+            this.customerLoginButton.Text = "Login";
+            this.customerLoginButton.UseVisualStyleBackColor = true;
+            this.customerLoginButton.Click += new System.EventHandler(this.customerLoginButton_Click);
             // 
             // Customer_Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(529, 221);
-            this.Controls.Add(this.Customer_Home_Exit_Button);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.customer_find_item_button);
+            this.Controls.Add(this.customerLoginButton);
+            this.Controls.Add(this.customerExitButton);
+            this.Controls.Add(this.customerAccountInformationButton);
+            this.Controls.Add(this.customerFindItemButton);
             this.Name = "Customer_Home";
             this.Text = "Customer Home";
             this.ResumeLayout(false);
@@ -79,8 +95,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button customer_find_item_button;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button Customer_Home_Exit_Button;
+        private System.Windows.Forms.Button customerFindItemButton;
+        private System.Windows.Forms.Button customerAccountInformationButton;
+        private System.Windows.Forms.Button customerExitButton;
+        private System.Windows.Forms.Button customerLoginButton;
     }
 }

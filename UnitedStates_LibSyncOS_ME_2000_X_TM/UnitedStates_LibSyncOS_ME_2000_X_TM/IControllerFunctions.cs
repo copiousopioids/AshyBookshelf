@@ -9,30 +9,38 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 {
     interface IControllerFunctions
     {
-        bool VerifyAccount(string username, string password);
+        bool VerifyAccount(string username, string password, out string errorMessage);
 
-        bool AddMovie(string title, string description, string genre, 
-            string condition, int duration, string barcode, List<Person> contributors);
+        Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success, out string errorMessage);
 
-        bool AddBook(string title, string genre, string isbn, string publisher, int numberOfPages, List<Person> contributors);
+        Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success, out string errorMessage);
 
         Item GetItem(ItemTypes itemType, string searchTitle);
 
-        bool DeleteItem(ItemTypes itemType, int itemId);
+        bool DeleteItem(ItemTypes itemType, int itemId, out string errorMessage);
 
-        bool CheckoutItem(ItemTypes itemType, int itemId);
+        bool CheckoutItem(ItemTypes itemType, int itemId, out string errorMessage);
 
-        bool ReturnItem(ItemTypes itemType, int itemId);
+        bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage);
 
-        Customer GetCustomer(string username);
+        Customer GetCustomer(string username, out bool success, out string errorMessage);
 
-        bool AddCustomer(string username, string password, string name, string address, string phoneNumber);
+        bool AddCustomer(string username, string password, string name, string address, string phoneNumber, out string errorMessage);
 
-        bool DeleteCustomer(string username);
+        Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage);
 
-        bool PayFine(string username);
+        bool DeleteCustomer(string username, out string errorMessage);
 
-        bool AddFine(string username);
+        bool PayFine(string username, out string errorMessage);
+
+        Fine AddFine(string username, int amount, out bool result, out string errorMessage);
+        List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria, out string errorMessage);
+        bool CheckUserLoginCredentials(string username, string password, out string errorMessage);
+        bool PayIndividualFine(string username, Fine fine, out string errorMessage);
+        List<Person> GetAllContributors(out bool success, out string errorMessage);
+        List<Award> GetAllAwards(out bool success, out string errorMessage);
+        List<Role> GetAllRoles(out bool success, out string errorMessage);
+        List<Genre> GetAllGenres(out bool success, out string errorMessage);
 
     }
 }

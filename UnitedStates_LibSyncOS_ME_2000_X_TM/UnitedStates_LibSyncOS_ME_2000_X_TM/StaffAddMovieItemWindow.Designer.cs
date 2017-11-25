@@ -28,27 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.uxStaffMovieTitleTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.uxStaffAddMovieButton = new System.Windows.Forms.Button();
+            this.uxStaffCancelButton = new System.Windows.Forms.Button();
+            this.uxStaffDescriptionTextBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.uxStaffDurationTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.uxStaffStudioNameTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.uxStaffAddContributorButton = new System.Windows.Forms.Button();
+            this.uxStaffGenericItemsListBox = new System.Windows.Forms.ListBox();
+            this.uxStaffGenreLabel = new System.Windows.Forms.Label();
+            this.uxStaffGenreComboBox = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.uxStaffBarcodeTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // uxStaffMovieTitleTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(48, 22);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 0;
+            this.uxStaffMovieTitleTextBox.Location = new System.Drawing.Point(48, 22);
+            this.uxStaffMovieTitleTextBox.Name = "uxStaffMovieTitleTextBox";
+            this.uxStaffMovieTitleTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffMovieTitleTextBox.TabIndex = 0;
             // 
             // label1
             // 
@@ -59,30 +63,32 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Title:";
             // 
-            // button1
+            // uxStaffAddMovieButton
             // 
-            this.button1.Location = new System.Drawing.Point(12, 226);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Add Movie";
-            this.button1.UseVisualStyleBackColor = true;
+            this.uxStaffAddMovieButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.uxStaffAddMovieButton.Location = new System.Drawing.Point(15, 299);
+            this.uxStaffAddMovieButton.Name = "uxStaffAddMovieButton";
+            this.uxStaffAddMovieButton.Size = new System.Drawing.Size(75, 23);
+            this.uxStaffAddMovieButton.TabIndex = 2;
+            this.uxStaffAddMovieButton.Text = "Add Movie";
+            this.uxStaffAddMovieButton.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // uxStaffCancelButton
             // 
-            this.button2.Location = new System.Drawing.Point(501, 226);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
+            this.uxStaffCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.uxStaffCancelButton.Location = new System.Drawing.Point(268, 299);
+            this.uxStaffCancelButton.Name = "uxStaffCancelButton";
+            this.uxStaffCancelButton.Size = new System.Drawing.Size(75, 23);
+            this.uxStaffCancelButton.TabIndex = 3;
+            this.uxStaffCancelButton.Text = "Cancel";
+            this.uxStaffCancelButton.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // uxStaffDescriptionTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(78, 45);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 4;
+            this.uxStaffDescriptionTextBox.Location = new System.Drawing.Point(78, 45);
+            this.uxStaffDescriptionTextBox.Name = "uxStaffDescriptionTextBox";
+            this.uxStaffDescriptionTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffDescriptionTextBox.TabIndex = 4;
             // 
             // label2
             // 
@@ -93,12 +99,12 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Description:";
             // 
-            // textBox3
+            // uxStaffDurationTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(78, 71);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 6;
+            this.uxStaffDurationTextBox.Location = new System.Drawing.Point(78, 71);
+            this.uxStaffDurationTextBox.Name = "uxStaffDurationTextBox";
+            this.uxStaffDurationTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffDurationTextBox.TabIndex = 6;
             // 
             // label3
             // 
@@ -118,57 +124,95 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Studio:";
             // 
-            // textBox4
+            // uxStaffStudioNameTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(58, 97);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 9;
+            this.uxStaffStudioNameTextBox.Location = new System.Drawing.Point(58, 97);
+            this.uxStaffStudioNameTextBox.Name = "uxStaffStudioNameTextBox";
+            this.uxStaffStudioNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffStudioNameTextBox.TabIndex = 9;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 132);
+            this.label5.Location = new System.Drawing.Point(9, 198);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 13);
             this.label5.TabIndex = 10;
             this.label5.Text = "Contributors:";
             // 
-            // textBox5
+            // uxStaffAddContributorButton
             // 
-            this.textBox5.Location = new System.Drawing.Point(78, 129);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(343, 91);
-            this.textBox5.TabIndex = 11;
+            this.uxStaffAddContributorButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.uxStaffAddContributorButton.Location = new System.Drawing.Point(96, 299);
+            this.uxStaffAddContributorButton.Name = "uxStaffAddContributorButton";
+            this.uxStaffAddContributorButton.Size = new System.Drawing.Size(94, 23);
+            this.uxStaffAddContributorButton.TabIndex = 12;
+            this.uxStaffAddContributorButton.Text = "Add Contributor";
+            this.uxStaffAddContributorButton.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // uxStaffGenericItemsListBox
             // 
-            this.button3.Location = new System.Drawing.Point(103, 226);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 23);
-            this.button3.TabIndex = 12;
-            this.button3.Text = "Add Contributor";
-            this.button3.UseVisualStyleBackColor = true;
+            this.uxStaffGenericItemsListBox.FormattingEnabled = true;
+            this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(78, 198);
+            this.uxStaffGenericItemsListBox.Name = "uxStaffGenericItemsListBox";
+            this.uxStaffGenericItemsListBox.Size = new System.Drawing.Size(265, 95);
+            this.uxStaffGenericItemsListBox.TabIndex = 13;
+            // 
+            // uxStaffGenreLabel
+            // 
+            this.uxStaffGenreLabel.AutoSize = true;
+            this.uxStaffGenreLabel.Location = new System.Drawing.Point(12, 126);
+            this.uxStaffGenreLabel.Name = "uxStaffGenreLabel";
+            this.uxStaffGenreLabel.Size = new System.Drawing.Size(39, 13);
+            this.uxStaffGenreLabel.TabIndex = 15;
+            this.uxStaffGenreLabel.Text = "Genre:";
+            // 
+            // uxStaffGenreComboBox
+            // 
+            this.uxStaffGenreComboBox.FormattingEnabled = true;
+            this.uxStaffGenreComboBox.Location = new System.Drawing.Point(57, 126);
+            this.uxStaffGenreComboBox.Name = "uxStaffGenreComboBox";
+            this.uxStaffGenreComboBox.Size = new System.Drawing.Size(121, 21);
+            this.uxStaffGenreComboBox.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 161);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(50, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Barcode:";
+            // 
+            // uxStaffBarcodeTextBox
+            // 
+            this.uxStaffBarcodeTextBox.Location = new System.Drawing.Point(68, 158);
+            this.uxStaffBarcodeTextBox.Name = "uxStaffBarcodeTextBox";
+            this.uxStaffBarcodeTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffBarcodeTextBox.TabIndex = 18;
             // 
             // StaffAddMovieItemWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 261);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.textBox5);
+            this.ClientSize = new System.Drawing.Size(356, 334);
+            this.Controls.Add(this.uxStaffBarcodeTextBox);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.uxStaffGenreComboBox);
+            this.Controls.Add(this.uxStaffGenreLabel);
+            this.Controls.Add(this.uxStaffGenericItemsListBox);
+            this.Controls.Add(this.uxStaffAddContributorButton);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.uxStaffStudioNameTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.uxStaffDurationTextBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.uxStaffDescriptionTextBox);
+            this.Controls.Add(this.uxStaffCancelButton);
+            this.Controls.Add(this.uxStaffAddMovieButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.uxStaffMovieTitleTextBox);
             this.Name = "StaffAddMovieItemWindow";
             this.Text = "StaffAddMovieItemWindow";
             this.ResumeLayout(false);
@@ -178,18 +222,22 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox uxStaffMovieTitleTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button uxStaffAddMovieButton;
+        private System.Windows.Forms.Button uxStaffCancelButton;
+        private System.Windows.Forms.TextBox uxStaffDescriptionTextBox;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox uxStaffDurationTextBox;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox uxStaffStudioNameTextBox;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button uxStaffAddContributorButton;
+        private System.Windows.Forms.ListBox uxStaffGenericItemsListBox;
+        private System.Windows.Forms.Label uxStaffGenreLabel;
+        private System.Windows.Forms.ComboBox uxStaffGenreComboBox;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox uxStaffBarcodeTextBox;
     }
 }
