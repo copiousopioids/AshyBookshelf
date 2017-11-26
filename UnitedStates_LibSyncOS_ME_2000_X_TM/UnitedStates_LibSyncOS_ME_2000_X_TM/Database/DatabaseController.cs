@@ -16,12 +16,45 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         MySqlCommand _selectBooksByTitle;
         private string _selectMoviesByTitle_sql = "select available, title from Movies m join Items i on i.item_id=m.item_id where i.title like @param1";
         MySqlCommand _selectMoviesByTitle;
+        private string _selectItemsByGenre_sql = "select available, title from Items i left outer join Item_Genre ig on ig.item_id=i.item_id left outer join Genres g on g.genre_id=ig.genre_id where g.genre like @genre_like";
+        MySqlCommand _selectItemsByGenre;
+        private string _selectBooksByGenre_sql = "select available, title from Books b join Items i on i.item_id=b.item_id join Item_Genre ig on ig.item_id=i.item_id join Genres g on g.genre_id=ig.genre_id where g.genre like @genre_like";
+        MySqlCommand _selectBooksByGenre;
+        private string _selectMoviesByGenre_sql = "select available, title from Movies m join Items i on i.item_id=m.item_id join Item_Genre ig on ig.item_id=i.item_id join Genres g on g.genre_id = ig.genre_id where g.genre like @genre_like";
+        MySqlCommand _selectMoviesByGenre;
+        private string _selectItemsByPerson_sql = "select available, title from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where p.first_name like @name_like or p.last_name like @name_like2";
+        MySqlCommand _selectItemsByPerson;
+        private string _selectBooksByPerson_sql = "select available, title from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where i.item_id in (select b.item_id from Books b) and p.first_name like @name_like or p.last_name like @name_like2";
+        MySqlCommand _selectBooksByPerson;
+        private string _selectMoviesByPerson_sql = "select available, title from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where i.item_id in (select m.item_id from Movies m) and p.first_name like @name_like or p.last_name like @name_like2";
+        MySqlCommand _selectMoviesByPerson;
+
+        private string _selectItemsUnavailable_sql = "select title from Items where available=false";
+        MySqlCommand _selectItemsUnavailable;
+        private string _showTotalAmtOwed_sql = "select sum(f.amount) from Fines f join Owes o on o.fine_id=f.fine_id where f.paid=false and o.c_id = @curUser_int";
+        MySqlCommand _showTotalAmtOwed;
+        private string _showAllFinesForUser_sql = "select amount, paid, due_date, description from Fines f join Owes o on o.fine_id=f.fine_id where o.c_id=@curUser_int";
+        MySqlCommand _showAllFinesForUser;
+        private string _searchCardholders_sql = "select username, name, c_id from Cardholders where username like @username_like";
+        MySqlCommand _searchCardholders;
+
 
         private void PrepareStatements()
         {
             _selectItemsByTitle = new MySqlCommand(_selectItemsByTitle_sql, _mysqlConnection);
             _selectBooksByTitle = new MySqlCommand(_selectBooksByTitle_sql, _mysqlConnection);
             _selectMoviesByTitle = new MySqlCommand(_selectMoviesByTitle_sql, _mysqlConnection);
+            _selectItemsByGenre = new MySqlCommand(_selectItemsByGenre_sql, _mysqlConnection);
+            _selectBooksByGenre = new MySqlCommand(_selectBooksByGenre_sql, _mysqlConnection);
+            _selectMoviesByGenre = new MySqlCommand(_selectMoviesByGenre_sql, _mysqlConnection);
+            _selectItemsByPerson = new MySqlCommand(_selectItemsByPerson_sql, _mysqlConnection);
+            _selectBooksByPerson = new MySqlCommand(_selectBooksByPerson_sql, _mysqlConnection);
+            _selectMoviesByPerson = new MySqlCommand(_selectMoviesByPerson_sql, _mysqlConnection);
+
+            _selectItemsUnavailable = new MySqlCommand(_selectItemsUnavailable_sql, _mysqlConnection);
+            _showTotalAmtOwed = new MySqlCommand(_showTotalAmtOwed_sql, _mysqlConnection);
+            _showAllFinesForUser = new MySqlCommand(_showAllFinesForUser_sql, _mysqlConnection);
+            _searchCardholders = new MySqlCommand(_searchCardholders_sql, _mysqlConnection);
 
         }
         
@@ -226,11 +259,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             throw new NotImplementedException();
         }
 
-        public Customer GetCustomer(string username, out bool success, out string errorMessage)
-        {
-            throw new NotImplementedException();
-        }
-
         public Item GetItem(ItemTypes itemType, string searchTitle)
         {
             throw new NotImplementedException();
@@ -284,6 +312,57 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             reader.Close();
             errorMessage = "";
             return searchResults;
+        }
+
+        public int getTotalAmtOwed(int customerId)
+        {
+            int balance = -1;
+            _showTotalAmtOwed.Parameters.Clear();
+            _showTotalAmtOwed.Parameters.AddWithValue("@curUser_int", customerId);
+            var reader = _showTotalAmtOwed.ExecuteReader();
+            reader.Read();
+            balance = Convert.ToInt32(reader.GetString(0));
+            return balance;
+        }
+
+        public List<object> getFines(int CustomerId)
+        {
+            List<object> list = new List<object>();
+            _showAllFinesForUser.Parameters.Clear();
+            _showAllFinesForUser.Parameters.AddWithValue("@curUser_int", CustomerId);
+            var reader = _showAllFinesForUser.ExecuteReader();
+            while (reader.Read())
+            {
+                //amt paid due_date description
+                bool paid;
+                if (Convert.ToInt32(reader.GetString(1)) ==1)
+                {
+                    paid = true;
+                } else
+                {
+                    paid = false;
+                }
+                // TODO: GUI says outstanding fines, would like it to say just "Fines"
+                list.Add(new Fine(-1, Convert.ToInt32(reader.GetString(0)), Convert.ToDateTime(reader.GetString(2)), paid, reader.GetString(3)));
+            }
+            reader.Close();
+            return list;
+        }
+        public List<Customer> GetCustomer(string username, out bool success, out string errorMessage)
+        {
+            List<Customer> customers = new List<Customer>();
+            _searchCardholders.Parameters.Clear();
+            _searchCardholders.Parameters.AddWithValue("@username_like", '%' + username + '%');
+            var reader = _searchCardholders.ExecuteReader();
+            while (reader.Read())
+            {
+                //returns username, name, c_id
+                customers.Add(new Customer(Convert.ToInt32(reader.GetString(2)), reader.GetString(0), null, reader.GetString(1), null, null, null, null));
+            }
+            reader.Close();
+            success = true;
+            errorMessage = "";
+            return customers;
         }
 
         public bool VerifyAccount(string username, string password, out string errorMessage)

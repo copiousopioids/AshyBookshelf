@@ -38,7 +38,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             this.staffItemSearchWindow = new StaffItemSearchWindow();
             this.staffCreateContributorWindow = new CreateContributorWindow();
             this.staffCreateCustomerWindow = new StaffCreateCustomerWindow();
-            this.staffCustomerManager = new StaffCustomerManager();
+            this.staffCustomerManager = new StaffCustomerManager(controller);
             
             this.libraryController = controller;
         }
@@ -465,13 +465,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             var searchString = staffCustomerSearchWindow.UXStaffCustomerSearchIdString;
             staffCustomerSearchWindow.ClearDisplayItems();
             var success = false;
-            var customerDisplayObjects = (Customer)libraryController.GetCustomer(searchString, out success, out errorMessage);
+            var customerDisplayObjects = (List<Customer>)libraryController.GetCustomer(searchString, out success, out errorMessage);
             if (!success)
             {
                 // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
                 MessageBox.Show("No Customers could be found " + errorMessage);
             }
-            staffCustomerSearchWindow.AddDisplayItems(customerDisplayObjects);
+            staffCustomerSearchWindow.AddDisplayItems(customerDisplayObjects.ToArray());
         }
     }
 }
