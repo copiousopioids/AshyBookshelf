@@ -229,7 +229,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
             fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
 
-            loggedInCustomer = new Customer(12234, "reaganwood1", "poopoo", "Reagan", "123 Abduction Lane", "1234566", fineList, itemsCheckedOut);
+            //loggedInCustomer = new Customer(12234, "reaganwood1", "poopoo", "Reagan", "123 Abduction Lane", "1234566", fineList, itemsCheckedOut);
+            loggedInCustomer = new Customer(2, "dredmore1", "null", "Drew Redmore", "123 Abduction Lane", "123456", fineList, itemsCheckedOut);
             if (loggedInCustomer == null)
                 return new LoggedInInformation(false, null);
             else
@@ -276,6 +277,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public List<object> getFines(int CustomerId)
         {
             return databaseController.getFines(CustomerId);
+        }
+
+        public int getTotalAmtOwed(int CustomerId)
+        {
+            return databaseController.getTotalAmtOwed(CustomerId);
         }
 
         public bool VerifyAccount(string username, string password, out string errorMessage)
@@ -373,5 +379,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             genres.Add(genre3);
             return genres;
         }
+
     }
 }

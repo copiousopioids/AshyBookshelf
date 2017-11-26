@@ -313,7 +313,18 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             errorMessage = "";
             return searchResults;
         }
-        
+
+        public int getTotalAmtOwed(int customerId)
+        {
+            int balance = -1;
+            _showTotalAmtOwed.Parameters.Clear();
+            _showTotalAmtOwed.Parameters.AddWithValue("@curUser_int", customerId);
+            var reader = _showTotalAmtOwed.ExecuteReader();
+            reader.Read();
+            balance = Convert.ToInt32(reader.GetString(0));
+            return balance;
+        }
+
         public List<object> getFines(int CustomerId)
         {
             List<object> list = new List<object>();

@@ -23,7 +23,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public Customer_Home(LibraryController controller) : this() {
-            this.customerAccountForm = new CustomerAccountForm();
+            this.customerAccountForm = new CustomerAccountForm(controller);
             this.customerLoginForm = new CustomerLoginForm();
             this.customerItemSearchWindow = new CustomerItemSearchWindow();
             this.libraryController = controller;
