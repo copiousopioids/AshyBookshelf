@@ -322,6 +322,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             var reader = _showTotalAmtOwed.ExecuteReader();
             reader.Read();
             balance = Convert.ToInt32(reader.GetString(0));
+            reader.Close();
             return balance;
         }
 
