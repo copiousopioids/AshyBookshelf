@@ -23,7 +23,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage);
 
-        Customer GetCustomer(string username, out bool success, out string errorMessage);
+        List<Customer> GetCustomer(string username, out bool success, out string errorMessage);
 
         bool AddCustomer(string username, string password, string name, string address, string phoneNumber, out string errorMessage);
 

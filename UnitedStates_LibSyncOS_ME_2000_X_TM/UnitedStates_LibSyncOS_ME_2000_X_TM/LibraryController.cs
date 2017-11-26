@@ -113,7 +113,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
-        public Customer GetCustomer(string username, out bool success, out string errorMessage)
+        public List<Customer> GetCustomer(string username, out bool success, out string errorMessage)
         {
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             var itemsCheckedOut = new List<Item>();
@@ -148,8 +148,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
             fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
             success = true;
-            return new Customer(12234, "reaganwood1", "poopoo", "Reagan", "123 Abduction Lane", "1234566", fineList, itemsCheckedOut);
-            throw new NotImplementedException();
+            return databaseController.GetCustomer(username, out success, out errorMessage);
+            //return new Customer(12234, "reaganwood1", "poopoo", "Reagan", "123 Abduction Lane", "1234566", fineList, itemsCheckedOut);
+            //throw new NotImplementedException();
         }
 
         public Item GetItem(ItemTypes itemType, string searchTitle)
@@ -271,6 +272,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             //return objectList;
             return databaseController.searchItems(searchTitle, searchCriteria, out errorMessage);
             //throw new NotImplementedException();
+        }
+        public List<object> getFines(int CustomerId)
+        {
+            return databaseController.getFines(CustomerId);
         }
 
         public bool VerifyAccount(string username, string password, out string errorMessage)

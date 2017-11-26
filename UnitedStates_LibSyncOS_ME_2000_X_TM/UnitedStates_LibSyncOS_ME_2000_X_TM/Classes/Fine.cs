@@ -25,8 +25,16 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
 
         public override string ToString()
         {
+            string _paid;
+            if (Paid)
+            {
+                _paid = "Paid  ";
+            } else
+            {
+                _paid = "Unpaid";
+            }
             // TODO: Create tostring how you would like element to display in listboxes
-            return "Fine: " + Amount;
+            return "Fine: $" + Amount + "\t" + _paid + "\t" + "Due: " + DueDate;
         }
     }
 }
