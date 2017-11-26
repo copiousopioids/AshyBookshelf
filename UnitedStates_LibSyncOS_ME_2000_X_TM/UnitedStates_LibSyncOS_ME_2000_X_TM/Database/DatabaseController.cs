@@ -93,7 +93,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     string bookSQL = "INSERT INTO Books(item_id, num_pages, publisher, isbn) VALUES (@item_id, @num_pages, @publisher, @isbn);";
                     string[,] bookValues = new string[,]
                     {
-                        {"@item_id", itemID.ToString()  }, //No idea if this'll work
+                        {"@item_id", itemID.ToString()  }, //No idea if this'll work but i use it extensively lol
                         {"@num_pages", numberOfPages.ToString() },
                         {"@publisher", publisher },
                         {"@isbn", isbn }
