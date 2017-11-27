@@ -250,7 +250,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             MessageBox.Show("A contributor was not selected");
                             return null;
                         }
-                        break;
+                        //break;
                     case DialogReturn.Create:
                         var newContributor = LaunchCreateContributorWindowAndCreateContributor();
                         return newContributor;
@@ -393,7 +393,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             {
                 try
                 {
-                    var success = false;
+                    //var success = false;
                     var dialogReturn = staffCustomerSearchWindow.Display();
                     switch (dialogReturn)
                     {
