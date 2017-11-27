@@ -363,7 +363,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                 while (rdr.Read())
                 {
-                    awards.Add(new Award((int)rdr["award_id"], (string)rdr["name"]));
+                    awards.Add(new Award((int)rdr["award_id"], (string)rdr["name"], 0));
                 }
 
                 success = true;

@@ -19,12 +19,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
             Year = year;
         }
 
-        public Award(int awardId, string name)
-        {
-            AwardId = awardId;
-            Name = name;
-        }
-
         public override string ToString()
         {
             // TODO: Create tostring how you would like element to display in listboxes
