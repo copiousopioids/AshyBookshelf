@@ -44,6 +44,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _deleteItem_sql = "DELETE from Items WHERE item_id = @item_id";
         MySqlCommand _deleteItem;
 
+        private string _selectUsernamePassword_sql = "SELECT username, password FROM Cardholders WHERE username = @username";
+        MySqlCommand _selectUsernamePassword;
+
 
         private void PrepareStatements()
         {
@@ -64,6 +67,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _checkUniqueUsername = new MySqlCommand(_checkUniqueUsername_sql, _mysqlConnection);
             _deleteCustomer = new MySqlCommand(_deleteCustomer_sql, _mysqlConnection);
             _deleteItem = new MySqlCommand(_deleteItem_sql, _mysqlConnection);
+
+            _selectUsernamePassword = new MySqlCommand(_selectUsernamePassword_sql, _mysqlConnection);
 
         }
         
@@ -310,6 +315,26 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public bool CheckUserLoginCredentials(string username, string password, out string errorMessage)
         {
+            try
+            {
+                MySqlDataReader rdr = _selectUsernamePassword.ExecuteReader();
+                string un = rdr["username"].ToString();
+                if (rdr["password"].ToString() == password)
+                {
+                    errorMessage = "";
+                    return true;
+                }
+                else
+                {
+                    errorMessage = "Invalid username or password";
+                    return false;
+                }
+                   
+                
+            } catch (Exception e)
+            {
+                throw;
+            }
             throw new NotImplementedException();
         }
 
