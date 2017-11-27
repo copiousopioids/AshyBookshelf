@@ -39,6 +39,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         MySqlCommand _searchCardholders;
         private string _checkUniqueUsername_sql = "SELECT username FROM Cardholders WHERE username = @username";
         MySqlCommand _checkUniqueUsername;
+        private string _deleteCustomer_sql = "DELETE from Cardholders WHERE username = @username";
+        MySqlCommand _deleteCustomer;
+        private string _deleteItem_sql = "DELETE from Items WHERE item_id = @item_id";
+        MySqlCommand _deleteItem;
 
 
         private void PrepareStatements()
@@ -58,6 +62,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _showAllFinesForUser = new MySqlCommand(_showAllFinesForUser_sql, _mysqlConnection);
             _searchCardholders = new MySqlCommand(_searchCardholders_sql, _mysqlConnection);
             _checkUniqueUsername = new MySqlCommand(_checkUniqueUsername_sql, _mysqlConnection);
+            _deleteCustomer = new MySqlCommand(_deleteCustomer_sql, _mysqlConnection);
+            _deleteItem = new MySqlCommand(_deleteItem_sql, _mysqlConnection);
 
         }
         
@@ -270,14 +276,19 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 {"@address", address }
             };
 
-            if (Insert(insertCustomer, parameters))
+            try
             {
-                errorMessage = null;
-                return true;
+                if (Insert(insertCustomer, parameters))
+                {
+                    errorMessage = null;
+                    return true;
+                }
+                else
+                    throw new Exception("Unknown Error Occurred. Insertion not successful");
             }
-            else
+            catch (Exception e)
             {
-                errorMessage = "Unknown Error Occurred";
+                errorMessage = e.Message;
                 return false;
             }
         }
@@ -304,12 +315,42 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public bool DeleteCustomer(string username, out string errorMessage)
         {
-            throw new NotImplementedException();
+            _deleteCustomer.Parameters.AddWithValue("@username", username);
+            try
+            {
+                if (_deleteCustomer.ExecuteNonQuery() > 0)
+                {
+                    errorMessage = null;
+                    return true;
+                }
+                else
+                    throw new Exception("Unknown Error Occurred. Deletion not successful");
+            }
+            catch (Exception e)
+            {
+                errorMessage = e.Message;
+                return false;
+            }
         }
 
         public bool DeleteItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
-            throw new NotImplementedException();
+            _deleteItem.Parameters.AddWithValue("@item_id", itemId);
+            try
+            {
+                if (_deleteItem.ExecuteNonQuery() > 0)
+                {
+                    errorMessage = null;
+                    return true;
+                }
+                else
+                    throw new Exception("Unknow Error Occurred. Deletion not successful");
+            }
+            catch (Exception e)
+            {
+                errorMessage = e.Message;
+                return false;
+            }
         }
 
         public List<Award> GetAllAwards(out bool success, out string errorMessage)
