@@ -380,5 +380,15 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             return genres;
         }
 
+        public List<Customer> GetAllCustomers(out bool success, out string errorMessage)
+        {
+            // DB controller. get all customers()
+            // Format to list of customers
+            success = true;
+            errorMessage = "Testing error.";
+            return new List<Customer>();
+        }
+
+
     }
 }

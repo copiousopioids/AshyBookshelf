@@ -96,6 +96,23 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxCustomerGenericItemsList.Items.Clear();
         }
 
+        public ItemSearchOptions customerSearchCriteria
+        {
+            get
+            {
+                string attribute = Customer_Search_Attribute_ComboBox.Text;
+                switch (attribute)
+                {
+                    case "Person":
+                        return ItemSearchOptions.Person;
+                    case "Genre":
+                        return ItemSearchOptions.Genre;
+                    default:
+                        return ItemSearchOptions.Title;
+                }
+            }
+        }
+
         public DialogReturn Display()
         {
             while (true)
