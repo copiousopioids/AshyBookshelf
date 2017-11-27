@@ -76,6 +76,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _deleteFromCI_sql = "begin delete from Cardholder_Item where item_id = @item_id; return true; end";
         MySqlCommand _deleteFromCI;
 
+        private string _checkItemAvailability_sql = "SELECT available FROM Items WHERE item_id = @item_id";
+        MySqlCommand _checkItemAvailability;
+
         private void PrepareStatements()
         {
             _selectItemsByTitle = new MySqlCommand(_selectItemsByTitle_sql, _mysqlConnection);
@@ -105,6 +108,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _selectAllContributors = new MySqlCommand(_selectAllContributors_sql, _mysqlConnection);
             _selectAllGenres = new MySqlCommand(_selectAllGenres_sql, _mysqlConnection);
             _selectAllRoles = new MySqlCommand(_selectAllRoles_sql, _mysqlConnection);
+
 
             _setAvailable = new MySqlCommand(_setAvailable_sql, _mysqlConnection);
             _deleteCustomer = new MySqlCommand(_deleteCustomer_sql, _mysqlConnection);
