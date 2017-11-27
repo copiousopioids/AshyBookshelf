@@ -620,6 +620,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             try
             {
+                _selectUsernamePassword.Parameters.AddWithValue("@username", username);
                 MySqlDataReader rdr = _selectUsernamePassword.ExecuteReader();
                 while (rdr.Read())
                 {
