@@ -51,6 +51,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             throw new NotImplementedException();
         }
 
+        internal List<Object> GetUserItemsCheckedOut(int customerId)
+        {
+            return databaseController.GetUserItemsCheckedOut(customerId);
+        }
+
         public bool AddCustomer(string username, string password, string name, string address, string phoneNumber, out string errorMessage)
         {
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
@@ -192,7 +197,20 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool CheckUserLoginCredentials(string username, string password, out string errorMessage) {
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL - libController";
-            return databaseController.CheckUserLoginCredentials(username, password, out errorMessage);
+            //loggedInCustomer = set to cust if true
+            //return databaseController.CheckUserLoginCredentials(username, password, out errorMessage);
+            bool success = false;
+            string getCustErrorMessage = "";
+            if (databaseController.CheckUserLoginCredentials(username,password, out errorMessage))
+            {                                   //getCustomer returns a list of customers where username like '%username%' but 
+                                        // since username is unique, we should only get one back here
+                loggedInCustomer = databaseController.GetCustomer(username, out success, out getCustErrorMessage)[0]; 
+                return success;
+            } else
+            {
+                loggedInCustomer = null;
+                return false;
+            }
         }
 
         public LoggedInInformation GetUserIfLoggedIn() {
@@ -229,7 +247,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             fineList.Add(new Fine(1, 2, DateTime.Now, true, "this is a fine!"));
 
             //loggedInCustomer = new Customer(12234, "reaganwood1", "poopoo", "Reagan", "123 Abduction Lane", "1234566", fineList, itemsCheckedOut);
-            loggedInCustomer = new Customer(2, "dredmore1", "null", "Drew Redmore", "123 Abduction Lane", "123456", fineList, itemsCheckedOut);
+            //loggedInCustomer = new Customer(2, "dredmore1", "null", "Drew Redmore", "123 Abduction Lane", "123456", fineList, itemsCheckedOut);
             if (loggedInCustomer == null)
                 return new LoggedInInformation(false, null);
             else

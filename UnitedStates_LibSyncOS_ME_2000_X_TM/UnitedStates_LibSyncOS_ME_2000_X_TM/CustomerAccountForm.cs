@@ -28,7 +28,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxCustomerPasswordTextBox.Text = customerLoggedIn.Password;
             uxCustomerPhoneNumberTextBox.Text = customerLoggedIn.PhoneNumber;
             uxCustomerUsernameTextBox.Text = customerLoggedIn.Username;
-            uxCustomerGenericItemsListBox.Items.AddRange(customerLoggedIn.ItemsCheckoutOut.ToArray());
+            //uxCustomerGenericItemsListBox.Items.AddRange(customerLoggedIn.ItemsCheckoutOut.ToArray());
+            //use GetUserItemdCheckedOut instead of ItemsCheckoutOut property
+            uxCustomerGenericItemsListBox.Items.AddRange(libraryController.GetUserItemsCheckedOut(customerLoggedIn.CustomerId).ToArray());
         }
 
         public CustomerAccountForm(LibraryController controller)

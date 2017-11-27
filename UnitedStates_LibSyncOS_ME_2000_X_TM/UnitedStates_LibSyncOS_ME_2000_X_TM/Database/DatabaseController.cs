@@ -27,6 +27,24 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectBooksByPerson_sql = "select available, title from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where i.item_id in (select b.item_id from Books b) and p.first_name like @name_like or p.last_name like @name_like2";
         MySqlCommand _selectBooksByPerson;
         private string _selectMoviesByPerson_sql = "select available, title from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where i.item_id in (select m.item_id from Movies m) and p.first_name like @name_like or p.last_name like @name_like2";
+
+        internal List<Object> GetUserItemsCheckedOut(int customerId)
+        {
+            List<Object> itemsOut = new List<Object>();
+            string _selectItemsCheckedOutUser_sql = "select i.title, ci.due_date from Cardholder_Item ci join Items i on i.item_id=ci.item_id where ci.c_id=@custId and i.available=false";
+            MySqlCommand _selectItemsCheckedOutUser = new MySqlCommand(_selectItemsCheckedOutUser_sql, _mysqlConnection);
+            _selectItemsCheckedOutUser.Parameters.Clear();
+            _selectItemsCheckedOutUser.Parameters.AddWithValue("@custId", customerId);
+            var reader = _selectItemsCheckedOutUser.ExecuteReader();
+            while (reader.Read())
+            {
+                itemsOut.Add("Title: " + reader.GetString(0) + " \tDue: " + reader.GetString(1));
+            }
+            reader.Close();
+            return itemsOut;
+            throw new NotImplementedException();
+        }
+
         MySqlCommand _selectMoviesByPerson;
 
         private string _selectItemsUnavailable_sql = "select title from Items where available=false";
