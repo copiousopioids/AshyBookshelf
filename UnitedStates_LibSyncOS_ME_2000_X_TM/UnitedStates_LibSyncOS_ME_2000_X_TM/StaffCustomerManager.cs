@@ -20,6 +20,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffUsernameTextBox.Text = customer.Username;
             //this.AddDisplayItems(customer.fines.ToArray());
             this.AddDisplayItems(libraryController.getFines(customer.CustomerId).ToArray());
+            uxStaffCheckedOutItemsListBox.Items.AddRange(customer.ItemsCheckoutOut.ToArray());
         }
 
         public int NewFineAmount {
@@ -91,6 +92,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffNameTextBox.Text = "";
             uxStaffUsernameTextBox.Text = "";
             uxStaffNewFineAmount.Text = "";
+            uxStaffCheckedOutItemsListBox.Items.Clear();
         }
 
         public bool CheckDataValidityRemoveFine() {
