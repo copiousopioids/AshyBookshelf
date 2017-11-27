@@ -66,7 +66,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
         MySqlCommand _selectAllContributors;
 
-        private string _returnItem_sql = "UPDATE Items SET available = true WHERE item_id = @item_id;" +
+        private string _returnItem_sql = "UPDATE Items SET available = 1 WHERE item_id = @item_id;" +
                                          "DELETE FROM Cardholder_Item WHERE item_id = @item_id_1";
         MySqlCommand _returnItem;
 
@@ -78,6 +78,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         private string _checkItemAvailability_sql = "SELECT available FROM Items WHERE item_id = @item_id";
         MySqlCommand _checkItemAvailability;
+
+        private string _updateAvailabilityCheckedout_sql = "UPDATE Items SET available = 0 WHERE item_id = @item_id";
+        MySqlCommand _updateAvailabilityCheckedout;
 
         private void PrepareStatements()
         {
@@ -112,6 +115,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
             _setAvailable = new MySqlCommand(_setAvailable_sql, _mysqlConnection);
             _deleteCustomer = new MySqlCommand(_deleteCustomer_sql, _mysqlConnection);
+            _updateAvailabilityCheckedout = new MySqlCommand(_updateAvailabilityCheckedout_sql, _mysqlConnection);
 
 
             _returnItem = new MySqlCommand(_returnItem_sql, _mysqlConnection);
@@ -150,10 +154,26 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             {
                 cmd.Parameters.AddWithValue(parameterValue[i, 0], parameterValue[i, 1]);
             }
-            int success = -1;
-            success = cmd.ExecuteNonQuery();
-            if (success > 0) return true;
-            else return false;
+
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
+            cmd.Transaction = trans;
+
+            try
+            {
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    trans.Commit();
+                    return true;
+                }
+                else
+                    throw new Exception("System Error Occurred");
+            }
+            catch (Exception e)
+            {
+                trans.Rollback();
+                return false;
+            }
+
         }
 
         /// <summary>
@@ -170,8 +190,28 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             {
                 cmd.Parameters.AddWithValue(parameterValue[i, 0], parameterValue[i, 1]);
             }
-            int modified = (int)cmd.ExecuteScalar();
-            return modified;
+
+
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
+            cmd.Transaction = trans;
+
+            int modified = -1;
+            try
+            {
+                modified = (int)cmd.ExecuteScalar();
+                if (modified != -1)
+                {
+                    trans.Commit();
+                    return modified;
+                }
+                else
+                    throw new Exception("System Error Occurred");
+            }
+            catch(Exception e)
+            {
+                trans.Rollback();
+                return modified;
+            }
         }
 
 
@@ -455,6 +495,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             c_id = rdr["c_id"].ToString();
             fine_id = InsertScalarInt(_insertFine_sql, parameters).ToString();
 
+            if (Int32.Parse(fine_id) == -1)
+            {
+                errorMessage = "System Error Occurred";
+                result = false;
+                return new Fine(0, 0, DateTime.UtcNow, false, null);
+            }
+
             string _insertFineOwed_sql = "INSERT INTO Owes(c_id, fine_id) VALUES(@c_id, @fine_id)";
             string[,] owedParameters =
             {
@@ -462,17 +509,57 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 {"@fine_id", fine_id }
             };
 
-            Insert(_insertFineOwed_sql, owedParameters);
-            result = true;
-            errorMessage = null;
-            return new Fine(Int32.Parse(fine_id), amount, DateTime.UtcNow, false, "test");
+            if (Insert(_insertFineOwed_sql, owedParameters))
+            {
+                result = true;
+                errorMessage = null;
+                return new Fine(Int32.Parse(fine_id), amount, DateTime.UtcNow, false, "test");
+            }
+            else
+            {
+                result = false;
+                errorMessage = null;
+                return new Fine(Int32.Parse(fine_id), amount, DateTime.UtcNow, false, "test");
+            }
         }
 
 
         //TODO
         public bool CheckoutItem(ItemTypes itemType, Customer loggedInCustomer, int itemId, out string errorMessage)
         {
-            
+            _checkItemAvailability.Parameters.AddWithValue("@item_id", itemId);
+            MySqlDataReader rdr = _checkItemAvailability.ExecuteReader();
+
+            if(Int32.Parse(rdr["item_id"].ToString())==0)
+            {
+                errorMessage = "Item already checked out";
+                return false;
+            }
+
+            string insertInCI = "INSERT INTO Cardholders_Items(c_id, item_id, due_date) VALUES(@c_id, @item_id, @due_date)";
+            string[,] parameters =
+            {
+                {"@c_id", loggedInCustomer.CustomerId.ToString() },
+                {"@item_id", itemId.ToString() },
+                {"@due_date", DateTime.UtcNow.AddDays(14).ToString() }
+            };
+
+            if(_updateAvailabilityCheckedout.ExecuteNonQuery() == 0)
+            {
+                errorMessage = "System Error Occurred. Please Try Again";
+                return false;
+            }
+
+            if(Insert(insertInCI, parameters))
+            {
+                errorMessage = null;
+                return true;
+            }
+            else
+            {
+                errorMessage = "System Error Occurred. Please Try Again";
+                return false;
+            }
         }
 
         //TODO
