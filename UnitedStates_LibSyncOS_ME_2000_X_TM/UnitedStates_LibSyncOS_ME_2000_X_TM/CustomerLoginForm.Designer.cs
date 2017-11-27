@@ -70,7 +70,7 @@
             // 
             this.Customer_Password_Label.AutoSize = true;
             this.Customer_Password_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Password_Label.Location = new System.Drawing.Point(32, 127);
+            this.Customer_Password_Label.Location = new System.Drawing.Point(37, 127);
             this.Customer_Password_Label.Name = "Customer_Password_Label";
             this.Customer_Password_Label.Size = new System.Drawing.Size(97, 24);
             this.Customer_Password_Label.TabIndex = 3;
@@ -79,10 +79,10 @@
             // uxCustomerSubmitButton
             // 
             this.uxCustomerSubmitButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.uxCustomerSubmitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerSubmitButton.Location = new System.Drawing.Point(36, 188);
+            this.uxCustomerSubmitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerSubmitButton.Location = new System.Drawing.Point(89, 199);
             this.uxCustomerSubmitButton.Name = "uxCustomerSubmitButton";
-            this.uxCustomerSubmitButton.Size = new System.Drawing.Size(146, 46);
+            this.uxCustomerSubmitButton.Size = new System.Drawing.Size(75, 23);
             this.uxCustomerSubmitButton.TabIndex = 4;
             this.uxCustomerSubmitButton.Text = "Submit";
             this.uxCustomerSubmitButton.UseVisualStyleBackColor = true;
@@ -90,10 +90,10 @@
             // uxCustomerCancelButton
             // 
             this.uxCustomerCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.uxCustomerCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerCancelButton.Location = new System.Drawing.Point(217, 188);
+            this.uxCustomerCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerCancelButton.Location = new System.Drawing.Point(227, 199);
             this.uxCustomerCancelButton.Name = "uxCustomerCancelButton";
-            this.uxCustomerCancelButton.Size = new System.Drawing.Size(146, 46);
+            this.uxCustomerCancelButton.Size = new System.Drawing.Size(75, 23);
             this.uxCustomerCancelButton.TabIndex = 5;
             this.uxCustomerCancelButton.Text = "Cancel";
             this.uxCustomerCancelButton.UseVisualStyleBackColor = true;

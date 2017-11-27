@@ -56,28 +56,28 @@
             // uxStaffUsernameTextBox
             // 
             this.uxStaffUsernameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxStaffUsernameTextBox.Location = new System.Drawing.Point(122, 14);
+            this.uxStaffUsernameTextBox.Location = new System.Drawing.Point(164, 14);
             this.uxStaffUsernameTextBox.Name = "uxStaffUsernameTextBox";
             this.uxStaffUsernameTextBox.ReadOnly = true;
-            this.uxStaffUsernameTextBox.Size = new System.Drawing.Size(151, 61);
+            this.uxStaffUsernameTextBox.Size = new System.Drawing.Size(151, 29);
             this.uxStaffUsernameTextBox.TabIndex = 21;
             // 
             // uxStaffNameTextBox
             // 
             this.uxStaffNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxStaffNameTextBox.Location = new System.Drawing.Point(86, 103);
+            this.uxStaffNameTextBox.Location = new System.Drawing.Point(164, 69);
             this.uxStaffNameTextBox.Name = "uxStaffNameTextBox";
             this.uxStaffNameTextBox.ReadOnly = true;
-            this.uxStaffNameTextBox.Size = new System.Drawing.Size(151, 61);
+            this.uxStaffNameTextBox.Size = new System.Drawing.Size(151, 29);
             this.uxStaffNameTextBox.TabIndex = 20;
             // 
             // Customer_Account_Username_Label
             // 
             this.Customer_Account_Username_Label.AutoSize = true;
             this.Customer_Account_Username_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Username_Label.Location = new System.Drawing.Point(14, 14);
+            this.Customer_Account_Username_Label.Location = new System.Drawing.Point(34, 14);
             this.Customer_Account_Username_Label.Name = "Customer_Account_Username_Label";
-            this.Customer_Account_Username_Label.Size = new System.Drawing.Size(260, 55);
+            this.Customer_Account_Username_Label.Size = new System.Drawing.Size(102, 24);
             this.Customer_Account_Username_Label.TabIndex = 18;
             this.Customer_Account_Username_Label.Text = "Username:";
             // 
@@ -85,9 +85,9 @@
             // 
             this.Customer_Account_Name_Label.AutoSize = true;
             this.Customer_Account_Name_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Name_Label.Location = new System.Drawing.Point(14, 103);
+            this.Customer_Account_Name_Label.Location = new System.Drawing.Point(70, 69);
             this.Customer_Account_Name_Label.Name = "Customer_Account_Name_Label";
-            this.Customer_Account_Name_Label.Size = new System.Drawing.Size(166, 55);
+            this.Customer_Account_Name_Label.Size = new System.Drawing.Size(66, 24);
             this.Customer_Account_Name_Label.TabIndex = 15;
             this.Customer_Account_Name_Label.Text = "Name:";
             // 
@@ -103,11 +103,11 @@
             // 
             this.uxCreateFineButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.uxCreateFineButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCreateFineButton.Location = new System.Drawing.Point(18, 266);
+            this.uxCreateFineButton.Location = new System.Drawing.Point(164, 210);
             this.uxCreateFineButton.Name = "uxCreateFineButton";
-            this.uxCreateFineButton.Size = new System.Drawing.Size(124, 31);
+            this.uxCreateFineButton.Size = new System.Drawing.Size(151, 34);
             this.uxCreateFineButton.TabIndex = 29;
-            this.uxCreateFineButton.Text = "Create Fine";
+            this.uxCreateFineButton.Text = "Charge Fine";
             this.uxCreateFineButton.UseVisualStyleBackColor = true;
             // 
             // uxStaffRemoveFineButton
@@ -125,27 +125,27 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 236);
+            this.label1.Location = new System.Drawing.Point(12, 159);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(419, 55);
+            this.label1.Size = new System.Drawing.Size(124, 24);
             this.label1.TabIndex = 31;
-            this.label1.Text = "New Fine Amount:";
+            this.label1.Text = "Fine Amount:";
             // 
             // uxStaffNewFineAmount
             // 
             this.uxStaffNewFineAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxStaffNewFineAmount.Location = new System.Drawing.Point(186, 236);
+            this.uxStaffNewFineAmount.Location = new System.Drawing.Point(164, 156);
             this.uxStaffNewFineAmount.Name = "uxStaffNewFineAmount";
-            this.uxStaffNewFineAmount.Size = new System.Drawing.Size(151, 61);
+            this.uxStaffNewFineAmount.Size = new System.Drawing.Size(151, 29);
             this.uxStaffNewFineAmount.TabIndex = 32;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(14, 200);
+            this.label2.Location = new System.Drawing.Point(14, 123);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(814, 55);
+            this.label2.Size = new System.Drawing.Size(320, 24);
             this.label2.TabIndex = 33;
             this.label2.Text = "If item, remove fine and add new one";
             this.label2.Click += new System.EventHandler(this.label2_Click);
@@ -156,7 +156,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(355, 8);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(154, 55);
+            this.label3.Size = new System.Drawing.Size(62, 24);
             this.label3.TabIndex = 34;
             this.label3.Text = "Fines:";
             // 

@@ -34,9 +34,9 @@
             // 
             // staffSearchItemsButton
             // 
-            this.staffSearchItemsButton.Location = new System.Drawing.Point(95, 117);
+            this.staffSearchItemsButton.Location = new System.Drawing.Point(12, 12);
             this.staffSearchItemsButton.Name = "staffSearchItemsButton";
-            this.staffSearchItemsButton.Size = new System.Drawing.Size(108, 23);
+            this.staffSearchItemsButton.Size = new System.Drawing.Size(123, 43);
             this.staffSearchItemsButton.TabIndex = 0;
             this.staffSearchItemsButton.Text = "Search Items";
             this.staffSearchItemsButton.UseVisualStyleBackColor = true;
@@ -44,9 +44,9 @@
             // 
             // staffSearchCustomerButton
             // 
-            this.staffSearchCustomerButton.Location = new System.Drawing.Point(442, 117);
+            this.staffSearchCustomerButton.Location = new System.Drawing.Point(170, 12);
             this.staffSearchCustomerButton.Name = "staffSearchCustomerButton";
-            this.staffSearchCustomerButton.Size = new System.Drawing.Size(105, 23);
+            this.staffSearchCustomerButton.Size = new System.Drawing.Size(123, 43);
             this.staffSearchCustomerButton.TabIndex = 1;
             this.staffSearchCustomerButton.Text = "Search Customer";
             this.staffSearchCustomerButton.UseVisualStyleBackColor = true;
@@ -56,7 +56,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 261);
+            this.ClientSize = new System.Drawing.Size(320, 77);
             this.Controls.Add(this.staffSearchCustomerButton);
             this.Controls.Add(this.staffSearchItemsButton);
             this.Name = "StaffWindow";

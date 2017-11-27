@@ -51,22 +51,22 @@
             // uxStaffRoleComboBox
             // 
             this.uxStaffRoleComboBox.FormattingEnabled = true;
-            this.uxStaffRoleComboBox.Location = new System.Drawing.Point(52, 150);
+            this.uxStaffRoleComboBox.Location = new System.Drawing.Point(80, 111);
             this.uxStaffRoleComboBox.Name = "uxStaffRoleComboBox";
             this.uxStaffRoleComboBox.Size = new System.Drawing.Size(121, 21);
             this.uxStaffRoleComboBox.TabIndex = 16;
             // 
             // uxStaffFirstNameTextBox
             // 
-            this.uxStaffFirstNameTextBox.Location = new System.Drawing.Point(80, 70);
+            this.uxStaffFirstNameTextBox.Location = new System.Drawing.Point(80, 59);
             this.uxStaffFirstNameTextBox.Name = "uxStaffFirstNameTextBox";
-            this.uxStaffFirstNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffFirstNameTextBox.Size = new System.Drawing.Size(121, 20);
             this.uxStaffFirstNameTextBox.TabIndex = 17;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 70);
+            this.label3.Location = new System.Drawing.Point(15, 62);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 18;
@@ -75,7 +75,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(14, 153);
+            this.label7.Location = new System.Drawing.Point(42, 114);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(32, 13);
             this.label7.TabIndex = 19;
@@ -84,7 +84,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(14, 114);
+            this.label9.Location = new System.Drawing.Point(15, 88);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(61, 13);
             this.label9.TabIndex = 20;
@@ -93,7 +93,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(14, 207);
+            this.label10.Location = new System.Drawing.Point(41, 141);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(33, 13);
             this.label10.TabIndex = 21;
@@ -102,7 +102,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(12, 36);
+            this.label11.Location = new System.Drawing.Point(32, 36);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(42, 13);
             this.label11.TabIndex = 22;
@@ -110,23 +110,23 @@
             // 
             // uxStaffTwitterHandleTextBox
             // 
-            this.uxStaffTwitterHandleTextBox.Location = new System.Drawing.Point(60, 33);
+            this.uxStaffTwitterHandleTextBox.Location = new System.Drawing.Point(80, 33);
             this.uxStaffTwitterHandleTextBox.Name = "uxStaffTwitterHandleTextBox";
-            this.uxStaffTwitterHandleTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffTwitterHandleTextBox.Size = new System.Drawing.Size(121, 20);
             this.uxStaffTwitterHandleTextBox.TabIndex = 23;
             // 
             // uxStaffLastNameTextBox
             // 
-            this.uxStaffLastNameTextBox.Location = new System.Drawing.Point(81, 114);
+            this.uxStaffLastNameTextBox.Location = new System.Drawing.Point(80, 85);
             this.uxStaffLastNameTextBox.Name = "uxStaffLastNameTextBox";
-            this.uxStaffLastNameTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffLastNameTextBox.Size = new System.Drawing.Size(121, 20);
             this.uxStaffLastNameTextBox.TabIndex = 24;
             // 
             // uxStaffDOBTextBox
             // 
-            this.uxStaffDOBTextBox.Location = new System.Drawing.Point(52, 204);
+            this.uxStaffDOBTextBox.Location = new System.Drawing.Point(80, 138);
             this.uxStaffDOBTextBox.Name = "uxStaffDOBTextBox";
-            this.uxStaffDOBTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffDOBTextBox.Size = new System.Drawing.Size(121, 20);
             this.uxStaffDOBTextBox.TabIndex = 25;
             // 
             // label12
@@ -141,7 +141,7 @@
             // uxStaffCreateContributorButton
             // 
             this.uxStaffCreateContributorButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.uxStaffCreateContributorButton.Location = new System.Drawing.Point(12, 288);
+            this.uxStaffCreateContributorButton.Location = new System.Drawing.Point(87, 176);
             this.uxStaffCreateContributorButton.Name = "uxStaffCreateContributorButton";
             this.uxStaffCreateContributorButton.Size = new System.Drawing.Size(104, 23);
             this.uxStaffCreateContributorButton.TabIndex = 27;

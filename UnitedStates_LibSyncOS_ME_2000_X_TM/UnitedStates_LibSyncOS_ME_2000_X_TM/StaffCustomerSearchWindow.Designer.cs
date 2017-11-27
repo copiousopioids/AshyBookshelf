@@ -36,13 +36,14 @@
             this.uxStaffCancelButton = new System.Windows.Forms.Button();
             this.uxStaffSearchCustomerIDButton = new System.Windows.Forms.Button();
             this.uxStaffCustomerSelectButton = new System.Windows.Forms.Button();
+            this.staffListCustomersButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uxStaffCustomerSearchTextBox
             // 
-            this.uxStaffCustomerSearchTextBox.Location = new System.Drawing.Point(191, 9);
+            this.uxStaffCustomerSearchTextBox.Location = new System.Drawing.Point(19, 9);
             this.uxStaffCustomerSearchTextBox.Name = "uxStaffCustomerSearchTextBox";
-            this.uxStaffCustomerSearchTextBox.Size = new System.Drawing.Size(100, 20);
+            this.uxStaffCustomerSearchTextBox.Size = new System.Drawing.Size(182, 20);
             this.uxStaffCustomerSearchTextBox.TabIndex = 0;
             // 
             // uxStaffAddCustomerButton
@@ -94,7 +95,7 @@
             // uxStaffSearchCustomerIDButton
             // 
             this.uxStaffSearchCustomerIDButton.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            this.uxStaffSearchCustomerIDButton.Location = new System.Drawing.Point(12, 7);
+            this.uxStaffSearchCustomerIDButton.Location = new System.Drawing.Point(207, 7);
             this.uxStaffSearchCustomerIDButton.Name = "uxStaffSearchCustomerIDButton";
             this.uxStaffSearchCustomerIDButton.Size = new System.Drawing.Size(173, 23);
             this.uxStaffSearchCustomerIDButton.TabIndex = 7;
@@ -111,11 +112,21 @@
             this.uxStaffCustomerSelectButton.Text = "Select Customer";
             this.uxStaffCustomerSelectButton.UseVisualStyleBackColor = true;
             // 
+            // staffListCustomersButton
+            // 
+            this.staffListCustomersButton.Location = new System.Drawing.Point(386, 7);
+            this.staffListCustomersButton.Name = "staffListCustomersButton";
+            this.staffListCustomersButton.Size = new System.Drawing.Size(138, 23);
+            this.staffListCustomersButton.TabIndex = 9;
+            this.staffListCustomersButton.Text = "List Customers";
+            this.staffListCustomersButton.UseVisualStyleBackColor = true;
+            // 
             // StaffCustomerSearchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(610, 261);
+            this.Controls.Add(this.staffListCustomersButton);
             this.Controls.Add(this.uxStaffCustomerSelectButton);
             this.Controls.Add(this.uxStaffSearchCustomerIDButton);
             this.Controls.Add(this.uxStaffCancelButton);
@@ -141,5 +152,6 @@
         private System.Windows.Forms.Button uxStaffCancelButton;
         private System.Windows.Forms.Button uxStaffSearchCustomerIDButton;
         private System.Windows.Forms.Button uxStaffCustomerSelectButton;
+        private System.Windows.Forms.Button staffListCustomersButton;
     }
 }
