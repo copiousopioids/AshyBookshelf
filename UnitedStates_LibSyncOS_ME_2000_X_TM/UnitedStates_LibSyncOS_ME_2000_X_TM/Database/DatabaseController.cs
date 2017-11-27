@@ -364,8 +364,19 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _showTotalAmtOwed.Parameters.Clear();
             _showTotalAmtOwed.Parameters.AddWithValue("@curUser_int", customerId);
             var reader = _showTotalAmtOwed.ExecuteReader();
-            reader.Read();
-            balance = Convert.ToInt32(reader.GetString(0));
+            if (reader.Read())
+            {
+                if(!reader.IsDBNull(0))
+                {
+                    balance = reader.GetInt32(0);
+                } else
+                {
+                    balance = 0;
+                }
+            } else
+            {
+                balance = 0;
+            }
             reader.Close();
             return balance;
         }
