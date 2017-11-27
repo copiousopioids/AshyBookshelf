@@ -66,7 +66,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
         MySqlCommand _selectAllContributors;
 
-        private string _returnItem_sql = "UPDATE Items SET available = true WHERE item_id = @item_id;" +
+
+        private string _selectCheckedOutItem_sql = "SELECT item_id FROM Cardholder_Item OUTPUT INSERTED.item_id WHERE item_id = @item_id";
+        MySqlCommand _selectCheckedOutItem;
+
+        private string _returnItem_sql = "UPDATE Items SET available = 1 WHERE item_id = @item_id;" +
                                          "DELETE FROM Cardholder_Item WHERE item_id = @item_id_1";
         MySqlCommand _returnItem;
 
@@ -113,7 +117,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _setAvailable = new MySqlCommand(_setAvailable_sql, _mysqlConnection);
             _deleteCustomer = new MySqlCommand(_deleteCustomer_sql, _mysqlConnection);
 
-
+            _selectCheckedOutItem = new MySqlCommand(_selectCheckedOutItem_sql, _mysqlConnection);
             _returnItem = new MySqlCommand(_returnItem_sql, _mysqlConnection);
 
 
@@ -137,7 +141,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         }
 
         /// <summary>
-        /// Generic insert function for the database.
+        /// Generic insert function for the database. Also works for updates.
         /// </summary>
         /// <param name="strSQL">the sql string using parameters.</param>
         /// <param name="parameterValue">A two-dimensional array holding the parameter in the first 'column'
@@ -431,6 +435,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 errorMessage = "System Error.";
                 return false;
             }
@@ -478,11 +483,43 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         //TODO
         public bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
-            //If item exsits in Items AND item exists in cardholder_item, then
+            //If item exsits in cardholder_items then
             // 1. Remove row from cardholder_item
             // 2. In Items, set available to true
-            
-            throw new NotImplementedException();
+            try
+            {
+                _selectCheckedOutItem.Parameters.AddWithValue("@item_id", itemId);
+                MySqlDataReader rdr = _selectCheckedOutItem.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    string[,] returnItemVal = new string[,]
+                    {
+                        { "@item_id", itemId.ToString() },
+                        { "@item_id_1", itemId.ToString() }
+                    };
+                    //insert works for update
+                    if (Insert(_returnItem_sql, returnItemVal))
+                    {
+                        errorMessage = "";
+                        return true;
+                    }
+                    else
+                    {
+                        errorMessage = "Item not deleted.";
+                        return false;
+                    }
+                }
+
+                errorMessage = "Item not checked out.";
+                return false;
+                
+            } catch (Exception e)
+            {
+                Console.WriteLine(e);
+                errorMessage = "System Error.";
+                return false;
+            }
 
         }
 
@@ -497,6 +534,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             try
             {
+                _selectUsernamePassword.Parameters.AddWithValue("@username", username);
                 MySqlDataReader rdr = _selectUsernamePassword.ExecuteReader();
                 while (rdr.Read())
                 {
