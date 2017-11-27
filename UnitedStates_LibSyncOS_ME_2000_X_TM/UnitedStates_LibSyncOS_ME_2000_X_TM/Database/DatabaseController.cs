@@ -70,6 +70,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                                          "DELETE FROM Cardholder_Item WHERE item_id = @item_id_1";
         MySqlCommand _returnItem;
 
+        private string _setAvailable_sql = "begin update Items set available = status where item_id = @item_id; return true; end";
+        MySqlCommand _setAvailable;
+
+        private string _deleteFromCI_sql = "begin delete from Cardholder_Item where item_id = @item_id; return true; end";
+        MySqlCommand _deleteFromCI;
+
         private void PrepareStatements()
         {
             _selectItemsByTitle = new MySqlCommand(_selectItemsByTitle_sql, _mysqlConnection);
@@ -99,6 +105,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _selectAllContributors = new MySqlCommand(_selectAllContributors_sql, _mysqlConnection);
             _selectAllGenres = new MySqlCommand(_selectAllGenres_sql, _mysqlConnection);
             _selectAllRoles = new MySqlCommand(_selectAllRoles_sql, _mysqlConnection);
+
+            _setAvailable = new MySqlCommand(_setAvailable_sql, _mysqlConnection);
+            _deleteCustomer = new MySqlCommand(_deleteCustomer_sql, _mysqlConnection);
+
 
             _returnItem = new MySqlCommand(_returnItem_sql, _mysqlConnection);
 
@@ -456,9 +466,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
 
         //TODO
-        public bool CheckoutItem(ItemTypes itemType, int itemId, out string errorMessage)
+        public bool CheckoutItem(ItemTypes itemType, Customer loggedInCustomer, int itemId, out string errorMessage)
         {
-            throw new NotImplementedException();
+            
         }
 
         //TODO
