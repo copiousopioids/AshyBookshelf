@@ -37,6 +37,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         MySqlCommand _showAllFinesForUser;
         private string _searchCardholders_sql = "select username, name, c_id from Cardholders where username like @username_like";
         MySqlCommand _searchCardholders;
+        private string _checkUniqueUsername_sql = "SELECT username FROM Cardholders WHERE username = @username";
+        MySqlCommand _checkUniqueUsername;
 
 
         private void PrepareStatements()
@@ -55,6 +57,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _showTotalAmtOwed = new MySqlCommand(_showTotalAmtOwed_sql, _mysqlConnection);
             _showAllFinesForUser = new MySqlCommand(_showAllFinesForUser_sql, _mysqlConnection);
             _searchCardholders = new MySqlCommand(_searchCardholders_sql, _mysqlConnection);
+            _checkUniqueUsername = new MySqlCommand(_checkUniqueUsername_sql, _mysqlConnection);
 
         }
         
@@ -206,7 +209,34 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public bool AddCustomer(string username, string password, string name, string address, string phoneNumber, out string errorMessage)
         {
-            throw new NotImplementedException();
+            string insertCustomer = "INSERT INTO Cardholders(username, password, phone, name, address) VALUES(@username, @password, @phone, @name, @address)";
+            _checkUniqueUsername.Parameters.AddWithValue("@username", username);
+            MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader();
+            if (rdr.Read())
+            {
+                errorMessage = "Username already taken";
+                return false;
+            }
+
+            string[,] parameters =
+            {
+                {"@username", username },
+                {"@password", password },
+                {"@phone", phoneNumber },
+                {"@name", name },
+                {"@address", address }
+            };
+
+            if (Insert(insertCustomer, parameters))
+            {
+                errorMessage = null;
+                return true;
+            }
+            else
+            {
+                errorMessage = "Unknown Error Occurred";
+                return false;
+            }
         }
 
         public Fine AddFine(string username, int amount, out bool result, out string errorMessage)
