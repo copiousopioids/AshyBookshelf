@@ -199,7 +199,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
         }
 
-        public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage)
+        public Person AddContributor(string firstName, string lastName, string twitterHandle, DateTime dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage)
         {
             throw new NotImplementedException();
         }

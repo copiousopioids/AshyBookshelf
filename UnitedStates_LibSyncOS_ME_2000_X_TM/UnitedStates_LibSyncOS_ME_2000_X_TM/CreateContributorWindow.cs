@@ -62,11 +62,26 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
-        public string UXStaffContributorDateOfBirth
+        public DateTime UXStaffContributorDateOfBirth
         {
+           
             get
             {
-                return uxStaffDOBTextBox.Text.ToString();
+                try
+                {
+                    var month = Convert.ToInt32(uxStaffDOBTextBox.Text.Substring(0, 2));
+                    var day = Convert.ToInt32(uxStaffDOBTextBox.Text.Substring(3, 2));
+                    var year = Convert.ToInt32(uxStaffDOBTextBox.Text.Substring(6, 4));
+
+                    var dateCreation = new DateTime(year, month, day);
+                    return dateCreation;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    MessageBox.Show("Please enter a date of birth in the format MM/DD/YYYY");
+                    throw;
+                }
             }
         }
 
@@ -134,7 +149,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffFirstNameTextBox.Clear();
             uxStaffLastNameTextBox.Clear();
             uxStaffRoleComboBox.Items.Clear();
-            uxStaffTwitterHandleTextBox.Clear();       
+            uxStaffTwitterHandleTextBox.Clear();
+            uxStaffDOBTextBox.Text = "MM/DD/YYYY";  
         }
 
         public DialogReturn Display()
@@ -160,18 +176,44 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool CheckDataValidity()
         {
-            if (string.IsNullOrEmpty(uxStaffDOBTextBox.Text))
+            if (string.IsNullOrEmpty(uxStaffDOBTextBox.Text)) {
+                MessageBox.Show("Please enter a date of birth in the format MM/DD/YYYY");
                 return false;
-            if (string.IsNullOrEmpty(uxStaffFirstNameTextBox.Text))
+            }
+            if (uxStaffDOBTextBox.Text.Length != 10) {
+                MessageBox.Show("Please enter a date of birth in the format MM/DD/YYYY");
+            }
+            if (string.IsNullOrEmpty(uxStaffFirstNameTextBox.Text)) {
                 return false;
-            if (string.IsNullOrEmpty(uxStaffLastNameTextBox.Text))
+            }
+
+            if (string.IsNullOrEmpty(uxStaffLastNameTextBox.Text)) {
                 return false;
-            if (string.IsNullOrEmpty(uxStaffTwitterHandleTextBox.Text))
-                return false;
-            if (uxStaffRoleComboBox.SelectedItem == null) {
-                MessageBox.Show("Enter a role");
+            }
+
+            if (string.IsNullOrEmpty(uxStaffTwitterHandleTextBox.Text)) {
                 return false;
             }              
+            if (uxStaffRoleComboBox.SelectedItem == null) {
+                MessageBox.Show("Enter a role");
+
+                return false;
+            }
+            
+
+            // CHECK FOR Date in proper format
+            try {
+                var month = Convert.ToInt32(uxStaffDOBTextBox.Text.Substring(0, 2));
+                var day = Convert.ToInt32(uxStaffDOBTextBox.Text.Substring(3, 2));
+                var year = Convert.ToInt32(uxStaffDOBTextBox.Text.Substring(6, 4));
+
+                var dateCreation = new DateTime(year, month, day);
+            } catch (Exception ex) {
+                Console.WriteLine(ex.ToString());
+                MessageBox.Show("Please enter a date of birth in the format MM/DD/YYYY");
+                return false;
+            }
+                       
             return true;
         }
 
