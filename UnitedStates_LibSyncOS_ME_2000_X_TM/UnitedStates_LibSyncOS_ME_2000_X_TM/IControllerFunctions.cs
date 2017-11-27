@@ -9,7 +9,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 {
     interface IControllerFunctions
     {
-        bool VerifyAccount(string username, string password, out string errorMessage);
 
         Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success, out string errorMessage);
 
