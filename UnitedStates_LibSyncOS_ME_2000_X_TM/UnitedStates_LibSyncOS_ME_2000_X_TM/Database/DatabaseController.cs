@@ -66,6 +66,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
         MySqlCommand _selectAllContributors;
 
+        private string _selectCheckedOutItem_sql = "SELECT item_id FROM Cardholder_Item WHERE item_id = @item_id";
+        MySqlCommand _selectCheckedOutItem;
+
         private string _returnItem_sql = "UPDATE Items SET available = 1 WHERE item_id = @item_id;" +
                                          "DELETE FROM Cardholder_Item WHERE item_id = @item_id_1";
         MySqlCommand _returnItem;
@@ -569,11 +572,44 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         //TODO
         public bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
-            //If item exsits in Items AND item exists in cardholder_item, then
+            //If item exsits in cardholder_item, then
             // 1. Remove row from cardholder_item
             // 2. In Items, set available to true
+            try
+            {
+                _selectCheckedOutItem.Parameters.AddWithValue("@item_id", itemId);
+                MySqlDataReader rdr = _selectCheckedOutItem.ExecuteReader();
 
-            throw new NotImplementedException();
+                while (rdr.Read())
+                {
+                    string[,] returnItemVal = new string[,]
+                    {
+                        { "@item_id", itemId.ToString() },
+                        { "@item_id_1", itemId.ToString() }
+                    };
+                    //insert works for update
+                    if (Insert(_returnItem_sql, returnItemVal))
+                    {
+                        errorMessage = "";
+                        return true;
+                    }
+                    else
+                    {
+                        errorMessage = "Item not deleted.";
+                        return false;
+                    }
+                }
+
+                errorMessage = "Item not checked out.";
+                return false;
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                errorMessage = "System Error.";
+                return false;
+            }
 
         }
 
