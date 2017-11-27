@@ -35,7 +35,7 @@
             this.uxCustomerCancelButton = new System.Windows.Forms.Button();
             this.uxCustomerSearchItemsTextBox = new System.Windows.Forms.TextBox();
             this.uxCustomerCheckoutItemButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.Customer_Search_Attribute_ComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // uxCustomerSearchButton
@@ -108,24 +108,24 @@
             this.uxCustomerCheckoutItemButton.Text = "Checkout Item";
             this.uxCustomerCheckoutItemButton.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // Customer_Search_Attribute_ComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.Customer_Search_Attribute_ComboBox.FormattingEnabled = true;
+            this.Customer_Search_Attribute_ComboBox.Items.AddRange(new object[] {
             "Title",
             "Genre",
             "Person"});
-            this.comboBox1.Location = new System.Drawing.Point(22, 18);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 18;
+            this.Customer_Search_Attribute_ComboBox.Location = new System.Drawing.Point(22, 18);
+            this.Customer_Search_Attribute_ComboBox.Name = "Customer_Search_Attribute_ComboBox";
+            this.Customer_Search_Attribute_ComboBox.Size = new System.Drawing.Size(121, 21);
+            this.Customer_Search_Attribute_ComboBox.TabIndex = 18;
             // 
             // CustomerItemSearchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 295);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.Customer_Search_Attribute_ComboBox);
             this.Controls.Add(this.uxCustomerCheckoutItemButton);
             this.Controls.Add(this.uxCustomerSearchButton);
             this.Controls.Add(this.uxCustomerGenericItemsList);
@@ -149,6 +149,6 @@
         private System.Windows.Forms.Button uxCustomerCancelButton;
         private System.Windows.Forms.TextBox uxCustomerSearchItemsTextBox;
         private System.Windows.Forms.Button uxCustomerCheckoutItemButton;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox Customer_Search_Attribute_ComboBox;
     }
 }

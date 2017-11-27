@@ -223,19 +223,53 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
             var isBookCheckBoxChecked = customerItemSearchWindow.UXCustomerIsSearchBookCheckBoxSelected;
             var isMovieCheckBoxChecked = customerItemSearchWindow.UXCustomerIsSearchMovieCheckBoxSelected;
+            ItemSearchOptions searchAttribute = customerItemSearchWindow.customerSearchCriteria;
             var bookAndMovieDisplayObjects = new List<object>();
 
             if (isBookCheckBoxChecked && isMovieCheckBoxChecked)
             {
-                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.BookAndMovie, out errorMessage);
+                if (searchAttribute == ItemSearchOptions.Person)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndBookAndMovie, out errorMessage);
+                }
+                else if (searchAttribute == ItemSearchOptions.Genre)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndBookAndMovie, out errorMessage);
+                }
+                else
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndBookAndMovie, out errorMessage);
+                }
             }
             else if (isBookCheckBoxChecked)
             {
-                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Book, out errorMessage);
+                if (searchAttribute == ItemSearchOptions.Person)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndBook, out errorMessage);
+                }
+                else if (searchAttribute == ItemSearchOptions.Genre)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndBook, out errorMessage);
+                }
+                else
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndBook, out errorMessage);
+                }
             }
             else if (isMovieCheckBoxChecked)
             {
-                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Movie, out errorMessage);
+                if (searchAttribute == ItemSearchOptions.Person)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndMovie, out errorMessage);
+                }
+                else if (searchAttribute == ItemSearchOptions.Genre)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndMovie, out errorMessage);
+                }
+                else
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndMovie, out errorMessage);
+                }
             }
             else
             {

@@ -321,15 +321,56 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             {
                 var isBookCheckBoxChecked = staffItemSearchWindow.staffIsSearchBookCheckBoxSelected;
                 var isMovieCheckBoxChecked = staffItemSearchWindow.staffIsSearchMovieCheckBoxSelected;
+                ItemSearchOptions searchAttribute = staffItemSearchWindow.staffSearchCriteria;
                 var bookAndMovieDisplayObjects = new List<object>();
 
                 if (isBookCheckBoxChecked && isMovieCheckBoxChecked) {
-                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.BookAndMovie, out errorMessage);
-                } else if (isBookCheckBoxChecked) {
-                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Book, out errorMessage);
-                } else if (isMovieCheckBoxChecked) {
-                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Movie, out errorMessage);
-                } else {
+                    if (searchAttribute == ItemSearchOptions.Person)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndBookAndMovie, out errorMessage);
+                    }
+                    else if(searchAttribute == ItemSearchOptions.Genre)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndBookAndMovie, out errorMessage);
+                    }
+                    else
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndBookAndMovie, out errorMessage);
+                    }
+                    
+                }
+                else if (isBookCheckBoxChecked)
+                {
+                    if (searchAttribute == ItemSearchOptions.Person)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndBook, out errorMessage);
+                    }
+                    else if (searchAttribute == ItemSearchOptions.Genre)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndBook, out errorMessage);
+                    }
+                    else
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndBook, out errorMessage);
+                    }
+                }
+                else if (isMovieCheckBoxChecked)
+                {
+                    if (searchAttribute == ItemSearchOptions.Person)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndMovie, out errorMessage);
+                    }
+                    else if (searchAttribute == ItemSearchOptions.Genre)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndMovie, out errorMessage);
+                    }
+                    else
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndMovie, out errorMessage);
+                    }
+                }
+                else
+                {
                     MessageBox.Show("Check one or both of the following checkboxes: Movies, Books");
                     return;
                 }
@@ -482,7 +523,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             staffCustomerSearchWindow.ClearDisplayItems();
             var success = false;
-            var customerDisplayObjects = (List<Customer>)libraryController.GetAllCustomers(out success);
+            var customerDisplayObjects = (List<Customer>)libraryController.GetAllCustomers(out success, out errorMessage);
             if (!success)
             {
                 // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED

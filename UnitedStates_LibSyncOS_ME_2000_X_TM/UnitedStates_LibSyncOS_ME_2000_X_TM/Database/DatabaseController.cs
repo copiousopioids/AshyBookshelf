@@ -283,6 +283,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             List<object> searchResults = new List<object>();
             MySqlCommand query;
+
+            // TODO > Add cases for the title, genre, person item search options that can get passed in (about 9 
+            // more if statements. ALSO switch case might be better here.
             if (searchCriteria == ItemSearchOptions.BookAndMovie)
             {
                 query = _selectItemsByTitle;
@@ -368,6 +371,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public bool VerifyAccount(string username, string password, out string errorMessage)
         {
+            throw new NotImplementedException();
+        }
+
+        public List<Customer> GetAllCustomers(out bool success, out string errorMessage)
+        {
+            // TODO > Needs a sql statment and functionality for returning all the customers in the database.
             throw new NotImplementedException();
         }
     }
