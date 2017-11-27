@@ -60,7 +60,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                                 staffItemSearchWindow.AddItem(book);
                             break;
                         case DialogReturn.AddMovie:
-                            var movie = AddAndGetMovieThroughAddMoviekWindow(out success);
+                            var movie = AddAndGetMovieThroughAddMovieWindow(out success);
                             if (success)
                                 staffItemSearchWindow.AddItem(movie);
                             break;
@@ -114,7 +114,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
-        public Movie AddAndGetMovieThroughAddMoviekWindow(out bool success) {
+        public Movie AddAndGetMovieThroughAddMovieWindow(out bool success) {
             staffAddMovieItemWindow.ClearDisplayItems();
 
             success = false;
@@ -380,6 +380,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             var customerToEdit = (Customer)staffCustomerSearchWindow.SelectedItem;
                             LaunchAndDisplayCustomerManager(customerToEdit);
                             break;
+                        case DialogReturn.ListCustomers:
+                            // List and display all the customers.
+                            ListCustomersButtonPressedInStaffCustomerSearchWindow();
+                            break;
                         case DialogReturn.Undefined:
                             throw new Exception("Dialog did not return properly");
                     }
@@ -466,6 +470,19 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             staffCustomerSearchWindow.ClearDisplayItems();
             var success = false;
             var customerDisplayObjects = (List<Customer>)libraryController.GetCustomer(searchString, out success, out errorMessage);
+            if (!success)
+            {
+                // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                MessageBox.Show("No Customers could be found " + errorMessage);
+            }
+            staffCustomerSearchWindow.AddDisplayItems(customerDisplayObjects.ToArray());
+        }
+
+        public void ListCustomersButtonPressedInStaffCustomerSearchWindow()
+        {
+            staffCustomerSearchWindow.ClearDisplayItems();
+            var success = false;
+            var customerDisplayObjects = (List<Customer>)libraryController.GetAllCustomers(out success);
             if (!success)
             {
                 // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED

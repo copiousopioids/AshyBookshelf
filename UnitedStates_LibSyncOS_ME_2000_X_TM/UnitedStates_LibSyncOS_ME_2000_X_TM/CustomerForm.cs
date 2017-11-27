@@ -203,10 +203,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 var logoutResult = libraryController.LogoutUser();
                 if (logoutResult)
                 {
-                    MessageBox.Show("User logged out");
+                    MessageBox.Show("User logged out.");
                 }
                 else {
-                    MessageBox.Show("User could not be logged out");
+                    MessageBox.Show("User could not be logged out.");
                 }
             }
             catch (Exception ex) {
@@ -218,6 +218,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public void SearchItemsButtonPressedInCustomerSearchItemWindow()
         {
             var searchString = customerItemSearchWindow.UXCustomerSearchText;
+
+            // TODO > check to see if the string is null...
 
             var isBookCheckBoxChecked = customerItemSearchWindow.UXCustomerIsSearchBookCheckBoxSelected;
             var isMovieCheckBoxChecked = customerItemSearchWindow.UXCustomerIsSearchMovieCheckBoxSelected;

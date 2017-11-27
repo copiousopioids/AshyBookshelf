@@ -120,6 +120,7 @@
             // 
             // staffListCustomersButton
             // 
+            this.staffListCustomersButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
             this.staffListCustomersButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.staffListCustomersButton.Location = new System.Drawing.Point(457, 49);
             this.staffListCustomersButton.Name = "staffListCustomersButton";
