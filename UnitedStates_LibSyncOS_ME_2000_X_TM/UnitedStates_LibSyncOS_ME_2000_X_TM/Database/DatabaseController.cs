@@ -440,7 +440,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             //If item exsits in Items AND item exists in cardholder_item, then
             // 1. Remove row from cardholder_item
             // 2. In Items, set available to true
-
+            
             throw new NotImplementedException();
 
         }
