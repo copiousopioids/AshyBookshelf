@@ -59,9 +59,10 @@
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(12, 241);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 23);
+            this.button1.Size = new System.Drawing.Size(88, 27);
             this.button1.TabIndex = 3;
             this.button1.Text = "Add Book";
             this.button1.UseVisualStyleBackColor = true;
@@ -69,9 +70,10 @@
             // button2
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.No;
-            this.button2.Location = new System.Drawing.Point(282, 241);
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Location = new System.Drawing.Point(300, 241);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 23);
+            this.button2.Size = new System.Drawing.Size(88, 27);
             this.button2.TabIndex = 4;
             this.button2.Text = "Delete Item";
             this.button2.UseVisualStyleBackColor = true;
@@ -79,11 +81,12 @@
             // button3
             // 
             this.button3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button3.Location = new System.Drawing.Point(388, 241);
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(394, 241);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(91, 23);
+            this.button3.Size = new System.Drawing.Size(88, 27);
             this.button3.TabIndex = 5;
-            this.button3.Text = "Return";
+            this.button3.Text = "Close";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // staffSearchBooksCheckBox
@@ -109,9 +112,10 @@
             // button4
             // 
             this.button4.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button4.Location = new System.Drawing.Point(112, 241);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(94, 23);
+            this.button4.Size = new System.Drawing.Size(108, 27);
             this.button4.TabIndex = 8;
             this.button4.Text = "Add Movie";
             this.button4.UseVisualStyleBackColor = true;
@@ -127,9 +131,10 @@
             // staffSearchButton
             // 
             this.staffSearchButton.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            this.staffSearchButton.Location = new System.Drawing.Point(366, 8);
+            this.staffSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.staffSearchButton.Location = new System.Drawing.Point(391, 12);
             this.staffSearchButton.Name = "staffSearchButton";
-            this.staffSearchButton.Size = new System.Drawing.Size(91, 23);
+            this.staffSearchButton.Size = new System.Drawing.Size(88, 27);
             this.staffSearchButton.TabIndex = 10;
             this.staffSearchButton.Text = "Search";
             this.staffSearchButton.UseVisualStyleBackColor = true;
@@ -150,7 +155,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(489, 278);
+            this.ClientSize = new System.Drawing.Size(497, 283);
             this.Controls.Add(this.Staff_Search_Attribute_ComboBox);
             this.Controls.Add(this.staffSearchButton);
             this.Controls.Add(this.genericItemsList);
@@ -163,7 +168,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.staffSearchItemsTextBox);
             this.Name = "StaffItemSearchWindow";
-            this.Text = "StaffItemSearchWindow";
+            this.Text = "Item Search";
             this.ResumeLayout(false);
             this.PerformLayout();
 

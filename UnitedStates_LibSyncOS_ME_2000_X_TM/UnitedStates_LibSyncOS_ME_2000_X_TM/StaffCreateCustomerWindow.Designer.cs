@@ -45,32 +45,34 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(66, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(58, 13);
+            this.label1.Size = new System.Drawing.Size(87, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Username:";
             // 
             // uxStaffCreateUserButton
             // 
             this.uxStaffCreateUserButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.uxStaffCreateUserButton.Location = new System.Drawing.Point(15, 142);
+            this.uxStaffCreateUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxStaffCreateUserButton.Location = new System.Drawing.Point(46, 154);
             this.uxStaffCreateUserButton.Name = "uxStaffCreateUserButton";
-            this.uxStaffCreateUserButton.Size = new System.Drawing.Size(75, 23);
+            this.uxStaffCreateUserButton.Size = new System.Drawing.Size(85, 30);
             this.uxStaffCreateUserButton.TabIndex = 1;
             this.uxStaffCreateUserButton.Text = "Create User";
             this.uxStaffCreateUserButton.UseVisualStyleBackColor = true;
             // 
             // uxStaffUsernameTextBox
             // 
-            this.uxStaffUsernameTextBox.Location = new System.Drawing.Point(76, 12);
+            this.uxStaffUsernameTextBox.Location = new System.Drawing.Point(159, 12);
             this.uxStaffUsernameTextBox.Name = "uxStaffUsernameTextBox";
             this.uxStaffUsernameTextBox.Size = new System.Drawing.Size(100, 20);
             this.uxStaffUsernameTextBox.TabIndex = 2;
             // 
             // uxStaffPasswordTextBox
             // 
-            this.uxStaffPasswordTextBox.Location = new System.Drawing.Point(76, 38);
+            this.uxStaffPasswordTextBox.Location = new System.Drawing.Point(159, 38);
             this.uxStaffPasswordTextBox.Name = "uxStaffPasswordTextBox";
             this.uxStaffPasswordTextBox.Size = new System.Drawing.Size(100, 20);
             this.uxStaffPasswordTextBox.TabIndex = 4;
@@ -78,15 +80,16 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 41);
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(71, 36);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 13);
+            this.label2.Size = new System.Drawing.Size(82, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Password:";
             // 
             // uxStaffNameTextBox
             // 
-            this.uxStaffNameTextBox.Location = new System.Drawing.Point(76, 64);
+            this.uxStaffNameTextBox.Location = new System.Drawing.Point(159, 64);
             this.uxStaffNameTextBox.Name = "uxStaffNameTextBox";
             this.uxStaffNameTextBox.Size = new System.Drawing.Size(100, 20);
             this.uxStaffNameTextBox.TabIndex = 6;
@@ -94,15 +97,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 67);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(98, 62);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.Size = new System.Drawing.Size(55, 20);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Name: ";
+            this.label3.Text = "Name:";
             // 
             // uxStaffAddressTextBox
             // 
-            this.uxStaffAddressTextBox.Location = new System.Drawing.Point(76, 90);
+            this.uxStaffAddressTextBox.Location = new System.Drawing.Point(159, 90);
             this.uxStaffAddressTextBox.Name = "uxStaffAddressTextBox";
             this.uxStaffAddressTextBox.Size = new System.Drawing.Size(100, 20);
             this.uxStaffAddressTextBox.TabIndex = 8;
@@ -110,15 +114,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 93);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(81, 88);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(48, 13);
+            this.label4.Size = new System.Drawing.Size(72, 20);
             this.label4.TabIndex = 7;
             this.label4.Text = "Address:";
             // 
             // uxStaffPhoneNumberTextBox
             // 
-            this.uxStaffPhoneNumberTextBox.Location = new System.Drawing.Point(76, 116);
+            this.uxStaffPhoneNumberTextBox.Location = new System.Drawing.Point(159, 116);
             this.uxStaffPhoneNumberTextBox.Name = "uxStaffPhoneNumberTextBox";
             this.uxStaffPhoneNumberTextBox.Size = new System.Drawing.Size(100, 20);
             this.uxStaffPhoneNumberTextBox.TabIndex = 10;
@@ -126,18 +131,20 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 119);
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(34, 114);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 13);
+            this.label5.Size = new System.Drawing.Size(119, 20);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Phone #:";
+            this.label5.Text = "Phone Number:";
             // 
             // button1
             // 
             this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Location = new System.Drawing.Point(101, 142);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(174, 154);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(85, 30);
             this.button1.TabIndex = 11;
             this.button1.Text = "Cancel";
             this.button1.UseVisualStyleBackColor = true;
@@ -146,7 +153,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(192, 175);
+            this.ClientSize = new System.Drawing.Size(314, 206);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.uxStaffPhoneNumberTextBox);
             this.Controls.Add(this.label5);
@@ -160,7 +167,7 @@
             this.Controls.Add(this.uxStaffCreateUserButton);
             this.Controls.Add(this.label1);
             this.Name = "StaffCreateCustomerWindow";
-            this.Text = "StaffCreateCustomerWindow";
+            this.Text = "Add Customer";
             this.ResumeLayout(false);
             this.PerformLayout();
 
