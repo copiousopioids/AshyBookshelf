@@ -284,13 +284,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             return databaseController.getTotalAmtOwed(CustomerId);
         }
 
-        public bool VerifyAccount(string username, string password, out string errorMessage)
-        {
-            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
-            return true;
-            throw new NotImplementedException();
-        }
-
         public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage) {
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             awards = new List<Award>();

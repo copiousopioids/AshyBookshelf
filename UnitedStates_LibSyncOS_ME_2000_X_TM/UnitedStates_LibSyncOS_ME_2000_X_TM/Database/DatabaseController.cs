@@ -63,9 +63,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectAllRoles_sql = "SELECT role_code, role FROM Roles";
         MySqlCommand _selectAllRoles;
 
-        string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
+        private string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
         MySqlCommand _selectAllContributors;
 
+        private string _returnItem_sql = "UPDATE Items SET available = true WHERE item_id = @item_id;" +
+                                         "DELETE FROM Cardholder_Item WHERE item_id = @item_id_1";
+        MySqlCommand _returnItem;
 
         private void PrepareStatements()
         {
@@ -96,6 +99,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _selectAllContributors = new MySqlCommand(_selectAllContributors_sql, _mysqlConnection);
             _selectAllGenres = new MySqlCommand(_selectAllGenres_sql, _mysqlConnection);
             _selectAllRoles = new MySqlCommand(_selectAllRoles_sql, _mysqlConnection);
+
+            _returnItem = new MySqlCommand(_returnItem_sql, _mysqlConnection);
 
 
         }
@@ -179,7 +184,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     {
                         //add to relational tables
                         //Item_people and People_Roles_Items
-                        string ipSQL = "INSERT INTO Item_People(item_id, person_id) VALUES (@item_id, @person_id);";
+                        string ipSQL = "INSERT INTO (item_id, person_id) VALUES (@item_id, @person_id);";
                         string[,] ipValues = new string[,]
                         {
                             {"@item_id", itemID.ToString() },
@@ -427,6 +432,17 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         public bool CheckoutItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
             throw new NotImplementedException();
+        }
+
+        //TODO
+        public bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage)
+        {
+            //If item exsits in Items AND item exists in cardholder_item, then
+            // 1. Remove row from cardholder_item
+            // 2. In Items, set available to true
+
+            throw new NotImplementedException();
+
         }
 
         /// <summary>
@@ -697,11 +713,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             return true;
         }
 
-        //TODO
-        public bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria, out string errorMessage)
         {
@@ -787,11 +798,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             success = true;
             errorMessage = "";
             return customers;
-        }
-
-        public bool VerifyAccount(string username, string password, out string errorMessage)
-        {
-            throw new NotImplementedException();
         }
     }
 }
