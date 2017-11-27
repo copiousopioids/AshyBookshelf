@@ -19,8 +19,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         bool DeleteItem(ItemTypes itemType, int itemId, out string errorMessage);
 
-        bool CheckoutItem(ItemTypes itemType, int itemId, out string errorMessage);
-
         bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage);
 
         List<Customer> GetCustomer(string username, out bool success, out string errorMessage);
