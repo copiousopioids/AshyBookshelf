@@ -201,7 +201,50 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string acSQL = "INSERT INTO People(person_id, first_name, last_name, birth_date, death_date, twitter) OUTPUT INSERTED.person_id VALUES (@first_name, @last_name, @birth_date, NULL, @twitter)";
+                string[,] peopleValues =
+                {
+                    { "@first_name", firstName },
+                    { "@last_name", lastName },
+                    { "@birth_date", dateOfBirth },
+                    { "@twitter", twitterHandle }
+                };
+
+                int contribID = -1;
+                contribID = InsertScalarInt(acSQL, peopleValues);
+                if (contribID > 0)
+                {
+                    //Add to Awards_Won table
+                    string awSQL = "INSERT INTO Awards_Won(person_id, award_id, year_won) VALUES (@person_id, @award_id, @year_won)";
+                    string[,] awValues =
+                    {
+                        { "@person_id", contribID.ToString() },
+                        { "@award_id", "placeholder" },
+                        { "@year_won", "placeholder" }
+                    };
+
+                    foreach (Award a in awards)
+                    {
+                        awValues[1, 1] = a.AwardId.ToString();
+                        awValues[2, 1] = a.Year.ToString();
+                        if (!(Insert(awSQL, awValues)))
+                            throw new Exception("Person's Awards not added to awards table");
+                    }
+
+                    success = true;
+                    errorMessage = "";
+                    // hard code that death date lol
+                    return new Person(contribID, firstName, lastName, Convert.ToDateTime(dateOfBirth), twitterHandle, new DateTime(2100, 12, 19), awards, role);
+                }
+                else throw new Exception("Person not added to People table");
+            } catch(Exception e)
+            {
+                success = false;
+                errorMessage = e.Message;
+                throw;
+            }
         }
 
         public bool AddCustomer(string username, string password, string name, string address, string phoneNumber, out string errorMessage)
