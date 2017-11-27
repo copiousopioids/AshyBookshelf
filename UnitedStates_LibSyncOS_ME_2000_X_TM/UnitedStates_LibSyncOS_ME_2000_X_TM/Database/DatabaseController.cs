@@ -57,6 +57,16 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectAllAwards_sql = "SELECT award_id, name FROM Awards";
         MySqlCommand _selectAllAwards;
 
+        private string _selectAllGenres_sql = "SELECT genre_id, genre FROM Genres";
+        MySqlCommand _selectAllGenres;
+
+        private string _selectAllRoles_sql = "SELECT role_code, role FROM Roles";
+        MySqlCommand _selectAllRoles;
+
+        string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
+        MySqlCommand _selectAllContributors;
+
+
         private void PrepareStatements()
         {
             _selectItemsByTitle = new MySqlCommand(_selectItemsByTitle_sql, _mysqlConnection);
@@ -83,7 +93,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
             _selectUsernamePassword = new MySqlCommand(_selectUsernamePassword_sql, _mysqlConnection);
             _selectAllAwards = new MySqlCommand(_selectAllAwards_sql, _mysqlConnection);
-
+            _selectAllContributors = new MySqlCommand(_selectAllContributors_sql, _mysqlConnection);
+            _selectAllGenres = new MySqlCommand(_selectAllGenres_sql, _mysqlConnection);
+            _selectAllRoles = new MySqlCommand(_selectAllRoles_sql, _mysqlConnection);
 
 
         }
@@ -143,6 +155,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             return modified;
         }
 
+
+        //TODO: Transactions
         public Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success, out string errorMessage)
         {
             try
@@ -224,11 +238,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             catch (Exception e)
             {
                 success = false;
-                errorMessage = e.Message;
+                errorMessage = "System Error.";
                 throw;
             }
         }
 
+        //TODO: Transactions
         public Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success, out string errorMessage)
         {
             try
@@ -311,11 +326,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             catch (Exception e)
             {
                 success = false;
-                errorMessage = e.Message;
+                errorMessage = "System Error.";
                 throw;
             }
         }
 
+        //TODO: Transactions
         public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage)
         {
             try
@@ -359,7 +375,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             } catch(Exception e)
             {
                 success = false;
-                errorMessage = e.Message;
+                errorMessage = "System Error.";
                 throw;
             }
         }
@@ -396,7 +412,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
-                errorMessage = e.Message;
+                errorMessage = "System Error.";
                 return false;
             }
         }
@@ -407,7 +423,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         }
 
 
-
+        //TODO
         public bool CheckoutItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
             throw new NotImplementedException();
@@ -468,7 +484,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
-                errorMessage = e.Message;
+                errorMessage = "System Error.";
                 transaction.Rollback();
                 return false;
             }
@@ -492,7 +508,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
-                errorMessage = e.Message;
+                errorMessage = "System Error.";
                 transaction.Rollback();
                 return false;
             }
@@ -516,7 +532,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             } catch (Exception e)
             {
                 success = false;
-                errorMessage = e.Message;
+                errorMessage = "System Error.";
                 return null;
             }
         }
@@ -524,10 +540,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         public List<Person> GetAllContributors(out bool success, out string errorMessage)
         {
 
-            string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
-            MySqlCommand _selectAllContributors;
 
-            _selectAllContributors = new MySqlCommand(_selectAllContributors_sql, _mysqlConnection);
 
             try
             {
@@ -544,24 +557,58 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             } catch (Exception e)
             {
                 success = false;
-                errorMessage = e.Message;
+                errorMessage = "System Error.";
                 return null;
             }
         }
 
         public List<Genre> GetAllGenres(out bool success, out string errorMessage)
         {
-            throw new NotImplementedException();
+            try
+            {
+                MySqlDataReader rdr = _selectAllGenres.ExecuteReader();
+                List<Genre> genres = new List<Genre>();
+
+                while (rdr.Read())
+                {
+                    genres.Add(new Genre(rdr["name"].ToString(), (int)rdr["genre_id"]));
+                }
+
+                success = true;
+                errorMessage = "";
+                return genres;
+                
+            } catch (Exception e)
+            {
+                success = false;
+                errorMessage = "System Error.";
+                return null;
+            }
         }
 
         public List<Role> GetAllRoles(out bool success, out string errorMessage)
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                MySqlDataReader rdr = _selectAllRoles.ExecuteReader();
+                List<Role> roles = new List<Role>();
 
-        public Item GetItem(ItemTypes itemType, string searchTitle)
-        {
-            throw new NotImplementedException();
+                while (rdr.Read())
+                {
+                    roles.Add(new Role((int)rdr["role_id"], (string)rdr["role_id"]));
+                }
+
+                success = true;
+                errorMessage = "";
+                return roles;
+
+            }
+            catch (Exception e)
+            {
+                success = false;
+                errorMessage = "System Error.";
+                return null;
+            }
         }
 
         public bool PayFine(string username, out string errorMessage)
@@ -583,7 +630,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
-                errorMessage = e.Message;
+                errorMessage = "System Error.";
                 return false;
             }
 
@@ -609,7 +656,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch(Exception e)
             {
-                errorMessage = e.Message;
+                errorMessage = "System Error.";
                 transaction.Rollback();
                 return false;
             }
@@ -640,7 +687,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
-                errorMessage = e.Message;
+                errorMessage = "System Error.";
                 transaction.Rollback();
                 return false;
             }
@@ -650,6 +697,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             return true;
         }
 
+        //TODO
         public bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
             throw new NotImplementedException();

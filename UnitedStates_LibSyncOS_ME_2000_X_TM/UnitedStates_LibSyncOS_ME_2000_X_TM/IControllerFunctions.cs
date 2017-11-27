@@ -15,8 +15,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success, out string errorMessage);
 
-        Item GetItem(ItemTypes itemType, string searchTitle);
-
         bool DeleteItem(ItemTypes itemType, int itemId, out string errorMessage);
 
         bool CheckoutItem(ItemTypes itemType, int itemId, out string errorMessage);
