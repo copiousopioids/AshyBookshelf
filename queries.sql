@@ -171,3 +171,22 @@ on ci.c_id=c.c_id
 join Items i
 on i.item_id=ci.item_id
 where i.available=false;
+
+
+/* function to set available when checking out/returning an item */
+create function setavail (id int, status bool)
+returns bool
+begin
+update Items set available=status where item_id=id;
+return true;
+end;
+
+/* function to delete from Cardholder_Item */
+delimiter $$
+create function deleteci (id int)
+returns bool
+begin
+delete from Cardholder_Item where item_id=id;
+return true;
+end; $$
+delimiter ;
