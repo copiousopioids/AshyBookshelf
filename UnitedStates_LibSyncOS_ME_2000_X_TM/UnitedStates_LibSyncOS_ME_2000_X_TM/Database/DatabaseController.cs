@@ -38,6 +38,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _searchCardholders_sql = "select username, name, c_id from Cardholders where username like @username_like";
         MySqlCommand _searchCardholders;
 
+        private string _selectUsernamePassword_sql = "SELECT username, password FROM Cardholders WHERE username = @username";
+        MySqlCommand _selectUsernamePassword;
+
 
         private void PrepareStatements()
         {
@@ -55,6 +58,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _showTotalAmtOwed = new MySqlCommand(_showTotalAmtOwed_sql, _mysqlConnection);
             _showAllFinesForUser = new MySqlCommand(_showAllFinesForUser_sql, _mysqlConnection);
             _searchCardholders = new MySqlCommand(_searchCardholders_sql, _mysqlConnection);
+
+            _selectUsernamePassword = new MySqlCommand(_selectUsernamePassword_sql, _mysqlConnection);
 
         }
         
@@ -269,6 +274,26 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public bool CheckUserLoginCredentials(string username, string password, out string errorMessage)
         {
+            try
+            {
+                MySqlDataReader rdr = _selectUsernamePassword.ExecuteReader();
+                string un = rdr["username"].ToString();
+                if (rdr["password"].ToString() == password)
+                {
+                    errorMessage = "";
+                    return true;
+                }
+                else
+                {
+                    errorMessage = "Invalid username or password";
+                    return false;
+                }
+                   
+                
+            } catch (Exception e)
+            {
+                throw;
+            }
             throw new NotImplementedException();
         }
 
