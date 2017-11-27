@@ -153,29 +153,29 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             //throw new NotImplementedException();
         }
 
-        public Item GetItem(ItemTypes itemType, string searchTitle)
-        {
-            var contributors = new List<Person>();
-            var awards = new List<Award>();
-            var award1 = new Award(1, "pooAward", 21);
-            var award2 = new Award(1, "pooAward", 21);
-            var award3 = new Award(1, "pooAward", 21);
-            var award4 = new Award(1, "pooAward", 21);
-            awards.Add(award1);
-            awards.Add(award2);
-            awards.Add(award3);
-            awards.Add(award4);
+        //public Item GetItem(ItemTypes itemType, string searchTitle)
+        //{
+        //    var contributors = new List<Person>();
+        //    var awards = new List<Award>();
+        //    var award1 = new Award(1, "pooAward", 21);
+        //    var award2 = new Award(1, "pooAward", 21);
+        //    var award3 = new Award(1, "pooAward", 21);
+        //    var award4 = new Award(1, "pooAward", 21);
+        //    awards.Add(award1);
+        //    awards.Add(award2);
+        //    awards.Add(award3);
+        //    awards.Add(award4);
 
-            var person1 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
-            var person2 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
-            var person3 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
-            contributors.Add(person1);
-            contributors.Add(person2);
-            contributors.Add(person3);
+        //    var person1 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+        //    var person2 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+        //    var person3 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+        //    contributors.Add(person1);
+        //    contributors.Add(person2);
+        //    contributors.Add(person3);
 
-            return new Movie(new Condition("Good", 1), true, 2, new Genre("thisGenre", 1), 1, "This is the title", 2, 2, "This is the studio", 3, "This is the description", contributors);
-            throw new NotImplementedException();
-        }
+        //    return new Movie(new Condition("Good", 1), true, 2, new Genre("thisGenre", 1), 1, "This is the title", 2, 2, "This is the studio", 3, "This is the description", contributors);
+        //    throw new NotImplementedException();
+        //}
 
         public bool PayFine(string username, out string errorMessage)
         {
