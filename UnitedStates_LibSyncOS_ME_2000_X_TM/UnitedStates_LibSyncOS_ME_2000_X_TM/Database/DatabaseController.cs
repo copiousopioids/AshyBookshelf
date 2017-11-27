@@ -49,6 +49,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         MySqlCommand _deleteFineOwed;
         private string _selectAllFinesForUser_sql = "SELECT fine_id FROM Owes WHERE c_id = @c_id";
         MySqlCommand _selectAllFinesForUser;
+        private string _selectIndividualFine_sql = "SELET fine_id FROM Owes WHERE fine_id = @fine_id";
+        MySqlCommand _selectIndividualFine;
         private string _selectUsernamePassword_sql = "SELECT username, password FROM Cardholders WHERE username = @username";
         MySqlCommand _selectUsernamePassword;
 
@@ -77,6 +79,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _updateFine = new MySqlCommand(_updateFine_sql, _mysqlConnection);
             _selectAllFinesForUser = new MySqlCommand(_selectAllFinesForUser_sql, _mysqlConnection);
             _deleteFineOwed = new MySqlCommand(_deleteFineOwed_sql, _mysqlConnection);
+            _selectIndividualFine = new MySqlCommand(_selectIndividualFine_sql, _mysqlConnection);
 
             _selectUsernamePassword = new MySqlCommand(_selectUsernamePassword_sql, _mysqlConnection);
             _selectAllAwards = new MySqlCommand(_selectAllAwards_sql, _mysqlConnection);
@@ -534,7 +537,33 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public bool PayIndividualFine(string username, Fine fine, out string errorMessage)
         {
-            throw new NotImplementedException();
+            _selectIndividualFine.Parameters.AddWithValue("@fine_id", fine.FineId);
+            MySqlDataReader rdr = _selectIndividualFine.ExecuteReader();
+            MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
+            _updateFine.Transaction = transaction;
+            _deleteCustomer.Transaction = transaction;
+
+            try
+            {
+                _updateFine.Parameters.AddWithValue("@fine_id", fine.FineId);
+                if (_updateFine.ExecuteNonQuery() > 0)
+                {
+                    _deleteFineOwed.Parameters.AddWithValue("@fine_id", fine.FineId);
+                    _deleteFineOwed.ExecuteNonQuery();
+                }
+                else
+                    throw new Exception("Fine " + fine.FineId + " not successfully updated");
+            }
+            catch (Exception e)
+            {
+                errorMessage = e.Message;
+                transaction.Rollback();
+                return false;
+            }
+
+            errorMessage = null;
+            transaction.Commit();
+            return true;
         }
 
         public bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage)
