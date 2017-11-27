@@ -52,6 +52,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectUsernamePassword_sql = "SELECT username, password FROM Cardholders WHERE username = @username";
         MySqlCommand _selectUsernamePassword;
 
+        private string _selectAllAwards_sql = "SELECT award_id, name FROM Awards";
+        MySqlCommand _selectAllAwards;
 
         private void PrepareStatements()
         {
@@ -77,6 +79,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _deleteFineOwed = new MySqlCommand(_deleteFineOwed_sql, _mysqlConnection);
 
             _selectUsernamePassword = new MySqlCommand(_selectUsernamePassword_sql, _mysqlConnection);
+            _selectAllAwards = new MySqlCommand(_selectAllAwards_sql, _mysqlConnection);
+
+
 
         }
         
@@ -321,23 +326,35 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="errorMessage"></param>
+        /// <returns></returns>
         public bool CheckUserLoginCredentials(string username, string password, out string errorMessage)
         {
             try
             {
                 MySqlDataReader rdr = _selectUsernamePassword.ExecuteReader();
-                string un = rdr["username"].ToString();
-                if (rdr["password"].ToString() == password)
+                while (rdr.Read())
                 {
-                    errorMessage = "";
-                    return true;
+                    string un = rdr["username"].ToString();
+                    if (rdr["password"].ToString() == password)
+                    {
+                        errorMessage = "";
+                        return true;
+                    }
+                    else
+                    {
+                        errorMessage = "Invalid username or password";
+                        return false;
+                    }
                 }
-                else
-                {
-                    errorMessage = "Invalid username or password";
-                    return false;
-                }
-                   
+
+                errorMessage = "No user found";
+                return false;
                 
             } catch (Exception e)
             {
@@ -396,12 +413,53 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public List<Award> GetAllAwards(out bool success, out string errorMessage)
         {
-            throw new NotImplementedException();
+            try
+            {
+                MySqlDataReader rdr = _selectAllAwards.ExecuteReader();
+                List<Award> awards = new List<Award>();
+
+                while (rdr.Read())
+                {
+                    awards.Add(new Award((int)rdr["award_id"], (string)rdr["name"], 0));
+                }
+
+                success = true;
+                errorMessage = "";
+                return awards;
+            } catch (Exception e)
+            {
+                success = false;
+                errorMessage = e.Message;
+                return null;
+            }
         }
 
         public List<Person> GetAllContributors(out bool success, out string errorMessage)
         {
-            throw new NotImplementedException();
+
+            string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
+            MySqlCommand _selectAllContributors;
+
+            _selectAllContributors = new MySqlCommand(_selectAllContributors_sql, _mysqlConnection);
+
+            try
+            {
+                MySqlDataReader rdr = _selectAllContributors.ExecuteReader();
+                List<Person> people = new List<Person>();
+                 while (rdr.Read())
+                {
+                    people.Add(new Person((int)rdr["person_id"], (string)rdr["first_name"], (string)rdr["last_name"], new DateTime(2100, 12, 19), null, new DateTime(2100, 12, 19), null, null));
+                }
+
+                success = true;
+                errorMessage = "";
+                return people;
+            } catch (Exception e)
+            {
+                success = false;
+                errorMessage = e.Message;
+                return null;
+            }
         }
 
         public List<Genre> GetAllGenres(out bool success, out string errorMessage)
