@@ -226,7 +226,30 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public bool CheckUserLoginCredentials(string username, string password, out string errorMessage)
         {
-            throw new NotImplementedException();
+            string _CheckCredentials_sql = "select username, password, count(*) as numMatches from Cardholders where username=@username and password=@password";
+            MySqlCommand query = new MySqlCommand(_CheckCredentials_sql, _mysqlConnection);
+            query.Parameters.Clear();
+            query.Parameters.AddWithValue("@username", username);
+            query.Parameters.AddWithValue("@password", password);
+            var reader = query.ExecuteReader();
+            reader.Read();
+            int matches = Convert.ToInt32(reader.GetString(2));
+            reader.Close();
+            if (matches == 1) //exactly one match
+            {
+                errorMessage = "";
+                return true;
+            }
+            else if (matches > 1)
+            {
+                errorMessage = "more than one Cardholder matches given username/password pair";
+                return false;
+            }
+            else //matches = 0 -no user
+            {
+                errorMessage = "no user matches those credentials";
+                return false;
+            }
         }
 
         public bool DeleteCustomer(string username, out string errorMessage)

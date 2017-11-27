@@ -191,9 +191,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public bool CheckUserLoginCredentials(string username, string password, out string errorMessage) {
-            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
-            return true;
-            throw new NotImplementedException();
+            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL - libController";
+            return databaseController.CheckUserLoginCredentials(username, password, out errorMessage);
         }
 
         public LoggedInInformation GetUserIfLoggedIn() {
