@@ -472,7 +472,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         //TODO
         public bool CheckoutItem(ItemTypes itemType, Customer loggedInCustomer, int itemId, out string errorMessage)
         {
-            
+            errorMessage = null;
+            return false;
         }
 
         //TODO
