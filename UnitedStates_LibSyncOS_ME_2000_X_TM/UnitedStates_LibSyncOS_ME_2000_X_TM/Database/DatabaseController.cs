@@ -450,9 +450,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             if (rdr.Read())
             {
                 errorMessage = "Username already taken";
+                rdr.Close();
                 return false;
             }
-
+            rdr.Close();
             string[,] parameters =
             {
                 {"@username", username },
@@ -497,12 +498,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             rdr.Read();
             c_id = rdr["c_id"].ToString();
             fine_id = InsertScalarInt(_insertFine_sql, parameters).ToString();
+            rdr.Close();
 
             if (Int32.Parse(fine_id) == -1)
             {
                 errorMessage = "System Error Occurred";
                 result = false;
-                return new Fine(0, 0, DateTime.UtcNow, false, null);
+                return null;
             }
 
             string _insertFineOwed_sql = "INSERT INTO Owes(c_id, fine_id) VALUES(@c_id, @fine_id)";
@@ -522,7 +524,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             {
                 result = false;
                 errorMessage = null;
-                return new Fine(Int32.Parse(fine_id), amount, DateTime.UtcNow, false, "test");
+                return null;
             }
         }
 
@@ -547,7 +549,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 {"@due_date", DateTime.UtcNow.AddDays(14).ToString() }
             };
 
-            if(_updateAvailabilityCheckedout.ExecuteNonQuery() == 0)
+            rdr.Close();
+            if (_updateAvailabilityCheckedout.ExecuteNonQuery() == 0)
             {
                 errorMessage = "System Error Occurred. Please Try Again";
                 return false;
@@ -563,6 +566,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 errorMessage = "System Error Occurred. Please Try Again";
                 return false;
             }
+            
         }
 
         //TODO
@@ -628,11 +632,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     if (rdr["password"].ToString() == password)
                     {
                         errorMessage = "";
+                        rdr.Close();
                         return true;
                     }
                     else
                     {
                         errorMessage = "Invalid username or password";
+                        rdr.Close();
                         return false;
                     }
                 }
@@ -709,6 +715,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                 success = true;
                 errorMessage = "";
+                rdr.Close();
                 return awards;
             } catch (Exception e)
             {
@@ -734,6 +741,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                 success = true;
                 errorMessage = "";
+                rdr.Close();
                 return people;
             } catch (Exception e)
             {
@@ -757,6 +765,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                 success = true;
                 errorMessage = "";
+                rdr.Close();
                 return genres;
                 
             } catch (Exception e)
@@ -781,6 +790,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                 success = true;
                 errorMessage = "";
+                rdr.Close();
                 return roles;
 
             }
@@ -812,6 +822,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             catch (Exception e)
             {
                 errorMessage = "System Error.";
+                rdr.Close();
                 return false;
             }
 
@@ -839,9 +850,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             {
                 errorMessage = "System Error.";
                 transaction.Rollback();
+                rdr.Close();
                 return false;
             }
 
+            rdr.Close();
             errorMessage = null;
             transaction.Commit();
             return true;     
@@ -870,11 +883,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             {
                 errorMessage = "System Error.";
                 transaction.Rollback();
+                rdr.Close();
                 return false;
             }
 
             errorMessage = null;
             transaction.Commit();
+            rdr.Close();
             return true;
         }
 
