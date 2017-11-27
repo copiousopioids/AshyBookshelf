@@ -66,10 +66,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
         MySqlCommand _selectAllContributors;
 
-
-        private string _selectCheckedOutItem_sql = "SELECT item_id FROM Cardholder_Item OUTPUT INSERTED.item_id WHERE item_id = @item_id";
-        MySqlCommand _selectCheckedOutItem;
-
         private string _returnItem_sql = "UPDATE Items SET available = 1 WHERE item_id = @item_id;" +
                                          "DELETE FROM Cardholder_Item WHERE item_id = @item_id_1";
         MySqlCommand _returnItem;
@@ -82,6 +78,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         private string _checkItemAvailability_sql = "SELECT available FROM Items WHERE item_id = @item_id";
         MySqlCommand _checkItemAvailability;
+
+        private string _updateAvailabilityCheckedout_sql = "UPDATE Items SET available = 0 WHERE item_id = @item_id";
+        MySqlCommand _updateAvailabilityCheckedout;
 
         private void PrepareStatements()
         {
@@ -116,8 +115,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
             _setAvailable = new MySqlCommand(_setAvailable_sql, _mysqlConnection);
             _deleteCustomer = new MySqlCommand(_deleteCustomer_sql, _mysqlConnection);
+            _updateAvailabilityCheckedout = new MySqlCommand(_updateAvailabilityCheckedout_sql, _mysqlConnection);
 
-            _selectCheckedOutItem = new MySqlCommand(_selectCheckedOutItem_sql, _mysqlConnection);
+
             _returnItem = new MySqlCommand(_returnItem_sql, _mysqlConnection);
 
 
@@ -141,7 +141,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         }
 
         /// <summary>
-        /// Generic insert function for the database. Also works for updates.
+        /// Generic insert function for the database.
         /// </summary>
         /// <param name="strSQL">the sql string using parameters.</param>
         /// <param name="parameterValue">A two-dimensional array holding the parameter in the first 'column'
@@ -154,10 +154,26 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             {
                 cmd.Parameters.AddWithValue(parameterValue[i, 0], parameterValue[i, 1]);
             }
-            int success = -1;
-            success = cmd.ExecuteNonQuery();
-            if (success > 0) return true;
-            else return false;
+
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
+            cmd.Transaction = trans;
+
+            try
+            {
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    trans.Commit();
+                    return true;
+                }
+                else
+                    throw new Exception("System Error Occurred");
+            }
+            catch (Exception e)
+            {
+                trans.Rollback();
+                return false;
+            }
+
         }
 
         /// <summary>
@@ -174,8 +190,28 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             {
                 cmd.Parameters.AddWithValue(parameterValue[i, 0], parameterValue[i, 1]);
             }
-            int modified = (int)cmd.ExecuteScalar();
-            return modified;
+
+
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
+            cmd.Transaction = trans;
+
+            int modified = -1;
+            try
+            {
+                modified = (int)cmd.ExecuteScalar();
+                if (modified != -1)
+                {
+                    trans.Commit();
+                    return modified;
+                }
+                else
+                    throw new Exception("System Error Occurred");
+            }
+            catch(Exception e)
+            {
+                trans.Rollback();
+                return modified;
+            }
         }
 
 
@@ -435,7 +471,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 errorMessage = "System Error.";
                 return false;
             }
@@ -460,6 +495,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             c_id = rdr["c_id"].ToString();
             fine_id = InsertScalarInt(_insertFine_sql, parameters).ToString();
 
+            if (Int32.Parse(fine_id) == -1)
+            {
+                errorMessage = "System Error Occurred";
+                result = false;
+                return new Fine(0, 0, DateTime.UtcNow, false, null);
+            }
+
             string _insertFineOwed_sql = "INSERT INTO Owes(c_id, fine_id) VALUES(@c_id, @fine_id)";
             string[,] owedParameters =
             {
@@ -467,59 +509,67 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 {"@fine_id", fine_id }
             };
 
-            Insert(_insertFineOwed_sql, owedParameters);
-            result = true;
-            errorMessage = null;
-            return new Fine(Int32.Parse(fine_id), amount, DateTime.UtcNow, false, "test");
+            if (Insert(_insertFineOwed_sql, owedParameters))
+            {
+                result = true;
+                errorMessage = null;
+                return new Fine(Int32.Parse(fine_id), amount, DateTime.UtcNow, false, "test");
+            }
+            else
+            {
+                result = false;
+                errorMessage = null;
+                return new Fine(Int32.Parse(fine_id), amount, DateTime.UtcNow, false, "test");
+            }
         }
 
 
         //TODO
         public bool CheckoutItem(ItemTypes itemType, Customer loggedInCustomer, int itemId, out string errorMessage)
         {
-            
+            _checkItemAvailability.Parameters.AddWithValue("@item_id", itemId);
+            MySqlDataReader rdr = _checkItemAvailability.ExecuteReader();
+
+            if(Int32.Parse(rdr["item_id"].ToString())==0)
+            {
+                errorMessage = "Item already checked out";
+                return false;
+            }
+
+            string insertInCI = "INSERT INTO Cardholders_Items(c_id, item_id, due_date) VALUES(@c_id, @item_id, @due_date)";
+            string[,] parameters =
+            {
+                {"@c_id", loggedInCustomer.CustomerId.ToString() },
+                {"@item_id", itemId.ToString() },
+                {"@due_date", DateTime.UtcNow.AddDays(14).ToString() }
+            };
+
+            if(_updateAvailabilityCheckedout.ExecuteNonQuery() == 0)
+            {
+                errorMessage = "System Error Occurred. Please Try Again";
+                return false;
+            }
+
+            if(Insert(insertInCI, parameters))
+            {
+                errorMessage = null;
+                return true;
+            }
+            else
+            {
+                errorMessage = "System Error Occurred. Please Try Again";
+                return false;
+            }
         }
 
         //TODO
         public bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
-            //If item exsits in cardholder_items then
+            //If item exsits in Items AND item exists in cardholder_item, then
             // 1. Remove row from cardholder_item
             // 2. In Items, set available to true
-            try
-            {
-                _selectCheckedOutItem.Parameters.AddWithValue("@item_id", itemId);
-                MySqlDataReader rdr = _selectCheckedOutItem.ExecuteReader();
 
-                while (rdr.Read())
-                {
-                    string[,] returnItemVal = new string[,]
-                    {
-                        { "@item_id", itemId.ToString() },
-                        { "@item_id_1", itemId.ToString() }
-                    };
-                    //insert works for update
-                    if (Insert(_returnItem_sql, returnItemVal))
-                    {
-                        errorMessage = "";
-                        return true;
-                    }
-                    else
-                    {
-                        errorMessage = "Item not deleted.";
-                        return false;
-                    }
-                }
-
-                errorMessage = "Item not checked out.";
-                return false;
-                
-            } catch (Exception e)
-            {
-                Console.WriteLine(e);
-                errorMessage = "System Error.";
-                return false;
-            }
+            throw new NotImplementedException();
 
         }
 
@@ -534,7 +584,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             try
             {
-                _selectUsernamePassword.Parameters.AddWithValue("@username", username);
                 MySqlDataReader rdr = _selectUsernamePassword.ExecuteReader();
                 while (rdr.Read())
                 {
