@@ -39,11 +39,18 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         MySqlCommand _searchCardholders;
         private string _checkUniqueUsername_sql = "SELECT username FROM Cardholders WHERE username = @username";
         MySqlCommand _checkUniqueUsername;
-        private string _deleteCustomer_sql = "DELETE from Cardholders WHERE username = @username";
+        private string _deleteCustomer_sql = "DELETE FROM Cardholders WHERE username = @username";
         MySqlCommand _deleteCustomer;
-        private string _deleteItem_sql = "DELETE from Items WHERE item_id = @item_id";
+        private string _deleteItem_sql = "DELETE FROM Items WHERE item_id = @item_id";
         MySqlCommand _deleteItem;
-
+        private string _updateFine_sql = "UPDATE Fines SET paid = 1 WHERE fine_id = @fine_id";
+        MySqlCommand _updateFine;
+        private string _deleteFineOwed_sql = "DELETE FROM Owes WHERE fine_id = @fine_id";
+        MySqlCommand _deleteFineOwed;
+        private string _selectAllFinesForUser_sql = "SELECT fine_id FROM Owes WHERE c_id = @c_id";
+        MySqlCommand _selectAllFinesForUser;
+        private string _selectIndividualFine_sql = "SELET fine_id FROM Owes WHERE fine_id = @fine_id";
+        MySqlCommand _selectIndividualFine;
         private string _selectUsernamePassword_sql = "SELECT username, password FROM Cardholders WHERE username = @username";
         MySqlCommand _selectUsernamePassword;
 
@@ -69,6 +76,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _checkUniqueUsername = new MySqlCommand(_checkUniqueUsername_sql, _mysqlConnection);
             _deleteCustomer = new MySqlCommand(_deleteCustomer_sql, _mysqlConnection);
             _deleteItem = new MySqlCommand(_deleteItem_sql, _mysqlConnection);
+            _updateFine = new MySqlCommand(_updateFine_sql, _mysqlConnection);
+            _selectAllFinesForUser = new MySqlCommand(_selectAllFinesForUser_sql, _mysqlConnection);
+            _deleteFineOwed = new MySqlCommand(_deleteFineOwed_sql, _mysqlConnection);
+            _selectIndividualFine = new MySqlCommand(_selectIndividualFine_sql, _mysqlConnection);
 
             _selectUsernamePassword = new MySqlCommand(_selectUsernamePassword_sql, _mysqlConnection);
             _selectAllAwards = new MySqlCommand(_selectAllAwards_sql, _mysqlConnection);
@@ -441,12 +452,15 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public bool DeleteCustomer(string username, out string errorMessage)
         {
+            MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
+            _deleteCustomer.Transaction = transaction;
             _deleteCustomer.Parameters.AddWithValue("@username", username);
             try
             {
                 if (_deleteCustomer.ExecuteNonQuery() > 0)
                 {
                     errorMessage = null;
+                    transaction.Commit();
                     return true;
                 }
                 else
@@ -455,18 +469,22 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             catch (Exception e)
             {
                 errorMessage = e.Message;
+                transaction.Rollback();
                 return false;
             }
         }
 
         public bool DeleteItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
+            MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
+            _deleteItem.Transaction = transaction;
             _deleteItem.Parameters.AddWithValue("@item_id", itemId);
             try
             {
                 if (_deleteItem.ExecuteNonQuery() > 0)
                 {
                     errorMessage = null;
+                    transaction.Commit();
                     return true;
                 }
                 else
@@ -475,6 +493,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             catch (Exception e)
             {
                 errorMessage = e.Message;
+                transaction.Rollback();
                 return false;
             }
         }
@@ -547,12 +566,88 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public bool PayFine(string username, out string errorMessage)
         {
-            throw new NotImplementedException();
+            MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
+            _checkUniqueUsername.Parameters.AddWithValue("@username", username);
+            MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader();
+            string c_id;
+            string fine_id;
+
+            try
+            {
+                if (rdr.Read())
+                {
+                    c_id = rdr["c_id"].ToString();
+                }
+                else
+                    throw new Exception("User not found");
+            }
+            catch (Exception e)
+            {
+                errorMessage = e.Message;
+                return false;
+            }
+
+            rdr.Close();
+            rdr = _selectAllFinesForUser.ExecuteReader();
+            _updateFine.Transaction = transaction;
+            _deleteFineOwed.Transaction = transaction;
+
+            try
+            {
+               while(rdr.Read())
+               {
+                    fine_id = rdr["fine_id"].ToString();
+                    _updateFine.Parameters.AddWithValue("@fine_id", fine_id);
+                    if (_updateFine.ExecuteNonQuery() > 0)
+                    {
+                        _deleteFineOwed.Parameters.AddWithValue("@fine_id", fine_id);
+                        _deleteFineOwed.ExecuteNonQuery();
+                    }
+                    else
+                        throw new Exception("Fine " + fine_id + " not successfully updated");
+               }
+            }
+            catch(Exception e)
+            {
+                errorMessage = e.Message;
+                transaction.Rollback();
+                return false;
+            }
+
+            errorMessage = null;
+            transaction.Commit();
+            return true;     
         }
 
         public bool PayIndividualFine(string username, Fine fine, out string errorMessage)
         {
-            throw new NotImplementedException();
+            _selectIndividualFine.Parameters.AddWithValue("@fine_id", fine.FineId);
+            MySqlDataReader rdr = _selectIndividualFine.ExecuteReader();
+            MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
+            _updateFine.Transaction = transaction;
+            _deleteCustomer.Transaction = transaction;
+
+            try
+            {
+                _updateFine.Parameters.AddWithValue("@fine_id", fine.FineId);
+                if (_updateFine.ExecuteNonQuery() > 0)
+                {
+                    _deleteFineOwed.Parameters.AddWithValue("@fine_id", fine.FineId);
+                    _deleteFineOwed.ExecuteNonQuery();
+                }
+                else
+                    throw new Exception("Fine " + fine.FineId + " not successfully updated");
+            }
+            catch (Exception e)
+            {
+                errorMessage = e.Message;
+                transaction.Rollback();
+                return false;
+            }
+
+            errorMessage = null;
+            transaction.Commit();
+            return true;
         }
 
         public bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage)
