@@ -419,7 +419,34 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public Fine AddFine(string username, int amount, out bool result, out string errorMessage)
         {
-            throw new NotImplementedException();
+            string fine_id;
+            string c_id;
+            string _insertFine_sql = "INSERT INTO Fines(amount, due_date, paid, description) OUTPUT Inserted.fine_id VALUES(@amount, @due_date, @paid, @description)";
+            string[,] parameters =
+            {
+                {"@amount", amount.ToString() },
+                {"@due_date", DateTime.UtcNow.ToString()},
+                {"@paid", 0.ToString() },
+                {"@description", "test" }
+            };
+
+            _checkUniqueUsername.Parameters.AddWithValue("@username", username);
+            MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader();
+            rdr.Read();
+            c_id = rdr["c_id"].ToString();
+            fine_id = InsertScalarInt(_insertFine_sql, parameters).ToString();
+
+            string _insertFineOwed_sql = "INSERT INTO Owes(c_id, fine_id) VALUES(@c_id, @fine_id)";
+            string[,] owedParameters =
+            {
+                {"@c_id", c_id},
+                {"@fine_id", fine_id }
+            };
+
+            Insert(_insertFineOwed_sql, owedParameters);
+            result = true;
+            errorMessage = null;
+            return new Fine(Int32.Parse(fine_id), amount, DateTime.UtcNow, false, "test");
         }
 
 
