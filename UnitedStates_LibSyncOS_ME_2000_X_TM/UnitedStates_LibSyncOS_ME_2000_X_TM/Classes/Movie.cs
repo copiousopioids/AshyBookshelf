@@ -41,7 +41,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public override string ToString()
         {
             // TODO: Create tostring how you would like element to display in listboxes
-            return "Movie: Title - " + Title + ", Genre - " + Genre.ToString() + ", Available - " + Available.ToString();
+            return "Movie:\t" + ((Available) ? "Available" : "Unavailable") + "\tTitle - " + Title.ToString();
         }
     }
 }
