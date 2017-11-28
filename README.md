@@ -16,14 +16,14 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | ------------- |:-------------:| -----:|---:|
 | POWERPOINT	| PRESENTATION |	| TRICIA |
 | Library      | Working       | Launch Library |  austen |
-| Customer Home     | Not Working      |   Find Item | austen |
-| Item Search     | Not Working      |   Search (all types) | austen |
+| Customer Home     | Working      |   Find Item | reagan |
+| Item Search     | Working      |   Search (all types) | reagan |
 | Item Search     | Working      |   Checkout | justin |
 | Item Search     | Working      |   Return ("Close") | justin |
 | Customer Home     | Working      |   Account Information | austen |
 | Customer Account Information     | Working      |   Pay Fine| Reagan |
-| Customer Account Information     | Not Working      | Return Item  | austen |
-| Customer Account Information     | Not Working      |   Close | |
+| Customer Account Information     | Working      | Return Item  | zach |
+| Customer Account Information     | Working      |   Close | |
 | Customer Home    | Working      |   Login | justin |
 | Customer Home    | Working      |   Logout | justin |
 | Staff Home   | Working      |   Search Items by Title | reagan |
