@@ -77,6 +77,12 @@
     <Compile Include="Enums.cs" />
     <Compile Include="IControllerFunctions.cs" />
     <Compile Include="ILibraryForm.cs" />
+    <Compile Include="ItemDetailView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ItemDetailView.Designer.cs">
+      <DependentUpon>ItemDetailView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Library.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CustomerLoginForm.resx">
       <DependentUpon>CustomerLoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ItemDetailView.resx">
+      <DependentUpon>ItemDetailView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Library.resx">
       <DependentUpon>Library.cs</DependentUpon>

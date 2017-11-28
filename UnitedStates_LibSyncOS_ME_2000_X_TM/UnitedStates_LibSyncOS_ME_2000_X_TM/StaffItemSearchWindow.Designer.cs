@@ -154,6 +154,7 @@
             // 
             // uxStaffSelectItemButton
             // 
+            this.uxStaffSelectItemButton.DialogResult = System.Windows.Forms.DialogResult.Abort;
             this.uxStaffSelectItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxStaffSelectItemButton.Location = new System.Drawing.Point(226, 241);
             this.uxStaffSelectItemButton.Name = "uxStaffSelectItemButton";
