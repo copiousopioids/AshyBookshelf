@@ -17,7 +17,7 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Library      | Working       | Launch Library |  austen |
 | Customer Home     | Not Working      |   Find Item | austen |
 | Item Search     | Not Working      |   Search (all types) | austen |
-| Item Search     | Working      |   Checkout | austen |
+| Item Search     | Working      |   Checkout | justin |
 | Item Search     | Working      |   Return ("Close") | justin |
 | Customer Home     | Working      |   Account Information | austen |
 | Customer Account Information     | Not Working      |   Pay Fine|austen |
