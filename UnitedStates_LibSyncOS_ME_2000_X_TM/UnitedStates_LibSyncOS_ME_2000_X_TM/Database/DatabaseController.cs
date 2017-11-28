@@ -234,6 +234,32 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
         }
 
+        public int AddItem(string title, int available, int weekly_fine, int damage_fine)
+        {
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
+            try
+            {
+                string strSQL = "INSERT INTO Items(title, available, weekly_fine, damage_fine) VALUES (@title, @available, @weekly_fine, @damage_fine);";
+
+                string[,] itemValues = new string[,] {
+                                                    { "@title", title },
+                                                    { "@available", available.ToString() },
+                                                    { "@weekly_fine", weekly_fine.ToString() },
+                                                    { "@damage_fine", damage_fine.ToString() }
+                                                 };
+
+                int itemID = -1;
+                itemID = InsertScalarInt(strSQL, itemValues, trans);
+
+                return itemID;
+            } catch (Exception e)
+            {
+                trans.Rollback();
+                Console.WriteLine(e.Message);
+                throw;
+            }
+
+        }
 
         //TODO: null object reference when accessing people. Says it inserts but doesn't because of transactions
         public Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success, out string errorMessage)
@@ -241,10 +267,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             try
             {
-                string strSQL = "INSERT INTO Items(title, available, weekly_fine, damage_fine) VALUES (@title, true, 2.0, 10.0);";
-                string[,] itemValues = new string[,] { { "@title", title } };
-                int itemID = -1;
-                itemID = InsertScalarInt(strSQL, itemValues, trans);
+                int itemID = AddItem(title, 1, 5, 10);
                 if (itemID > 0)
                 {
                     string bookSQL = "INSERT INTO Books(item_id, num_pages, publisher, isbn) VALUES (@item_id, @num_pages, @publisher, @isbn);";
