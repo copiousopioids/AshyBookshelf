@@ -53,7 +53,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         MySqlCommand _showTotalAmtOwed;
         private string _showAllFinesForUser_sql = "select amount, paid, due_date, description from Fines f join Owes o on o.fine_id=f.fine_id where o.c_id=@curUser_int";
         MySqlCommand _showAllFinesForUser;
-        private string _searchCardholders_sql = "select username, name, c_id from Cardholders where username like @username_like";
+        private string _searchCardholders_sql = "select * from Cardholders where username like @username_like";
         MySqlCommand _searchCardholders;
         private string _checkUniqueUsername_sql = "SELECT username FROM Cardholders WHERE username = @username";
         MySqlCommand _checkUniqueUsername;
@@ -103,6 +103,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _updateAvailabilityCheckedout_sql = "UPDATE Items SET available = 0 WHERE item_id = @item_id";
         MySqlCommand _updateAvailabilityCheckedout;
 
+        private string _listAllCustomers_sql = "SELECT * FROM Cardholders";
+        MySqlCommand _listAllCustomers;
+
         private void PrepareStatements()
         {
             _selectItemsByTitle = new MySqlCommand(_selectItemsByTitle_sql, _mysqlConnection);
@@ -137,7 +140,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _setAvailable = new MySqlCommand(_setAvailable_sql, _mysqlConnection);
             _deleteCustomer = new MySqlCommand(_deleteCustomer_sql, _mysqlConnection);
             _updateAvailabilityCheckedout = new MySqlCommand(_updateAvailabilityCheckedout_sql, _mysqlConnection);
-
+            _listAllCustomers = new MySqlCommand(_listAllCustomers_sql, _mysqlConnection);
 
             _returnItem = new MySqlCommand(_returnItem_sql, _mysqlConnection);
 
@@ -1018,8 +1021,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             var reader = _searchCardholders.ExecuteReader();
             while (reader.Read())
             {
-                //returns username, name, c_id
-                customers.Add(new Customer(Convert.ToInt32(reader.GetString(2)), reader.GetString(0), null, reader.GetString(1), null, null, null, null));
+                customers.Add(new Customer(Convert.ToInt32(reader["c_id"].ToString()), reader["username"].ToString(), reader["password"].ToString(), reader["name"].ToString(), reader["address"].ToString(), reader["phone"].ToString(), null, null));
             }
             reader.Close();
             success = true;
@@ -1029,8 +1031,16 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public List<Customer> GetAllCustomers(out bool success, out string errorMessage)
         {
-            // TODO > Needs a sql statment and functionality for returning all the customers in the database.
-            throw new NotImplementedException();
+            List<Customer> customers = new List<Customer>();
+            var reader = _listAllCustomers.ExecuteReader();
+            while (reader.Read())
+            {
+                customers.Add(new Customer(Convert.ToInt32(reader["c_id"].ToString()), reader["username"].ToString(), reader["password"].ToString(), reader["name"].ToString(), reader["address"].ToString(), reader["phone"].ToString(), null, null));
+            }
+            reader.Close();
+            success = true;
+            errorMessage = "";
+            return customers;
         }
     }
 }

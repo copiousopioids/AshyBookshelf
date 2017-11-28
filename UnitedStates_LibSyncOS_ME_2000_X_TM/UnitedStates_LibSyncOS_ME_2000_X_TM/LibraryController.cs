@@ -430,11 +430,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public List<Customer> GetAllCustomers(out bool success, out string errorMessage)
         {
-            // DB controller. get all customers()
-            // Format to list of customers
-            success = true;
-            errorMessage = "Testing error.";
-            return new List<Customer>();
+            errorMessage = "System Error";
+            success = false;
+            return databaseController.GetAllCustomers(out success, out errorMessage);
         }
 
 
