@@ -40,8 +40,8 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Add Movie   | Not Working      |   Add Contributor | zach |
 | Add Contributor   | Not Working      |   Create New | zach |
 | Add Contributor   | Not Working      |   Add Contributor | zach |
-| Item Search   | Not Working      |   Delete | justin |
-| Item Search   | Not Working      |   Close | justin |
+| Item Search   | Working      |   Delete | justin |
+| Item Search   | Working      |   Close | justin |
 | Search Customer   | Not Working      |   Customer Search | |
 | Customer Search  | Working      |   Search (username) | |
 | Customer Search  | Working      |   List Customers | |
