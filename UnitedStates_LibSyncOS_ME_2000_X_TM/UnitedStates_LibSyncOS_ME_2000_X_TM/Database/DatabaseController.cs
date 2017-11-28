@@ -191,6 +191,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 trans.Rollback();
                 return false;
             }
@@ -230,6 +231,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch(Exception e)
             {
+                Console.WriteLine(e.Message);
                 trans.Rollback();
                 return modified;
             }
@@ -317,6 +319,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 success = false;
                 errorMessage = "System Error.";
                 throw;
@@ -405,6 +408,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 success = false;
                 errorMessage = "System Error.";
                 throw;
@@ -412,7 +416,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         }
 
         //TODO: Transactions
-        public Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage)
+        public Person AddContributor(string firstName, string lastName, string twitterHandle, DateTime dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage)
         {
             try
             {
@@ -421,7 +425,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 {
                     { "@first_name", firstName },
                     { "@last_name", lastName },
-                    { "@birth_date", dateOfBirth },
+                    { "@birth_date", dateOfBirth.ToString() },
                     { "@twitter", twitterHandle }
                 };
 
@@ -454,6 +458,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 else throw new Exception("Person not added to People table");
             } catch(Exception e)
             {
+                Console.WriteLine(e.Message);
                 success = false;
                 errorMessage = "System Error.";
                 throw;
@@ -493,6 +498,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 errorMessage = "System Error.";
                 return false;
             }
@@ -663,9 +669,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                 errorMessage = "No user found";
                 return false;
-            }
             } catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 throw;
             }
         }
@@ -688,6 +694,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 errorMessage = "System Error.";
                 transaction.Rollback();
                 return false;
@@ -712,6 +719,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 errorMessage = "System Error.";
                 transaction.Rollback();
                 return false;
@@ -736,6 +744,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 return awards;
             } catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 success = false;
                 errorMessage = "System Error.";
                 return null;
@@ -762,6 +771,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 return people;
             } catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 success = false;
                 errorMessage = "System Error.";
                 return null;
@@ -787,6 +797,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 
             } catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 success = false;
                 errorMessage = "System Error.";
                 return null;
@@ -813,6 +824,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 success = false;
                 errorMessage = "System Error.";
                 return null;
@@ -838,6 +850,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 errorMessage = "System Error.";
                 rdr.Close();
                 return false;
@@ -865,6 +878,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch(Exception e)
             {
+                Console.WriteLine(e.Message);
                 errorMessage = "System Error.";
                 transaction.Rollback();
                 rdr.Close();
@@ -898,6 +912,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 errorMessage = "System Error.";
                 transaction.Rollback();
                 rdr.Close();
@@ -1010,8 +1025,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             success = true;
             errorMessage = "";
             return customers;
-        }
-            throw new NotImplementedException();
         }
 
         public List<Customer> GetAllCustomers(out bool success, out string errorMessage)
