@@ -203,7 +203,7 @@
             this.Controls.Add(this.uxStaffCancelButton);
             this.Controls.Add(this.uxStaffFinishBookButton);
             this.Name = "StaffAddBookItemWindow";
-            this.Text = "StaffAddBookItemWindow";
+            this.Text = "Staff Add Book";
             this.ResumeLayout(false);
             this.PerformLayout();
 
