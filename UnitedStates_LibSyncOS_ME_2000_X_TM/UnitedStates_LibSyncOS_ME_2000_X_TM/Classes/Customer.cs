@@ -32,7 +32,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
         public override string ToString()
         {
             // TODO: Create tostring how you would like element to display in listboxes
-            return "Username: " + Username + ", Name: " + Name + ", Phone: " + PhoneNumber.ToString() + ", Address: " + Address;
+            return "Username: " + Username + "\tPhone: " + PhoneNumber.ToString() + "\tName: " + Name + "\tAddress: " + Address;
         }
     }
 }
