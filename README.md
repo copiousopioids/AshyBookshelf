@@ -25,8 +25,10 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Customer Account Information     | Not Working      |   Close | |
 | Customer Home    | Working      |   Login | justin |
 | Customer Home    | Working      |   Logout | justin |
-| Staff Home   | Not Working      |   Search Items | |
-| Item Search   | Not Working      |   Search | |
+| Staff Home   | Working      |   Search Items by Title | reagan |
+| Staff Home   | Not Working | Search Items by Genre | |
+| Staff Home   | Not Working | Search Items by Person | |
+| Item Search   | Not Working      |   Search | reagan |
 | Item Search   | Not Working      |   Add Book | |
 | Add Book   | Not Working      |   Create Book | |
 | Add Book   | Not Working      |   Add Contributor | |
@@ -46,8 +48,8 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Add New Customer  | Working      |   Create | justin |
 | Add New Customer  | Working      |   Cancel | justin |
 | Customer Search  | Working      |   Delete | justin |
-| Customer Search  | Not Working      |   Select | |
-| Customer Search  | Not Working      |   Cancel | |
+| Customer Search  | Working      |   Select | reagan|
+| Customer Search  | Working      |   Cancel | justin|
 
 # Library: 
 - Launch Library
