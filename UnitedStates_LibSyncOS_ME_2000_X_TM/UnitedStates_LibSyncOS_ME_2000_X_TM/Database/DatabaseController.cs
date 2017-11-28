@@ -259,12 +259,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     {
                         //add to relational tables
                         //Item_people and People_Roles_Items
-                        string ipSQL = "INSERT INTO (item_id, person_id) VALUES (@item_id, @person_id);";
-                        string[,] ipValues = new string[,]
-                        {
-                            {"@item_id", itemID.ToString() },
-                            {"@person_id", "placeholder" }
-                        };
+                        //string ipSQL = "INSERT INTO (item_id, person_id) VALUES (@item_id, @person_id);";
+                        //string[,] ipValues = new string[,]
+                        //{
+                        //    {"@item_id", itemID.ToString() },
+                        //    {"@person_id", "placeholder" }
+                        //};
 
                         string priSQL = "INSERT INTO People_Roles_Items(person_id, role_code, item_id) VALUES (@personID, @role_code, @item_id)";
                         string[,] priValues = new string[,]
@@ -276,10 +276,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                         foreach (Person p in contributors)
                         {
-                            ipValues[1, 1] = p.PersonId.ToString();
+                            //ipValues[1, 1] = p.PersonId.ToString();
                             priValues[0, 1] = p.PersonId.ToString();
                             priValues[1, 1] = p.Role.RoleId.ToString();
-                            if (!(Insert(ipSQL, ipValues, trans) && Insert(priSQL, priValues, trans)))
+                            //if (!(Insert(ipSQL, ipValues, trans) && Insert(priSQL, priValues, trans)))
+                            if (!(Insert(priSQL, priValues, trans)))
                                 throw new Exception("Item not added to item_people or people_roles_items");
                         }
 
