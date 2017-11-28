@@ -42,7 +42,7 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Add Contributor   | Not Working      |   Add Contributor | zach |
 | Item Search   | Working      |   Delete | justin |
 | Item Search   | Working      |   Close | justin |
-| Search Customer   | Not Working      |   Customer Search | |
+| Search Customer   | Working      |   Customer Search | reagan |
 | Customer Search  | Working      |   Search (username) | |
 | Customer Search  | Working      |   List Customers | |
 | Customer Search  | Working      |   Add New | justin |
