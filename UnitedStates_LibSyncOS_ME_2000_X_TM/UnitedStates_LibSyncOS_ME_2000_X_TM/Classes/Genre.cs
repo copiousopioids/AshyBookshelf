@@ -26,7 +26,21 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         Horror,
         Western,
         Romance,
-        Uknown
+        Uknown,
+        War,
+        SciFi,
+        Thriller,
+        Musical,
+        Family,
+        Mystery,
+        Music,
+        FilmNoir,
+        Fantasy,
+        History,
+        Biography,
+        Documentary,
+        Animation,
+        Sport
     }
 
     public class Genre
@@ -101,6 +115,48 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     break;
                 case "Romance":
                     this.Type = Genres.Romance;
+                    break;
+                case "War":
+                    this.Type = Genres.War;
+                    break;
+                case "Sci-Fi":
+                    this.Type = Genres.SciFi;
+                    break;
+                case "Thriller":
+                    this.Type = Genres.Thriller;
+                    break;
+                case "Musical":
+                    this.Type = Genres.Musical;
+                    break;
+                case "Family":
+                    this.Type = Genres.Family;
+                    break;
+                case "Mystery":
+                    this.Type = Genres.Mystery;
+                    break;
+                case "Music":
+                    this.Type = Genres.Music;
+                    break;
+                case "Film-Noir":
+                    this.Type = Genres.FilmNoir;
+                    break;
+                case "Fantasy":
+                    this.Type = Genres.Fantasy;
+                    break;
+                case "History":
+                    this.Type = Genres.History;
+                    break;
+                case "Biography":
+                    this.Type = Genres.Biography;
+                    break;
+                case "Documentary":
+                    this.Type = Genres.Documentary;
+                    break;
+                case "Animation":
+                    this.Type = Genres.Animation;
+                    break;
+                case "Sport":
+                    this.Type = Genres.Sport;
                     break;
                 default:
                     this.Type = Genres.Uknown;

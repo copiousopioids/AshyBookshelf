@@ -787,7 +787,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                 while (rdr.Read())
                 {
-                    genres.Add(new Genre(rdr["name"].ToString(), (int)rdr["genre_id"]));
+                    genres.Add(new Genre(rdr["genre"].ToString(), (int)rdr["genre_id"]));
                 }
 
                 success = true;
