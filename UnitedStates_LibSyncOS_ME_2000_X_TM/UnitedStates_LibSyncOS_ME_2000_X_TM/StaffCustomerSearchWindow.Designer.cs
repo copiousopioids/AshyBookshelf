@@ -32,12 +32,16 @@
             this.uxStaffAddCustomerButton = new System.Windows.Forms.Button();
             this.uxStaffDeleteCustomerButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.uxStaffGenericItemsListBox = new System.Windows.Forms.ListBox();
             this.uxStaffCancelButton = new System.Windows.Forms.Button();
             this.uxStaffSearchCustomerIDButton = new System.Windows.Forms.Button();
             this.uxStaffCustomerSelectButton = new System.Windows.Forms.Button();
             this.staffListCustomersButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.uxStaffCustomerSearchListView = new System.Windows.Forms.ListView();
+            this.usernameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.addressColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.phoneColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // uxStaffCustomerSearchTextBox
@@ -76,14 +80,6 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 4;
-            // 
-            // uxStaffGenericItemsListBox
-            // 
-            this.uxStaffGenericItemsListBox.FormattingEnabled = true;
-            this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(9, 84);
-            this.uxStaffGenericItemsListBox.Name = "uxStaffGenericItemsListBox";
-            this.uxStaffGenericItemsListBox.Size = new System.Drawing.Size(582, 173);
-            this.uxStaffGenericItemsListBox.TabIndex = 5;
             // 
             // uxStaffCancelButton
             // 
@@ -139,17 +135,54 @@
             this.label2.TabIndex = 10;
             this.label2.Text = "Customer Username Search:";
             // 
+            // uxStaffCustomerSearchListView
+            // 
+            this.uxStaffCustomerSearchListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.usernameColumnHeader,
+            this.nameColumnHeader,
+            this.addressColumnHeader,
+            this.phoneColumnHeader});
+            this.uxStaffCustomerSearchListView.GridLines = true;
+            this.uxStaffCustomerSearchListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.uxStaffCustomerSearchListView.Location = new System.Drawing.Point(9, 77);
+            this.uxStaffCustomerSearchListView.MultiSelect = false;
+            this.uxStaffCustomerSearchListView.Name = "uxStaffCustomerSearchListView";
+            this.uxStaffCustomerSearchListView.Size = new System.Drawing.Size(582, 180);
+            this.uxStaffCustomerSearchListView.TabIndex = 11;
+            this.uxStaffCustomerSearchListView.UseCompatibleStateImageBehavior = false;
+            this.uxStaffCustomerSearchListView.View = System.Windows.Forms.View.Details;
+            // 
+            // usernameColumnHeader
+            // 
+            this.usernameColumnHeader.Text = "Username";
+            this.usernameColumnHeader.Width = 101;
+            // 
+            // nameColumnHeader
+            // 
+            this.nameColumnHeader.Text = "Name";
+            this.nameColumnHeader.Width = 141;
+            // 
+            // addressColumnHeader
+            // 
+            this.addressColumnHeader.Text = "Address";
+            this.addressColumnHeader.Width = 170;
+            // 
+            // phoneColumnHeader
+            // 
+            this.phoneColumnHeader.Text = "Phone Number";
+            this.phoneColumnHeader.Width = 164;
+            // 
             // StaffCustomerSearchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(603, 305);
+            this.Controls.Add(this.uxStaffCustomerSearchListView);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.staffListCustomersButton);
             this.Controls.Add(this.uxStaffCustomerSelectButton);
             this.Controls.Add(this.uxStaffSearchCustomerIDButton);
             this.Controls.Add(this.uxStaffCancelButton);
-            this.Controls.Add(this.uxStaffGenericItemsListBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.uxStaffDeleteCustomerButton);
             this.Controls.Add(this.uxStaffAddCustomerButton);
@@ -167,11 +200,15 @@
         private System.Windows.Forms.Button uxStaffAddCustomerButton;
         private System.Windows.Forms.Button uxStaffDeleteCustomerButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox uxStaffGenericItemsListBox;
         private System.Windows.Forms.Button uxStaffCancelButton;
         private System.Windows.Forms.Button uxStaffSearchCustomerIDButton;
         private System.Windows.Forms.Button uxStaffCustomerSelectButton;
         private System.Windows.Forms.Button staffListCustomersButton;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ListView uxStaffCustomerSearchListView;
+        private System.Windows.Forms.ColumnHeader usernameColumnHeader;
+        private System.Windows.Forms.ColumnHeader nameColumnHeader;
+        private System.Windows.Forms.ColumnHeader addressColumnHeader;
+        private System.Windows.Forms.ColumnHeader phoneColumnHeader;
     }
 }
