@@ -180,7 +180,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(151, 31);
             this.button1.TabIndex = 39;
-            this.button1.Text = "Charge Fine ($2)";
+            this.button1.Text = "Charge Fine ($5)";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // StaffCustomerManager

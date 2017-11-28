@@ -10,23 +10,23 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string mysqlConnectionString;
         private MySqlConnection _mysqlConnection;
 
-        private string _selectItemsByTitle_sql = "SELECT available, title from Items where title like @param1 ";
+        private string _selectItemsByTitle_sql = "SELECT available, title, i.item_id from Items where title like @param1 ";
         MySqlCommand _selectItemsByTitle;
-        private string _selectBooksByTitle_sql = "select available, title from Books b join Items i on i.item_id=b.item_id where i.title like @param1";
+        private string _selectBooksByTitle_sql = "select available, title, i.item_id from Books b join Items i on i.item_id=b.item_id where i.title like @param1";
         MySqlCommand _selectBooksByTitle;
-        private string _selectMoviesByTitle_sql = "select available, title from Movies m join Items i on i.item_id=m.item_id where i.title like @param1";
+        private string _selectMoviesByTitle_sql = "select available, title, i.item_id from Movies m join Items i on i.item_id=m.item_id where i.title like @param1";
         MySqlCommand _selectMoviesByTitle;
-        private string _selectItemsByGenre_sql = "select available, title from Items i left outer join Item_Genre ig on ig.item_id=i.item_id left outer join Genres g on g.genre_id=ig.genre_id where g.genre like @genre_like";
+        private string _selectItemsByGenre_sql = "select available, title, i.item_id from Items i left outer join Item_Genre ig on ig.item_id=i.item_id left outer join Genres g on g.genre_id=ig.genre_id where g.genre like @param1";
         MySqlCommand _selectItemsByGenre;
-        private string _selectBooksByGenre_sql = "select available, title from Books b join Items i on i.item_id=b.item_id join Item_Genre ig on ig.item_id=i.item_id join Genres g on g.genre_id=ig.genre_id where g.genre like @genre_like";
+        private string _selectBooksByGenre_sql = "select available, title, i.item_id from Books b join Items i on i.item_id=b.item_id join Item_Genre ig on ig.item_id=i.item_id join Genres g on g.genre_id=ig.genre_id where g.genre like @param1";
         MySqlCommand _selectBooksByGenre;
-        private string _selectMoviesByGenre_sql = "select available, title from Movies m join Items i on i.item_id=m.item_id join Item_Genre ig on ig.item_id=i.item_id join Genres g on g.genre_id = ig.genre_id where g.genre like @genre_like";
+        private string _selectMoviesByGenre_sql = "select available, title, i.item_id from Movies m join Items i on i.item_id=m.item_id join Item_Genre ig on ig.item_id=i.item_id join Genres g on g.genre_id = ig.genre_id where g.genre like @param1";
         MySqlCommand _selectMoviesByGenre;
-        private string _selectItemsByPerson_sql = "select available, title from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where p.first_name like @name_like or p.last_name like @name_like2";
+        private string _selectItemsByPerson_sql = "select available, title, i.item_id from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where p.first_name like @name_like or p.last_name like @name_like2";
         MySqlCommand _selectItemsByPerson;
-        private string _selectBooksByPerson_sql = "select available, title from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where i.item_id in (select b.item_id from Books b) and p.first_name like @name_like or p.last_name like @name_like2";
+        private string _selectBooksByPerson_sql = "select available, title, i.item_id from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where i.item_id in (select b.item_id from Books b) and p.first_name like @name_like or p.last_name like @name_like2";
         MySqlCommand _selectBooksByPerson;
-        private string _selectMoviesByPerson_sql = "select available, title from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where i.item_id in (select m.item_id from Movies m) and p.first_name like @name_like or p.last_name like @name_like2";
+        private string _selectMoviesByPerson_sql = "select available, title, i.item_id from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where i.item_id in (select m.item_id from Movies m) and p.first_name like @name_like or p.last_name like @name_like2";
 
         internal List<Object> GetUserItemsCheckedOut(int customerId)
         {
@@ -1018,38 +1018,126 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         public List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria, out string errorMessage)
         {
             List<object> searchResults = new List<object>();
-            MySqlCommand query;
-
+            MySqlCommand booksQuery = null;
+            MySqlCommand moviesQuery = null;
+            errorMessage = null;
             // TODO > Add cases for the title, genre, person item search options that can get passed in (about 9 
             // more if statements. ALSO switch case might be better here.
-            if (searchCriteria == ItemSearchOptions.BookAndMovie)
-            {
-                query = _selectItemsByTitle;
-            } else if (searchCriteria == ItemSearchOptions.Book)
-            {
-                query = _selectBooksByTitle;
-            } else //must be movie
-            {
-                query = _selectMoviesByTitle;
+
+            switch (searchCriteria) {
+                case (ItemSearchOptions.GenreAndBookAndMovie):
+                    booksQuery = _selectBooksByGenre;
+                    moviesQuery = _selectMoviesByGenre;
+                    booksQuery.Parameters.Clear();
+                    moviesQuery.Parameters.Clear();
+                    moviesQuery.Parameters.AddWithValue("@param1", '%' + searchTitle + '%');
+                    booksQuery.Parameters.AddWithValue("@param1", '%' + searchTitle + '%');
+                    break;
+                case (ItemSearchOptions.PersonAndBookAndMovie):
+                    booksQuery = _selectBooksByPerson;
+                    moviesQuery = _selectMoviesByPerson;
+                    booksQuery.Parameters.Clear();
+                    moviesQuery.Parameters.Clear();
+                    if (searchTitle.Contains(" "))
+                    {
+                        string[] firstLast = searchTitle.Split(' ');
+                        moviesQuery.Parameters.AddWithValue("@name_like", '%' + firstLast[0] + '%');
+                        moviesQuery.Parameters.AddWithValue("@name_like2", '%' + firstLast[1] + '%');
+                        booksQuery.Parameters.AddWithValue("@name_like", '%' + firstLast[0] + '%');
+                        booksQuery.Parameters.AddWithValue("@name_like2", '%' + firstLast[1] + '%');
+                    }
+                    else
+                    {
+                        moviesQuery.Parameters.AddWithValue("@name_like", '%' + searchTitle + '%');
+                        moviesQuery.Parameters.AddWithValue("@name_like2", '%' + searchTitle + '%');
+                        booksQuery.Parameters.AddWithValue("@name_like", '%' + searchTitle + '%');
+                        booksQuery.Parameters.AddWithValue("@name_like2", '%' + searchTitle + '%');
+                    }
+                    break;
+                case (ItemSearchOptions.TitleAndBookAndMovie):
+                    booksQuery = _selectBooksByTitle;
+                    moviesQuery = _selectMoviesByTitle;
+                    booksQuery.Parameters.Clear();
+                    moviesQuery.Parameters.Clear();
+                    moviesQuery.Parameters.AddWithValue("@param1", '%' + searchTitle + '%');
+                    booksQuery.Parameters.AddWithValue("@param1", '%' + searchTitle + '%');
+                    break;
+                case (ItemSearchOptions.PersonAndBook):
+                    booksQuery = _selectBooksByPerson;
+                    booksQuery.Parameters.Clear();
+                    if (searchTitle.Contains(" "))
+                    {
+                        string[] firstLast = searchTitle.Split(' ');
+                        booksQuery.Parameters.AddWithValue("@name_like", '%' + firstLast[0] + '%');
+                        booksQuery.Parameters.AddWithValue("@name_like2", '%' + firstLast[1] + '%');
+                    }
+                    else
+                    {
+                        booksQuery.Parameters.AddWithValue("@name_like", '%' + searchTitle + '%');
+                        booksQuery.Parameters.AddWithValue("@name_like2", '%' + searchTitle + '%');
+                    }
+                    break;
+                case (ItemSearchOptions.TitleAndBook):
+                    booksQuery = _selectBooksByTitle;
+                    booksQuery.Parameters.Clear();
+                    booksQuery.Parameters.AddWithValue("@param1", '%' + searchTitle + '%');
+                    break;
+                case (ItemSearchOptions.GenreAndBook):
+                    booksQuery = _selectBooksByGenre;
+                    booksQuery.Parameters.Clear();
+                    booksQuery.Parameters.AddWithValue("@param1", '%' + searchTitle + '%');
+                    break;
+                case (ItemSearchOptions.GenreAndMovie):
+                    moviesQuery = _selectMoviesByGenre;
+                    moviesQuery.Parameters.Clear();
+                    moviesQuery.Parameters.AddWithValue("@param1", '%' + searchTitle + '%');
+                    break;
+                case (ItemSearchOptions.TitleAndMovie):
+                    moviesQuery = _selectMoviesByTitle;
+                    moviesQuery.Parameters.Clear();
+                    moviesQuery.Parameters.AddWithValue("@param1", '%' + searchTitle + '%');
+                    break;
+                case (ItemSearchOptions.PersonAndMovie):
+                    moviesQuery = _selectMoviesByPerson;
+                    moviesQuery.Parameters.Clear();
+                    if (searchTitle.Contains(" "))
+                    {
+                        string[] firstLast = searchTitle.Split(' ');
+                        moviesQuery.Parameters.AddWithValue("@name_like", '%' + firstLast[0] + '%');
+                        moviesQuery.Parameters.AddWithValue("@name_like2", '%' + firstLast[1] + '%');
+                    }
+                    else
+                    {
+                        moviesQuery.Parameters.AddWithValue("@name_like", '%' + searchTitle + '%');
+                        moviesQuery.Parameters.AddWithValue("@name_like2", '%' + searchTitle + '%');
+                    } 
+                    break;
+                default:
+                    errorMessage = "System error";
+                    return searchResults;
             }
-            query.Parameters.Clear();
-            query.Parameters.AddWithValue("@param1", '%' + searchTitle + '%');
-            var reader = query.ExecuteReader();
-            while (reader.Read())
-            {
-                string someStringFromColumnZero;
-                if (Convert.ToInt32(reader.GetString(0)) == 1)
-                {
-                    someStringFromColumnZero = "Available       ";
-                } else
-                {
-                    someStringFromColumnZero = "Not Available";
+
+            if (moviesQuery != null) {
+                var reader = moviesQuery.ExecuteReader();
+                while (reader.Read()) {
+                    string someStringFromColumnOne = reader.GetString(1);
+                    searchResults.Add(new Movie(new Condition("Brand New", 1), (reader.GetString(0) == "1") ? true : false, 10, new Genre("Uknown", 1), Convert.ToInt32(reader.GetString(2)), someStringFromColumnOne, 5, 0, "", 0,"", null));
                 }
-                string someStringFromColumnOne = reader.GetString(1);
-                searchResults.Add(someStringFromColumnZero + "\t" + someStringFromColumnOne);
+                reader.Close();
+                errorMessage = null;
             }
-            reader.Close();
-            errorMessage = "";
+
+            if (booksQuery != null)
+            {
+                var reader = booksQuery.ExecuteReader();
+                while (reader.Read())
+                {
+                    string someStringFromColumnOne = reader.GetString(1);
+                    searchResults.Add(new Book(new Condition("Brand New", 1), (reader.GetString(0) == "1") ? true : false, 10, new Genre("Uknown", 1), Convert.ToInt32(reader.GetString(2)), someStringFromColumnOne, 5, 0, "", 0, null));
+                }
+                reader.Close();
+                errorMessage = null;
+            }
             return searchResults;
         }
 
