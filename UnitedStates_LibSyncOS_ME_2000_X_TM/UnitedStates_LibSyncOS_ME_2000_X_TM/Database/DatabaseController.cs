@@ -35,14 +35,15 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             MySqlCommand _selectItemsCheckedOutUser = new MySqlCommand(_selectItemsCheckedOutUser_sql, _mysqlConnection);
             _selectItemsCheckedOutUser.Parameters.Clear();
             _selectItemsCheckedOutUser.Parameters.AddWithValue("@custId", customerId);
-            var reader = _selectItemsCheckedOutUser.ExecuteReader();
-            while (reader.Read())
+            using (MySqlDataReader reader = _selectItemsCheckedOutUser.ExecuteReader())
             {
-                itemsOut.Add("Title: " + reader.GetString(0) + " \tDue: " + reader.GetString(1));
+                while (reader.Read())
+                {
+                    itemsOut.Add("Title: " + reader.GetString(0) + " \tDue: " + reader.GetString(1));
+                }
+                reader.Close();
+                return itemsOut;
             }
-            reader.Close();
-            return itemsOut;
-            throw new NotImplementedException();
         }
 
         MySqlCommand _selectMoviesByPerson;
@@ -470,6 +471,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             string insertCustomer = "INSERT INTO Cardholders(username, password, phone, name, address) VALUES(@username, @password, @phone, @name, @address)";
+            _checkUniqueUsername.Parameters.Clear();
             _checkUniqueUsername.Parameters.AddWithValue("@username", username);
             using (MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader())
             {
@@ -530,6 +532,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 {"@description", description }
             };
 
+            _checkUniqueUsername.Parameters.Clear();
             _checkUniqueUsername.Parameters.AddWithValue("@username", username);
             using (MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader())
             {
@@ -575,6 +578,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         public bool CheckoutItem(ItemTypes itemType, Customer loggedInCustomer, int itemId, out string errorMessage)
         {
             MySqlTransaction trans = _mysqlConnection.BeginTransaction();
+            _checkItemAvailability.Parameters.Clear();
             _checkItemAvailability.Parameters.AddWithValue("@item_id", itemId);
             using (MySqlDataReader rdr = _checkItemAvailability.ExecuteReader())
             {
@@ -625,6 +629,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             // 1. Remove row from cardholder_item
             // 2. In Items, set available to true
             MySqlTransaction trans = _mysqlConnection.BeginTransaction();
+            _selectCheckedOutItem.Parameters.Clear();
             _selectCheckedOutItem.Parameters.AddWithValue("@item_id", itemId);
             using (MySqlDataReader rdr = _selectCheckedOutItem.ExecuteReader())
             {
@@ -679,6 +684,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         /// <returns></returns>
         public bool CheckUserLoginCredentials(string username, string password, out string errorMessage)
         {
+            _selectUsernamePassword.Parameters.Clear();
             _selectUsernamePassword.Parameters.AddWithValue("@username", username);
             using (MySqlDataReader rdr = _selectUsernamePassword.ExecuteReader())
             {
@@ -718,6 +724,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
             _deleteCustomer.Transaction = transaction;
+            _deleteCustomer.Parameters.Clear();
             _deleteCustomer.Parameters.AddWithValue("@username", username);
             try
             {
@@ -743,6 +750,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
             _deleteItem.Transaction = transaction;
+            _deleteItem.Parameters.Clear();
             _deleteItem.Parameters.AddWithValue("@item_id", itemId);
             try
             {
@@ -890,6 +898,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         public bool PayFine(string username, out string errorMessage)
         {
             MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
+            _checkUniqueUsername.Parameters.Clear();
             _checkUniqueUsername.Parameters.AddWithValue("@username", username);
             string c_id;
             string fine_id;
@@ -924,9 +933,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     while (rdr.Read())
                     {
                         fine_id = rdr["fine_id"].ToString();
+                        _updateFine.Parameters.Clear();
                         _updateFine.Parameters.AddWithValue("@fine_id", fine_id);
                         if (_updateFine.ExecuteNonQuery() > 0)
                         {
+                            _deleteFineOwed.Parameters.Clear();
                             _deleteFineOwed.Parameters.AddWithValue("@fine_id", fine_id);
                             _deleteFineOwed.ExecuteNonQuery();
                         }
@@ -957,6 +968,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
             try
             {
+                _updateFine.Parameters.Clear();
                 _updateFine.Parameters.AddWithValue("@fine_id", fine.FineId);
                 if (_updateFine.ExecuteNonQuery() > 0)
                 {
@@ -1019,21 +1031,25 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             int balance = -1;
             _showTotalAmtOwed.Parameters.Clear();
             _showTotalAmtOwed.Parameters.AddWithValue("@curUser_int", customerId);
-            var reader = _showTotalAmtOwed.ExecuteReader();
-            if (reader.Read())
+            using (MySqlDataReader reader = _showTotalAmtOwed.ExecuteReader())
             {
-                if(!reader.IsDBNull(0))
+                if (reader.Read())
                 {
-                    balance = reader.GetInt32(0);
-                } else
+                    if (!reader.IsDBNull(0))
+                    {
+                        balance = reader.GetInt32(0);
+                    }
+                    else
+                    {
+                        balance = 0;
+                    }
+                }
+                else
                 {
                     balance = 0;
                 }
-            } else
-            {
-                balance = 0;
+                reader.Close();
             }
-            reader.Close();
             return balance;
         }
 
@@ -1042,53 +1058,60 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             List<object> list = new List<object>();
             _showAllFinesForUser.Parameters.Clear();
             _showAllFinesForUser.Parameters.AddWithValue("@curUser_int", CustomerId);
-            var reader = _showAllFinesForUser.ExecuteReader();
-            while (reader.Read())
+            using (MySqlDataReader reader = _showAllFinesForUser.ExecuteReader())
             {
-                //amt paid due_date description
-                bool paid;
-                if (Convert.ToInt32(reader.GetString(2)) ==1)
+                while (reader.Read())
                 {
-                    paid = true;
-                } else
-                {
-                    paid = false;
+                    //amt paid due_date description
+                    bool paid;
+                    if (Convert.ToInt32(reader.GetString(2)) == 1)
+                    {
+                        paid = true;
+                    }
+                    else
+                    {
+                        paid = false;
+                    }
+                    // TODO: GUI says outstanding fines, would like it to say just "Fines"
+                    if (!paid)
+                        list.Add(new Fine(Convert.ToInt32(reader.GetString(0)), Convert.ToInt32(reader.GetString(1)), Convert.ToDateTime(reader.GetString(3)), paid, reader.GetString(4)));
                 }
-                // TODO: GUI says outstanding fines, would like it to say just "Fines"
-                if (!paid)
-                    list.Add(new Fine(Convert.ToInt32(reader.GetString(0)), Convert.ToInt32(reader.GetString(1)), Convert.ToDateTime(reader.GetString(3)), paid, reader.GetString(4)));
+                reader.Close();
+                return list;
             }
-            reader.Close();
-            return list;
         }
         public List<Customer> GetCustomer(string username, out bool success, out string errorMessage)
         {
             List<Customer> customers = new List<Customer>();
             _searchCardholders.Parameters.Clear();
             _searchCardholders.Parameters.AddWithValue("@username_like", '%' + username + '%');
-            var reader = _searchCardholders.ExecuteReader();
-            while (reader.Read())
+            using (MySqlDataReader reader = _searchCardholders.ExecuteReader())
             {
-                customers.Add(new Customer(Convert.ToInt32(reader["c_id"].ToString()), reader["username"].ToString(), reader["password"].ToString(), reader["name"].ToString(), reader["address"].ToString(), reader["phone"].ToString(), null, null));
+                while (reader.Read())
+                {
+                    customers.Add(new Customer(Convert.ToInt32(reader["c_id"].ToString()), reader["username"].ToString(), reader["password"].ToString(), reader["name"].ToString(), reader["address"].ToString(), reader["phone"].ToString(), null, null));
+                }
+                reader.Close();
+                success = true;
+                errorMessage = "";
+                return customers;
             }
-            reader.Close();
-            success = true;
-            errorMessage = "";
-            return customers;
         }
 
         public List<Customer> GetAllCustomers(out bool success, out string errorMessage)
         {
             List<Customer> customers = new List<Customer>();
-            var reader = _listAllCustomers.ExecuteReader();
-            while (reader.Read())
+            using (MySqlDataReader reader = _listAllCustomers.ExecuteReader())
             {
-                customers.Add(new Customer(Convert.ToInt32(reader["c_id"].ToString()), reader["username"].ToString(), reader["password"].ToString(), reader["name"].ToString(), reader["address"].ToString(), reader["phone"].ToString(), null, null));
+                while (reader.Read())
+                {
+                    customers.Add(new Customer(Convert.ToInt32(reader["c_id"].ToString()), reader["username"].ToString(), reader["password"].ToString(), reader["name"].ToString(), reader["address"].ToString(), reader["phone"].ToString(), null, null));
+                }
+                reader.Close();
+                success = true;
+                errorMessage = "";
+                return customers;
             }
-            reader.Close();
-            success = true;
-            errorMessage = "";
-            return customers;
         }
     }
 }
