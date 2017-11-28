@@ -36,6 +36,7 @@
             this.uxCustomerSearchItemsTextBox = new System.Windows.Forms.TextBox();
             this.uxCustomerCheckoutItemButton = new System.Windows.Forms.Button();
             this.Customer_Search_Attribute_ComboBox = new System.Windows.Forms.ComboBox();
+            this.uxStaffSelectButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uxCustomerSearchButton
@@ -120,11 +121,23 @@
             this.Customer_Search_Attribute_ComboBox.Size = new System.Drawing.Size(121, 21);
             this.Customer_Search_Attribute_ComboBox.TabIndex = 18;
             // 
+            // uxStaffSelectButton
+            // 
+            this.uxStaffSelectButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.uxStaffSelectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxStaffSelectButton.Location = new System.Drawing.Point(142, 254);
+            this.uxStaffSelectButton.Name = "uxStaffSelectButton";
+            this.uxStaffSelectButton.Size = new System.Drawing.Size(114, 29);
+            this.uxStaffSelectButton.TabIndex = 19;
+            this.uxStaffSelectButton.Text = "Select";
+            this.uxStaffSelectButton.UseVisualStyleBackColor = true;
+            // 
             // CustomerItemSearchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 295);
+            this.Controls.Add(this.uxStaffSelectButton);
             this.Controls.Add(this.Customer_Search_Attribute_ComboBox);
             this.Controls.Add(this.uxCustomerCheckoutItemButton);
             this.Controls.Add(this.uxCustomerSearchButton);
@@ -150,5 +163,6 @@
         private System.Windows.Forms.TextBox uxCustomerSearchItemsTextBox;
         private System.Windows.Forms.Button uxCustomerCheckoutItemButton;
         private System.Windows.Forms.ComboBox Customer_Search_Attribute_ComboBox;
+        private System.Windows.Forms.Button uxStaffSelectButton;
     }
 }

@@ -22,6 +22,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         private CreateContributorWindow staffCreateContributorWindow;
         private StaffCreateCustomerWindow staffCreateCustomerWindow;
         private StaffCustomerManager staffCustomerManager;
+        private ItemDetailView itemDetailView;
         private string errorMessage = "";
 
         public StaffWindow()
@@ -39,6 +40,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             this.staffCreateContributorWindow = new CreateContributorWindow();
             this.staffCreateCustomerWindow = new StaffCreateCustomerWindow();
             this.staffCustomerManager = new StaffCustomerManager(controller);
+            this.itemDetailView = new ItemDetailView();
             
             this.libraryController = controller;
         }
@@ -83,14 +85,24 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public void ShowItemDetailViewWindow(Item selectedItem) {
-
+            List<string> itemDisplayContents = null;
             if (selectedItem is Movie) {
-                libraryController.GetItemDetails(selectedItem, ItemType.Movie);
+                itemDisplayContents = libraryController.GetItemDetails(selectedItem, ItemType.Movie);
             } else if (selectedItem is Book) {
-                libraryController.GetItemDetails(selectedItem, ItemType.Book);
+                itemDisplayContents = libraryController.GetItemDetails(selectedItem, ItemType.Book);
             } else {
                 MessageBox.Show("Error with selected item, sorry");
             }
+
+            if (itemDisplayContents == null)
+                return;
+            itemDetailView.ClearDisplayItems();
+            itemDetailView.AddDisplayItems(itemDisplayContents.ToArray());
+            var dialogResult = itemDetailView.Display();
+            // do more things if needed
+
+
+
         }
         public void DeleteItemFromLibrary()
         {
