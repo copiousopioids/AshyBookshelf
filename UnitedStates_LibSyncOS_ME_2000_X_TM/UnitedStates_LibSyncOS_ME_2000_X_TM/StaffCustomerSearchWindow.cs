@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnitedStates_LibSyncOS_ME_2000_X_TM.Classes;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
@@ -27,13 +28,17 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             get
             {
-                if (uxStaffCustomerSearchListView.SelectedIndices == -1) throw new Exception("Select a Line");
-                return uxStaffCustomerSearchListView.SelectedIndices;
+                if (uxStaffCustomerSearchListView.SelectedIndices.Count > 0)
+                {
+                    
+                    return uxStaffCustomerSearchListView.SelectedIndices[0];
+                }
+                throw new Exception("Select a Line");
             }
-
             set
             {
-                uxStaffCustomerSearchListView.Sele = value;
+                // why are you using this.
+                uxStaffCustomerSearchListView.SelectedIndices.Add(value);
             }
         }
 
@@ -41,14 +46,27 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             get
             {
-                if (uxStaffCustomerSearchListView.SelectedItem == null) throw new Exception("Select a line");
-                return uxStaffCustomerSearchListView.SelectedItem;
-            }
-        }
+                if (uxStaffCustomerSearchListView.SelectedItems.Count > 0)
+                {
+                    return uxStaffCustomerSearchListView.SelectedItems[0];
+                }
+                throw new Exception("Select a line");
+            }            
+    }
 
-        public void AddDisplayItems(params object [] displayObjects)
+        public void AddDisplayItems(params object [] customers)
         {
-            uxStaffCustomerSearchListView.Items.AddRange(displayObjects.ToArray());
+            ListViewItem viewItem;
+            List<ListViewItem> viewItems = new List<ListViewItem>();
+            foreach(Customer customer in customers)
+            {
+                viewItem = new ListViewItem(customer.Username);
+                viewItem.SubItems.Add(customer.Name);
+                viewItem.SubItems.Add(customer.Address);
+                viewItem.SubItems.Add(customer.PhoneNumber);
+                viewItems.Add(viewItem);                
+            }
+            uxStaffCustomerSearchListView.Items.AddRange(viewItems.ToArray<ListViewItem>());
         }
 
         public bool CheckDataValidity()
@@ -77,7 +95,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public bool CheckSelectCustomerValidity () {
-            if (uxStaffCustomerSearchListView.SelectedItem == null) {
+            if (uxStaffCustomerSearchListView.SelectedItems.Count <= 0) {
                 MessageBox.Show("Please select a customer to continue with this action");
                 return false;
             }
