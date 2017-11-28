@@ -99,7 +99,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _deleteFromCI_sql = "begin delete from Cardholder_Item where item_id = @item_id; return true; end";
         MySqlCommand _deleteFromCI;
 
-        private string _checkItemAvailability_sql = "SELECT available FROM Items WHERE item_id = @item_id";
+        private string _checkItemAvailability_sql = "SELECT * FROM Items WHERE item_id = @item_id";
         MySqlCommand _checkItemAvailability;
 
         private string _updateAvailabilityCheckedout_sql = "UPDATE Items SET available = 0 WHERE item_id = @item_id";
@@ -144,6 +144,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _updateAvailabilityCheckedout = new MySqlCommand(_updateAvailabilityCheckedout_sql, _mysqlConnection);
             _listAllCustomers = new MySqlCommand(_listAllCustomers_sql, _mysqlConnection);
 
+            _checkItemAvailability = new MySqlCommand(_checkItemAvailability_sql, _mysqlConnection);
             _returnItem = new MySqlCommand(_returnItem_sql, _mysqlConnection);
             _selectCheckedOutItem = new MySqlCommand(_selectCheckedOutItem_sql, _mysqlConnection);
 
@@ -607,9 +608,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             _checkItemAvailability.Parameters.Clear();
-            _checkItemAvailability.Parameters.AddWithValue("@item_id", itemId);
+            _checkItemAvailability.Parameters.AddWithValue("@item_id", itemId.ToString());
             using (MySqlDataReader rdr = _checkItemAvailability.ExecuteReader())
             {
+                if (!rdr.Read())
+                {
+                    errorMessage = "No Book Found";
+                    return false;
+                }
 
                 if (Int32.Parse(rdr["item_id"].ToString()) == 0)
                 {
@@ -618,15 +624,20 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     return false;
                 }
 
-                string insertInCI = "INSERT INTO Cardholders_Items(c_id, item_id, due_date) VALUES(@c_id, @item_id, @due_date)";
+                string insertInCI = "INSERT INTO Cardholder_Item(c_id, item_id, due_date) VALUES(@c_id, @item_id, @due_date)";
+                string dateFormat = "yyyy-MM-dd HH:mm:ss";
                 string[,] parameters =
                 {
                     {"@c_id", loggedInCustomer.CustomerId.ToString() },
                     {"@item_id", itemId.ToString() },
-                    {"@due_date", DateTime.UtcNow.AddDays(14).ToString() }
+                    {"@due_date", DateTime.Now.AddDays(14).ToString(dateFormat) }
                 };
 
                 rdr.Close();
+
+                _updateAvailabilityCheckedout.Parameters.Clear();
+                _updateAvailabilityCheckedout.Parameters.AddWithValue("@item_id", itemId);
+
                 if (_updateAvailabilityCheckedout.ExecuteNonQuery() == 0)
                 {
                     errorMessage = "System Error Occurred. Please Try Again";
@@ -634,7 +645,17 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     return false;
                 }
 
+                //MySqlCommand cmd = new MySqlCommand(insertInCI, _mysqlConnection);
+
+                //cmd.Transaction = trans;
+                //cmd.Parameters.AddWithValue("@c_id", loggedInCustomer.CustomerId);
+                //cmd.Parameters.AddWithValue("item_id", itemId);
+                //cmd.Parameters.AddWithValue("due_date", DateTime.UtcNow.AddDays(14));
+
+
+
                 if (Insert(insertInCI, parameters, trans))
+                //if (cmd.ExecuteNonQuery() > 0)
                 {
                     errorMessage = null;
                     trans.Commit();
