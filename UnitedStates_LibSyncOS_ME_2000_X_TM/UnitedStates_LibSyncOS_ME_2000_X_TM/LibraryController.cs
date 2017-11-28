@@ -28,6 +28,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success, out string errorMessage)
         {
+            success = false;
+            errorMessage = "System Error";
+            return databaseController.AddBook(title, genre, isbn, publisher, numberOfPages, contributors, out success, out errorMessage);
+
             success = true;
             var contributors1 = new List<Person>();
             var awards = new List<Award>();
@@ -58,6 +62,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool AddCustomer(string username, string password, string name, string address, string phoneNumber, out string errorMessage)
         {
+            errorMessage = "System Error";
+            return databaseController.AddCustomer(username, password, name, address, phoneNumber, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
@@ -65,6 +72,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public Fine AddFine(string username, int amount, out bool result, out string errorMessage)
         {
+            result = false;
+            errorMessage = "System Error";
+            return databaseController.AddFine(username, amount, out result, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             result = true;
             return new Fine(1, 23, DateTime.Now, false, "This is the description");
@@ -73,6 +84,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success, out string errorMessage)
         {
+            errorMessage = "System Error";
+            success = false;
+            return databaseController.AddMovie(title, description, genre, duration, barcode, contributors, out success, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             success = true;
             var contributors1 = new List<Person>();
@@ -99,6 +114,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool CheckoutItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
+            errorMessage = "User was not logged in";
+            if (loggedInCustomer == null)
+                return false;
+
+            return databaseController.CheckoutItem(itemType, loggedInCustomer, itemId, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
@@ -106,6 +127,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool DeleteCustomer(string username, out string errorMessage)
         {
+
+            errorMessage = "System Error";
+            return databaseController.DeleteCustomer(username, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
@@ -113,6 +138,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool DeleteItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
+            errorMessage = "System Error";
+            databaseController.DeleteItem(itemType, itemId, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
@@ -120,6 +148,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public List<Customer> GetCustomer(string username, out bool success, out string errorMessage)
         {
+            errorMessage = "System Error";
+            success = false;
+            return databaseController.GetCustomer(username, out success, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             var itemsCheckedOut = new List<Item>();
             var contributors1 = new List<Person>();
@@ -158,48 +190,55 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             //throw new NotImplementedException();
         }
 
-        public Item GetItem(ItemTypes itemType, string searchTitle)
-        {
-            var contributors = new List<Person>();
-            var awards = new List<Award>();
-            var award1 = new Award(1, "pooAward", 21);
-            var award2 = new Award(1, "pooAward", 21);
-            var award3 = new Award(1, "pooAward", 21);
-            var award4 = new Award(1, "pooAward", 21);
-            awards.Add(award1);
-            awards.Add(award2);
-            awards.Add(award3);
-            awards.Add(award4);
+        //public Item GetItem(ItemTypes itemType, string searchTitle)
+        //{
+        //    var contributors = new List<Person>();
+        //    var awards = new List<Award>();
+        //    var award1 = new Award(1, "pooAward", 21);
+        //    var award2 = new Award(1, "pooAward", 21);
+        //    var award3 = new Award(1, "pooAward", 21);
+        //    var award4 = new Award(1, "pooAward", 21);
+        //    awards.Add(award1);
+        //    awards.Add(award2);
+        //    awards.Add(award3);
+        //    awards.Add(award4);
 
-            var person1 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
-            var person2 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
-            var person3 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
-            contributors.Add(person1);
-            contributors.Add(person2);
-            contributors.Add(person3);
+        //    var person1 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+        //    var person2 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+        //    var person3 = new Person(1, "Roy", "Poo", DateTime.Now, "twitterBro", DateTime.Now, awards, new Role(1, "stageCleaner"));
+        //    contributors.Add(person1);
+        //    contributors.Add(person2);
+        //    contributors.Add(person3);
 
-            return new Movie(new Condition("Good", 1), true, 2, new Genre("thisGenre", 1), 1, "This is the title", 2, 2, "This is the studio", 3, "This is the description", contributors);
-            throw new NotImplementedException();
-        }
+        //    return new Movie(new Condition("Good", 1), true, 2, new Genre("thisGenre", 1), 1, "This is the title", 2, 2, "This is the studio", 3, "This is the description", contributors);
+        //    throw new NotImplementedException();
+        //}
 
         public bool PayFine(string username, out string errorMessage)
         {
+            errorMessage = "System Error";
+            return databaseController.PayFine(username, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
         }
 
         public bool PayIndividualFine(string username, Fine fine, out string errorMessage) {
+
+            errorMessage = "System Error";
+            return databaseController.PayIndividualFine(username, fine, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
         }
 
         public bool CheckUserLoginCredentials(string username, string password, out string errorMessage) {
-            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL - libController";
-            //loggedInCustomer = set to cust if true
-            //return databaseController.CheckUserLoginCredentials(username, password, out errorMessage);
-            bool success = false;
+
+            errorMessage = "System Error";
+            return databaseController.CheckUserLoginCredentials(username, password, out errorMessage);
+
             string getCustErrorMessage = "";
             if (databaseController.CheckUserLoginCredentials(username,password, out errorMessage))
             {                                   //getCustomer returns a list of customers where username like '%username%' but 
@@ -256,6 +295,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage)
         {
+            errorMessage = "System Error";
+            return databaseController.ReturnItem(itemType, itemId, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             return true;
             throw new NotImplementedException();
@@ -263,6 +305,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria, out string errorMessage)
         {
+            errorMessage = "System Error";
+            return databaseController.searchItems(searchTitle, searchCriteria, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             var objectList = new List<object>();
             var contributors = new List<Person>();
@@ -301,15 +346,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             return databaseController.getTotalAmtOwed(CustomerId);
         }
 
-        public bool VerifyAccount(string username, string password, out string errorMessage)
-        {
-            errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
-            return true;
-            throw new NotImplementedException();
-        }
-
         public Person AddContributor(string firstName, string lastName, string twitterHandle, DateTime dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage) {
-            // ignoring death date for now
+            errorMessage = "System Error";
+            success = false;
+            return databaseController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, role, awards, out success, out errorMessage);
+
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             awards = new List<Award>();
             var award1 = new Award(1, "pooAward", 21);
@@ -333,6 +375,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public List<Person> GetAllContributors(out bool success, out string errorMessage) {
+
+            success = false;
+            errorMessage = "System Error";
+            return databaseController.GetAllContributors(out success, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             var contributors = new List<Person>();
             var awards = new List<Award>();
@@ -357,6 +404,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public List<Award> GetAllAwards(out bool success, out string errorMessage) {
+
+            success = false;
+            errorMessage = "System Error";
+            return databaseController.GetAllAwards(out success, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             var awards = new List<Award>();
             var award1 = new Award(1, "pooAward", 21);
@@ -373,6 +425,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public List<Role> GetAllRoles(out bool success, out string errorMessage) {
+
+            success = false;
+            errorMessage = "System Error";
+            return databaseController.GetAllRoles(out success, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             success = true;
             var roles = new List<Role>();
@@ -386,6 +443,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public List<Genre> GetAllGenres(out bool success, out string errorMessage) {
+
+            success = false;
+            errorMessage = "System Error";
+            return databaseController.GetAllGenres(out success, out errorMessage);
+
             errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
             success = true;
             var genres = new List<Genre>();

@@ -12,6 +12,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class StaffCreateCustomerWindow : Form, ILibraryNoListBoxForm
     {
+        LibraryController libraryControl = new LibraryController();
         public StaffCreateCustomerWindow()
         {
             InitializeComponent();
