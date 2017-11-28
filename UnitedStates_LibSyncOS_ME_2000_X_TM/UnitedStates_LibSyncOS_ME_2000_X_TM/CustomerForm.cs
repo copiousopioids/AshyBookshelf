@@ -46,7 +46,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             var type = checkoutItem.GetType();
                             if (checkoutItem is Book) {
                                 var bookToCheckout = (Book)checkoutItem;
-                                success = libraryController.DeleteItem(ItemTypes.Book, bookToCheckout.ID, out errorMessage);
+                                success = libraryController.CheckoutItem(ItemTypes.Book, bookToCheckout.ID, out errorMessage);
                                 if (success)
                                 {
                                     MessageBox.Show("Item Checked out");
@@ -60,7 +60,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             if (checkoutItem is Movie)
                             {
                                 var bookToCheckout = (Movie)checkoutItem;
-                                success = libraryController.DeleteItem(ItemTypes.Movie, bookToCheckout.ID, out errorMessage);
+                                success = libraryController.CheckoutItem(ItemTypes.Movie, bookToCheckout.ID, out errorMessage);
                                 if (success)
                                 {
                                     MessageBox.Show("Movie Checked out");
