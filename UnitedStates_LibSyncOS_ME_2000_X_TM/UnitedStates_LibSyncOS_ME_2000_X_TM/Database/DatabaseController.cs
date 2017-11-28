@@ -617,7 +617,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     return false;
                 }
 
-                if (Int32.Parse(rdr["item_id"].ToString()) == 0)
+                if (Int32.Parse(rdr["available"].ToString()) == 0)
                 {
                     errorMessage = "Item already checked out";
                     rdr.Close();
