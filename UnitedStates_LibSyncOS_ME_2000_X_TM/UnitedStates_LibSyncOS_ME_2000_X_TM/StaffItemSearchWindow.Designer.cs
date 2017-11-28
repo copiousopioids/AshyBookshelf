@@ -158,9 +158,9 @@
             this.uxStaffSelectItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uxStaffSelectItemButton.Location = new System.Drawing.Point(226, 241);
             this.uxStaffSelectItemButton.Name = "uxStaffSelectItemButton";
-            this.uxStaffSelectItemButton.Size = new System.Drawing.Size(89, 27);
+            this.uxStaffSelectItemButton.Size = new System.Drawing.Size(111, 27);
             this.uxStaffSelectItemButton.TabIndex = 12;
-            this.uxStaffSelectItemButton.Text = "Select";
+            this.uxStaffSelectItemButton.Text = "More Info";
             this.uxStaffSelectItemButton.UseVisualStyleBackColor = true;
             // 
             // StaffItemSearchWindow
