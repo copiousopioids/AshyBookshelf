@@ -127,18 +127,6 @@ CREATE TABLE Awards_Won(
 	ON DELETE CASCADE
 );
 
-CREATE TABLE Item_People(
-  item_id         INT NOT NULL,
-  person_id       INT NOT NULL,
-  PRIMARY KEY(item_id,person_id),
-  FOREIGN KEY(item_id)
-	REFERENCES Items(item_id)
-	ON DELETE CASCADE,
-  FOREIGN KEY(person_id) 
-	REFERENCES People(person_id)
-	ON DELETE CASCADE
-);
-
 CREATE TABLE People_Roles_Items(
   person_id       INT NOT NULL,
   role_code       INT NOT NULL,
