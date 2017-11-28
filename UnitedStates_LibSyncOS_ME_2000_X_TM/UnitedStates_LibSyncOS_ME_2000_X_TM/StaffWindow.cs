@@ -444,16 +444,29 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             while (true) {
                 var dialogResult = staffCustomerManager.Display();
                 switch (dialogResult) {
-                    case DialogReturn.CreateFine:
-                        var fineAmount = staffCustomerManager.NewFineAmount;
+                    case DialogReturn.CreateFine10:
                         var success = false;
-                        var fine = libraryController.AddFine(customer.Username, fineAmount, out success, out errorMessage);
+                        var fine = libraryController.AddFine(customer.Username, 10, out success, out errorMessage);
                         if (success)
                         {
                             MessageBox.Show("Fine Added");
                             staffCustomerManager.AddItem(fine);
                         }
                         else {
+                            // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                            MessageBox.Show("Fine could not be added " + errorMessage);
+                        }
+                        break;
+                    case DialogReturn.CreateFine2:
+                        var success2 = false;
+                        var fine2 = libraryController.AddFine(customer.Username, 2, out success2, out errorMessage);
+                        if (success2)
+                        {
+                            MessageBox.Show("Fine Added");
+                            staffCustomerManager.AddItem(fine2);
+                        }
+                        else
+                        {
                             // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
                             MessageBox.Show("Fine could not be added " + errorMessage);
                         }

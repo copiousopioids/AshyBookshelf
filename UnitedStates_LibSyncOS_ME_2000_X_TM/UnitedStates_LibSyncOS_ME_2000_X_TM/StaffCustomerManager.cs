@@ -24,18 +24,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 uxStaffCheckedOutItemsListBox.Items.AddRange(customer.ItemsCheckoutOut.ToArray());
         }
 
-        public int NewFineAmount {
-            get {
-                try
-                {
-                    return Convert.ToInt32(uxStaffNewFineAmount.Text);
-                }
-                catch (Exception ex) {
-                    MessageBox.Show("Amount was not an integer" + ex.ToString());
-                    return 0;
-                }
-            }
-        }
         public StaffCustomerManager(LibraryController controller)
         {
             this.libraryController = controller;
@@ -72,10 +60,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool CheckDataValidity()
         {
-            if (uxStaffNewFineAmount.Text.Equals("")) {
-                MessageBox.Show("Please enter a fine amount");
-                return false;
-            }
             return true;
         }
 
@@ -92,7 +76,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffGenericItemsListBox.Items.Clear();
             uxStaffNameTextBox.Text = "";
             uxStaffUsernameTextBox.Text = "";
-            uxStaffNewFineAmount.Text = "";
             uxStaffCheckedOutItemsListBox.Items.Clear();
         }
 
@@ -111,7 +94,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 switch (this.ShowDialog()) {
                     case DialogResult.OK:
                         if (CheckDataValidity()) {
-                            return DialogReturn.CreateFine;
+                            return DialogReturn.CreateFine10;
                         }
                         break;
                     case DialogResult.Yes:
@@ -121,6 +104,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         break;
                     case DialogResult.Cancel:
                         return DialogReturn.Cancel;
+                    case DialogResult.Abort: return DialogReturn.CreateFine2;
                     default:
                         return DialogReturn.Undefined;
                 }
