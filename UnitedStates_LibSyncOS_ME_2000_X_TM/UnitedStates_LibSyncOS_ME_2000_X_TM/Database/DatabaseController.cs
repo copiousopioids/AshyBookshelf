@@ -31,7 +31,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         internal List<Object> GetUserItemsCheckedOut(int customerId)
         {
             List<Object> itemsOut = new List<Object>();
-            string _selectItemsCheckedOutUser_sql = "select i.title, ci.due_date from Cardholder_Item ci join Items i on i.item_id=ci.item_id where ci.c_id=@custId and i.available=false";
+            string _selectItemsCheckedOutUser_sql = "select i.item_id, i.title, ci.due_date from Cardholder_Item ci join Items i on i.item_id=ci.item_id where ci.c_id=@custId and i.available=false";
             MySqlCommand _selectItemsCheckedOutUser = new MySqlCommand(_selectItemsCheckedOutUser_sql, _mysqlConnection);
             _selectItemsCheckedOutUser.Parameters.Clear();
             _selectItemsCheckedOutUser.Parameters.AddWithValue("@custId", customerId);
@@ -39,7 +39,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             {
                 while (reader.Read())
                 {
-                    itemsOut.Add("Title: " + reader.GetString(0) + " \tDue: " + reader.GetString(1));
+                    //no longer displays due date - will do that from the admin side
+                    itemsOut.Add(new Book(null, false, -1, null, reader.GetInt32(0), reader.GetString(1), -1, -1, null, -1, null));
                 }
                 reader.Close();
                 return itemsOut;
@@ -144,6 +145,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _listAllCustomers = new MySqlCommand(_listAllCustomers_sql, _mysqlConnection);
 
             _returnItem = new MySqlCommand(_returnItem_sql, _mysqlConnection);
+            _selectCheckedOutItem = new MySqlCommand(_selectCheckedOutItem_sql, _mysqlConnection);
 
 
         }
@@ -639,6 +641,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                     while (rdr.Read())
                     {
+                        rdr.Close();
                         string[,] returnItemVal = new string[,]
                         {
                         { "@item_id", itemId.ToString() },
