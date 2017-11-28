@@ -487,7 +487,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 case DialogReturn.Create:
                     var username = staffCreateCustomerWindow.UXStaffUsername;
                     var password = staffCreateCustomerWindow.UXStaffPassword;
-                    var name = staffCreateCustomerWindow.UXStaffPassword;
+                    var name = staffCreateCustomerWindow.UXStaffName;
                     var address = staffCreateCustomerWindow.UXStaffAddress;
                     var phoneNumber = staffCreateCustomerWindow.UXStaffPhoneNumber;
                     var success = libraryController.AddCustomer(username, password, name, address, phoneNumber, out errorMessage);
