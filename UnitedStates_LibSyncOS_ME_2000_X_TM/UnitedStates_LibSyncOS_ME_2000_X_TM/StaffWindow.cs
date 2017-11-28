@@ -457,9 +457,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             MessageBox.Show("Fine could not be added " + errorMessage);
                         }
                         break;
-                    case DialogReturn.CreateFine2:
+                    case DialogReturn.CreateFine5:
                         var success2 = false;
-                        var fine2 = libraryController.AddFine(customer.Username, 2, out success2, out errorMessage);
+                        var fine2 = libraryController.AddFine(customer.Username, 5, out success2, out errorMessage);
                         if (success2)
                         {
                             MessageBox.Show("Fine Added");

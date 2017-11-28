@@ -104,7 +104,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         break;
                     case DialogResult.Cancel:
                         return DialogReturn.Cancel;
-                    case DialogResult.Abort: return DialogReturn.CreateFine2;
+                    case DialogResult.Abort: return DialogReturn.CreateFine5;
                     default:
                         return DialogReturn.Undefined;
                 }

@@ -25,7 +25,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         PayFine,
         RemoveFine,
         CreateFine10,
-        CreateFine2,
+        CreateFine5,
         Select,
         ListCustomers
     }
