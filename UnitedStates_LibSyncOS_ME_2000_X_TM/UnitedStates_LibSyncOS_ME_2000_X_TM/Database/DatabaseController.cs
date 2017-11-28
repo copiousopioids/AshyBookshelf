@@ -1260,5 +1260,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 return customers;
             }
         }
+
+        public List<string> GetItemDetails(Item selectedItem, ItemType itemType)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

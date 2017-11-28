@@ -69,6 +69,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         case DialogReturn.Delete:
                             DeleteItemFromLibrary();
                             break;
+                        case DialogReturn.Select:
+                            ShowItemDetailViewWindow((Item)staffItemSearchWindow.SelectedItem);
+                            break;
                         case DialogReturn.Undefined:
                             throw new Exception("Dialog did not return properly");
                     }
@@ -79,6 +82,16 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
+        public void ShowItemDetailViewWindow(Item selectedItem) {
+
+            if (selectedItem is Movie) {
+                libraryController.GetItemDetails(selectedItem, ItemType.Movie);
+            } else if (selectedItem is Book) {
+                libraryController.GetItemDetails(selectedItem, ItemType.Book);
+            } else {
+                MessageBox.Show("Error with selected item, sorry");
+            }
+        }
         public void DeleteItemFromLibrary()
         {
             var selectedItem = staffItemSearchWindow.SelectedItem;

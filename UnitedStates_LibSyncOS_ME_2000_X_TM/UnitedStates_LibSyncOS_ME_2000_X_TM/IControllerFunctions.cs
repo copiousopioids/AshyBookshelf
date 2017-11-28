@@ -37,5 +37,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         List<Role> GetAllRoles(out bool success, out string errorMessage);
         List<Genre> GetAllGenres(out bool success, out string errorMessage);
 
+        List<string> GetItemDetails(Item selectedItem, ItemType itemType);
+
     }
 }

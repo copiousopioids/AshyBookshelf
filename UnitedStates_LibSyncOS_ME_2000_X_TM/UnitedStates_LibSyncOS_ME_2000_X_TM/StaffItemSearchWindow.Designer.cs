@@ -39,6 +39,7 @@
             this.genericItemsList = new System.Windows.Forms.ListBox();
             this.staffSearchButton = new System.Windows.Forms.Button();
             this.Staff_Search_Attribute_ComboBox = new System.Windows.Forms.ComboBox();
+            this.uxStaffSelectItemButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // staffSearchItemsTextBox
@@ -71,7 +72,7 @@
             // 
             this.button2.DialogResult = System.Windows.Forms.DialogResult.No;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(300, 241);
+            this.button2.Location = new System.Drawing.Point(354, 241);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(88, 27);
             this.button2.TabIndex = 4;
@@ -82,7 +83,7 @@
             // 
             this.button3.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(394, 241);
+            this.button3.Location = new System.Drawing.Point(448, 241);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(88, 27);
             this.button3.TabIndex = 5;
@@ -125,7 +126,7 @@
             this.genericItemsList.FormattingEnabled = true;
             this.genericItemsList.Location = new System.Drawing.Point(15, 64);
             this.genericItemsList.Name = "genericItemsList";
-            this.genericItemsList.Size = new System.Drawing.Size(464, 173);
+            this.genericItemsList.Size = new System.Drawing.Size(521, 173);
             this.genericItemsList.TabIndex = 9;
             // 
             // staffSearchButton
@@ -151,11 +152,22 @@
             this.Staff_Search_Attribute_ComboBox.Size = new System.Drawing.Size(121, 21);
             this.Staff_Search_Attribute_ComboBox.TabIndex = 11;
             // 
+            // uxStaffSelectItemButton
+            // 
+            this.uxStaffSelectItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxStaffSelectItemButton.Location = new System.Drawing.Point(226, 241);
+            this.uxStaffSelectItemButton.Name = "uxStaffSelectItemButton";
+            this.uxStaffSelectItemButton.Size = new System.Drawing.Size(89, 27);
+            this.uxStaffSelectItemButton.TabIndex = 12;
+            this.uxStaffSelectItemButton.Text = "Select";
+            this.uxStaffSelectItemButton.UseVisualStyleBackColor = true;
+            // 
             // StaffItemSearchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 283);
+            this.ClientSize = new System.Drawing.Size(548, 283);
+            this.Controls.Add(this.uxStaffSelectItemButton);
             this.Controls.Add(this.Staff_Search_Attribute_ComboBox);
             this.Controls.Add(this.staffSearchButton);
             this.Controls.Add(this.genericItemsList);
@@ -187,5 +199,6 @@
         private System.Windows.Forms.ListBox genericItemsList;
         private System.Windows.Forms.Button staffSearchButton;
         private System.Windows.Forms.ComboBox Staff_Search_Attribute_ComboBox;
+        private System.Windows.Forms.Button uxStaffSelectItemButton;
     }
 }

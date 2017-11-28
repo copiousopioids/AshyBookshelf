@@ -141,7 +141,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             break;
                     case DialogResult.Ignore:
                             return DialogReturn.Select;
-                        break;
                     case DialogResult.Yes:
                         return DialogReturn.ListCustomers;
                     default:

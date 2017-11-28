@@ -432,6 +432,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             return databaseController.GetAllCustomers(out success, out errorMessage);
         }
 
-
+        public List<string> GetItemDetails(Item selectedItem, ItemType itemType)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
