@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS People;
 DROP TABLE IF EXISTS Items;
 
 CREATE TABLE Items(
-  item_id       INT NOT NULL,
+  item_id       INT NOT NULL AUTO_INCREMENT,
   title         VARCHAR(75) NOT NULL,
   available     BIT NOT NULL,
   weekly_fine   DOUBLE NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE Books(
 );
 
 CREATE TABLE Cardholders(
-  c_id          INT NOT NULL,
+  c_id          INT NOT NULL AUTO_INCREMENT,
   username      VARCHAR(80) NOT NULL,
   password      VARCHAR(30) NOT NULL,
   phone         VARCHAR(30),
@@ -72,7 +72,7 @@ CREATE TABLE Condit(
 );
 
 CREATE TABLE People(
-  person_id     INT NOT NULL,
+  person_id     INT NOT NULL AUTO_INCREMENT,
   first_name    VARCHAR(30) NOT NULL,
   last_name     VARCHAR(30) NOT NULL,
   birth_date    DATE NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE Awards(
 );
 
 CREATE TABLE Fines(
-  fine_id       INT NOT NULL,
+  fine_id       INT NOT NULL AUTO_INCREMENT,
   amount        DOUBLE NOT NULL,
   due_date      DATE NOT NULL,
   paid          BIT NOT NULL,
@@ -184,8 +184,7 @@ CREATE TABLE Cardholder_Item(
   c_id            INT NOT NULL,
   item_id         INT NOT NULL,
   due_date        DATE NOT NULL,
-  time		  INT NOT NULL,
-  PRIMARY KEY(c_id,item_id,time),
+  PRIMARY KEY(c_id,item_id,due_date),
   FOREIGN KEY(c_id) 
 	REFERENCES Cardholders(c_id)
 	ON DELETE CASCADE,
