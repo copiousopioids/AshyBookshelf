@@ -43,6 +43,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     {
                         case DialogReturn.CheckOut:
                             var checkoutItem = customerItemSearchWindow.SelectedItem;
+                            var type = checkoutItem.GetType();
                             if (checkoutItem is Book) {
                                 var bookToCheckout = (Book)checkoutItem;
                                 success = libraryController.DeleteItem(ItemTypes.Book, bookToCheckout.ID, out errorMessage);
@@ -52,6 +53,21 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                                     customerItemSearchWindow.ClearDisplayItems();
                                 }
                                 else {
+                                    // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                                    MessageBox.Show("Item could not be checked out " + errorMessage);
+                                }
+                            }
+                            if (checkoutItem is Movie)
+                            {
+                                var bookToCheckout = (Movie)checkoutItem;
+                                success = libraryController.DeleteItem(ItemTypes.Movie, bookToCheckout.ID, out errorMessage);
+                                if (success)
+                                {
+                                    MessageBox.Show("Movie Checked out");
+                                    customerItemSearchWindow.ClearDisplayItems();
+                                }
+                                else
+                                {
                                     // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
                                     MessageBox.Show("Item could not be checked out " + errorMessage);
                                 }

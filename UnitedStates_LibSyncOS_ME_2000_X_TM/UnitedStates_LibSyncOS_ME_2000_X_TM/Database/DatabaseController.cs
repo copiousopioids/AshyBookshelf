@@ -35,14 +35,15 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             MySqlCommand _selectItemsCheckedOutUser = new MySqlCommand(_selectItemsCheckedOutUser_sql, _mysqlConnection);
             _selectItemsCheckedOutUser.Parameters.Clear();
             _selectItemsCheckedOutUser.Parameters.AddWithValue("@custId", customerId);
-            var reader = _selectItemsCheckedOutUser.ExecuteReader();
-            while (reader.Read())
+            using (MySqlDataReader reader = _selectItemsCheckedOutUser.ExecuteReader())
             {
-                itemsOut.Add("Title: " + reader.GetString(0) + " \tDue: " + reader.GetString(1));
+                while (reader.Read())
+                {
+                    itemsOut.Add("Title: " + reader.GetString(0) + " \tDue: " + reader.GetString(1));
+                }
+                reader.Close();
+                return itemsOut;
             }
-            reader.Close();
-            return itemsOut;
-            throw new NotImplementedException();
         }
 
         MySqlCommand _selectMoviesByPerson;
@@ -51,11 +52,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         MySqlCommand _selectItemsUnavailable;
         private string _showTotalAmtOwed_sql = "select sum(f.amount) from Fines f join Owes o on o.fine_id=f.fine_id where f.paid=false and o.c_id = @curUser_int";
         MySqlCommand _showTotalAmtOwed;
-        private string _showAllFinesForUser_sql = "select amount, paid, due_date, description from Fines f join Owes o on o.fine_id=f.fine_id where o.c_id=@curUser_int";
+        private string _showAllFinesForUser_sql = "select f.fine_id, amount, paid, due_date, description from Fines f join Owes o on o.fine_id=f.fine_id where o.c_id=@curUser_int";
         MySqlCommand _showAllFinesForUser;
         private string _searchCardholders_sql = "select * from Cardholders where username like @username_like";
         MySqlCommand _searchCardholders;
-        private string _checkUniqueUsername_sql = "SELECT username FROM Cardholders WHERE username = @username";
+        private string _checkUniqueUsername_sql = "SELECT username, c_id FROM Cardholders WHERE username = @username";
         MySqlCommand _checkUniqueUsername;
         private string _deleteCustomer_sql = "DELETE FROM Cardholders WHERE username = @username";
         MySqlCommand _deleteCustomer;
@@ -67,7 +68,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         MySqlCommand _deleteFineOwed;
         private string _selectAllFinesForUser_sql = "SELECT fine_id FROM Owes WHERE c_id = @c_id";
         MySqlCommand _selectAllFinesForUser;
-        private string _selectIndividualFine_sql = "SELET fine_id FROM Owes WHERE fine_id = @fine_id";
+        private string _selectIndividualFine_sql = "SELECT * FROM Fines WHERE fine_id = @fine_id";
         MySqlCommand _selectIndividualFine;
         private string _selectUsernamePassword_sql = "SELECT username, password FROM Cardholders WHERE username = @username";
         MySqlCommand _selectUsernamePassword;
@@ -170,7 +171,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         /// <param name="strSQL">the sql string using parameters.</param>
         /// <param name="parameterValue">A two-dimensional array holding the parameter in the first 'column'
         ///                              (e.g. '@title'), and the value in the second column.</param>
-        public bool Insert(string strSQL, string[,] parameterValue)
+        public bool Insert(string strSQL, string[,] parameterValue, MySqlTransaction trans)
         {
             MySqlCommand cmd = new MySqlCommand(strSQL, _mysqlConnection);
 
@@ -179,14 +180,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 cmd.Parameters.AddWithValue(parameterValue[i, 0], parameterValue[i, 1]);
             }
 
-            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             cmd.Transaction = trans;
 
             try
             {
                 if (cmd.ExecuteNonQuery() > 0)
                 {
-                    trans.Commit();
                     return true;
                 }
                 else
@@ -195,7 +194,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                trans.Rollback();
                 return false;
             }
 
@@ -207,7 +205,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         /// <param name="strSQL"></param>
         /// <param name="parameterValue"></param>
         /// <returns></returns>
-        public int InsertScalarInt(string strSQL, string[,] parameterValue)
+        public int InsertScalarInt(string strSQL, string[,] parameterValue, MySqlTransaction trans)
         {
             MySqlCommand cmd = new MySqlCommand(strSQL, _mysqlConnection);
 
@@ -216,18 +214,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 cmd.Parameters.AddWithValue(parameterValue[i, 0], parameterValue[i, 1]);
             }
 
-
-            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             cmd.Transaction = trans;
 
-            int modified = -1;
             try
             {
-                modified = (int)cmd.ExecuteScalar();
-                if (modified != -1)
+                if (cmd.ExecuteNonQuery() > 0)
                 {
-                    trans.Commit();
-                    return modified;
+                    return Convert.ToInt32(cmd.LastInsertedId);
                 }
                 else
                     throw new Exception("System Error Occurred");
@@ -235,21 +228,21 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             catch(Exception e)
             {
                 Console.WriteLine(e.Message);
-                trans.Rollback();
-                return modified;
+                return Convert.ToInt32(cmd.LastInsertedId);
             }
         }
 
 
-        //TODO: Transactions
+        //TODO: null object reference when accessing people. Says it inserts but doesn't because of transactions
         public Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success, out string errorMessage)
         {
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             try
             {
-                string strSQL = "INSERT INTO Items(title, available, weekly_fine, damage_fine) OUTPUT INSERTED.item_id VALUES (@title, true, 2.0, 10.0);";
+                string strSQL = "INSERT INTO Items(title, available, weekly_fine, damage_fine) VALUES (@title, true, 2.0, 10.0);";
                 string[,] itemValues = new string[,] { { "@title", title } };
                 int itemID = -1;
-                itemID = InsertScalarInt(strSQL, itemValues);
+                itemID = InsertScalarInt(strSQL, itemValues, trans);
                 if (itemID > 0)
                 {
                     string bookSQL = "INSERT INTO Books(item_id, num_pages, publisher, isbn) VALUES (@item_id, @num_pages, @publisher, @isbn);";
@@ -260,7 +253,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                         {"@publisher", publisher },
                         {"@isbn", isbn }
                     };
-                    if (Insert(bookSQL, bookValues))
+                    if (Insert(bookSQL, bookValues, trans))
                     {
                         //add to relational tables
                         //Item_people and People_Roles_Items
@@ -284,7 +277,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                             ipValues[1, 1] = p.PersonId.ToString();
                             priValues[0, 1] = p.PersonId.ToString();
                             priValues[1, 1] = p.Role.RoleId.ToString();
-                            if (!(Insert(ipSQL, ipValues) && Insert(priSQL, priValues)))
+                            if (!(Insert(ipSQL, ipValues, trans) && Insert(priSQL, priValues, trans)))
                                 throw new Exception("Item not added to item_people or people_roles_items");
                         }
 
@@ -306,14 +299,15 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                         };
 
                         //insert item cond and item genre
-                        if (!(Insert(igSQL, igValues) && Insert(icSQL, icValues)))
+                        if (!(Insert(igSQL, igValues, trans) && Insert(icSQL, icValues, trans)))
                             throw new Exception("Item not added to igSQL or icValues");
 
                         //if you get to here, you've inserted successfully into all tables
                         errorMessage = "no error";
                         success = true;
+                        trans.Commit();
                         //return book here
-                        return new Book(new Condition("Brand New", 0), true, 10, genre, itemID, title, 2, Convert.ToInt32(isbn), publisher, numberOfPages, contributors);
+                        return new Book(new Condition("Brand New", 0), true, 10, genre, itemID, title, 5, Convert.ToInt32(isbn), publisher, numberOfPages, contributors);
                     }
                     else throw new Exception("Item not added to table Book");
                     
@@ -322,22 +316,23 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
                 success = false;
-                errorMessage = "System Error.";
-                throw;
+                trans.Rollback();
+                errorMessage = e.Message;
+                return null;
             }
         }
 
-        //TODO: Transactions
+        //TODO: same as books above ^
         public Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success, out string errorMessage)
         {
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             try
             {
                 string strSQL = "INSERT INTO Items(title, available, weekly_fine, damage_fine) OUTPUT INSERTED.item_id VALUES (@title, true, 2.0, 10.0);";
                 string[,] itemValues = new string[,] { { "@title", title } };
                 int itemID = -1;
-                itemID = InsertScalarInt(strSQL, itemValues);
+                itemID = InsertScalarInt(strSQL, itemValues, trans);
                 if (itemID > 0)
                 {
                     string movieSQL = "INSERT INTO Movies(item_id, description, duration, studio, barcode_no) VALUES (@item_id, @description, @duration, @studio, @barcode_no);";
@@ -349,7 +344,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                         {"@studio", "disney" },
                         { "@barcode_no", barcode }
                     };
-                    if (Insert(movieSQL, bookValues))
+                    if (Insert(movieSQL, bookValues, trans))
                     {
                         //add to relational tables
                         //Item_people and People_Roles_Items
@@ -373,7 +368,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                             ipValues[1, 1] = p.PersonId.ToString();
                             priValues[0, 1] = p.PersonId.ToString();
                             priValues[1, 1] = p.Role.RoleId.ToString();
-                            if (!(Insert(ipSQL, ipValues) && Insert(priSQL, priValues)))
+                            if (!(Insert(ipSQL, ipValues, trans) && Insert(priSQL, priValues, trans)))
                                 throw new Exception("Item not added to item_people or people_roles_items");
                         }
 
@@ -395,14 +390,15 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                         };
 
                         //insert item cond and item genre
-                        if (!(Insert(igSQL, igValues) && Insert(icSQL, icValues)))
+                        if (!(Insert(igSQL, igValues, trans) && Insert(icSQL, icValues, trans)))
                             throw new Exception("Item not added to igSQL or icValues");
 
                         //if you get to here, you've inserted successfully into all tables
                         errorMessage = "no error";
                         success = true;
+                        trans.Commit();
                         //return book here
-                        return new Movie(new Condition("Brand New", 0), true, 10, genre, itemID, title, 2, Convert.ToInt32(barcode), "disney", duration, description, contributors);
+                        return new Movie(new Condition("Brand New", 0), true, 10, genre, itemID, title, 5, Convert.ToInt32(barcode), "disney", duration, description, contributors);
                     }
                     else throw new Exception("Item not added to table Book");
 
@@ -414,13 +410,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 Console.WriteLine(e.Message);
                 success = false;
                 errorMessage = "System Error.";
+                trans.Rollback();
                 throw;
             }
         }
 
-        //TODO: Transactions
         public Person AddContributor(string firstName, string lastName, string twitterHandle, DateTime dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage)
         {
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             try
             {
                 string acSQL = "INSERT INTO People(person_id, first_name, last_name, birth_date, death_date, twitter) OUTPUT INSERTED.person_id VALUES (@first_name, @last_name, @birth_date, NULL, @twitter)";
@@ -433,7 +430,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 };
 
                 int contribID = -1;
-                contribID = InsertScalarInt(acSQL, peopleValues);
+                contribID = InsertScalarInt(acSQL, peopleValues, trans);
                 if (contribID > 0)
                 {
                     //Add to Awards_Won table
@@ -449,12 +446,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     {
                         awValues[1, 1] = a.AwardId.ToString();
                         awValues[2, 1] = a.Year.ToString();
-                        if (!(Insert(awSQL, awValues)))
+                        if (!(Insert(awSQL, awValues, trans)))
                             throw new Exception("Person's Awards not added to awards table");
                     }
 
                     success = true;
                     errorMessage = "";
+                    trans.Commit();
                     // hard code that death date lol
                     return new Person(contribID, firstName, lastName, Convert.ToDateTime(dateOfBirth), twitterHandle, new DateTime(2100, 12, 19), awards, role);
                 }
@@ -464,46 +462,51 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 Console.WriteLine(e.Message);
                 success = false;
                 errorMessage = "System Error.";
+                trans.Rollback();
                 throw;
             }
         }
 
         public bool AddCustomer(string username, string password, string name, string address, string phoneNumber, out string errorMessage)
         {
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             string insertCustomer = "INSERT INTO Cardholders(username, password, phone, name, address) VALUES(@username, @password, @phone, @name, @address)";
+            _checkUniqueUsername.Parameters.Clear();
             _checkUniqueUsername.Parameters.AddWithValue("@username", username);
-            MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader();
-            if (rdr.Read())
+            using (MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader())
             {
-                errorMessage = "Username already taken";
-                rdr.Close();
-                return false;
-            }
-            rdr.Close();
-            string[,] parameters =
-            {
-                {"@username", username },
-                {"@password", password },
-                {"@phone", phoneNumber },
-                {"@name", name },
-                {"@address", address }
-            };
-
-            try
-            {
-                if (Insert(insertCustomer, parameters))
+                if (rdr.Read())
                 {
-                    errorMessage = null;
-                    return true;
+                    errorMessage = "Username already taken";
+                    rdr.Close();
+                    return false;
                 }
-                else
-                    throw new Exception("Unknown Error Occurred. Insertion not successful");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                errorMessage = "System Error.";
-                return false;
+                rdr.Close();
+                string[,] parameters =
+                {
+                    {"@username", username },
+                    {"@password", password },
+                    {"@phone", phoneNumber },
+                    {"@name", name },
+                    {"@address", address }
+                };
+
+                try
+                {
+                    if (Insert(insertCustomer, parameters, trans))
+                    {
+                        errorMessage = null;
+                        return true;
+                    }
+                    else
+                        throw new Exception("Unknown Error Occurred. Insertion not successful");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    errorMessage = "System Error.";
+                    return false;
+                }
             }
         }
 
@@ -511,46 +514,61 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             string fine_id;
             string c_id;
-            string _insertFine_sql = "INSERT INTO Fines(amount, due_date, paid, description) OUTPUT Inserted.fine_id VALUES(@amount, @due_date, @paid, @description)";
+            string description;
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
+
+            if (amount == 5)
+                description = "Weekly Fine";
+            else
+                description = "Damage Fine";
+
+
+            string _insertFine_sql = "INSERT INTO Fines(amount, due_date, paid, description) VALUES(@amount, @due_date, @paid, @description)";
             string[,] parameters =
             {
                 {"@amount", amount.ToString() },
                 {"@due_date", DateTime.UtcNow.ToString()},
                 {"@paid", 0.ToString() },
-                {"@description", "test" }
+                {"@description", description }
             };
 
+            _checkUniqueUsername.Parameters.Clear();
             _checkUniqueUsername.Parameters.AddWithValue("@username", username);
-            MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader();
-            rdr.Read();
-            c_id = rdr["c_id"].ToString();
-            fine_id = InsertScalarInt(_insertFine_sql, parameters).ToString();
-            rdr.Close();
+            using (MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader())
+            {
+                rdr.Read();
+                c_id = rdr["c_id"].ToString();
+                rdr.Close();
+            }
+            fine_id = InsertScalarInt(_insertFine_sql, parameters, trans).ToString();
 
             if (Int32.Parse(fine_id) == -1)
             {
                 errorMessage = "System Error Occurred";
                 result = false;
+                trans.Rollback();
                 return null;
             }
 
             string _insertFineOwed_sql = "INSERT INTO Owes(c_id, fine_id) VALUES(@c_id, @fine_id)";
             string[,] owedParameters =
             {
-                {"@c_id", c_id},
-                {"@fine_id", fine_id }
-            };
+                    {"@c_id", c_id},
+                    {"@fine_id", fine_id }
+                };
 
-            if (Insert(_insertFineOwed_sql, owedParameters))
+            if (Insert(_insertFineOwed_sql, owedParameters, trans))
             {
                 result = true;
                 errorMessage = null;
+                trans.Commit();
                 return new Fine(Int32.Parse(fine_id), amount, DateTime.UtcNow, false, "test");
             }
             else
             {
                 result = false;
-                errorMessage = null;
+                errorMessage = "System Error";
+                trans.Rollback();
                 return null;
             }
         }
@@ -559,39 +577,47 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         //TODO
         public bool CheckoutItem(ItemTypes itemType, Customer loggedInCustomer, int itemId, out string errorMessage)
         {
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
+            _checkItemAvailability.Parameters.Clear();
             _checkItemAvailability.Parameters.AddWithValue("@item_id", itemId);
-            MySqlDataReader rdr = _checkItemAvailability.ExecuteReader();
+            using (MySqlDataReader rdr = _checkItemAvailability.ExecuteReader())
+            {
 
-            if(Int32.Parse(rdr["item_id"].ToString())==0)
-            {
-                errorMessage = "Item already checked out";
-                return false;
-            }
+                if (Int32.Parse(rdr["item_id"].ToString()) == 0)
+                {
+                    errorMessage = "Item already checked out";
+                    rdr.Close();
+                    return false;
+                }
 
-            string insertInCI = "INSERT INTO Cardholders_Items(c_id, item_id, due_date) VALUES(@c_id, @item_id, @due_date)";
-            string[,] parameters =
-            {
-                {"@c_id", loggedInCustomer.CustomerId.ToString() },
-                {"@item_id", itemId.ToString() },
-                {"@due_date", DateTime.UtcNow.AddDays(14).ToString() }
-            };
+                string insertInCI = "INSERT INTO Cardholders_Items(c_id, item_id, due_date) VALUES(@c_id, @item_id, @due_date)";
+                string[,] parameters =
+                {
+                    {"@c_id", loggedInCustomer.CustomerId.ToString() },
+                    {"@item_id", itemId.ToString() },
+                    {"@due_date", DateTime.UtcNow.AddDays(14).ToString() }
+                };
 
-            rdr.Close();
-            if (_updateAvailabilityCheckedout.ExecuteNonQuery() == 0)
-            {
-                errorMessage = "System Error Occurred. Please Try Again";
-                return false;
-            }
+                rdr.Close();
+                if (_updateAvailabilityCheckedout.ExecuteNonQuery() == 0)
+                {
+                    errorMessage = "System Error Occurred. Please Try Again";
+                    trans.Rollback();
+                    return false;
+                }
 
-            if(Insert(insertInCI, parameters))
-            {
-                errorMessage = null;
-                return true;
-            }
-            else
-            {
-                errorMessage = "System Error Occurred. Please Try Again";
-                return false;
+                if (Insert(insertInCI, parameters, trans))
+                {
+                    errorMessage = null;
+                    trans.Commit();
+                    return true;
+                }
+                else
+                {
+                    errorMessage = "System Error Occurred. Please Try Again";
+                    trans.Rollback();
+                    return false;
+                }
             }
             
         }
@@ -602,42 +628,51 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             //If item exsits in cardholder_item, then
             // 1. Remove row from cardholder_item
             // 2. In Items, set available to true
-            try
+            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
+            _selectCheckedOutItem.Parameters.Clear();
+            _selectCheckedOutItem.Parameters.AddWithValue("@item_id", itemId);
+            using (MySqlDataReader rdr = _selectCheckedOutItem.ExecuteReader())
             {
-                _selectCheckedOutItem.Parameters.AddWithValue("@item_id", itemId);
-                MySqlDataReader rdr = _selectCheckedOutItem.ExecuteReader();
-
-                while (rdr.Read())
+                try
                 {
-                    string[,] returnItemVal = new string[,]
+
+
+                    while (rdr.Read())
                     {
+                        string[,] returnItemVal = new string[,]
+                        {
                         { "@item_id", itemId.ToString() },
                         { "@item_id_1", itemId.ToString() }
-                    };
-                    //insert works for update
-                    if (Insert(_returnItem_sql, returnItemVal))
-                    {
-                        errorMessage = "";
-                        return true;
+                        };
+                        //insert works for update
+                        if (Insert(_returnItem_sql, returnItemVal, trans))
+                        {
+                            errorMessage = "";
+                            trans.Commit();
+                            return true;
+                        }
+                        else
+                        {
+                            errorMessage = "Item not deleted.";
+                            trans.Rollback();
+                            return false;
+                        }
                     }
-                    else
-                    {
-                        errorMessage = "Item not deleted.";
-                        return false;
-                    }
+                    rdr.Close();
+                    errorMessage = "Item not checked out.";
+                    trans.Rollback();
+                    return false;
+
                 }
-
-                errorMessage = "Item not checked out.";
-                return false;
-
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    errorMessage = "System Error.";
+                    rdr.Close();
+                    trans.Rollback();
+                    return false;
+                }
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                errorMessage = "System Error.";
-                return false;
-            }
-
         }
 
         /// <summary>
@@ -649,33 +684,39 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         /// <returns></returns>
         public bool CheckUserLoginCredentials(string username, string password, out string errorMessage)
         {
-            try
+            _selectUsernamePassword.Parameters.Clear();
+            _selectUsernamePassword.Parameters.AddWithValue("@username", username);
+            using (MySqlDataReader rdr = _selectUsernamePassword.ExecuteReader())
             {
-                _selectUsernamePassword.Parameters.AddWithValue("@username", username);
-                MySqlDataReader rdr = _selectUsernamePassword.ExecuteReader();
-                while (rdr.Read())
+                try
                 {
-                    string un = rdr["username"].ToString();
-                    if (rdr["password"].ToString() == password)
-                    {
-                        errorMessage = "";
-                        rdr.Close();
-                        return true;
-                    }
-                    else
-                    {
-                        errorMessage = "Invalid username or password";
-                        rdr.Close();
-                        return false;
-                    }
-                }
 
-                errorMessage = "No user found";
-                return false;
-            } catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                throw;
+                    while (rdr.Read())
+                    {
+                        string un = rdr["username"].ToString();
+                        if (rdr["password"].ToString() == password)
+                        {
+                            errorMessage = "";
+                            rdr.Close();
+                            return true;
+                        }
+                        else
+                        {
+                            errorMessage = "Invalid username or password";
+                            rdr.Close();
+                            return false;
+                        }
+                    }
+                    rdr.Close();
+                    errorMessage = "No user found";
+                    return false;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    rdr.Close();
+                    throw;
+                }
             }
         }
 
@@ -683,6 +724,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
             _deleteCustomer.Transaction = transaction;
+            _deleteCustomer.Parameters.Clear();
             _deleteCustomer.Parameters.AddWithValue("@username", username);
             try
             {
@@ -708,6 +750,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         {
             MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
             _deleteItem.Transaction = transaction;
+            _deleteItem.Parameters.Clear();
             _deleteItem.Parameters.AddWithValue("@item_id", itemId);
             try
             {
@@ -731,184 +774,207 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public List<Award> GetAllAwards(out bool success, out string errorMessage)
         {
-            try
+            using (MySqlDataReader rdr = _selectAllAwards.ExecuteReader())
             {
-                MySqlDataReader rdr = _selectAllAwards.ExecuteReader();
                 List<Award> awards = new List<Award>();
-
-                while (rdr.Read())
+                try
                 {
-                    awards.Add(new Award((int)rdr["award_id"], (string)rdr["name"], 0));
-                }
 
-                success = true;
-                errorMessage = "";
-                rdr.Close();
-                return awards;
-            } catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                success = false;
-                errorMessage = "System Error.";
-                return null;
+
+                    while (rdr.Read())
+                    {
+                        awards.Add(new Award((int)rdr["award_id"], (string)rdr["name"], 0));
+                    }
+
+                    success = true;
+                    errorMessage = "";
+                    rdr.Close();
+                    return awards;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    success = false;
+                    errorMessage = "System Error.";
+                    rdr.Close();
+                    return null;
+                }
             }
         }
 
         public List<Person> GetAllContributors(out bool success, out string errorMessage)
         {
 
-
-
-            try
+            using (MySqlDataReader rdr = _selectAllContributors.ExecuteReader())
             {
-                MySqlDataReader rdr = _selectAllContributors.ExecuteReader();
                 List<Person> people = new List<Person>();
-                 while (rdr.Read())
-                {
-                    people.Add(new Person((int)rdr["person_id"], (string)rdr["first_name"], (string)rdr["last_name"], new DateTime(2100, 12, 19), null, new DateTime(2100, 12, 19), null, null));
-                }
 
-                success = true;
-                errorMessage = "";
-                rdr.Close();
-                return people;
-            } catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                success = false;
-                errorMessage = "System Error.";
-                return null;
+                try
+                {
+
+                    while (rdr.Read())
+                    {
+                        people.Add(new Person((int)rdr["person_id"], (string)rdr["first_name"], (string)rdr["last_name"], new DateTime(2100, 12, 19), null, new DateTime(2100, 12, 19), null, null));
+                    }
+
+                    success = true;
+                    errorMessage = "";
+                    rdr.Close();
+                    return people;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    success = false;
+                    errorMessage = "System Error.";
+                    rdr.Close();
+                    return null;
+                }
             }
         }
 
         public List<Genre> GetAllGenres(out bool success, out string errorMessage)
         {
-            try
+            using (MySqlDataReader rdr = _selectAllGenres.ExecuteReader())
             {
-                MySqlDataReader rdr = _selectAllGenres.ExecuteReader();
                 List<Genre> genres = new List<Genre>();
-
-                while (rdr.Read())
+                try
                 {
-                    genres.Add(new Genre(rdr["name"].ToString(), (int)rdr["genre_id"]));
-                }
 
-                success = true;
-                errorMessage = "";
-                rdr.Close();
-                return genres;
-                
-            } catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                success = false;
-                errorMessage = "System Error.";
-                return null;
+
+                    while (rdr.Read())
+                    {
+                        genres.Add(new Genre(rdr["genre"].ToString(), (int)rdr["genre_id"]));
+                    }
+
+                    success = true;
+                    errorMessage = "";
+                    rdr.Close();
+                    return genres;
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    success = false;
+                    errorMessage = "System Error.";
+                    rdr.Close();
+                    return null;
+                }
             }
         }
 
         public List<Role> GetAllRoles(out bool success, out string errorMessage)
         {
-            try
+            using (MySqlDataReader rdr = _selectAllRoles.ExecuteReader())
             {
-                MySqlDataReader rdr = _selectAllRoles.ExecuteReader();
                 List<Role> roles = new List<Role>();
-
-                while (rdr.Read())
+                try
                 {
-                    roles.Add(new Role((int)rdr["role_id"], (string)rdr["role_id"]));
+
+
+                    while (rdr.Read())
+                    {
+                        roles.Add(new Role((int)rdr["role_id"], (string)rdr["role_id"]));
+                    }
+
+                    success = true;
+                    errorMessage = "";
+                    rdr.Close();
+                    return roles;
+
                 }
-
-                success = true;
-                errorMessage = "";
-                rdr.Close();
-                return roles;
-
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                success = false;
-                errorMessage = "System Error.";
-                return null;
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    success = false;
+                    errorMessage = "System Error.";
+                    rdr.Close();
+                    return null;
+                }
             }
         }
 
         public bool PayFine(string username, out string errorMessage)
         {
             MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
+            _checkUniqueUsername.Parameters.Clear();
             _checkUniqueUsername.Parameters.AddWithValue("@username", username);
-            MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader();
             string c_id;
             string fine_id;
-
-            try
+            using (MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader())
             {
-                if (rdr.Read())
+                try
                 {
-                    c_id = rdr["c_id"].ToString();
-                }
-                else
-                    throw new Exception("User not found");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                errorMessage = "System Error.";
-                rdr.Close();
-                return false;
-            }
-
-            rdr.Close();
-            rdr = _selectAllFinesForUser.ExecuteReader();
-            _updateFine.Transaction = transaction;
-            _deleteFineOwed.Transaction = transaction;
-
-            try
-            {
-               while(rdr.Read())
-               {
-                    fine_id = rdr["fine_id"].ToString();
-                    _updateFine.Parameters.AddWithValue("@fine_id", fine_id);
-                    if (_updateFine.ExecuteNonQuery() > 0)
+                    if (rdr.Read())
                     {
-                        _deleteFineOwed.Parameters.AddWithValue("@fine_id", fine_id);
-                        _deleteFineOwed.ExecuteNonQuery();
+                        c_id = rdr["c_id"].ToString();
                     }
                     else
-                        throw new Exception("Fine " + fine_id + " not successfully updated");
-               }
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-                errorMessage = "System Error.";
-                transaction.Rollback();
-                rdr.Close();
-                return false;
-            }
+                        throw new Exception("User not found");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    errorMessage = "System Error.";
+                    rdr.Close();
+                    return false;
+                }
 
-            rdr.Close();
-            errorMessage = null;
-            transaction.Commit();
-            return true;     
+                rdr.Close();
+            }
+            using (MySqlDataReader rdr = _selectAllFinesForUser.ExecuteReader())
+            {
+                _updateFine.Transaction = transaction;
+                _deleteFineOwed.Transaction = transaction;
+
+                try
+                {
+                    while (rdr.Read())
+                    {
+                        fine_id = rdr["fine_id"].ToString();
+                        _updateFine.Parameters.Clear();
+                        _updateFine.Parameters.AddWithValue("@fine_id", fine_id);
+                        if (_updateFine.ExecuteNonQuery() > 0)
+                        {
+                            _deleteFineOwed.Parameters.Clear();
+                            _deleteFineOwed.Parameters.AddWithValue("@fine_id", fine_id);
+                            _deleteFineOwed.ExecuteNonQuery();
+                        }
+                        else
+                            throw new Exception("Fine " + fine_id + " not successfully updated");
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    errorMessage = "System Error.";
+                    transaction.Rollback();
+                    rdr.Close();
+                    return false;
+                }
+
+                rdr.Close();
+                errorMessage = null;
+                transaction.Commit();
+                return true;
+            }
         }
 
         public bool PayIndividualFine(string username, Fine fine, out string errorMessage)
         {
-            _selectIndividualFine.Parameters.AddWithValue("@fine_id", fine.FineId);
-            MySqlDataReader rdr = _selectIndividualFine.ExecuteReader();
             MySqlTransaction transaction = _mysqlConnection.BeginTransaction();
             _updateFine.Transaction = transaction;
-            _deleteCustomer.Transaction = transaction;
 
             try
             {
+                _updateFine.Parameters.Clear();
                 _updateFine.Parameters.AddWithValue("@fine_id", fine.FineId);
                 if (_updateFine.ExecuteNonQuery() > 0)
                 {
-                    _deleteFineOwed.Parameters.AddWithValue("@fine_id", fine.FineId);
-                    _deleteFineOwed.ExecuteNonQuery();
+                    errorMessage = null;
+                    transaction.Commit();
+                    return true;
                 }
                 else
                     throw new Exception("Fine " + fine.FineId + " not successfully updated");
@@ -918,16 +984,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 Console.WriteLine(e.Message);
                 errorMessage = "System Error.";
                 transaction.Rollback();
-                rdr.Close();
                 return false;
             }
-
-            errorMessage = null;
-            transaction.Commit();
-            rdr.Close();
-            return true;
         }
-
 
         public List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria, out string errorMessage)
         {
@@ -972,21 +1031,25 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             int balance = -1;
             _showTotalAmtOwed.Parameters.Clear();
             _showTotalAmtOwed.Parameters.AddWithValue("@curUser_int", customerId);
-            var reader = _showTotalAmtOwed.ExecuteReader();
-            if (reader.Read())
+            using (MySqlDataReader reader = _showTotalAmtOwed.ExecuteReader())
             {
-                if(!reader.IsDBNull(0))
+                if (reader.Read())
                 {
-                    balance = reader.GetInt32(0);
-                } else
+                    if (!reader.IsDBNull(0))
+                    {
+                        balance = reader.GetInt32(0);
+                    }
+                    else
+                    {
+                        balance = 0;
+                    }
+                }
+                else
                 {
                     balance = 0;
                 }
-            } else
-            {
-                balance = 0;
+                reader.Close();
             }
-            reader.Close();
             return balance;
         }
 
@@ -995,52 +1058,60 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             List<object> list = new List<object>();
             _showAllFinesForUser.Parameters.Clear();
             _showAllFinesForUser.Parameters.AddWithValue("@curUser_int", CustomerId);
-            var reader = _showAllFinesForUser.ExecuteReader();
-            while (reader.Read())
+            using (MySqlDataReader reader = _showAllFinesForUser.ExecuteReader())
             {
-                //amt paid due_date description
-                bool paid;
-                if (Convert.ToInt32(reader.GetString(1)) ==1)
+                while (reader.Read())
                 {
-                    paid = true;
-                } else
-                {
-                    paid = false;
+                    //amt paid due_date description
+                    bool paid;
+                    if (Convert.ToInt32(reader.GetString(2)) == 1)
+                    {
+                        paid = true;
+                    }
+                    else
+                    {
+                        paid = false;
+                    }
+                    // TODO: GUI says outstanding fines, would like it to say just "Fines"
+                    if (!paid)
+                        list.Add(new Fine(Convert.ToInt32(reader.GetString(0)), Convert.ToInt32(reader.GetString(1)), Convert.ToDateTime(reader.GetString(3)), paid, reader.GetString(4)));
                 }
-                // TODO: GUI says outstanding fines, would like it to say just "Fines"
-                list.Add(new Fine(-1, Convert.ToInt32(reader.GetString(0)), Convert.ToDateTime(reader.GetString(2)), paid, reader.GetString(3)));
+                reader.Close();
+                return list;
             }
-            reader.Close();
-            return list;
         }
         public List<Customer> GetCustomer(string username, out bool success, out string errorMessage)
         {
             List<Customer> customers = new List<Customer>();
             _searchCardholders.Parameters.Clear();
             _searchCardholders.Parameters.AddWithValue("@username_like", '%' + username + '%');
-            var reader = _searchCardholders.ExecuteReader();
-            while (reader.Read())
+            using (MySqlDataReader reader = _searchCardholders.ExecuteReader())
             {
-                customers.Add(new Customer(Convert.ToInt32(reader["c_id"].ToString()), reader["username"].ToString(), reader["password"].ToString(), reader["name"].ToString(), reader["address"].ToString(), reader["phone"].ToString(), null, null));
+                while (reader.Read())
+                {
+                    customers.Add(new Customer(Convert.ToInt32(reader["c_id"].ToString()), reader["username"].ToString(), reader["password"].ToString(), reader["name"].ToString(), reader["address"].ToString(), reader["phone"].ToString(), null, null));
+                }
+                reader.Close();
+                success = true;
+                errorMessage = "";
+                return customers;
             }
-            reader.Close();
-            success = true;
-            errorMessage = "";
-            return customers;
         }
 
         public List<Customer> GetAllCustomers(out bool success, out string errorMessage)
         {
             List<Customer> customers = new List<Customer>();
-            var reader = _listAllCustomers.ExecuteReader();
-            while (reader.Read())
+            using (MySqlDataReader reader = _listAllCustomers.ExecuteReader())
             {
-                customers.Add(new Customer(Convert.ToInt32(reader["c_id"].ToString()), reader["username"].ToString(), reader["password"].ToString(), reader["name"].ToString(), reader["address"].ToString(), reader["phone"].ToString(), null, null));
+                while (reader.Read())
+                {
+                    customers.Add(new Customer(Convert.ToInt32(reader["c_id"].ToString()), reader["username"].ToString(), reader["password"].ToString(), reader["name"].ToString(), reader["address"].ToString(), reader["phone"].ToString(), null, null));
+                }
+                reader.Close();
+                success = true;
+                errorMessage = "";
+                return customers;
             }
-            reader.Close();
-            success = true;
-            errorMessage = "";
-            return customers;
         }
     }
 }
