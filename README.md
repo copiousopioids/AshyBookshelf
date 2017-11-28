@@ -5,6 +5,13 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 - Username: zmarcolesco
 - Password: password (?)
 
+# Todo
+- Powerpoint
+- When adding a contributor for a new item, set the role
+	- Book: Set role to Author
+	- Movie: Set role using dropdown
+	- Pass this into the AddBook function
+
 | Form          | Status        | Button| Assignee |
 | ------------- |:-------------:| -----:|---:|
 | Library      | Working       | Launch Library |  austen |
