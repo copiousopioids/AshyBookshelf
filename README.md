@@ -37,15 +37,15 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Add Movie   | Not Working      |   Add Contributor | zach |
 | Add Contributor   | Not Working      |   Create New | zach |
 | Add Contributor   | Not Working      |   Add Contributor | zach |
-| Item Search   | Not Working      |   Delete | |
-| Item Search   | Not Working      |   Close | |
+| Item Search   | Not Working      |   Delete | justin |
+| Item Search   | Not Working      |   Close | justin |
 | Search Customer   | Not Working      |   Customer Search | |
-| Customer Search  | Not Working      |   Search (username) | |
-| Customer Search  | Not Working      |   List Customers | |
-| Customer Search  | Not Working      |   Add New | |
-| Add New Customer  | Not Working      |   Create | |
-| Add New Customer  | Not Working      |   Cancel | |
-| Customer Search  | Not Working      |   Delete | |
+| Customer Search  | Working      |   Search (username) | |
+| Customer Search  | Working      |   List Customers | |
+| Customer Search  | Working      |   Add New | justin |
+| Add New Customer  | Working      |   Create | justin |
+| Add New Customer  | Working      |   Cancel | justin |
+| Customer Search  | Not Working      |   Delete | justin |
 | Customer Search  | Not Working      |   Select | |
 | Customer Search  | Not Working      |   Cancel | |
 
