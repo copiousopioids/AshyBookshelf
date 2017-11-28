@@ -20,7 +20,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffUsernameTextBox.Text = customer.Username;
             //this.AddDisplayItems(customer.fines.ToArray());
             this.AddDisplayItems(libraryController.getFines(customer.CustomerId).ToArray());
-            uxStaffCheckedOutItemsListBox.Items.AddRange(customer.ItemsCheckoutOut.ToArray());
+            if (customer.ItemsCheckoutOut != null) 
+                uxStaffCheckedOutItemsListBox.Items.AddRange(customer.ItemsCheckoutOut.ToArray());
         }
 
         public int NewFineAmount {
