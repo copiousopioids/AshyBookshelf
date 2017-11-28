@@ -19,12 +19,12 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Item Search     | Not Working      |   Search (all types) | austen |
 | Item Search     | Not Working      |   Checkout | austen |
 | Item Search     | Not Working      |   Return ("Close") | austen |
-| Customer Home     | Not Working      |   Account Information | austen |
+| Customer Home     | Working      |   Account Information | austen |
 | Customer Account Information     | Not Working      |   Pay Fine|austen |
 | Customer Account Information     | Not Working      | Return Item  | austen |
 | Customer Account Information     | Not Working      |   Close | |
-| Customer Home    | Not Working      |   Login | |
-| Customer Home    | Not Working      |   Logout | |
+| Customer Home    | Working      |   Login | justin |
+| Customer Home    | Working      |   Logout | justin |
 | Staff Home   | Not Working      |   Search Items | |
 | Item Search   | Not Working      |   Search | |
 | Item Search   | Not Working      |   Add Book | |
@@ -45,7 +45,7 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Customer Search  | Working      |   Add New | justin |
 | Add New Customer  | Working      |   Create | justin |
 | Add New Customer  | Working      |   Cancel | justin |
-| Customer Search  | Not Working      |   Delete | justin |
+| Customer Search  | Working      |   Delete | justin |
 | Customer Search  | Not Working      |   Select | |
 | Customer Search  | Not Working      |   Cancel | |
 
