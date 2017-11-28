@@ -132,6 +132,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             return DialogReturn.Search;
                         }
                         break;
+                    case DialogResult.Yes:
+                        if (CheckDataValidity()) return DialogReturn.Select;
+                        break;
                     default:
                         return DialogReturn.Undefined;
                 }

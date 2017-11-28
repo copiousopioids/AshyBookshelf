@@ -16,6 +16,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         CustomerAccountForm customerAccountForm;
         CustomerLoginForm customerLoginForm;
         CustomerItemSearchWindow customerItemSearchWindow;
+        ItemDetailView itemDetailView;
         string errorMessage = "";
         public Customer_Home()
         {
@@ -27,6 +28,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             this.customerLoginForm = new CustomerLoginForm();
             this.customerItemSearchWindow = new CustomerItemSearchWindow();
             this.libraryController = controller;
+            this.itemDetailView = new ItemDetailView();
         }
 
         //////////////////////////// CLICK FUNCTIONS //////////////////////////
@@ -78,6 +80,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         case DialogReturn.Search:
                             SearchItemsButtonPressedInCustomerSearchItemWindow();
                             break;
+                        case DialogReturn.Select:
+                            ShowItemDetailViewWindow((Item)customerItemSearchWindow.SelectedItem);
+                            break;
                         default:
                             return;
                     }
@@ -87,6 +92,31 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 MessageBox.Show(ex.ToString());
             }
             
+        }
+
+        public void ShowItemDetailViewWindow(Item selectedItem)
+        {
+            List<string> itemDisplayContents = null;
+            if (selectedItem is Movie)
+            {
+                itemDisplayContents = libraryController.GetItemDetails(selectedItem, ItemType.Movie);
+            }
+            else if (selectedItem is Book)
+            {
+                itemDisplayContents = libraryController.GetItemDetails(selectedItem, ItemType.Book);
+            }
+            else
+            {
+                MessageBox.Show("Error with selected item, sorry");
+            }
+
+            if (itemDisplayContents == null)
+                return;
+            itemDetailView.ClearDisplayItems();
+            itemDetailView.AddDisplayItems(itemDisplayContents.ToArray());
+            var dialogResult = itemDetailView.Display();
+            // do more things if needed
+
         }
 
         private void customerAccountInformationButton_Click(object sender, EventArgs e)
