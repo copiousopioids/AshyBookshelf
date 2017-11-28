@@ -27,13 +27,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             get
             {
-                if (uxStaffGenericItemsListBox.SelectedIndex == -1) throw new Exception("Select a Line");
-                return uxStaffGenericItemsListBox.SelectedIndex;
+                if (uxStaffCustomerSearchListView.SelectedIndices == -1) throw new Exception("Select a Line");
+                return uxStaffCustomerSearchListView.SelectedIndices;
             }
 
             set
             {
-                uxStaffGenericItemsListBox.SelectedIndex = value;
+                uxStaffCustomerSearchListView.Sele = value;
             }
         }
 
@@ -41,19 +41,19 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             get
             {
-                if (uxStaffGenericItemsListBox.SelectedItem == null) throw new Exception("Select a line");
-                return uxStaffGenericItemsListBox.SelectedItem;
+                if (uxStaffCustomerSearchListView.SelectedItem == null) throw new Exception("Select a line");
+                return uxStaffCustomerSearchListView.SelectedItem;
             }
         }
 
         public void AddDisplayItems(params object [] displayObjects)
         {
-            uxStaffGenericItemsListBox.Items.AddRange(displayObjects.ToArray());
+            uxStaffCustomerSearchListView.Items.AddRange(displayObjects.ToArray());
         }
 
         public bool CheckDataValidity()
         {
-            if (uxStaffGenericItemsListBox.SelectedItem == null)
+            if (uxStaffCustomerSearchListView.SelectedItems == null)
             {
                 MessageBox.Show("Please select an item");
                 return false;
@@ -64,7 +64,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public void ClearDisplayItems()
         {
-            uxStaffGenericItemsListBox.Items.Clear();
+            uxStaffCustomerSearchListView.Items.Clear();
         }
 
         public bool CheckSearchValidity() {
@@ -77,7 +77,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public bool CheckSelectCustomerValidity () {
-            if (uxStaffGenericItemsListBox.SelectedItem == null) {
+            if (uxStaffCustomerSearchListView.SelectedItem == null) {
                 MessageBox.Show("Please select a customer to continue with this action");
                 return false;
             }
