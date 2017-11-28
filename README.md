@@ -26,8 +26,8 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Customer Home    | Working      |   Login | justin |
 | Customer Home    | Working      |   Logout | justin |
 | Staff Home   | Working      |   Search Items by Title | reagan |
-| Staff Home   | Not Working | Search Items by Genre | |
-| Staff Home   | Not Working | Search Items by Person | |
+| Staff Home   | Not Working | Search Items by Genre | Tricia |
+| Staff Home   | Not Working | Search Items by Person | Tricia |
 | Item Search   | Not Working      |   Search | reagan |
 | Item Search   | Not Working      |   Add Book | |
 | Add Book   | Not Working      |   Create Book | |
