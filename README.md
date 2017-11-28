@@ -1,4 +1,4 @@
-# AshyBookshelf
+﻿# AshyBookshelf
 United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 
 # Details
@@ -20,15 +20,15 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Item Search     | Not Working      |   Checkout | austen |
 | Item Search     | Not Working      |   Return ("Close") | austen |
 | Customer Home     | Working      |   Account Information | austen |
-| Customer Account Information     | Not Working      |   Pay Fine|austen |
+| Customer Account Information     | Working      |   Pay Fine| Reagan |
 | Customer Account Information     | Not Working      | Return Item  | austen |
 | Customer Account Information     | Not Working      |   Close | |
 | Customer Home    | Working      |   Login | justin |
 | Customer Home    | Working      |   Logout | justin |
 | Staff Home   | Working      |   Search Items by Title | reagan |
-| Staff Home   | Not Working | Search Items by Genre | Tricia |
-| Staff Home   | Not Working | Search Items by Person | Tricia |
-| Item Search   | Not Working      |   Search | reagan |
+| Staff Home   | Working | Search Items by Genre | reagan |
+| Staff Home   | Working | Search Items by Person | reagan |
+| Item Search   | Working      |   Search | reagan |
 | Item Search   | Not Working      |   Add Book | |
 | Add Book   | Not Working      |   Create Book | |
 | Add Book   | Not Working      |   Add Contributor | |
