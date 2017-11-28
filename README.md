@@ -5,42 +5,51 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 - Username: zmarcolesco
 - Password: password (?)
 
+# Todo
+- Powerpoint
+- When adding a contributor for a new item, set the role
+	- Book: Set role to Author
+	- Movie: Set role using dropdown
+	- Pass this into the AddBook function
+
 | Form          | Status        | Button| Assignee |
 | ------------- |:-------------:| -----:|---:|
 | Library      | Working       | Launch Library |  austen |
-| Customer Home     | Not Working      |   Find Item | |
-| Item Search     | Not Working      |   Search (all types) | |
-| Item Search     | Not Working      |   Checkout | |
-| Item Search     | Not Working      |   Return ("Close") | |
-| Customer Home     | Not Working      |   Account Information | |
-| Customer Account Information     | Not Working      |   Pay Fine| |
-| Customer Account Information     | Not Working      | Return Item  | |
+| Customer Home     | Not Working      |   Find Item | austen |
+| Item Search     | Not Working      |   Search (all types) | austen |
+| Item Search     | Not Working      |   Checkout | austen |
+| Item Search     | Not Working      |   Return ("Close") | austen |
+| Customer Home     | Working      |   Account Information | austen |
+| Customer Account Information     | Not Working      |   Pay Fine|austen |
+| Customer Account Information     | Not Working      | Return Item  | austen |
 | Customer Account Information     | Not Working      |   Close | |
-| Customer Home    | Not Working      |   Login | |
-| Customer Home    | Not Working      |   Logout | |
-| Staff Home   | Not Working      |   Search Items | |
-| Item Search   | Not Working      |   Search | |
+| Customer Home    | Working      |   Login | justin |
+| Customer Home    | Working      |   Logout | justin |
+| Staff Home   | Working      |   Search Items by Title | reagan |
+| Staff Home   | Not Working | Search Items by Genre | |
+| Staff Home   | Not Working | Search Items by Person | |
+| Item Search   | Not Working      |   Search | reagan |
 | Item Search   | Not Working      |   Add Book | |
 | Add Book   | Not Working      |   Create Book | |
 | Add Book   | Not Working      |   Add Contributor | |
-| Add Contributor   | Not Working      |   Create New | |
-| Add Contributor   | Not Working      |   Add Contributor | |
+| Add Contributor   | Not Working      |   Create New | zach |
+| Add Contributor   | Not Working      |   Add Contributor | zach |
 | Item Search   | Not Working      |   Add Movie | |
-| Add Movie   | Not Working      |   Add Movie | |
-| Add Movie   | Not Working      |   Add Contributor | |
-| Add Contributor   | Not Working      |   Create New | |
-| Add Contributor   | Not Working      |   Add Contributor | |
-| Item Search   | Not Working      |   Delete | |
-| Item Search   | Not Working      |   Close | |
+| Add Movie   | Not Working      |   Add Movie | zach |
+| Add Movie   | Not Working      |   Add Contributor | zach |
+| Add Contributor   | Not Working      |   Create New | zach |
+| Add Contributor   | Not Working      |   Add Contributor | zach |
+| Item Search   | Not Working      |   Delete | justin |
+| Item Search   | Not Working      |   Close | justin |
 | Search Customer   | Not Working      |   Customer Search | |
-| Customer Search  | Not Working      |   Search (username) | |
-| Customer Search  | Not Working      |   List Customers | |
-| Customer Search  | Not Working      |   Add New | |
-| Add New Customer  | Not Working      |   Create | |
-| Add New Customer  | Not Working      |   Cancel | |
-| Customer Search  | Not Working      |   Delete | |
-| Customer Search  | Not Working      |   Select | |
-| Customer Search  | Not Working      |   Cancel | |
+| Customer Search  | Working      |   Search (username) | |
+| Customer Search  | Working      |   List Customers | |
+| Customer Search  | Working      |   Add New | justin |
+| Add New Customer  | Working      |   Create | justin |
+| Add New Customer  | Working      |   Cancel | justin |
+| Customer Search  | Working      |   Delete | justin |
+| Customer Search  | Working      |   Select | reagan|
+| Customer Search  | Working      |   Cancel | justin|
 
 # Library: 
 - Launch Library
