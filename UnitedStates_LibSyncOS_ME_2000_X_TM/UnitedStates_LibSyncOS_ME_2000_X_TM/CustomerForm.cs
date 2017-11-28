@@ -189,7 +189,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         case DialogReturn.Login:
                             var username = customerLoginForm.UXCustomerUsername;
                             var password = customerLoginForm.UXCustomerPassword;
-                            var isLoginASuccess = libraryController.CheckUserLoginCredentials(username, password, out errorMessage);
+                            bool success;
+                            libraryController.CheckUserLoginCredentials(username, password, out errorMessage, out success);
+                            var isLoginASuccess = success;
                             if (isLoginASuccess)
                             {
                                 MessageBox.Show("User logged in");

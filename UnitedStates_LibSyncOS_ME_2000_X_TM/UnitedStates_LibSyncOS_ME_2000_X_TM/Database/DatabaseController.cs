@@ -71,7 +71,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         MySqlCommand _selectAllFinesForUser;
         private string _selectIndividualFine_sql = "SELECT * FROM Fines WHERE fine_id = @fine_id";
         MySqlCommand _selectIndividualFine;
-        private string _selectUsernamePassword_sql = "SELECT username, password FROM Cardholders WHERE username = @username";
+        private string _selectUsernamePassword_sql = "SELECT * FROM Cardholders WHERE username = @username";
         MySqlCommand _selectUsernamePassword;
 
         private string _selectAllAwards_sql = "SELECT award_id, name FROM Awards";
@@ -522,6 +522,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     if (Insert(insertCustomer, parameters, trans))
                     {
                         errorMessage = null;
+                        trans.Commit();
                         return true;
                     }
                     else
@@ -531,6 +532,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 {
                     Console.WriteLine(e.Message);
                     errorMessage = "System Error.";
+                    trans.Rollback();
                     return false;
                 }
             }
@@ -709,7 +711,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         /// <param name="password"></param>
         /// <param name="errorMessage"></param>
         /// <returns></returns>
-        public bool CheckUserLoginCredentials(string username, string password, out string errorMessage)
+        public Customer CheckUserLoginCredentials(string username, string password, out string errorMessage, out bool success)
         {
             _selectUsernamePassword.Parameters.Clear();
             _selectUsernamePassword.Parameters.AddWithValue("@username", username);
@@ -721,22 +723,30 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     while (rdr.Read())
                     {
                         string un = rdr["username"].ToString();
-                        if (rdr["password"].ToString() == password)
+                        string pass = rdr["password"].ToString();
+                        if (pass == password)
                         {
                             errorMessage = "";
+                            int customerID = Convert.ToInt32(rdr["c_id"].ToString());
+                            string phone = rdr["phone"].ToString();
+                            string name = rdr["name"].ToString();
+                            string address = rdr["address"].ToString();
                             rdr.Close();
-                            return true;
+                            success = true;
+                            return new Customer(customerID, username, password, name, address, phone, null, null);
                         }
                         else
                         {
                             errorMessage = "Invalid username or password";
                             rdr.Close();
-                            return false;
+                            success = false;
+                            return null;
                         }
                     }
                     rdr.Close();
                     errorMessage = "No user found";
-                    return false;
+                    success = false;
+                    return null;
                 }
                 catch (Exception e)
                 {
@@ -1107,6 +1117,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 return list;
             }
         }
+
         public List<Customer> GetCustomer(string username, out bool success, out string errorMessage)
         {
             List<Customer> customers = new List<Customer>();

@@ -205,22 +205,19 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             return databaseController.PayIndividualFine(username, fine, out errorMessage);
         }
 
-        public bool CheckUserLoginCredentials(string username, string password, out string errorMessage)
+        public Customer CheckUserLoginCredentials(string username, string password, out string errorMessage, out bool success)
         {
-            var success = false;
             errorMessage = "System Error";
-
-            if (databaseController.CheckUserLoginCredentials(username,password, out errorMessage))
-            {                                   
-                //getCustomer returns a list of customers where username like '%username%' but 
-                // since username is unique, we should only get one back here
-                loggedInCustomer = databaseController.GetCustomer(username, out success, out errorMessage)[0]; 
-                return success;
+            Customer customer = databaseController.CheckUserLoginCredentials(username, password, out errorMessage, out success);
+            if (success)
+            {
+                loggedInCustomer = customer;
+                return loggedInCustomer;
             }
             else
             {
                 loggedInCustomer = null;
-                return false;
+                return loggedInCustomer ;
             }
         }
 

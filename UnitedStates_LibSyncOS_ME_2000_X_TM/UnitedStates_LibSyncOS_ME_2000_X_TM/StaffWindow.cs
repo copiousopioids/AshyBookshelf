@@ -406,7 +406,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         case DialogReturn.Cancel:
                             return;
                         case DialogReturn.Delete:
-                            var customer = (Customer)staffCustomerSearchWindow.SelectedItem;
+                            Customer customer = (Customer)staffCustomerSearchWindow.SelectedItem;
                             if (libraryController.DeleteCustomer(customer.Username, out errorMessage))
                             {
                                 MessageBox.Show("Customer Deleted");

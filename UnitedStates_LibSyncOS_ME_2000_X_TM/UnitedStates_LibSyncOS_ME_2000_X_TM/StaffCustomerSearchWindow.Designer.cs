@@ -42,6 +42,7 @@
             this.nameColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.addressColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.phoneColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.uxStaffGenericItemsList = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // uxStaffCustomerSearchTextBox
@@ -172,11 +173,20 @@
             this.phoneColumnHeader.Text = "Phone Number";
             this.phoneColumnHeader.Width = 164;
             // 
+            // uxStaffGenericItemsList
+            // 
+            this.uxStaffGenericItemsList.FormattingEnabled = true;
+            this.uxStaffGenericItemsList.Location = new System.Drawing.Point(597, 77);
+            this.uxStaffGenericItemsList.Name = "uxStaffGenericItemsList";
+            this.uxStaffGenericItemsList.Size = new System.Drawing.Size(585, 186);
+            this.uxStaffGenericItemsList.TabIndex = 12;
+            // 
             // StaffCustomerSearchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(603, 305);
+            this.ClientSize = new System.Drawing.Size(1239, 305);
+            this.Controls.Add(this.uxStaffGenericItemsList);
             this.Controls.Add(this.uxStaffCustomerSearchListView);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.staffListCustomersButton);
@@ -210,5 +220,6 @@
         private System.Windows.Forms.ColumnHeader nameColumnHeader;
         private System.Windows.Forms.ColumnHeader addressColumnHeader;
         private System.Windows.Forms.ColumnHeader phoneColumnHeader;
+        private System.Windows.Forms.ListBox uxStaffGenericItemsList;
     }
 }

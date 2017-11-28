@@ -30,7 +30,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         Fine AddFine(string username, int amount, out bool result, out string errorMessage);
         List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria, out string errorMessage);
-        bool CheckUserLoginCredentials(string username, string password, out string errorMessage);
+        Customer CheckUserLoginCredentials(string username, string password, out string errorMessage, out bool success);
         bool PayIndividualFine(string username, Fine fine, out string errorMessage);
         List<Person> GetAllContributors(out bool success, out string errorMessage);
         List<Award> GetAllAwards(out bool success, out string errorMessage);
