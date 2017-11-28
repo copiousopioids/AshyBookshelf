@@ -1,4 +1,4 @@
-# AshyBookshelf
+﻿# AshyBookshelf
 United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 
 # Details
@@ -14,21 +14,22 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 
 | Form          | Status        | Button| Assignee |
 | ------------- |:-------------:| -----:|---:|
+| POWERPOINT	| PRESENTATION |	| TRICIA |
 | Library      | Working       | Launch Library |  austen |
-| Customer Home     | Not Working      |   Find Item | austen |
-| Item Search     | Not Working      |   Search (all types) | austen |
-| Item Search     | Not Working      |   Checkout | austen |
-| Item Search     | Not Working      |   Return ("Close") | austen |
+| Customer Home     | Working      |   Find Item | reagan |
+| Item Search     | Working      |   Search (all types) | reagan |
+| Item Search     | Working      |   Checkout | justin |
+| Item Search     | Working      |   Return ("Close") | justin |
 | Customer Home     | Working      |   Account Information | austen |
-| Customer Account Information     | Not Working      |   Pay Fine|austen |
-| Customer Account Information     | Not Working      | Return Item  | austen |
-| Customer Account Information     | Not Working      |   Close | |
+| Customer Account Information     | Working      |   Pay Fine| Reagan |
+| Customer Account Information     | Working      | Return Item  | zach |
+| Customer Account Information     | Working      |   Close | |
 | Customer Home    | Working      |   Login | justin |
 | Customer Home    | Working      |   Logout | justin |
 | Staff Home   | Working      |   Search Items by Title | reagan |
-| Staff Home   | Not Working | Search Items by Genre | Tricia |
-| Staff Home   | Not Working | Search Items by Person | Tricia |
-| Item Search   | Not Working      |   Search | reagan |
+| Staff Home   | Working | Search Items by Genre | reagan |
+| Staff Home   | Working | Search Items by Person | reagan |
+| Item Search   | Working      |   Search | reagan |
 | Item Search   | Not Working      |   Add Book | |
 | Add Book   | Not Working      |   Create Book | |
 | Add Book   | Not Working      |   Add Contributor | |
@@ -39,9 +40,9 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Add Movie   | Not Working      |   Add Contributor | zach |
 | Add Contributor   | Not Working      |   Create New | zach |
 | Add Contributor   | Not Working      |   Add Contributor | zach |
-| Item Search   | Not Working      |   Delete | justin |
-| Item Search   | Not Working      |   Close | justin |
-| Search Customer   | Not Working      |   Customer Search | |
+| Item Search   | Working      |   Delete | justin |
+| Item Search   | Working      |   Close | justin |
+| Search Customer   | Working      |   Customer Search | reagan |
 | Customer Search  | Working      |   Search (username) | |
 | Customer Search  | Working      |   List Customers | |
 | Customer Search  | Working      |   Add New | justin |

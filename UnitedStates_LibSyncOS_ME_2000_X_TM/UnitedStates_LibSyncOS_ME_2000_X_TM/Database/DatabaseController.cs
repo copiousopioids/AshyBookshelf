@@ -552,12 +552,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 description = "Damage Fine";
 
 
-            string _insertFine_sql = "INSERT INTO Fines(amount, due_date, paid, description) VALUES(@amount, @due_date, @paid, @description)";
+            string _insertFine_sql = "INSERT INTO Fines(amount, due_date, paid, description) VALUES(@amount, @due_date, 0, @description)";
+            string dateFormat = "yyyy-MM-dd HH:mm:ss";
             string[,] parameters =
             {
                 {"@amount", amount.ToString() },
-                {"@due_date", DateTime.UtcNow.ToString()},
-                {"@paid", 0.ToString() },
+                {"@due_date", DateTime.UtcNow.ToString(dateFormat)},
                 {"@description", description }
             };
 
