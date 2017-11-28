@@ -518,7 +518,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             {
                 result = true;
                 errorMessage = null;
-                return new Fine(Int32.Parse(fine_id), amount, DateTime.UtcNow, false, "test");
+                return new Fine(Int32.Parse(fine_id), amount, DateTime.UtcNow.AddDays(14), false, "test");
             }
             else
             {
@@ -590,16 +590,19 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     //insert works for update
                     if (Insert(_returnItem_sql, returnItemVal))
                     {
+                        rdr.Close();
                         errorMessage = "";
                         return true;
                     }
                     else
                     {
+                        rdr.Close();
                         errorMessage = "Item not deleted.";
                         return false;
                     }
                 }
 
+                rdr.Close();
                 errorMessage = "Item not checked out.";
                 return false;
 
@@ -626,7 +629,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             {
                 _selectUsernamePassword.Parameters.AddWithValue("@username", username);
                 MySqlDataReader rdr = _selectUsernamePassword.ExecuteReader();
-                while (rdr.Read())
+                if (rdr.Read())
                 {
                     string un = rdr["username"].ToString();
                     if (rdr["password"].ToString() == password)
@@ -642,15 +645,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                         return false;
                     }
                 }
-
-                errorMessage = "No user found";
+                rdr.Close();
+                errorMessage = "\nNo user found";
                 return false;
                 
             } catch (Exception e)
             {
                 throw;
             }
-            throw new NotImplementedException();
         }
 
         public bool DeleteCustomer(string username, out string errorMessage)
@@ -937,6 +939,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             var reader = _showTotalAmtOwed.ExecuteReader();
             reader.Read();
             balance = Convert.ToInt32(reader.GetString(0));
+            reader.Close();
             return balance;
         }
 
