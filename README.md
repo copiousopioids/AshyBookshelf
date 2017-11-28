@@ -23,13 +23,13 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Item Search   | Not Working      |   Add Book | |
 | Add Book   | Not Working      |   Create Book | |
 | Add Book   | Not Working      |   Add Contributor | |
-| Add Contributor   | Not Working      |   Create New | |
-| Add Contributor   | Not Working      |   Add Contributor | |
+| Add Contributor   | Not Working      |   Create New | zach |
+| Add Contributor   | Not Working      |   Add Contributor | zach |
 | Item Search   | Not Working      |   Add Movie | |
-| Add Movie   | Not Working      |   Add Movie | |
-| Add Movie   | Not Working      |   Add Contributor | |
-| Add Contributor   | Not Working      |   Create New | |
-| Add Contributor   | Not Working      |   Add Contributor | |
+| Add Movie   | Not Working      |   Add Movie | zach |
+| Add Movie   | Not Working      |   Add Contributor | zach |
+| Add Contributor   | Not Working      |   Create New | zach |
+| Add Contributor   | Not Working      |   Add Contributor | zach |
 | Item Search   | Not Working      |   Delete | |
 | Item Search   | Not Working      |   Close | |
 | Search Customer   | Not Working      |   Customer Search | |
