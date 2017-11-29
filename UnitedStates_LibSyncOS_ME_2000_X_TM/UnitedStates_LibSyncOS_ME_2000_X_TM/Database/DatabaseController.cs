@@ -60,7 +60,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 while (reader.Read())
                 {
                     //no longer displays due date - will do that from the admin side
-                    itemsOut.Add(new Book(null, false, -1, null, reader.GetInt32(0), reader.GetString(1), -1, -1, null, -1, null));
+                    itemsOut.Add(new Book(null, false, -1, null, reader.GetInt32(0), reader.GetString(1), -1, "", null, -1, null));
                 }
                 reader.Close();
                 return itemsOut;
@@ -111,7 +111,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectAllGenres_sql = "SELECT genre_id, genre FROM Genres";
         MySqlCommand _selectAllGenres;
 
-        private string _selectAllRoles_sql = "SELECT role_code, role FROM Roles";
+        private string _selectAllRoles_sql = "SELECT * FROM Roles";
         MySqlCommand _selectAllRoles;
 
         //private string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
@@ -384,7 +384,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                         success = true;
                         trans.Commit();
                         //return book here
-                        return new Book(new Condition("Brand New", 0), true, 10, genre, itemID, title, 5, Convert.ToInt32(isbn), publisher, numberOfPages, contributors);
+                        return new Book(new Condition("Brand New", 0), true, 10, genre, itemID, title, 5, isbn, publisher, numberOfPages, contributors);
                     }
                     else throw new Exception("Item not added to table Book");
                     
@@ -406,7 +406,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             try
             {
-                string strSQL = "INSERT INTO Items(title, available, weekly_fine, damage_fine) OUTPUT INSERTED.item_id VALUES (@title, true, 2.0, 10.0);";
+                string strSQL = "INSERT INTO Items(title, available, weekly_fine, damage_fine) VALUES (@title, true, 2.0, 10.0);";
                 string[,] itemValues = new string[,] { { "@title", title } };
                 int itemID = -1;
                 itemID = InsertScalarInt(strSQL, itemValues, trans);
@@ -422,16 +422,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                         { "@barcode_no", barcode }
                     };
                     if (Insert(movieSQL, bookValues, trans))
-                    {
-                        //add to relational tables
-                        //Item_people and People_Roles_Items
-                        string ipSQL = "INSERT INTO Item_People(item_id, person_id) VALUES (@item_id, @person_id);";
-                        string[,] ipValues = new string[,]
-                        {
-                            {"@item_id", itemID.ToString() },
-                            {"@person_id", "placeholder" }
-                        };
-
+                    {                        
                         string priSQL = "INSERT INTO People_Roles_Items(person_id, role_code, item_id) VALUES (@personID, @role_code, @item_id)";
                         string[,] priValues = new string[,]
                         {
@@ -442,10 +433,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                         foreach (Person p in contributors)
                         {
-                            ipValues[1, 1] = p.PersonId.ToString();
                             priValues[0, 1] = p.PersonId.ToString();
                             priValues[1, 1] = p.Role.RoleId.ToString();
-                            if (!(Insert(ipSQL, ipValues, trans) && Insert(priSQL, priValues, trans)))
+                            if (!Insert(priSQL, priValues, trans))
                                 throw new Exception("Item not added to item_people or people_roles_items");
                         }
 
@@ -492,17 +482,18 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
         }
 
-        public Person AddContributor(string firstName, string lastName, string twitterHandle, DateTime dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage)
+        public Person AddContributor(string firstName, string lastName, string twitterHandle, DateTime dateOfBirth, List<Award> awards, out bool success, out string errorMessage)
         {
             MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             try
             {
-                string acSQL = "INSERT INTO People(person_id, first_name, last_name, birth_date, death_date, twitter) OUTPUT INSERTED.person_id VALUES (@first_name, @last_name, @birth_date, NULL, @twitter)";
+                string dateFormat = "yyyy-MM-dd HH:mm:ss";
+                string acSQL = "INSERT INTO People(first_name, last_name, birth_date, death_date, twitter) VALUES (@first_name, @last_name, @birth_date, '2017-11-23 00:00:00', @twitter)";
                 string[,] peopleValues =
                 {
                     { "@first_name", firstName },
                     { "@last_name", lastName },
-                    { "@birth_date", dateOfBirth.ToString() },
+                    { "@birth_date", dateOfBirth.ToString(dateFormat) },
                     { "@twitter", twitterHandle }
                 };
 
@@ -532,7 +523,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     trans.Commit();
 
                     // hard code that death date lol
-                    return new Person(contribID, firstName, lastName, dateOfBirth, twitterHandle, new DateTime(), awards, role);
+                    return new Person(contribID, firstName, lastName, dateOfBirth, twitterHandle, new DateTime(), awards);
                 }
                 else throw new Exception("Person not added to People table");
             } catch(Exception e)
@@ -975,7 +966,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                     while (rdr.Read())
                     {
-                        roles.Add(new Role((int)rdr["role_id"], (string)rdr["role_id"]));
+                        roles.Add(new Role((int)rdr["role_code"], (string)rdr["role"]));
                     }
 
                     success = true;
@@ -1229,7 +1220,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 while (reader.Read())
                 {
                     string someStringFromColumnOne = reader.GetString(1);
-                    searchResults.Add(new Book(new Condition("Brand New", 1), (reader.GetString(0) == "1") ? true : false, 10, new Genre("Uknown", 1), Convert.ToInt32(reader.GetString(2)), someStringFromColumnOne, 5, 0, "", 0, null));
+                    searchResults.Add(new Book(new Condition("Brand New", 1), (reader.GetString(0) == "1") ? true : false, 10, new Genre("Uknown", 1), Convert.ToInt32(reader.GetString(2)), someStringFromColumnOne, 5, "", "", 0, null));
                 }
                 reader.Close();
                 errorMessage = null;

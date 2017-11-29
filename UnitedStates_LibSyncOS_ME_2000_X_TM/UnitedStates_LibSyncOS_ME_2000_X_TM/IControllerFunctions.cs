@@ -22,7 +22,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         bool AddCustomer(string username, string password, string name, string address, string phoneNumber, out string errorMessage);
 
-        Person AddContributor(string firstName, string lastName, string twitterHandle, DateTime dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage);
+        Person AddContributor(string firstName, string lastName, string twitterHandle, DateTime dateOfBirth, List<Award> awards, out bool success, out string errorMessage);
 
         bool DeleteCustomer(string username, out string errorMessage);
 

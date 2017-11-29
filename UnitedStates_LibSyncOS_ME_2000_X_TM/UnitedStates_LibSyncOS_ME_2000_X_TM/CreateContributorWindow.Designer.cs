@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.uxStaffRoleComboBox = new System.Windows.Forms.ComboBox();
             this.uxStaffFirstNameTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -47,14 +45,6 @@
             this.uxStaffAvailableRewardsGenericItemsListBox = new System.Windows.Forms.ListBox();
             this.uxStaffCancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // uxStaffRoleComboBox
-            // 
-            this.uxStaffRoleComboBox.FormattingEnabled = true;
-            this.uxStaffRoleComboBox.Location = new System.Drawing.Point(98, 114);
-            this.uxStaffRoleComboBox.Name = "uxStaffRoleComboBox";
-            this.uxStaffRoleComboBox.Size = new System.Drawing.Size(121, 21);
-            this.uxStaffRoleComboBox.TabIndex = 16;
             // 
             // uxStaffFirstNameTextBox
             // 
@@ -73,16 +63,6 @@
             this.label3.TabIndex = 18;
             this.label3.Text = "First Name:";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(46, 112);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 20);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "Role:";
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -97,7 +77,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(44, 139);
+            this.label10.Location = new System.Drawing.Point(44, 112);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(48, 20);
             this.label10.TabIndex = 21;
@@ -129,7 +109,7 @@
             // 
             // uxStaffDOBTextBox
             // 
-            this.uxStaffDOBTextBox.Location = new System.Drawing.Point(98, 141);
+            this.uxStaffDOBTextBox.Location = new System.Drawing.Point(98, 114);
             this.uxStaffDOBTextBox.Name = "uxStaffDOBTextBox";
             this.uxStaffDOBTextBox.Size = new System.Drawing.Size(121, 20);
             this.uxStaffDOBTextBox.TabIndex = 25;
@@ -148,7 +128,7 @@
             // 
             this.uxStaffCreateContributorButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.uxStaffCreateContributorButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxStaffCreateContributorButton.Location = new System.Drawing.Point(98, 178);
+            this.uxStaffCreateContributorButton.Location = new System.Drawing.Point(98, 152);
             this.uxStaffCreateContributorButton.Name = "uxStaffCreateContributorButton";
             this.uxStaffCreateContributorButton.Size = new System.Drawing.Size(121, 48);
             this.uxStaffCreateContributorButton.TabIndex = 27;
@@ -232,10 +212,8 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.uxStaffFirstNameTextBox);
-            this.Controls.Add(this.uxStaffRoleComboBox);
             this.Name = "CreateContributorWindow";
             this.Text = "Add Contributor";
             this.ResumeLayout(false);
@@ -244,11 +222,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ComboBox uxStaffRoleComboBox;
         private System.Windows.Forms.TextBox uxStaffFirstNameTextBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;

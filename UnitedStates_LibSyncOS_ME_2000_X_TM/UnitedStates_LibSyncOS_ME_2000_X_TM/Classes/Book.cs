@@ -9,7 +9,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public class Book : Item
     {
-        public Book(Condition condition, bool available, int damageFine, Genre genre, int id, string title, int weeklyFine, int isbn, string publisher, int numberOfPages, List<Person> contributors) {
+        public Book(Condition condition, bool available, int damageFine, Genre genre, int id, string title, int weeklyFine, string isbn, string publisher, int numberOfPages, List<Person> contributors) {
             this.Isbn = isbn;
             this.Publisher = publisher;
             this.NumberOfPages = numberOfPages;
@@ -23,7 +23,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             this.contributors = contributors;
         }
         public List<Person> contributors { get; set; }
-        public int Isbn { get; set; }
+        public string Isbn { get; set; }
         public string Publisher { get; set; }
         public int NumberOfPages { get; set; }
 

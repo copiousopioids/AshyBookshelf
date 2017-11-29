@@ -9,9 +9,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
     public enum Roles
     {
         Director,
-        Producer,
+        Actor,
         Author,
-        Editor,
         None
     }
 
@@ -22,19 +21,17 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
 
         public Role (int roleId, string role)
         {
-            switch (role)
+            
+            switch (role.ToLower())
             {
                 case "director":
                     Type = Roles.Director;
                     break;
-                case "producer":
-                    Type = Roles.Producer;
-                    break;
                 case "author":
                     Type = Roles.Author;
                     break;
-                case "editor":
-                    Type = Roles.Editor;
+                case "actor":
+                    Type = Roles.Actor;
                     break;
                 default:
                     Type = Roles.None;

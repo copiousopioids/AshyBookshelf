@@ -311,10 +311,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             return databaseController.getTotalAmtOwed(CustomerId);
         }
 
-        public Person AddContributor(string firstName, string lastName, string twitterHandle, DateTime dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage) {
+        public Person AddContributor(string firstName, string lastName, string twitterHandle, DateTime dateOfBirth, List<Award> awards, out bool success, out string errorMessage) {
             errorMessage = "System Error";
             success = false;
-            return databaseController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, role, awards, out success, out errorMessage);
+            return databaseController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, awards, out success, out errorMessage);
 
 
             //errorMessage = "SET ME TO WHATEVER THE ERROR IS, IF NO ERROR, SET ME TO NULL";
