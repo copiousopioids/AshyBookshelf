@@ -51,26 +51,37 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         private string _selectItemsUnavailable_sql = "select title from Items where available=false";
         MySqlCommand _selectItemsUnavailable;
+
         private string _showTotalAmtOwed_sql = "select sum(f.amount) from Fines f join Owes o on o.fine_id=f.fine_id where f.paid=false and o.c_id = @curUser_int";
         MySqlCommand _showTotalAmtOwed;
+
         private string _showAllFinesForUser_sql = "select f.fine_id, amount, paid, due_date, description from Fines f join Owes o on o.fine_id=f.fine_id where o.c_id=@curUser_int";
         MySqlCommand _showAllFinesForUser;
+
         private string _searchCardholders_sql = "select * from Cardholders where username like @username_like";
         MySqlCommand _searchCardholders;
+
         private string _checkUniqueUsername_sql = "SELECT username, c_id FROM Cardholders WHERE username = @username";
         MySqlCommand _checkUniqueUsername;
+
         private string _deleteCustomer_sql = "DELETE FROM Cardholders WHERE username = @username";
         MySqlCommand _deleteCustomer;
+
         private string _deleteItem_sql = "DELETE FROM Items WHERE item_id = @item_id";
         MySqlCommand _deleteItem;
+
         private string _updateFine_sql = "UPDATE Fines SET paid = 1 WHERE fine_id = @fine_id";
         MySqlCommand _updateFine;
+
         private string _deleteFineOwed_sql = "DELETE FROM Owes WHERE fine_id = @fine_id";
         MySqlCommand _deleteFineOwed;
-        private string _selectAllFinesForUser_sql = "SELECT fine_id FROM Owes WHERE c_id = @c_id";
-        MySqlCommand _selectAllFinesForUser;
+
+        private string _selectAllUnpaidFinesForUser_sql = "select f.fine_id, amount, paid, due_date, description from Fines f join Owes o on o.fine_id=f.fine_id join Cardholders c on o.c_id= c.c_id where c.username= @username && f.paid =0";
+        MySqlCommand _selectAllUnpaidFinesForUser;
+
         private string _selectIndividualFine_sql = "SELECT * FROM Fines WHERE fine_id = @fine_id";
         MySqlCommand _selectIndividualFine;
+
         private string _selectUsernamePassword_sql = "SELECT * FROM Cardholders WHERE username = @username";
         MySqlCommand _selectUsernamePassword;
 
@@ -89,14 +100,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectCheckedOutItem_sql = "SELECT item_id FROM Cardholder_Item WHERE item_id = @item_id";
         MySqlCommand _selectCheckedOutItem;
 
-        private string _returnItem_sql = "UPDATE Items SET available = 1 WHERE item_id = @item_id;" +
-                                         "DELETE FROM Cardholder_Item WHERE item_id = @item_id_1";
+        private string _returnItem_sql = "UPDATE Items SET available = 1 WHERE item_id = @item_id;";
         MySqlCommand _returnItem;
 
-        private string _setAvailable_sql = "begin update Items set available = status where item_id = @item_id; return true; end";
+        private string _setAvailable_sql = "SELECT setavail(@item_id)";
         MySqlCommand _setAvailable;
 
-        private string _deleteFromCI_sql = "begin delete from Cardholder_Item where item_id = @item_id; return true; end";
+        private string _deleteFromCI_sql = "SELECT deleteci(@id)";
         MySqlCommand _deleteFromCI;
 
         private string _checkItemAvailability_sql = "SELECT * FROM Items WHERE item_id = @item_id";
@@ -128,7 +138,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _deleteCustomer = new MySqlCommand(_deleteCustomer_sql, _mysqlConnection);
             _deleteItem = new MySqlCommand(_deleteItem_sql, _mysqlConnection);
             _updateFine = new MySqlCommand(_updateFine_sql, _mysqlConnection);
-            _selectAllFinesForUser = new MySqlCommand(_selectAllFinesForUser_sql, _mysqlConnection);
+            _selectAllUnpaidFinesForUser = new MySqlCommand(_selectAllUnpaidFinesForUser_sql, _mysqlConnection);
             _deleteFineOwed = new MySqlCommand(_deleteFineOwed_sql, _mysqlConnection);
             _selectIndividualFine = new MySqlCommand(_selectIndividualFine_sql, _mysqlConnection);
 
@@ -137,6 +147,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _selectAllContributors = new MySqlCommand(_selectAllContributors_sql, _mysqlConnection);
             _selectAllGenres = new MySqlCommand(_selectAllGenres_sql, _mysqlConnection);
             _selectAllRoles = new MySqlCommand(_selectAllRoles_sql, _mysqlConnection);
+            _deleteFromCI = new MySqlCommand(_deleteFromCI_sql, _mysqlConnection);
 
 
             _setAvailable = new MySqlCommand(_setAvailable_sql, _mysqlConnection);
@@ -557,7 +568,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             string[,] parameters =
             {
                 {"@amount", amount.ToString() },
-                {"@due_date", DateTime.UtcNow.ToString(dateFormat)},
+                {"@due_date", DateTime.UtcNow.AddDays(14).ToString(dateFormat)},
                 {"@description", description }
             };
 
@@ -686,27 +697,18 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                 {
 
 
-                    while (rdr.Read())
+                    if (rdr.Read())
                     {
                         rdr.Close();
-                        string[,] returnItemVal = new string[,]
-                        {
-                        { "@item_id", itemId.ToString() },
-                        { "@item_id_1", itemId.ToString() }
-                        };
-                        //insert works for update
-                        if (Insert(_returnItem_sql, returnItemVal, trans))
-                        {
-                            errorMessage = "";
-                            trans.Commit();
-                            return true;
-                        }
-                        else
-                        {
-                            errorMessage = "Item not deleted.";
-                            trans.Rollback();
-                            return false;
-                        }
+
+                        _setAvailable.Parameters.AddWithValue("@item_id", itemId);
+                        _setAvailable.ExecuteNonQuery();
+                        _deleteFromCI.Parameters.AddWithValue("@id", itemId);
+                        _deleteFromCI.ExecuteNonQuery();
+                        errorMessage = "";
+                        trans.Commit();
+                        return true;
+
                     }
                     rdr.Close();
                     errorMessage = "Item not checked out.";
@@ -959,7 +961,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _checkUniqueUsername.Parameters.Clear();
             _checkUniqueUsername.Parameters.AddWithValue("@username", username);
             string c_id;
-            string fine_id;
             using (MySqlDataReader rdr = _checkUniqueUsername.ExecuteReader())
             {
                 try
@@ -981,42 +982,66 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                 rdr.Close();
             }
-            using (MySqlDataReader rdr = _selectAllFinesForUser.ExecuteReader())
-            {
-                _updateFine.Transaction = transaction;
-                _deleteFineOwed.Transaction = transaction;
 
+            _selectAllUnpaidFinesForUser.Parameters.Clear();
+            _selectAllUnpaidFinesForUser.Parameters.AddWithValue("@username", username);
+
+            List<int> fines = new List<int>();
+
+            using (MySqlDataReader rdr = _selectAllUnpaidFinesForUser.ExecuteReader())
+            {
                 try
                 {
                     while (rdr.Read())
                     {
-                        fine_id = rdr["fine_id"].ToString();
-                        _updateFine.Parameters.Clear();
-                        _updateFine.Parameters.AddWithValue("@fine_id", fine_id);
-                        if (_updateFine.ExecuteNonQuery() > 0)
-                        {
-                            _deleteFineOwed.Parameters.Clear();
-                            _deleteFineOwed.Parameters.AddWithValue("@fine_id", fine_id);
-                            _deleteFineOwed.ExecuteNonQuery();
-                        }
-                        else
-                            throw new Exception("Fine " + fine_id + " not successfully updated");
+                        //fine_id = Convert.ToInt32(rdr["fine_id"].ToString());
+                        //_updateFine.Parameters.Clear();
+                        //_updateFine.Parameters.AddWithValue("@fine_id", fine_id);
+                        //if (_updateFine.ExecuteNonQuery() > 0)
+                        //{
+                        //    _deleteFineOwed.Parameters.Clear();
+                        //    _deleteFineOwed.Parameters.AddWithValue("@fine_id", fine_id);
+                        //    _deleteFineOwed.ExecuteNonQuery();
+                        //}
+                        //else
+                        //    throw new Exception("Fine " + fine_id + " not successfully updated");
+                        fines.Add(Convert.ToInt32(rdr["fine_id"].ToString()));
+
                     }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);
-                    errorMessage = "System Error.";
-                    transaction.Rollback();
+                    errorMessage = e.Message;
                     rdr.Close();
                     return false;
                 }
-
                 rdr.Close();
                 errorMessage = null;
-                transaction.Commit();
-                return true;
             }
+
+            try
+            {
+                _updateFine.Transaction = transaction;
+                _deleteFineOwed.Transaction = transaction;
+
+                foreach (int fine_id in fines)
+                {
+                    _updateFine.Parameters.Clear();
+                    _updateFine.Parameters.AddWithValue("@fine_id", fine_id);
+                    _updateFine.ExecuteNonQuery();
+                    _deleteFineOwed.Parameters.Clear();
+                    _deleteFineOwed.Parameters.AddWithValue("@fine_id", fine_id);
+                    _deleteFineOwed.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                errorMessage = "System Error";
+                transaction.Rollback();
+                return false;
+            }
+            transaction.Commit();
+            return true;
         }
 
         public bool PayIndividualFine(string username, Fine fine, out string errorMessage)
