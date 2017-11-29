@@ -914,7 +914,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                     while (rdr.Read())
                     {
-                        people.Add(new Person((int)rdr["person_id"], (string)rdr["first_name"], (string)rdr["last_name"], getDate(rdr["birth_date"]), null, getDate(rdr["death_date"]), null, null));
+                        people.Add(new Person((int)rdr["person_id"], (string)rdr["first_name"], (string)rdr["last_name"], getDate(rdr["birth_date"]), null, getDate(rdr["death_date"]), null, new Role(2, "Author")));
                     }
 
                     success = true;
