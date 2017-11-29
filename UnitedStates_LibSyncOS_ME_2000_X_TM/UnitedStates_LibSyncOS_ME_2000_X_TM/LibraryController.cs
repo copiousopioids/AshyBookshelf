@@ -434,7 +434,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public List<string> GetItemDetails(Item selectedItem, ItemType itemType)
         {
-            throw new NotImplementedException();
+            return databaseController.GetItemDetails(selectedItem, itemType);
         }
     }
 }
