@@ -31,13 +31,13 @@ United States LibSyncOS ME 2000 X™ (“The Ashy Bookshelf”)
 | Staff Home   | Working | Search Items by Person | reagan |
 | Item Search   | Working      |   Search | reagan |
 | Item Search   | Not Working      |   Add Book | |
-| Add Book   | Not Working      |   Create Book | |
-| Add Book   | Not Working      |   Add Contributor | |
+| Add Book   | Working      |   Create Book | |
+| Add Book   | Working      |   Add Contributor | |
 | Add Contributor   | Not Working      |   Create New | zach |
 | Add Contributor   | Not Working      |   Add Contributor | zach |
-| Item Search   | Not Working      |   Add Movie | |
-| Add Movie   | Not Working      |   Add Movie | zach |
-| Add Movie   | Not Working      |   Add Contributor | zach |
+| Item Search   | Working      |   Add Movie | zach |
+| Add Movie   | Working      |   Add Movie | zach |
+| Add Movie   | Not Working - UI Role      |   Add Contributor | zach |
 | Add Contributor   | Not Working      |   Create New | zach |
 | Add Contributor   | Not Working      |   Add Contributor | zach |
 | Item Search   | Working      |   Delete | justin |
