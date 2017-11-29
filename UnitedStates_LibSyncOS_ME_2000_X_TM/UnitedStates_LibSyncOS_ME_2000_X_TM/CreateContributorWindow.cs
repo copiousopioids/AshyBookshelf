@@ -23,10 +23,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 return awardList;
             }       
         }
-        public void SetDisplayItems(List<Award> availableAwards, List<Role> roles) {
-            uxStaffAvailableRewardsGenericItemsListBox.Items.AddRange(availableAwards.ToArray());
-            uxStaffRoleComboBox.Items.AddRange(roles.ToArray());
-        }
 
         public string UXStaffContributorTwitterHandle
         {
@@ -50,17 +46,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             {
                 return uxStaffLastNameTextBox.Text.ToString();
             }
-        }
-
-        public Role UXStaffRoleSelected
-        {
-            get
-            {
-                if (uxStaffRoleComboBox.SelectedItem == null)
-                    throw new Exception("Please selected a role for the contributor");
-                return (Role)uxStaffRoleComboBox.SelectedItem;
-            }
-        }
+        }        
 
         public DateTime UXStaffContributorDateOfBirth
         {
@@ -138,7 +124,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public void AddDisplayItems(params object[] displayObjects)
         {
-            uxStaffAwardsReceivedGenericItemsListBox.Items.AddRange(displayObjects.ToArray());
+            uxStaffAvailableRewardsGenericItemsListBox.Items.AddRange(displayObjects.ToArray());            
         }
 
         public void ClearDisplayItems()
@@ -148,7 +134,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffDOBTextBox.Clear();
             uxStaffFirstNameTextBox.Clear();
             uxStaffLastNameTextBox.Clear();
-            uxStaffRoleComboBox.Items.Clear();
             uxStaffTwitterHandleTextBox.Clear();
             uxStaffDOBTextBox.Text = "MM/DD/YYYY";  
         }
@@ -193,13 +178,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
             if (string.IsNullOrEmpty(uxStaffTwitterHandleTextBox.Text)) {
                 return false;
-            }              
-            if (uxStaffRoleComboBox.SelectedItem == null) {
-                MessageBox.Show("Enter a role");
-
-                return false;
-            }
-            
+            }            
 
             // CHECK FOR Date in proper format
             try {

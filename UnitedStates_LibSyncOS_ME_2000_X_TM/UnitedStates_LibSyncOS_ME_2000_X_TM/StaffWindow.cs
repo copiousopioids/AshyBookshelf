@@ -161,7 +161,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     switch (addMovieWindowDialogReturn)
                     {
                         case DialogReturn.AddContributor:
-                            var contributor = PickContributorForItem();
+                            var contributor = PickContributorForItem(ItemType.Movie);
                             if (contributor != null)
                                 staffAddMovieItemWindow.AddItem(contributor);
                             break;
@@ -217,7 +217,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 switch (addBookWindowDialogReturn)
                 {
                     case DialogReturn.AddContributor:
-                        var contributor = PickContributorForItem();
+                        var contributor = PickContributorForItem(ItemType.Book);
                         if (contributor != null)
                             staffAddBookItemWindow.AddItem(contributor);
                         break;
@@ -248,10 +248,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }           
         }
 
-        public Person PickContributorForItem() {
+        public Person PickContributorForItem(ItemType type) {
             try
             {
-
                 var success = false;
                 var existingContributors = libraryController.GetAllContributors(out success, out errorMessage);
                 if (!success) {
@@ -260,16 +259,45 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     return null;
                 }
 
+                List<Role> rawRoles = libraryController.GetAllRoles(out success, out errorMessage);
+                List<Role> roles =new List<Role>();
+                
+                if (type.Equals(ItemType.Book))
+                {
+                    foreach (Role iRole in rawRoles)
+                    {
+                        if(iRole.Type.Equals(Roles.Author))
+                        {
+                            roles.Add(iRole);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Role iRole in rawRoles)
+                    {
+                        if (iRole.Type.Equals(Roles.Director) || iRole.Type.Equals(Roles.Actor))
+                        {
+                            roles.Add(iRole);
+                        }
+                    }
+                }
+
                 staffAddContributorWindow.ClearDisplayItems();
-                staffAddContributorWindow.AddDisplayItems(existingContributors.ToArray());
+                staffAddContributorWindow.SetDisplayItems(roles, existingContributors.ToArray());
 
                 var addContributorDialogReturn = staffAddContributorWindow.Display();
                 switch (addContributorDialogReturn)
                 {
                     case DialogReturn.AddContributor:
-                        var contributor = staffAddContributorWindow.SelectedItem;
+                        Person contributor =(Person)staffAddContributorWindow.SelectedItem;
+                        Role role = staffAddContributorWindow.UXStaffRoleSelected;
+                        
                         if (contributor is Person)
-                            return (Person)contributor;
+                        {
+                            contributor.Role = role;
+                            return contributor;
+                        }                            
                         else
                         {
                             MessageBox.Show("A contributor was not selected");
@@ -310,7 +338,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 return null;
             }
 
-            staffCreateContributorWindow.SetDisplayItems(existingAwards, roles);
+            staffCreateContributorWindow.AddDisplayItems(existingAwards.ToArray());
 
             while (true) {
                 var createContributorDialogReturn = staffCreateContributorWindow.Display();
@@ -321,9 +349,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         var lastName = staffCreateContributorWindow.UXStaffContributorLastName;
                         var twitterHandle = staffCreateContributorWindow.UXStaffContributorTwitterHandle;
                         var dateOfBirth = staffCreateContributorWindow.UXStaffContributorDateOfBirth;
-                        var role = staffCreateContributorWindow.UXStaffRoleSelected;
+                        
                         var awards = staffCreateContributorWindow.UXStaffGetAllRewardsContributorReceived;
-                        var contributor = libraryController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, role, awards, out success, out errorMessage);
+                        var contributor = libraryController.AddContributor(firstName, lastName, twitterHandle, dateOfBirth, awards, out success, out errorMessage);
                         if (!success)
                         {
                             // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED

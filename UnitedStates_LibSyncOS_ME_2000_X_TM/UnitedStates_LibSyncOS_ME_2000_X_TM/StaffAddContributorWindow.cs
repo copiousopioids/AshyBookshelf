@@ -7,11 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnitedStates_LibSyncOS_ME_2000_X_TM.Classes;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class StaffAddContributorWindow : Form, ILibraryForm
     {
+        public Role UXStaffRoleSelected
+        {
+            get
+            {
+                if (uxStaffRoleComboBox.SelectedItem == null)
+                {
+                    throw new Exception("Please selected a role for the contributor");
+                }
+                return (Role)uxStaffRoleComboBox.SelectedItem;
+            }
+        }
+
         public StaffAddContributorWindow()
         {
             InitializeComponent();
@@ -43,6 +56,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public void AddDisplayItems(params object [] displayObjects)
         {
             uxStaffGenericItemsListBox.Items.AddRange(displayObjects.ToArray());
+        }
+
+        public void SetDisplayItems(List<Role> roles, params object[] displayObjects)
+        {
+            uxStaffGenericItemsListBox.Items.AddRange(displayObjects.ToArray());
+            uxStaffRoleComboBox.Items.AddRange(roles.ToArray());
         }
 
         public void ClearDisplayItems()

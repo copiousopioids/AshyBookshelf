@@ -37,6 +37,24 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Classes
             Role = role;
         }
 
+        public Person(
+            int personId,
+            string firstName,
+            string lastName,
+            DateTime dateOfBirth,
+            string twitterHandle,
+            DateTime deathDate,
+            List<Award> award)
+        {
+            PersonId = personId;
+            FirstName = firstName;
+            LastName = lastName;
+            DateOfBirth = dateOfBirth;
+            TwitterHandle = twitterHandle;
+            DeathDate = deathDate;
+            Award = award;
+        }
+
         public override string ToString()
         {
             // TODO: Create tostring how you would like element to display in listboxes

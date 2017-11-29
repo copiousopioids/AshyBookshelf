@@ -35,13 +35,15 @@
             this.uxStaffCreateContributorButton = new System.Windows.Forms.Button();
             this.uxStaffGenericItemsListBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.RoleLabel = new System.Windows.Forms.Label();
+            this.uxStaffRoleComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // uxStaffAddContributorButton
             // 
             this.uxStaffAddContributorButton.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.uxStaffAddContributorButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxStaffAddContributorButton.Location = new System.Drawing.Point(16, 371);
+            this.uxStaffAddContributorButton.Location = new System.Drawing.Point(30, 371);
             this.uxStaffAddContributorButton.Name = "uxStaffAddContributorButton";
             this.uxStaffAddContributorButton.Size = new System.Drawing.Size(155, 30);
             this.uxStaffAddContributorButton.TabIndex = 3;
@@ -93,7 +95,7 @@
             this.uxStaffGenericItemsListBox.FormattingEnabled = true;
             this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(16, 75);
             this.uxStaffGenericItemsListBox.Name = "uxStaffGenericItemsListBox";
-            this.uxStaffGenericItemsListBox.Size = new System.Drawing.Size(390, 290);
+            this.uxStaffGenericItemsListBox.Size = new System.Drawing.Size(390, 212);
             this.uxStaffGenericItemsListBox.TabIndex = 17;
             // 
             // label1
@@ -106,11 +108,31 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "Add Contributor";
             // 
+            // RoleLabel
+            // 
+            this.RoleLabel.AutoSize = true;
+            this.RoleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RoleLabel.Location = new System.Drawing.Point(12, 324);
+            this.RoleLabel.Name = "RoleLabel";
+            this.RoleLabel.Size = new System.Drawing.Size(46, 20);
+            this.RoleLabel.TabIndex = 21;
+            this.RoleLabel.Text = "Role:";
+            // 
+            // uxStaffRoleComboBox
+            // 
+            this.uxStaffRoleComboBox.FormattingEnabled = true;
+            this.uxStaffRoleComboBox.Location = new System.Drawing.Point(64, 326);
+            this.uxStaffRoleComboBox.Name = "uxStaffRoleComboBox";
+            this.uxStaffRoleComboBox.Size = new System.Drawing.Size(121, 21);
+            this.uxStaffRoleComboBox.TabIndex = 20;
+            // 
             // StaffAddContributorWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(421, 471);
+            this.Controls.Add(this.RoleLabel);
+            this.Controls.Add(this.uxStaffRoleComboBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.uxStaffGenericItemsListBox);
             this.Controls.Add(this.uxStaffCreateContributorButton);
@@ -133,5 +155,7 @@
         private System.Windows.Forms.Button uxStaffCreateContributorButton;
         private System.Windows.Forms.ListBox uxStaffGenericItemsListBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label RoleLabel;
+        private System.Windows.Forms.ComboBox uxStaffRoleComboBox;
     }
 }
