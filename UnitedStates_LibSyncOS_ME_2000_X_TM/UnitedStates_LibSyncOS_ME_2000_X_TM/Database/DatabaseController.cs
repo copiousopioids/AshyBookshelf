@@ -194,6 +194,20 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         }
 
         /// <summary>
+        /// Takes an object (say a mySql date object)
+        /// and turns it into a DateTime. If it fails, it will just return the 
+        /// default DateTime.
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        private DateTime getDate(object date)
+        {
+            DateTime newDate = new DateTime();
+            DateTime.TryParse(date.ToString(), out newDate);
+            return newDate;            
+        }
+
+        /// <summary>
         /// Generic insert function for the database.
         /// </summary>
         /// <param name="strSQL">the sql string using parameters.</param>
@@ -505,8 +519,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     success = true;
                     errorMessage = "";
                     trans.Commit();
+
                     // hard code that death date lol
-                    return new Person(contribID, firstName, lastName, Convert.ToDateTime(dateOfBirth), twitterHandle, new DateTime(2100, 12, 19), awards, role);
+                    return new Person(contribID, firstName, lastName, dateOfBirth, twitterHandle, new DateTime(), awards, role);
                 }
                 else throw new Exception("Person not added to People table");
             } catch(Exception e)
@@ -897,7 +912,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
                     while (rdr.Read())
                     {
-                        people.Add(new Person((int)rdr["person_id"], (string)rdr["first_name"], (string)rdr["last_name"], new DateTime(2100, 12, 19), null, new DateTime(2100, 12, 19), null, null));
+                        people.Add(new Person((int)rdr["person_id"], (string)rdr["first_name"], (string)rdr["last_name"], getDate(rdr["birth_date"]), null, getDate(rdr["death_date"]), null, null));
                     }
 
                     success = true;
@@ -1245,7 +1260,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     }
                     // TODO: GUI says outstanding fines, would like it to say just "Fines"
                     if (!paid)
-                        list.Add(new Fine(Convert.ToInt32(reader.GetString(0)), Convert.ToInt32(reader.GetString(1)), Convert.ToDateTime(reader.GetString(3)), paid, reader.GetString(4)));
+                        list.Add(new Fine(Convert.ToInt32(reader.GetString(0)), Convert.ToInt32(reader.GetString(1)), getDate(reader.GetString(3)), paid, reader.GetString(4)));
                 }
                 reader.Close();
                 return list;
