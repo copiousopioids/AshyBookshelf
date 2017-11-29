@@ -103,7 +103,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectAllRoles_sql = "SELECT role_code, role FROM Roles";
         MySqlCommand _selectAllRoles;
 
-        private string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
+        //private string _selectAllContributors_sql = "SELECT person_id, first_name, last_name, birth_date, death_date, twitter FROM People";
+        private string _selectAllContributors_sql = "SELECT * FROM People";
         MySqlCommand _selectAllContributors;
 
         private string _selectCheckedOutItem_sql = "SELECT item_id FROM Cardholder_Item WHERE item_id = @item_id";
@@ -259,9 +260,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
         }
 
-        public int AddItem(string title, int available, int weekly_fine, int damage_fine)
+        public int AddItem(string title, int available, int weekly_fine, int damage_fine, MySqlTransaction trans)
         {
-            MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             try
             {
                 string strSQL = "INSERT INTO Items(title, available, weekly_fine, damage_fine) VALUES (@title, @available, @weekly_fine, @damage_fine);";
@@ -292,7 +292,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             MySqlTransaction trans = _mysqlConnection.BeginTransaction();
             try
             {
-                int itemID = AddItem(title, 1, 5, 10);
+                // Default available is 1, weekly fine is 5 and damage fee is 10. 
+                int itemID = AddItem(title, 1, 5, 10, trans);
                 if (itemID > 0)
                 {
                     string bookSQL = "INSERT INTO Books(item_id, num_pages, publisher, isbn) VALUES (@item_id, @num_pages, @publisher, @isbn);";
