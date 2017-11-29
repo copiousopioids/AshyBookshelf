@@ -322,7 +322,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 }
             }
             catch (Exception ex){
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show(ex.Message);
                 return null;
             }
         }

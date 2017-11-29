@@ -19,7 +19,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             {
                 if (uxStaffRoleComboBox.SelectedItem == null)
                 {
-                    throw new Exception("Please selected a role for the contributor");
+                    throw new Exception("Please select a role for the contributor.");
                 }
                 return (Role)uxStaffRoleComboBox.SelectedItem;
             }

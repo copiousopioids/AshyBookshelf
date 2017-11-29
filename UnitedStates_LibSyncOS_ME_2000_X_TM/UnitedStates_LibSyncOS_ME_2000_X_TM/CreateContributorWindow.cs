@@ -97,6 +97,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public CreateContributorWindow()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
         }
 
         public int SelectedIndex
