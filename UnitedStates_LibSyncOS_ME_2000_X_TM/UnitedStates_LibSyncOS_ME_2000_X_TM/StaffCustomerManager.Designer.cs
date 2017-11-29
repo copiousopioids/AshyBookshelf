@@ -36,27 +36,29 @@
             this.uxStaffGenericItemsListBox = new System.Windows.Forms.ListBox();
             this.uxCreateFineButton = new System.Windows.Forms.Button();
             this.uxStaffRemoveFineButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.uxStaffNewFineAmount = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.staffCheckedOutItemsLabel = new System.Windows.Forms.Label();
+            this.uxStaffCheckedOutItemsListBox = new System.Windows.Forms.ListBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uxCustomerReturnItemButton
             // 
             this.uxCustomerReturnItemButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.uxCustomerReturnItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerReturnItemButton.Location = new System.Drawing.Point(529, 266);
+            this.uxCustomerReturnItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerReturnItemButton.Location = new System.Drawing.Point(527, 325);
             this.uxCustomerReturnItemButton.Name = "uxCustomerReturnItemButton";
             this.uxCustomerReturnItemButton.Size = new System.Drawing.Size(124, 31);
             this.uxCustomerReturnItemButton.TabIndex = 27;
-            this.uxCustomerReturnItemButton.Text = "Return";
+            this.uxCustomerReturnItemButton.Text = "Close";
             this.uxCustomerReturnItemButton.UseVisualStyleBackColor = true;
             // 
             // uxStaffUsernameTextBox
             // 
             this.uxStaffUsernameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxStaffUsernameTextBox.Location = new System.Drawing.Point(122, 14);
+            this.uxStaffUsernameTextBox.Location = new System.Drawing.Point(162, 50);
             this.uxStaffUsernameTextBox.Name = "uxStaffUsernameTextBox";
             this.uxStaffUsernameTextBox.ReadOnly = true;
             this.uxStaffUsernameTextBox.Size = new System.Drawing.Size(151, 29);
@@ -65,7 +67,7 @@
             // uxStaffNameTextBox
             // 
             this.uxStaffNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxStaffNameTextBox.Location = new System.Drawing.Point(86, 103);
+            this.uxStaffNameTextBox.Location = new System.Drawing.Point(162, 85);
             this.uxStaffNameTextBox.Name = "uxStaffNameTextBox";
             this.uxStaffNameTextBox.ReadOnly = true;
             this.uxStaffNameTextBox.Size = new System.Drawing.Size(151, 29);
@@ -74,76 +76,58 @@
             // Customer_Account_Username_Label
             // 
             this.Customer_Account_Username_Label.AutoSize = true;
-            this.Customer_Account_Username_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Username_Label.Location = new System.Drawing.Point(14, 14);
+            this.Customer_Account_Username_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Account_Username_Label.Location = new System.Drawing.Point(47, 56);
             this.Customer_Account_Username_Label.Name = "Customer_Account_Username_Label";
-            this.Customer_Account_Username_Label.Size = new System.Drawing.Size(102, 24);
+            this.Customer_Account_Username_Label.Size = new System.Drawing.Size(87, 20);
             this.Customer_Account_Username_Label.TabIndex = 18;
             this.Customer_Account_Username_Label.Text = "Username:";
             // 
             // Customer_Account_Name_Label
             // 
             this.Customer_Account_Name_Label.AutoSize = true;
-            this.Customer_Account_Name_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Name_Label.Location = new System.Drawing.Point(14, 103);
+            this.Customer_Account_Name_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Account_Name_Label.Location = new System.Drawing.Point(79, 91);
             this.Customer_Account_Name_Label.Name = "Customer_Account_Name_Label";
-            this.Customer_Account_Name_Label.Size = new System.Drawing.Size(66, 24);
+            this.Customer_Account_Name_Label.Size = new System.Drawing.Size(55, 20);
             this.Customer_Account_Name_Label.TabIndex = 15;
             this.Customer_Account_Name_Label.Text = "Name:";
             // 
             // uxStaffGenericItemsListBox
             // 
             this.uxStaffGenericItemsListBox.FormattingEnabled = true;
-            this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(359, 35);
+            this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(357, 71);
             this.uxStaffGenericItemsListBox.Name = "uxStaffGenericItemsListBox";
-            this.uxStaffGenericItemsListBox.Size = new System.Drawing.Size(294, 225);
+            this.uxStaffGenericItemsListBox.Size = new System.Drawing.Size(294, 82);
             this.uxStaffGenericItemsListBox.TabIndex = 28;
             // 
             // uxCreateFineButton
             // 
             this.uxCreateFineButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.uxCreateFineButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCreateFineButton.Location = new System.Drawing.Point(18, 266);
+            this.uxCreateFineButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCreateFineButton.Location = new System.Drawing.Point(181, 201);
             this.uxCreateFineButton.Name = "uxCreateFineButton";
-            this.uxCreateFineButton.Size = new System.Drawing.Size(124, 31);
+            this.uxCreateFineButton.Size = new System.Drawing.Size(151, 31);
             this.uxCreateFineButton.TabIndex = 29;
-            this.uxCreateFineButton.Text = "Create Fine";
+            this.uxCreateFineButton.Text = "Charge Fine ($10)";
             this.uxCreateFineButton.UseVisualStyleBackColor = true;
             // 
             // uxStaffRemoveFineButton
             // 
             this.uxStaffRemoveFineButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.uxStaffRemoveFineButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxStaffRemoveFineButton.Location = new System.Drawing.Point(359, 266);
+            this.uxStaffRemoveFineButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxStaffRemoveFineButton.Location = new System.Drawing.Point(357, 159);
             this.uxStaffRemoveFineButton.Name = "uxStaffRemoveFineButton";
-            this.uxStaffRemoveFineButton.Size = new System.Drawing.Size(137, 31);
+            this.uxStaffRemoveFineButton.Size = new System.Drawing.Size(124, 31);
             this.uxStaffRemoveFineButton.TabIndex = 30;
             this.uxStaffRemoveFineButton.Text = "Remove Fine";
             this.uxStaffRemoveFineButton.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 236);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(168, 24);
-            this.label1.TabIndex = 31;
-            this.label1.Text = "New Fine Amount:";
-            // 
-            // uxStaffNewFineAmount
-            // 
-            this.uxStaffNewFineAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxStaffNewFineAmount.Location = new System.Drawing.Point(186, 236);
-            this.uxStaffNewFineAmount.Name = "uxStaffNewFineAmount";
-            this.uxStaffNewFineAmount.Size = new System.Drawing.Size(151, 29);
-            this.uxStaffNewFineAmount.TabIndex = 32;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(14, 200);
+            this.label2.Location = new System.Drawing.Point(12, 159);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(320, 24);
             this.label2.TabIndex = 33;
@@ -153,22 +137,63 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(355, 8);
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(353, 48);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(168, 24);
+            this.label3.Size = new System.Drawing.Size(52, 20);
             this.label3.TabIndex = 34;
-            this.label3.Text = "Outstanding Fines:";
+            this.label3.Text = "Fines:";
+            // 
+            // staffCheckedOutItemsLabel
+            // 
+            this.staffCheckedOutItemsLabel.AutoSize = true;
+            this.staffCheckedOutItemsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.staffCheckedOutItemsLabel.Location = new System.Drawing.Point(353, 201);
+            this.staffCheckedOutItemsLabel.Name = "staffCheckedOutItemsLabel";
+            this.staffCheckedOutItemsLabel.Size = new System.Drawing.Size(154, 20);
+            this.staffCheckedOutItemsLabel.TabIndex = 35;
+            this.staffCheckedOutItemsLabel.Text = "Checked Out Items: ";
+            // 
+            // uxStaffCheckedOutItemsListBox
+            // 
+            this.uxStaffCheckedOutItemsListBox.FormattingEnabled = true;
+            this.uxStaffCheckedOutItemsListBox.Location = new System.Drawing.Point(357, 224);
+            this.uxStaffCheckedOutItemsListBox.Name = "uxStaffCheckedOutItemsListBox";
+            this.uxStaffCheckedOutItemsListBox.Size = new System.Drawing.Size(294, 95);
+            this.uxStaffCheckedOutItemsListBox.TabIndex = 36;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(13, 13);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(246, 24);
+            this.label4.TabIndex = 38;
+            this.label4.Text = "Customer Account Manager";
+            // 
+            // button1
+            // 
+            this.button1.DialogResult = System.Windows.Forms.DialogResult.Abort;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(12, 201);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(151, 31);
+            this.button1.TabIndex = 39;
+            this.button1.Text = "Charge Fine ($5)";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // StaffCustomerManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 309);
+            this.ClientSize = new System.Drawing.Size(671, 370);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.uxStaffCheckedOutItemsListBox);
+            this.Controls.Add(this.staffCheckedOutItemsLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.uxStaffNewFineAmount);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.uxStaffRemoveFineButton);
             this.Controls.Add(this.uxCreateFineButton);
             this.Controls.Add(this.uxStaffGenericItemsListBox);
@@ -178,7 +203,7 @@
             this.Controls.Add(this.Customer_Account_Username_Label);
             this.Controls.Add(this.Customer_Account_Name_Label);
             this.Name = "StaffCustomerManager";
-            this.Text = "StaffCustomerManager";
+            this.Text = "Customer Account Manager";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -194,9 +219,11 @@
         private System.Windows.Forms.ListBox uxStaffGenericItemsListBox;
         private System.Windows.Forms.Button uxCreateFineButton;
         private System.Windows.Forms.Button uxStaffRemoveFineButton;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox uxStaffNewFineAmount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label staffCheckedOutItemsLabel;
+        private System.Windows.Forms.ListBox uxStaffCheckedOutItemsListBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button button1;
     }
 }

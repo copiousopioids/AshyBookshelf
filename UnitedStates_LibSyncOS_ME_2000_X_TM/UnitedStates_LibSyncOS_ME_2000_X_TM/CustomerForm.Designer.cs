@@ -36,10 +36,10 @@
             // 
             // customerFindItemButton
             // 
-            this.customerFindItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerFindItemButton.Location = new System.Drawing.Point(40, 45);
+            this.customerFindItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerFindItemButton.Location = new System.Drawing.Point(12, 12);
             this.customerFindItemButton.Name = "customerFindItemButton";
-            this.customerFindItemButton.Size = new System.Drawing.Size(188, 83);
+            this.customerFindItemButton.Size = new System.Drawing.Size(135, 72);
             this.customerFindItemButton.TabIndex = 0;
             this.customerFindItemButton.Text = "Find Item";
             this.customerFindItemButton.UseVisualStyleBackColor = true;
@@ -47,10 +47,10 @@
             // 
             // customerAccountInformationButton
             // 
-            this.customerAccountInformationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerAccountInformationButton.Location = new System.Drawing.Point(282, 45);
+            this.customerAccountInformationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerAccountInformationButton.Location = new System.Drawing.Point(153, 12);
             this.customerAccountInformationButton.Name = "customerAccountInformationButton";
-            this.customerAccountInformationButton.Size = new System.Drawing.Size(188, 83);
+            this.customerAccountInformationButton.Size = new System.Drawing.Size(135, 72);
             this.customerAccountInformationButton.TabIndex = 1;
             this.customerAccountInformationButton.Text = "Account Information";
             this.customerAccountInformationButton.UseVisualStyleBackColor = true;
@@ -58,10 +58,10 @@
             // 
             // customerExitButton
             // 
-            this.customerExitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerExitButton.Location = new System.Drawing.Point(315, 151);
+            this.customerExitButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerExitButton.Location = new System.Drawing.Point(153, 90);
             this.customerExitButton.Name = "customerExitButton";
-            this.customerExitButton.Size = new System.Drawing.Size(130, 47);
+            this.customerExitButton.Size = new System.Drawing.Size(135, 72);
             this.customerExitButton.TabIndex = 2;
             this.customerExitButton.Text = "Logout";
             this.customerExitButton.UseVisualStyleBackColor = true;
@@ -69,12 +69,12 @@
             // 
             // customerLoginButton
             // 
-            this.customerLoginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.customerLoginButton.Location = new System.Drawing.Point(61, 151);
+            this.customerLoginButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.customerLoginButton.Location = new System.Drawing.Point(12, 90);
             this.customerLoginButton.Name = "customerLoginButton";
-            this.customerLoginButton.Size = new System.Drawing.Size(130, 47);
+            this.customerLoginButton.Size = new System.Drawing.Size(135, 72);
             this.customerLoginButton.TabIndex = 3;
-            this.customerLoginButton.Text = "Login";
+            this.customerLoginButton.Text = "Login (?)";
             this.customerLoginButton.UseVisualStyleBackColor = true;
             this.customerLoginButton.Click += new System.EventHandler(this.customerLoginButton_Click);
             // 
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 221);
+            this.ClientSize = new System.Drawing.Size(305, 175);
             this.Controls.Add(this.customerLoginButton);
             this.Controls.Add(this.customerExitButton);
             this.Controls.Add(this.customerAccountInformationButton);

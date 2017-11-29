@@ -44,6 +44,23 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
+        public ItemSearchOptions staffSearchCriteria
+        {
+            get
+            {
+                string attribute = Staff_Search_Attribute_ComboBox.Text;
+                switch (attribute)
+                {
+                    case "Person":
+                        return ItemSearchOptions.Person;
+                    case "Genre":
+                        return ItemSearchOptions.Genre;
+                    default:
+                        return ItemSearchOptions.Title;
+                }
+            }
+        }
+
         public StaffItemSearchWindow()
         {
             InitializeComponent();
@@ -107,6 +124,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         return DialogReturn.Cancel;
                     case DialogResult.Retry:
                         return DialogReturn.Search;
+                    case DialogResult.Abort:
+                        if (CheckDataValidity())
+                            return DialogReturn.Select;
+                        break;
                     default:
                         return DialogReturn.Undefined;
                 }

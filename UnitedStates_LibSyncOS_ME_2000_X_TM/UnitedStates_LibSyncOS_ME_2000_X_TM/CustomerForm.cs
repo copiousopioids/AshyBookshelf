@@ -16,6 +16,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         CustomerAccountForm customerAccountForm;
         CustomerLoginForm customerLoginForm;
         CustomerItemSearchWindow customerItemSearchWindow;
+        ItemDetailView itemDetailView;
         string errorMessage = "";
         public Customer_Home()
         {
@@ -23,10 +24,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         }
 
         public Customer_Home(LibraryController controller) : this() {
-            this.customerAccountForm = new CustomerAccountForm();
+            this.customerAccountForm = new CustomerAccountForm(controller);
             this.customerLoginForm = new CustomerLoginForm();
             this.customerItemSearchWindow = new CustomerItemSearchWindow();
             this.libraryController = controller;
+            this.itemDetailView = new ItemDetailView();
         }
 
         //////////////////////////// CLICK FUNCTIONS //////////////////////////
@@ -43,9 +45,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                     {
                         case DialogReturn.CheckOut:
                             var checkoutItem = customerItemSearchWindow.SelectedItem;
+                            var type = checkoutItem.GetType();
                             if (checkoutItem is Book) {
                                 var bookToCheckout = (Book)checkoutItem;
-                                success = libraryController.DeleteItem(ItemTypes.Book, bookToCheckout.ID, out errorMessage);
+                                success = libraryController.CheckoutItem(ItemTypes.Book, bookToCheckout.ID, out errorMessage);
                                 if (success)
                                 {
                                     MessageBox.Show("Item Checked out");
@@ -56,11 +59,29 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                                     MessageBox.Show("Item could not be checked out " + errorMessage);
                                 }
                             }
+                            if (checkoutItem is Movie)
+                            {
+                                var bookToCheckout = (Movie)checkoutItem;
+                                success = libraryController.CheckoutItem(ItemTypes.Movie, bookToCheckout.ID, out errorMessage);
+                                if (success)
+                                {
+                                    MessageBox.Show("Movie Checked out");
+                                    customerItemSearchWindow.ClearDisplayItems();
+                                }
+                                else
+                                {
+                                    // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                                    MessageBox.Show("Item could not be checked out " + errorMessage);
+                                }
+                            }
                             break;
                         case DialogReturn.Cancel:
                             return;
                         case DialogReturn.Search:
                             SearchItemsButtonPressedInCustomerSearchItemWindow();
+                            break;
+                        case DialogReturn.Select:
+                            ShowItemDetailViewWindow((Item)customerItemSearchWindow.SelectedItem);
                             break;
                         default:
                             return;
@@ -71,6 +92,31 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 MessageBox.Show(ex.ToString());
             }
             
+        }
+
+        public void ShowItemDetailViewWindow(Item selectedItem)
+        {
+            List<string> itemDisplayContents = null;
+            if (selectedItem is Movie)
+            {
+                itemDisplayContents = libraryController.GetItemDetails(selectedItem, ItemType.Movie);
+            }
+            else if (selectedItem is Book)
+            {
+                itemDisplayContents = libraryController.GetItemDetails(selectedItem, ItemType.Book);
+            }
+            else
+            {
+                MessageBox.Show("Error with selected item, sorry");
+            }
+
+            if (itemDisplayContents == null)
+                return;
+            itemDetailView.ClearDisplayItems();
+            itemDetailView.AddDisplayItems(itemDisplayContents.ToArray());
+            var dialogResult = itemDetailView.Display();
+            // do more things if needed
+
         }
 
         private void customerAccountInformationButton_Click(object sender, EventArgs e)
@@ -173,7 +219,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         case DialogReturn.Login:
                             var username = customerLoginForm.UXCustomerUsername;
                             var password = customerLoginForm.UXCustomerPassword;
-                            var isLoginASuccess = libraryController.CheckUserLoginCredentials(username, password, out errorMessage);
+                            bool success;
+                            libraryController.CheckUserLoginCredentials(username, password, out errorMessage, out success);
+                            var isLoginASuccess = success;
                             if (isLoginASuccess)
                             {
                                 MessageBox.Show("User logged in");
@@ -203,10 +251,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 var logoutResult = libraryController.LogoutUser();
                 if (logoutResult)
                 {
-                    MessageBox.Show("User logged out");
+                    MessageBox.Show("User logged out.");
                 }
                 else {
-                    MessageBox.Show("User could not be logged out");
+                    MessageBox.Show("User could not be logged out.");
                 }
             }
             catch (Exception ex) {
@@ -219,21 +267,57 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             var searchString = customerItemSearchWindow.UXCustomerSearchText;
 
+            // TODO > check to see if the string is null...
+
             var isBookCheckBoxChecked = customerItemSearchWindow.UXCustomerIsSearchBookCheckBoxSelected;
             var isMovieCheckBoxChecked = customerItemSearchWindow.UXCustomerIsSearchMovieCheckBoxSelected;
+            ItemSearchOptions searchAttribute = customerItemSearchWindow.customerSearchCriteria;
             var bookAndMovieDisplayObjects = new List<object>();
 
             if (isBookCheckBoxChecked && isMovieCheckBoxChecked)
             {
-                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.BookAndMovie, out errorMessage);
+                if (searchAttribute == ItemSearchOptions.Person)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndBookAndMovie, out errorMessage);
+                }
+                else if (searchAttribute == ItemSearchOptions.Genre)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndBookAndMovie, out errorMessage);
+                }
+                else
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndBookAndMovie, out errorMessage);
+                }
             }
             else if (isBookCheckBoxChecked)
             {
-                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Book, out errorMessage);
+                if (searchAttribute == ItemSearchOptions.Person)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndBook, out errorMessage);
+                }
+                else if (searchAttribute == ItemSearchOptions.Genre)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndBook, out errorMessage);
+                }
+                else
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndBook, out errorMessage);
+                }
             }
             else if (isMovieCheckBoxChecked)
             {
-                bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Movie, out errorMessage);
+                if (searchAttribute == ItemSearchOptions.Person)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndMovie, out errorMessage);
+                }
+                else if (searchAttribute == ItemSearchOptions.Genre)
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndMovie, out errorMessage);
+                }
+                else
+                {
+                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndMovie, out errorMessage);
+                }
             }
             else
             {

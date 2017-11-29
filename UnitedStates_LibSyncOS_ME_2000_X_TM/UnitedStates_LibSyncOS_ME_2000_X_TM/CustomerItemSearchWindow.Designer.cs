@@ -35,22 +35,25 @@
             this.uxCustomerCancelButton = new System.Windows.Forms.Button();
             this.uxCustomerSearchItemsTextBox = new System.Windows.Forms.TextBox();
             this.uxCustomerCheckoutItemButton = new System.Windows.Forms.Button();
+            this.Customer_Search_Attribute_ComboBox = new System.Windows.Forms.ComboBox();
+            this.uxStaffSelectButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // uxCustomerSearchButton
             // 
             this.uxCustomerSearchButton.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            this.uxCustomerSearchButton.Location = new System.Drawing.Point(22, 15);
+            this.uxCustomerSearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerSearchButton.Location = new System.Drawing.Point(372, 17);
             this.uxCustomerSearchButton.Name = "uxCustomerSearchButton";
-            this.uxCustomerSearchButton.Size = new System.Drawing.Size(91, 23);
+            this.uxCustomerSearchButton.Size = new System.Drawing.Size(114, 29);
             this.uxCustomerSearchButton.TabIndex = 16;
-            this.uxCustomerSearchButton.Text = "Press to Search";
+            this.uxCustomerSearchButton.Text = "Search";
             this.uxCustomerSearchButton.UseVisualStyleBackColor = true;
             // 
             // uxCustomerGenericItemsList
             // 
             this.uxCustomerGenericItemsList.FormattingEnabled = true;
-            this.uxCustomerGenericItemsList.Location = new System.Drawing.Point(22, 46);
+            this.uxCustomerGenericItemsList.Location = new System.Drawing.Point(22, 75);
             this.uxCustomerGenericItemsList.Name = "uxCustomerGenericItemsList";
             this.uxCustomerGenericItemsList.Size = new System.Drawing.Size(464, 173);
             this.uxCustomerGenericItemsList.TabIndex = 15;
@@ -58,7 +61,8 @@
             // uxCustomerSearchMovieCheckBox
             // 
             this.uxCustomerSearchMovieCheckBox.AutoSize = true;
-            this.uxCustomerSearchMovieCheckBox.Location = new System.Drawing.Point(290, 20);
+            this.uxCustomerSearchMovieCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerSearchMovieCheckBox.Location = new System.Drawing.Point(149, 43);
             this.uxCustomerSearchMovieCheckBox.Name = "uxCustomerSearchMovieCheckBox";
             this.uxCustomerSearchMovieCheckBox.Size = new System.Drawing.Size(97, 17);
             this.uxCustomerSearchMovieCheckBox.TabIndex = 14;
@@ -68,7 +72,8 @@
             // uxCustomerSearchBooksCheckBox
             // 
             this.uxCustomerSearchBooksCheckBox.AutoSize = true;
-            this.uxCustomerSearchBooksCheckBox.Location = new System.Drawing.Point(393, 20);
+            this.uxCustomerSearchBooksCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerSearchBooksCheckBox.Location = new System.Drawing.Point(252, 43);
             this.uxCustomerSearchBooksCheckBox.Name = "uxCustomerSearchBooksCheckBox";
             this.uxCustomerSearchBooksCheckBox.Size = new System.Drawing.Size(93, 17);
             this.uxCustomerSearchBooksCheckBox.TabIndex = 13;
@@ -78,35 +83,62 @@
             // uxCustomerCancelButton
             // 
             this.uxCustomerCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.uxCustomerCancelButton.Location = new System.Drawing.Point(395, 223);
+            this.uxCustomerCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerCancelButton.Location = new System.Drawing.Point(372, 254);
             this.uxCustomerCancelButton.Name = "uxCustomerCancelButton";
-            this.uxCustomerCancelButton.Size = new System.Drawing.Size(91, 23);
+            this.uxCustomerCancelButton.Size = new System.Drawing.Size(114, 29);
             this.uxCustomerCancelButton.TabIndex = 12;
             this.uxCustomerCancelButton.Text = "Return";
             this.uxCustomerCancelButton.UseVisualStyleBackColor = true;
             // 
             // uxCustomerSearchItemsTextBox
             // 
-            this.uxCustomerSearchItemsTextBox.Location = new System.Drawing.Point(133, 17);
+            this.uxCustomerSearchItemsTextBox.Location = new System.Drawing.Point(149, 17);
             this.uxCustomerSearchItemsTextBox.Name = "uxCustomerSearchItemsTextBox";
-            this.uxCustomerSearchItemsTextBox.Size = new System.Drawing.Size(151, 20);
+            this.uxCustomerSearchItemsTextBox.Size = new System.Drawing.Size(217, 20);
             this.uxCustomerSearchItemsTextBox.TabIndex = 11;
             // 
             // uxCustomerCheckoutItemButton
             // 
             this.uxCustomerCheckoutItemButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.uxCustomerCheckoutItemButton.Location = new System.Drawing.Point(22, 226);
+            this.uxCustomerCheckoutItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerCheckoutItemButton.Location = new System.Drawing.Point(22, 255);
             this.uxCustomerCheckoutItemButton.Name = "uxCustomerCheckoutItemButton";
-            this.uxCustomerCheckoutItemButton.Size = new System.Drawing.Size(91, 23);
+            this.uxCustomerCheckoutItemButton.Size = new System.Drawing.Size(114, 29);
             this.uxCustomerCheckoutItemButton.TabIndex = 17;
             this.uxCustomerCheckoutItemButton.Text = "Checkout Item";
             this.uxCustomerCheckoutItemButton.UseVisualStyleBackColor = true;
+            // 
+            // Customer_Search_Attribute_ComboBox
+            // 
+            this.Customer_Search_Attribute_ComboBox.FormattingEnabled = true;
+            this.Customer_Search_Attribute_ComboBox.Items.AddRange(new object[] {
+            "Title",
+            "Genre",
+            "Person"});
+            this.Customer_Search_Attribute_ComboBox.Location = new System.Drawing.Point(22, 18);
+            this.Customer_Search_Attribute_ComboBox.Name = "Customer_Search_Attribute_ComboBox";
+            this.Customer_Search_Attribute_ComboBox.Size = new System.Drawing.Size(121, 21);
+            this.Customer_Search_Attribute_ComboBox.TabIndex = 18;
+            // 
+            // uxStaffSelectButton
+            // 
+            this.uxStaffSelectButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
+            this.uxStaffSelectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxStaffSelectButton.Location = new System.Drawing.Point(142, 254);
+            this.uxStaffSelectButton.Name = "uxStaffSelectButton";
+            this.uxStaffSelectButton.Size = new System.Drawing.Size(104, 29);
+            this.uxStaffSelectButton.TabIndex = 19;
+            this.uxStaffSelectButton.Text = "More Info";
+            this.uxStaffSelectButton.UseVisualStyleBackColor = true;
             // 
             // CustomerItemSearchWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(508, 261);
+            this.ClientSize = new System.Drawing.Size(505, 295);
+            this.Controls.Add(this.uxStaffSelectButton);
+            this.Controls.Add(this.Customer_Search_Attribute_ComboBox);
             this.Controls.Add(this.uxCustomerCheckoutItemButton);
             this.Controls.Add(this.uxCustomerSearchButton);
             this.Controls.Add(this.uxCustomerGenericItemsList);
@@ -115,7 +147,7 @@
             this.Controls.Add(this.uxCustomerCancelButton);
             this.Controls.Add(this.uxCustomerSearchItemsTextBox);
             this.Name = "CustomerItemSearchWindow";
-            this.Text = "CustomerItemSearchWindow";
+            this.Text = "Item Search";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -130,5 +162,7 @@
         private System.Windows.Forms.Button uxCustomerCancelButton;
         private System.Windows.Forms.TextBox uxCustomerSearchItemsTextBox;
         private System.Windows.Forms.Button uxCustomerCheckoutItemButton;
+        private System.Windows.Forms.ComboBox Customer_Search_Attribute_ComboBox;
+        private System.Windows.Forms.Button uxStaffSelectButton;
     }
 }

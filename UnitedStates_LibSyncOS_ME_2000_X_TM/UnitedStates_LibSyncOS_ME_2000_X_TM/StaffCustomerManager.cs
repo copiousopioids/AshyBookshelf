@@ -13,26 +13,20 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class StaffCustomerManager : Form, ILibraryForm
     {
+        private LibraryController libraryController;
+
         public void SetDisplay(Customer customer) {
             uxStaffNameTextBox.Text = customer.Name;
             uxStaffUsernameTextBox.Text = customer.Username;
-            this.AddDisplayItems(customer.fines.ToArray());
+            //this.AddDisplayItems(customer.fines.ToArray());
+            this.AddDisplayItems(libraryController.getFines(customer.CustomerId).ToArray());
+            if (customer.ItemsCheckoutOut != null) 
+                uxStaffCheckedOutItemsListBox.Items.AddRange(customer.ItemsCheckoutOut.ToArray());
         }
 
-        public int NewFineAmount {
-            get {
-                try
-                {
-                    return Convert.ToInt32(uxStaffNewFineAmount.Text);
-                }
-                catch (Exception ex) {
-                    MessageBox.Show("Amount was not an integer" + ex.ToString());
-                    return 0;
-                }
-            }
-        }
-        public StaffCustomerManager()
+        public StaffCustomerManager(LibraryController controller)
         {
+            this.libraryController = controller;
             InitializeComponent();
         }
 
@@ -66,10 +60,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool CheckDataValidity()
         {
-            if (uxStaffNewFineAmount.Text.Equals("")) {
-                MessageBox.Show("Please enter a fine amount");
-                return false;
-            }
             return true;
         }
 
@@ -86,7 +76,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffGenericItemsListBox.Items.Clear();
             uxStaffNameTextBox.Text = "";
             uxStaffUsernameTextBox.Text = "";
-            uxStaffNewFineAmount.Text = "";
+            uxStaffCheckedOutItemsListBox.Items.Clear();
         }
 
         public bool CheckDataValidityRemoveFine() {
@@ -104,7 +94,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 switch (this.ShowDialog()) {
                     case DialogResult.OK:
                         if (CheckDataValidity()) {
-                            return DialogReturn.CreateFine;
+                            return DialogReturn.CreateFine10;
                         }
                         break;
                     case DialogResult.Yes:
@@ -114,6 +104,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         break;
                     case DialogResult.Cancel:
                         return DialogReturn.Cancel;
+                    case DialogResult.Abort: return DialogReturn.CreateFine5;
                     default:
                         return DialogReturn.Undefined;
                 }

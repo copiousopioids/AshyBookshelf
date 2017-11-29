@@ -22,6 +22,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         private CreateContributorWindow staffCreateContributorWindow;
         private StaffCreateCustomerWindow staffCreateCustomerWindow;
         private StaffCustomerManager staffCustomerManager;
+        private ItemDetailView itemDetailView;
         private string errorMessage = "";
 
         public StaffWindow()
@@ -38,7 +39,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             this.staffItemSearchWindow = new StaffItemSearchWindow();
             this.staffCreateContributorWindow = new CreateContributorWindow();
             this.staffCreateCustomerWindow = new StaffCreateCustomerWindow();
-            this.staffCustomerManager = new StaffCustomerManager();
+            this.staffCustomerManager = new StaffCustomerManager(controller);
+            this.itemDetailView = new ItemDetailView();
             
             this.libraryController = controller;
         }
@@ -60,7 +62,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                                 staffItemSearchWindow.AddItem(book);
                             break;
                         case DialogReturn.AddMovie:
-                            var movie = AddAndGetMovieThroughAddMoviekWindow(out success);
+                            var movie = AddAndGetMovieThroughAddMovieWindow(out success);
                             if (success)
                                 staffItemSearchWindow.AddItem(movie);
                             break;
@@ -68,6 +70,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             return;
                         case DialogReturn.Delete:
                             DeleteItemFromLibrary();
+                            break;
+                        case DialogReturn.Select:
+                            ShowItemDetailViewWindow((Item)staffItemSearchWindow.SelectedItem);
                             break;
                         case DialogReturn.Undefined:
                             throw new Exception("Dialog did not return properly");
@@ -79,6 +84,26 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
+        public void ShowItemDetailViewWindow(Item selectedItem) {
+            List<string> itemDisplayContents = null;
+            if (selectedItem is Movie) {
+                itemDisplayContents = libraryController.GetItemDetails(selectedItem, ItemType.Movie);
+            } else if (selectedItem is Book) {
+                itemDisplayContents = libraryController.GetItemDetails(selectedItem, ItemType.Book);
+            } else {
+                MessageBox.Show("Error with selected item, sorry");
+            }
+
+            if (itemDisplayContents == null)
+                return;
+            itemDetailView.ClearDisplayItems();
+            itemDetailView.AddDisplayItems(itemDisplayContents.ToArray());
+            var dialogResult = itemDetailView.Display();
+            // do more things if needed
+
+
+
+        }
         public void DeleteItemFromLibrary()
         {
             var selectedItem = staffItemSearchWindow.SelectedItem;
@@ -114,7 +139,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             }
         }
 
-        public Movie AddAndGetMovieThroughAddMoviekWindow(out bool success) {
+        public Movie AddAndGetMovieThroughAddMovieWindow(out bool success) {
             staffAddMovieItemWindow.ClearDisplayItems();
 
             success = false;
@@ -250,7 +275,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             MessageBox.Show("A contributor was not selected");
                             return null;
                         }
-                        break;
+                        //break;
                     case DialogReturn.Create:
                         var newContributor = LaunchCreateContributorWindowAndCreateContributor();
                         return newContributor;
@@ -321,15 +346,56 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             {
                 var isBookCheckBoxChecked = staffItemSearchWindow.staffIsSearchBookCheckBoxSelected;
                 var isMovieCheckBoxChecked = staffItemSearchWindow.staffIsSearchMovieCheckBoxSelected;
+                ItemSearchOptions searchAttribute = staffItemSearchWindow.staffSearchCriteria;
                 var bookAndMovieDisplayObjects = new List<object>();
 
                 if (isBookCheckBoxChecked && isMovieCheckBoxChecked) {
-                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.BookAndMovie, out errorMessage);
-                } else if (isBookCheckBoxChecked) {
-                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Book, out errorMessage);
-                } else if (isMovieCheckBoxChecked) {
-                    bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.Movie, out errorMessage);
-                } else {
+                    if (searchAttribute == ItemSearchOptions.Person)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndBookAndMovie, out errorMessage);
+                    }
+                    else if(searchAttribute == ItemSearchOptions.Genre)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndBookAndMovie, out errorMessage);
+                    }
+                    else
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndBookAndMovie, out errorMessage);
+                    }
+                    
+                }
+                else if (isBookCheckBoxChecked)
+                {
+                    if (searchAttribute == ItemSearchOptions.Person)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndBook, out errorMessage);
+                    }
+                    else if (searchAttribute == ItemSearchOptions.Genre)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndBook, out errorMessage);
+                    }
+                    else
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndBook, out errorMessage);
+                    }
+                }
+                else if (isMovieCheckBoxChecked)
+                {
+                    if (searchAttribute == ItemSearchOptions.Person)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.PersonAndMovie, out errorMessage);
+                    }
+                    else if (searchAttribute == ItemSearchOptions.Genre)
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.GenreAndMovie, out errorMessage);
+                    }
+                    else
+                    {
+                        bookAndMovieDisplayObjects = libraryController.searchItems(searchString, ItemSearchOptions.TitleAndMovie, out errorMessage);
+                    }
+                }
+                else
+                {
                     MessageBox.Show("Check one or both of the following checkboxes: Movies, Books");
                     return;
                 }
@@ -352,7 +418,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             {
                 try
                 {
-                    var success = false;
+                    //var success = false;
                     var dialogReturn = staffCustomerSearchWindow.Display();
                     switch (dialogReturn)
                     {
@@ -365,7 +431,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         case DialogReturn.Cancel:
                             return;
                         case DialogReturn.Delete:
-                            var customer = (Customer)staffCustomerSearchWindow.SelectedItem;
+                            Customer customer = (Customer)staffCustomerSearchWindow.SelectedItem;
                             if (libraryController.DeleteCustomer(customer.Username, out errorMessage))
                             {
                                 MessageBox.Show("Customer Deleted");
@@ -379,6 +445,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         case DialogReturn.Select:
                             var customerToEdit = (Customer)staffCustomerSearchWindow.SelectedItem;
                             LaunchAndDisplayCustomerManager(customerToEdit);
+                            break;
+                        case DialogReturn.ListCustomers:
+                            // List and display all the customers.
+                            ListCustomersButtonPressedInStaffCustomerSearchWindow();
                             break;
                         case DialogReturn.Undefined:
                             throw new Exception("Dialog did not return properly");
@@ -399,16 +469,29 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             while (true) {
                 var dialogResult = staffCustomerManager.Display();
                 switch (dialogResult) {
-                    case DialogReturn.CreateFine:
-                        var fineAmount = staffCustomerManager.NewFineAmount;
+                    case DialogReturn.CreateFine10:
                         var success = false;
-                        var fine = libraryController.AddFine(customer.Username, fineAmount, out success, out errorMessage);
+                        var fine = libraryController.AddFine(customer.Username, 10, out success, out errorMessage);
                         if (success)
                         {
                             MessageBox.Show("Fine Added");
                             staffCustomerManager.AddItem(fine);
                         }
                         else {
+                            // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                            MessageBox.Show("Fine could not be added " + errorMessage);
+                        }
+                        break;
+                    case DialogReturn.CreateFine5:
+                        var success2 = false;
+                        var fine2 = libraryController.AddFine(customer.Username, 5, out success2, out errorMessage);
+                        if (success2)
+                        {
+                            MessageBox.Show("Fine Added");
+                            staffCustomerManager.AddItem(fine2);
+                        }
+                        else
+                        {
                             // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
                             MessageBox.Show("Fine could not be added " + errorMessage);
                         }
@@ -442,7 +525,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 case DialogReturn.Create:
                     var username = staffCreateCustomerWindow.UXStaffUsername;
                     var password = staffCreateCustomerWindow.UXStaffPassword;
-                    var name = staffCreateCustomerWindow.UXStaffPassword;
+                    var name = staffCreateCustomerWindow.UXStaffName;
                     var address = staffCreateCustomerWindow.UXStaffAddress;
                     var phoneNumber = staffCreateCustomerWindow.UXStaffPhoneNumber;
                     var success = libraryController.AddCustomer(username, password, name, address, phoneNumber, out errorMessage);
@@ -465,13 +548,26 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             var searchString = staffCustomerSearchWindow.UXStaffCustomerSearchIdString;
             staffCustomerSearchWindow.ClearDisplayItems();
             var success = false;
-            var customerDisplayObjects = (Customer)libraryController.GetCustomer(searchString, out success, out errorMessage);
+            var customerDisplayObjects = (List<Customer>)libraryController.GetCustomer(searchString, out success, out errorMessage);
             if (!success)
             {
                 // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
                 MessageBox.Show("No Customers could be found " + errorMessage);
             }
-            staffCustomerSearchWindow.AddDisplayItems(customerDisplayObjects);
+            staffCustomerSearchWindow.AddDisplayItems(customerDisplayObjects.ToArray());
+        }
+
+        public void ListCustomersButtonPressedInStaffCustomerSearchWindow()
+        {
+            staffCustomerSearchWindow.ClearDisplayItems();
+            var success = false;
+            var customerDisplayObjects = (List<Customer>)libraryController.GetAllCustomers(out success, out errorMessage);
+            if (!success)
+            {
+                // TODO: REMOVE CUSTOM MESSAGE ALL-TOGETHER WHEN ERROR MESSAGE IS IMPLEMENTED
+                MessageBox.Show("No Customers could be found " + errorMessage);
+            }
+            staffCustomerSearchWindow.AddDisplayItems(customerDisplayObjects.ToArray());
         }
     }
 }

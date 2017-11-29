@@ -9,25 +9,20 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 {
     interface IControllerFunctions
     {
-        bool VerifyAccount(string username, string password, out string errorMessage);
 
         Movie AddMovie(string title, string description, Genre genre, int duration, string barcode, List<Person> contributors, out bool success, out string errorMessage);
 
         Book AddBook(string title, Genre genre, string isbn, string publisher, int numberOfPages, List<Person> contributors, out bool success, out string errorMessage);
 
-        Item GetItem(ItemTypes itemType, string searchTitle);
-
         bool DeleteItem(ItemTypes itemType, int itemId, out string errorMessage);
-
-        bool CheckoutItem(ItemTypes itemType, int itemId, out string errorMessage);
 
         bool ReturnItem(ItemTypes itemType, int itemId, out string errorMessage);
 
-        Customer GetCustomer(string username, out bool success, out string errorMessage);
+        List<Customer> GetCustomer(string username, out bool success, out string errorMessage);
 
         bool AddCustomer(string username, string password, string name, string address, string phoneNumber, out string errorMessage);
 
-        Person AddContributor(string firstName, string lastName, string twitterHandle, string dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage);
+        Person AddContributor(string firstName, string lastName, string twitterHandle, DateTime dateOfBirth, Role role, List<Award> awards, out bool success, out string errorMessage);
 
         bool DeleteCustomer(string username, out string errorMessage);
 
@@ -35,12 +30,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         Fine AddFine(string username, int amount, out bool result, out string errorMessage);
         List<object> searchItems(string searchTitle, ItemSearchOptions searchCriteria, out string errorMessage);
-        bool CheckUserLoginCredentials(string username, string password, out string errorMessage);
+        Customer CheckUserLoginCredentials(string username, string password, out string errorMessage, out bool success);
         bool PayIndividualFine(string username, Fine fine, out string errorMessage);
         List<Person> GetAllContributors(out bool success, out string errorMessage);
         List<Award> GetAllAwards(out bool success, out string errorMessage);
         List<Role> GetAllRoles(out bool success, out string errorMessage);
         List<Genre> GetAllGenres(out bool success, out string errorMessage);
+
+        List<string> GetItemDetails(Item selectedItem, ItemType itemType);
 
     }
 }

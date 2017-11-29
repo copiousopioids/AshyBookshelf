@@ -34,14 +34,16 @@
             this.label7 = new System.Windows.Forms.Label();
             this.uxStaffCreateContributorButton = new System.Windows.Forms.Button();
             this.uxStaffGenericItemsListBox = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // uxStaffAddContributorButton
             // 
             this.uxStaffAddContributorButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.uxStaffAddContributorButton.Location = new System.Drawing.Point(18, 328);
+            this.uxStaffAddContributorButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxStaffAddContributorButton.Location = new System.Drawing.Point(16, 371);
             this.uxStaffAddContributorButton.Name = "uxStaffAddContributorButton";
-            this.uxStaffAddContributorButton.Size = new System.Drawing.Size(121, 23);
+            this.uxStaffAddContributorButton.Size = new System.Drawing.Size(155, 30);
             this.uxStaffAddContributorButton.TabIndex = 3;
             this.uxStaffAddContributorButton.Text = "Add Contributor";
             this.uxStaffAddContributorButton.UseVisualStyleBackColor = true;
@@ -49,9 +51,10 @@
             // uxStaffCancelButton
             // 
             this.uxStaffCancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.uxStaffCancelButton.Location = new System.Drawing.Point(333, 328);
+            this.uxStaffCancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxStaffCancelButton.Location = new System.Drawing.Point(286, 431);
             this.uxStaffCancelButton.Name = "uxStaffCancelButton";
-            this.uxStaffCancelButton.Size = new System.Drawing.Size(75, 23);
+            this.uxStaffCancelButton.Size = new System.Drawing.Size(120, 30);
             this.uxStaffCancelButton.TabIndex = 4;
             this.uxStaffCancelButton.Text = "Cancel";
             this.uxStaffCancelButton.UseVisualStyleBackColor = true;
@@ -67,18 +70,20 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(15, 9);
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(12, 52);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(105, 13);
+            this.label7.Size = new System.Drawing.Size(159, 20);
             this.label7.TabIndex = 13;
             this.label7.Text = "Existing Contributors:";
             // 
             // uxStaffCreateContributorButton
             // 
             this.uxStaffCreateContributorButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.uxStaffCreateContributorButton.Location = new System.Drawing.Point(145, 328);
+            this.uxStaffCreateContributorButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxStaffCreateContributorButton.Location = new System.Drawing.Point(286, 371);
             this.uxStaffCreateContributorButton.Name = "uxStaffCreateContributorButton";
-            this.uxStaffCreateContributorButton.Size = new System.Drawing.Size(148, 23);
+            this.uxStaffCreateContributorButton.Size = new System.Drawing.Size(120, 30);
             this.uxStaffCreateContributorButton.TabIndex = 16;
             this.uxStaffCreateContributorButton.Text = "Create New Contributor";
             this.uxStaffCreateContributorButton.UseVisualStyleBackColor = true;
@@ -86,16 +91,27 @@
             // uxStaffGenericItemsListBox
             // 
             this.uxStaffGenericItemsListBox.FormattingEnabled = true;
-            this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(18, 25);
+            this.uxStaffGenericItemsListBox.Location = new System.Drawing.Point(16, 75);
             this.uxStaffGenericItemsListBox.Name = "uxStaffGenericItemsListBox";
             this.uxStaffGenericItemsListBox.Size = new System.Drawing.Size(390, 290);
             this.uxStaffGenericItemsListBox.TabIndex = 17;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(142, 24);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Add Contributor";
             // 
             // StaffAddContributorWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 360);
+            this.ClientSize = new System.Drawing.Size(421, 471);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.uxStaffGenericItemsListBox);
             this.Controls.Add(this.uxStaffCreateContributorButton);
             this.Controls.Add(this.label7);
@@ -103,7 +119,7 @@
             this.Controls.Add(this.uxStaffCancelButton);
             this.Controls.Add(this.uxStaffAddContributorButton);
             this.Name = "StaffAddContributorWindow";
-            this.Text = "StaffAddContributorWindow";
+            this.Text = "Add Contributor";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -116,5 +132,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button uxStaffCreateContributorButton;
         private System.Windows.Forms.ListBox uxStaffGenericItemsListBox;
+        private System.Windows.Forms.Label label1;
     }
 }

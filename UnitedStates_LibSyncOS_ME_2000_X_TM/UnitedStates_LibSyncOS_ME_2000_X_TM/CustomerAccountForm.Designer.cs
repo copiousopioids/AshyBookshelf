@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.Customer_Account_Title = new System.Windows.Forms.Label();
+            this.Customer_Account_Label = new System.Windows.Forms.Label();
             this.Customer_Account_Name_Label = new System.Windows.Forms.Label();
             this.Customer_Account_Username_Label = new System.Windows.Forms.Label();
             this.Customer_Account_Password_Label = new System.Windows.Forms.Label();
@@ -48,70 +48,70 @@
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // Customer_Account_Title
+            // Customer_Account_Label
             // 
-            this.Customer_Account_Title.AutoSize = true;
-            this.Customer_Account_Title.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Title.Location = new System.Drawing.Point(30, 19);
-            this.Customer_Account_Title.Name = "Customer_Account_Title";
-            this.Customer_Account_Title.Size = new System.Drawing.Size(259, 29);
-            this.Customer_Account_Title.TabIndex = 0;
-            this.Customer_Account_Title.Text = "Customer Account Info:";
+            this.Customer_Account_Label.AutoSize = true;
+            this.Customer_Account_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Account_Label.Location = new System.Drawing.Point(12, 20);
+            this.Customer_Account_Label.Name = "Customer_Account_Label";
+            this.Customer_Account_Label.Size = new System.Drawing.Size(206, 24);
+            this.Customer_Account_Label.TabIndex = 0;
+            this.Customer_Account_Label.Text = "Customer Account Info:";
             // 
             // Customer_Account_Name_Label
             // 
             this.Customer_Account_Name_Label.AutoSize = true;
-            this.Customer_Account_Name_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Name_Label.Location = new System.Drawing.Point(36, 277);
+            this.Customer_Account_Name_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Account_Name_Label.Location = new System.Drawing.Point(76, 238);
             this.Customer_Account_Name_Label.Name = "Customer_Account_Name_Label";
-            this.Customer_Account_Name_Label.Size = new System.Drawing.Size(66, 24);
+            this.Customer_Account_Name_Label.Size = new System.Drawing.Size(55, 20);
             this.Customer_Account_Name_Label.TabIndex = 1;
             this.Customer_Account_Name_Label.Text = "Name:";
             // 
             // Customer_Account_Username_Label
             // 
             this.Customer_Account_Username_Label.AutoSize = true;
-            this.Customer_Account_Username_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Username_Label.Location = new System.Drawing.Point(31, 60);
+            this.Customer_Account_Username_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Account_Username_Label.Location = new System.Drawing.Point(44, 63);
             this.Customer_Account_Username_Label.Name = "Customer_Account_Username_Label";
-            this.Customer_Account_Username_Label.Size = new System.Drawing.Size(102, 24);
+            this.Customer_Account_Username_Label.Size = new System.Drawing.Size(87, 20);
             this.Customer_Account_Username_Label.TabIndex = 2;
             this.Customer_Account_Username_Label.Text = "Username:";
             // 
             // Customer_Account_Password_Label
             // 
             this.Customer_Account_Password_Label.AutoSize = true;
-            this.Customer_Account_Password_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Password_Label.Location = new System.Drawing.Point(36, 95);
+            this.Customer_Account_Password_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Account_Password_Label.Location = new System.Drawing.Point(49, 98);
             this.Customer_Account_Password_Label.Name = "Customer_Account_Password_Label";
-            this.Customer_Account_Password_Label.Size = new System.Drawing.Size(97, 24);
+            this.Customer_Account_Password_Label.Size = new System.Drawing.Size(82, 20);
             this.Customer_Account_Password_Label.TabIndex = 2;
             this.Customer_Account_Password_Label.Text = "Password:";
             // 
             // Customer_Account_Address_Label
             // 
             this.Customer_Account_Address_Label.AutoSize = true;
-            this.Customer_Account_Address_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Address_Label.Location = new System.Drawing.Point(36, 237);
+            this.Customer_Account_Address_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Account_Address_Label.Location = new System.Drawing.Point(59, 203);
             this.Customer_Account_Address_Label.Name = "Customer_Account_Address_Label";
-            this.Customer_Account_Address_Label.Size = new System.Drawing.Size(85, 24);
+            this.Customer_Account_Address_Label.Size = new System.Drawing.Size(72, 20);
             this.Customer_Account_Address_Label.TabIndex = 2;
             this.Customer_Account_Address_Label.Text = "Address:";
             // 
             // Customer_Account_Phone_Label
             // 
             this.Customer_Account_Phone_Label.AutoSize = true;
-            this.Customer_Account_Phone_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Phone_Label.Location = new System.Drawing.Point(36, 181);
+            this.Customer_Account_Phone_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Account_Phone_Label.Location = new System.Drawing.Point(12, 168);
             this.Customer_Account_Phone_Label.Name = "Customer_Account_Phone_Label";
-            this.Customer_Account_Phone_Label.Size = new System.Drawing.Size(145, 24);
+            this.Customer_Account_Phone_Label.Size = new System.Drawing.Size(119, 20);
             this.Customer_Account_Phone_Label.TabIndex = 3;
             this.Customer_Account_Phone_Label.Text = "Phone Number:";
             // 
             // uxCustomerNameTextBox
             // 
             this.uxCustomerNameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerNameTextBox.Location = new System.Drawing.Point(108, 277);
+            this.uxCustomerNameTextBox.Location = new System.Drawing.Point(137, 232);
             this.uxCustomerNameTextBox.Name = "uxCustomerNameTextBox";
             this.uxCustomerNameTextBox.ReadOnly = true;
             this.uxCustomerNameTextBox.Size = new System.Drawing.Size(151, 29);
@@ -120,7 +120,7 @@
             // uxCustomerUsernameTextBox
             // 
             this.uxCustomerUsernameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerUsernameTextBox.Location = new System.Drawing.Point(139, 60);
+            this.uxCustomerUsernameTextBox.Location = new System.Drawing.Point(137, 57);
             this.uxCustomerUsernameTextBox.Name = "uxCustomerUsernameTextBox";
             this.uxCustomerUsernameTextBox.ReadOnly = true;
             this.uxCustomerUsernameTextBox.Size = new System.Drawing.Size(151, 29);
@@ -129,7 +129,7 @@
             // uxCustomerPasswordTextBox
             // 
             this.uxCustomerPasswordTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerPasswordTextBox.Location = new System.Drawing.Point(139, 95);
+            this.uxCustomerPasswordTextBox.Location = new System.Drawing.Point(137, 92);
             this.uxCustomerPasswordTextBox.Name = "uxCustomerPasswordTextBox";
             this.uxCustomerPasswordTextBox.ReadOnly = true;
             this.uxCustomerPasswordTextBox.Size = new System.Drawing.Size(151, 29);
@@ -138,7 +138,7 @@
             // uxCustomerAddressTextBox
             // 
             this.uxCustomerAddressTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerAddressTextBox.Location = new System.Drawing.Point(127, 234);
+            this.uxCustomerAddressTextBox.Location = new System.Drawing.Point(137, 197);
             this.uxCustomerAddressTextBox.Name = "uxCustomerAddressTextBox";
             this.uxCustomerAddressTextBox.ReadOnly = true;
             this.uxCustomerAddressTextBox.Size = new System.Drawing.Size(151, 29);
@@ -147,7 +147,7 @@
             // uxCustomerPhoneNumberTextBox
             // 
             this.uxCustomerPhoneNumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerPhoneNumberTextBox.Location = new System.Drawing.Point(187, 181);
+            this.uxCustomerPhoneNumberTextBox.Location = new System.Drawing.Point(137, 162);
             this.uxCustomerPhoneNumberTextBox.Name = "uxCustomerPhoneNumberTextBox";
             this.uxCustomerPhoneNumberTextBox.ReadOnly = true;
             this.uxCustomerPhoneNumberTextBox.Size = new System.Drawing.Size(151, 29);
@@ -156,17 +156,17 @@
             // Customer_Account_Balance_Label
             // 
             this.Customer_Account_Balance_Label.AutoSize = true;
-            this.Customer_Account_Balance_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Customer_Account_Balance_Label.Location = new System.Drawing.Point(36, 135);
+            this.Customer_Account_Balance_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Customer_Account_Balance_Label.Location = new System.Drawing.Point(60, 133);
             this.Customer_Account_Balance_Label.Name = "Customer_Account_Balance_Label";
-            this.Customer_Account_Balance_Label.Size = new System.Drawing.Size(83, 24);
+            this.Customer_Account_Balance_Label.Size = new System.Drawing.Size(71, 20);
             this.Customer_Account_Balance_Label.TabIndex = 9;
             this.Customer_Account_Balance_Label.Text = "Balance:";
             // 
             // uxCustomerBalanceTextBox
             // 
             this.uxCustomerBalanceTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerBalanceTextBox.Location = new System.Drawing.Point(125, 135);
+            this.uxCustomerBalanceTextBox.Location = new System.Drawing.Point(137, 127);
             this.uxCustomerBalanceTextBox.Name = "uxCustomerBalanceTextBox";
             this.uxCustomerBalanceTextBox.ReadOnly = true;
             this.uxCustomerBalanceTextBox.Size = new System.Drawing.Size(151, 29);
@@ -175,8 +175,8 @@
             // uxCustomerPayFineButton
             // 
             this.uxCustomerPayFineButton.DialogResult = System.Windows.Forms.DialogResult.Yes;
-            this.uxCustomerPayFineButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerPayFineButton.Location = new System.Drawing.Point(35, 327);
+            this.uxCustomerPayFineButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerPayFineButton.Location = new System.Drawing.Point(137, 326);
             this.uxCustomerPayFineButton.Name = "uxCustomerPayFineButton";
             this.uxCustomerPayFineButton.Size = new System.Drawing.Size(124, 31);
             this.uxCustomerPayFineButton.TabIndex = 11;
@@ -186,8 +186,8 @@
             // uxCustomerCloseButton
             // 
             this.uxCustomerCloseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.uxCustomerCloseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerCloseButton.Location = new System.Drawing.Point(533, 327);
+            this.uxCustomerCloseButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerCloseButton.Location = new System.Drawing.Point(483, 327);
             this.uxCustomerCloseButton.Name = "uxCustomerCloseButton";
             this.uxCustomerCloseButton.Size = new System.Drawing.Size(124, 31);
             this.uxCustomerCloseButton.TabIndex = 12;
@@ -197,7 +197,7 @@
             // uxCustomerGenericItemsListBox
             // 
             this.uxCustomerGenericItemsListBox.FormattingEnabled = true;
-            this.uxCustomerGenericItemsListBox.Location = new System.Drawing.Point(363, 60);
+            this.uxCustomerGenericItemsListBox.Location = new System.Drawing.Point(313, 60);
             this.uxCustomerGenericItemsListBox.Name = "uxCustomerGenericItemsListBox";
             this.uxCustomerGenericItemsListBox.Size = new System.Drawing.Size(294, 251);
             this.uxCustomerGenericItemsListBox.TabIndex = 13;
@@ -205,8 +205,8 @@
             // uxCustomerReturnItemButton
             // 
             this.uxCustomerReturnItemButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.uxCustomerReturnItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uxCustomerReturnItemButton.Location = new System.Drawing.Point(363, 327);
+            this.uxCustomerReturnItemButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uxCustomerReturnItemButton.Location = new System.Drawing.Point(313, 327);
             this.uxCustomerReturnItemButton.Name = "uxCustomerReturnItemButton";
             this.uxCustomerReturnItemButton.Size = new System.Drawing.Size(124, 31);
             this.uxCustomerReturnItemButton.TabIndex = 14;
@@ -216,10 +216,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(359, 24);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(309, 37);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(175, 24);
+            this.label1.Size = new System.Drawing.Size(150, 20);
             this.label1.TabIndex = 15;
             this.label1.Text = "Checked Out Items:";
             // 
@@ -227,7 +227,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(669, 370);
+            this.ClientSize = new System.Drawing.Size(618, 370);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.uxCustomerReturnItemButton);
             this.Controls.Add(this.uxCustomerGenericItemsListBox);
@@ -245,7 +245,7 @@
             this.Controls.Add(this.Customer_Account_Password_Label);
             this.Controls.Add(this.Customer_Account_Username_Label);
             this.Controls.Add(this.Customer_Account_Name_Label);
-            this.Controls.Add(this.Customer_Account_Title);
+            this.Controls.Add(this.Customer_Account_Label);
             this.Name = "CustomerAccountForm";
             this.Text = "Customer Account Information";
             this.ResumeLayout(false);
@@ -255,7 +255,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label Customer_Account_Title;
+        private System.Windows.Forms.Label Customer_Account_Label;
         private System.Windows.Forms.Label Customer_Account_Name_Label;
         private System.Windows.Forms.Label Customer_Account_Username_Label;
         private System.Windows.Forms.Label Customer_Account_Password_Label;

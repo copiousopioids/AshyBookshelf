@@ -13,23 +13,29 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     public partial class CustomerAccountForm : Form, ILibraryForm
     {
+        private LibraryController libraryController;
+
         public void SetDisplayItems(Customer customerLoggedIn) {
-            var balance = 0;
-            foreach (var fine in customerLoggedIn.fines)
-            {
-                balance += fine.Amount;
-            }
+            var balance = libraryController.getTotalAmtOwed(customerLoggedIn.CustomerId);
+            //var balance = 0;
+            //foreach (var fine in customerLoggedIn.fines)
+            //{
+            //    balance += fine.Amount;
+            //}
             uxCustomerBalanceTextBox.Text = balance.ToString();
             uxCustomerAddressTextBox.Text = customerLoggedIn.Address;
             uxCustomerNameTextBox.Text = customerLoggedIn.Name;
             uxCustomerPasswordTextBox.Text = customerLoggedIn.Password;
             uxCustomerPhoneNumberTextBox.Text = customerLoggedIn.PhoneNumber;
             uxCustomerUsernameTextBox.Text = customerLoggedIn.Username;
-            uxCustomerGenericItemsListBox.Items.AddRange(customerLoggedIn.ItemsCheckoutOut.ToArray());
+            //uxCustomerGenericItemsListBox.Items.AddRange(customerLoggedIn.ItemsCheckoutOut.ToArray());
+            //use GetUserItemdCheckedOut instead of ItemsCheckoutOut property
+            uxCustomerGenericItemsListBox.Items.AddRange(libraryController.GetUserItemsCheckedOut(customerLoggedIn.CustomerId).ToArray());
         }
 
-        public CustomerAccountForm()
+        public CustomerAccountForm(LibraryController controller)
         {
+            this.libraryController = controller;
             InitializeComponent();
         }
 

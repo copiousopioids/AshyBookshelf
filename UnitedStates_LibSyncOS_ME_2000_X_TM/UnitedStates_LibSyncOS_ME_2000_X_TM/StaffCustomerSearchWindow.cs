@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UnitedStates_LibSyncOS_ME_2000_X_TM.Classes;
 
 namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
@@ -25,15 +26,30 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public int SelectedIndex
         {
+            //get
+            //{
+            //    //if (uxStaffCustomerSearchListView.SelectedIndices.Count > 0)
+            //    //{
+
+            //    //    return uxStaffCustomerSearchListView.SelectedIndices[0];
+            //    //}
+            //    throw new Exception("Select a Line");
+            //}
+            //set
+            //{
+            //    // why are you using this.
+            //    //uxStaffCustomerSearchListView.SelectedIndices.Add(value);
+            //    uxStaffGenericItemsList
+            //}
             get
             {
-                if (uxStaffGenericItemsListBox.SelectedIndex == -1) throw new Exception("Select a Line");
-                return uxStaffGenericItemsListBox.SelectedIndex;
+                if (uxStaffGenericItemsList.SelectedIndex == -1) throw new Exception("Select a Line");
+                return uxStaffGenericItemsList.SelectedIndex;
             }
 
             set
             {
-                uxStaffGenericItemsListBox.SelectedIndex = value;
+                uxStaffGenericItemsList.SelectedIndex = value;
             }
         }
 
@@ -41,19 +57,36 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             get
             {
-                if (uxStaffGenericItemsListBox.SelectedItem == null) throw new Exception("Select a line");
-                return uxStaffGenericItemsListBox.SelectedItem;
-            }
-        }
+                //if (uxStaffCustomerSearchListView.SelectedItems.Count > 0)
+                //{
+                //    return uxStaffCustomerSearchListView.SelectedItems;
+                //}
+                if (uxStaffGenericItemsList.SelectedItem == null) {
+                    throw new Exception("Select a line");
+                }
+                return uxStaffGenericItemsList.SelectedItem;
+            }            
+    }
 
-        public void AddDisplayItems(params object [] displayObjects)
+        public void AddDisplayItems(params object [] customers)
         {
-            uxStaffGenericItemsListBox.Items.AddRange(displayObjects.ToArray());
+            //ListViewItem viewItem;
+            //List<ListViewItem> viewItems = new List<ListViewItem>();
+            //foreach(Customer customer in customers)
+            //{
+            //    viewItem = new ListViewItem(customer.Username);
+            //    viewItem.SubItems.Add(customer.Name);
+            //    viewItem.SubItems.Add(customer.Address);
+            //    viewItem.SubItems.Add(customer.PhoneNumber);
+            //    viewItems.Add(viewItem);                
+            //}
+            //uxStaffCustomerSearchListView.Items.AddRange(viewItems.ToArray<ListViewItem>());
+            uxStaffGenericItemsList.Items.AddRange(customers);
         }
 
         public bool CheckDataValidity()
         {
-            if (uxStaffGenericItemsListBox.SelectedItem == null)
+            if (uxStaffCustomerSearchListView.SelectedItems == null)
             {
                 MessageBox.Show("Please select an item");
                 return false;
@@ -64,7 +97,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public void ClearDisplayItems()
         {
-            uxStaffGenericItemsListBox.Items.Clear();
+            uxStaffCustomerSearchListView.Items.Clear();
+            uxStaffGenericItemsList.Items.Clear();
         }
 
         public bool CheckSearchValidity() {
@@ -76,13 +110,13 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             return true;
         }
 
-        public bool CheckSelectCustomerValidity () {
-            if (uxStaffGenericItemsListBox.SelectedItem == null) {
-                MessageBox.Show("Please select a customer to continue with this action");
-                return false;
-            }
-            return true;
-        }
+        //public bool CheckSelectCustomerValidity () {
+        //    if (uxStaffCustomerSearchListView.SelectedItems.Count <= 0) {
+        //        MessageBox.Show("Please select a customer to continue with this action");
+        //        return false;
+        //    }
+        //    return true;
+        //}
 
         public DialogReturn Display()
         {
@@ -106,10 +140,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                         else
                             break;
                     case DialogResult.Ignore:
-                        if (CheckSelectCustomerValidity()) {
                             return DialogReturn.Select;
-                        }
-                        break;
+                    case DialogResult.Yes:
+                        return DialogReturn.ListCustomers;
                     default:
                         return DialogReturn.Undefined;
                 }
