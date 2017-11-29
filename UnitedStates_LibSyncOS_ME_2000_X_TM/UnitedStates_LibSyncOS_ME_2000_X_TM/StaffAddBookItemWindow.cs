@@ -52,6 +52,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public StaffAddBookItemWindow()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
         }
 
         public int SelectedIndex

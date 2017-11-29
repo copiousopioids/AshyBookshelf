@@ -64,6 +64,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public StaffItemSearchWindow()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
         }
 
         // Inspiration: 501 Bookshop program written by Masaaki Mizuno

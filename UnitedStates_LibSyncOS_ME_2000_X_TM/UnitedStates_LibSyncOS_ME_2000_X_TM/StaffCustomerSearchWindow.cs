@@ -16,6 +16,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public StaffCustomerSearchWindow()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
         }
 
         public String UXStaffCustomerSearchIdString {
@@ -86,7 +87,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public bool CheckDataValidity()
         {
-            if (uxStaffCustomerSearchListView.SelectedItems == null)
+            if (uxStaffGenericItemsList.SelectedItems == null)
             {
                 MessageBox.Show("Please select an item");
                 return false;
@@ -97,7 +98,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public void ClearDisplayItems()
         {
-            uxStaffCustomerSearchListView.Items.Clear();
+            uxStaffGenericItemsList.Items.Clear();
             uxStaffGenericItemsList.Items.Clear();
         }
 

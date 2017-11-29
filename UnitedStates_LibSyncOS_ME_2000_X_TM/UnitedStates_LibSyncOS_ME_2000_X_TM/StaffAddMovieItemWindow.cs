@@ -21,6 +21,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public StaffAddMovieItemWindow()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
         }
 
         public string UXStaffMovieTitle {

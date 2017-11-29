@@ -15,6 +15,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public CustomerItemSearchWindow()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
         }
 
         public bool UXCustomerIsSearchBookCheckBoxSelected

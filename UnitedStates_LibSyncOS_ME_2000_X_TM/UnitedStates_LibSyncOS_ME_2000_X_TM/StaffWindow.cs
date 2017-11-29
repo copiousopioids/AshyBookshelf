@@ -27,11 +27,19 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public StaffWindow()
         {
+            
             InitializeComponent();
+            Screen s = Screen.FromControl(this);
+            Point center = new Point(s.Bounds.Width/2,
+                                     s.Bounds.Height/2);
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(center.X + (this.Width/2),
+                                        center.Y - this.Height);
         }
 
         public StaffWindow(LibraryController controller) : this()
         {
+            
             this.staffAddBookItemWindow = new StaffAddBookItemWindow();
             this.staffAddContributorWindow = new StaffAddContributorWindow();
             this.staffAddMovieItemWindow = new StaffAddMovieItemWindow();

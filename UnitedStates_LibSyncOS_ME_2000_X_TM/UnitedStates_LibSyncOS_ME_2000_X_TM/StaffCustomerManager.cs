@@ -28,6 +28,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             this.libraryController = controller;
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
         }
 
         public int SelectedIndex

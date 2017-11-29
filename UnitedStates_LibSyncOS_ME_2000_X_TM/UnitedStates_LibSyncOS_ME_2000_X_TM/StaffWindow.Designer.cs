@@ -62,6 +62,7 @@
             this.Controls.Add(this.staffSearchCustomerButton);
             this.Controls.Add(this.staffSearchItemsButton);
             this.Name = "StaffWindow";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "United States LibSyncOS ME 2000 X (TM)";
             this.ResumeLayout(false);
 

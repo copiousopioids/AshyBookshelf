@@ -20,7 +20,8 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         {
             this.LibraryController = new LibraryController();
             this.StaffWindow = new StaffWindow(LibraryController);
-            this.CustomerWindow = new Customer_Home(LibraryController);
+            this.CustomerWindow = new Customer_Home(LibraryController);           
+
             InitializeComponent();
         }
 
@@ -29,6 +30,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             StaffWindow.Show();
             CustomerWindow.Show();
             button1.Enabled = false;
+        }
+
+        private void Library_Load(object sender, EventArgs e)
+        {
+            Screen s = Screen.FromControl(this);
+            int x = s.Bounds.Width;
+            int y = s.Bounds.Height;
+            this.Location = new System.Drawing.Point((x / 2) - (this.Width / 2), (y / 2) - (this.Height / 2));
         }
     }
 }

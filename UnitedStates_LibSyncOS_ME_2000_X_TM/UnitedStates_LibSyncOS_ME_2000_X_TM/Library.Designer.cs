@@ -1,4 +1,5 @@
-﻿namespace UnitedStates_LibSyncOS_ME_2000_X_TM
+﻿using System.Windows.Forms;
+namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 {
     partial class Library
     {
@@ -50,7 +51,9 @@
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.button1);
             this.Name = "Library";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Library";
+            this.Load += new System.EventHandler(this.Library_Load);
             this.ResumeLayout(false);
 
         }

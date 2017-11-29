@@ -21,6 +21,12 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
         public Customer_Home()
         {
             InitializeComponent();
+            Screen s = Screen.FromControl(this);
+            Point center = new Point(s.Bounds.Width / 2,
+                                     s.Bounds.Height / 2);
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new Point(center.X - (2 * this.Width),
+                                        center.Y - (this.Height/2));
         }
 
         public Customer_Home(LibraryController controller) : this() {
@@ -225,6 +231,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                             if (isLoginASuccess)
                             {
                                 MessageBox.Show("User logged in");
+                                customerLoginButton.Enabled = false;
                                 return;
                             }
                             else
@@ -252,6 +259,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 if (logoutResult)
                 {
                     MessageBox.Show("User logged out.");
+                    customerLoginButton.Enabled = true;
                 }
                 else {
                     MessageBox.Show("User could not be logged out.");
