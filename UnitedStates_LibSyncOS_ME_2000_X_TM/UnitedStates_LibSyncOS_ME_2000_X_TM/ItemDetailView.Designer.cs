@@ -47,7 +47,7 @@
             this.uxStaffGenericItemsList.FormattingEnabled = true;
             this.uxStaffGenericItemsList.Location = new System.Drawing.Point(16, 30);
             this.uxStaffGenericItemsList.Name = "uxStaffGenericItemsList";
-            this.uxStaffGenericItemsList.Size = new System.Drawing.Size(428, 277);
+            this.uxStaffGenericItemsList.Size = new System.Drawing.Size(748, 277);
             this.uxStaffGenericItemsList.TabIndex = 1;
             // 
             // uxStaffCloseButton
@@ -64,7 +64,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 344);
+            this.ClientSize = new System.Drawing.Size(799, 344);
             this.Controls.Add(this.uxStaffCloseButton);
             this.Controls.Add(this.uxStaffGenericItemsList);
             this.Controls.Add(this.lable1);

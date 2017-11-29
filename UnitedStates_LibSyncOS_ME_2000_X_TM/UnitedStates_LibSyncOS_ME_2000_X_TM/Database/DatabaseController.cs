@@ -28,6 +28,26 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         MySqlCommand _selectBooksByPerson;
         private string _selectMoviesByPerson_sql = "select available, title, i.item_id from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where i.item_id in (select m.item_id from Movies m) and p.first_name like @name_like or p.last_name like @name_like2";
 
+        private string _getItemMovieInfo_sql = "select i.item_id,i.title,i.available,i.weekly_fine,i.damage_fine,c.condit"
+            + ",m.description,m.duration,m.studio,m.barcode_no from Items i "
+            + "left outer join Item_Condition ic "
+            + "on ic.item_id=i.item_id "
+            + "left outer join Condit c on c.code=ic.code "
+            + "left outer join Movies m on m.item_id=i.item_id "
+            + "where i.item_id=@item_id";
+        MySqlCommand _getItemMovieInfo;
+        private string _getItemBookInfo_sql = "select i.item_id, i.title, i.available, i.weekly_fine, i.damage_fine, "
+            + "c.condit, b.num_pages, b.publisher, b.isbn from Items i left outer join Item_Condition ic on ic.item_id=i.item_id "
+            + "left outer join Condit c on c.code=ic.code left outer join Books b on b.item_id=i.item_id where i.item_id=@item_id";
+        MySqlCommand _getItemBookInfo;
+        private string _getGenreInfo_sql = "select g.genre from Genres g join Item_Genre ig "
+            + "on ig.genre_id=g.genre_id where ig.item_id=@item_id";
+        MySqlCommand _getPeopleInfo;
+        private string _getPeopleInfo_sql = "select r.role,p.first_name,p.last_name, p.birth_date, p.death_date, p.twitter "
+                + "from People_Roles_Items pri join Roles r on r.role_code=pri.role_code "
+                + "join People p on p.person_id=pri.person_id where pri.item_id=@item_id";
+        MySqlCommand _getGenreInfo;
+
         internal List<Object> GetUserItemsCheckedOut(int customerId)
         {
             List<Object> itemsOut = new List<Object>();
@@ -147,7 +167,11 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             _checkItemAvailability = new MySqlCommand(_checkItemAvailability_sql, _mysqlConnection);
             _returnItem = new MySqlCommand(_returnItem_sql, _mysqlConnection);
             _selectCheckedOutItem = new MySqlCommand(_selectCheckedOutItem_sql, _mysqlConnection);
-
+            
+            _getItemMovieInfo = new MySqlCommand(_getItemMovieInfo_sql, _mysqlConnection);
+            _getItemBookInfo = new MySqlCommand(_getItemBookInfo_sql, _mysqlConnection);
+            _getPeopleInfo = new MySqlCommand(_getPeopleInfo_sql, _mysqlConnection);
+            _getGenreInfo = new MySqlCommand(_getGenreInfo_sql, _mysqlConnection);
 
         }
         
@@ -1263,7 +1287,88 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         public List<string> GetItemDetails(Item selectedItem, ItemType itemType)
         {
-            throw new NotImplementedException();
+            List<string> itemDetails = new List<string>();
+            Item item;
+
+
+            MySqlCommand query;
+            if (itemType == ItemType.Book)
+            {
+                item = (Book)selectedItem;
+                _getItemBookInfo.Parameters.Clear();
+                _getItemBookInfo.Parameters.AddWithValue("@item_id",item.ID);
+
+                using (MySqlDataReader reader = _getItemBookInfo.ExecuteReader())
+                {
+                    while (reader.Read()) //returns: id, title, available, weekly_fine, dmgfine, condit, num_pages, publisher, isbn
+                    {
+                        itemDetails.Add("Title: \t\t" + reader.GetString(1));
+                        itemDetails.Add((reader.GetBoolean(2)) ? "Available" : "Unavailable");
+                        itemDetails.Add("Weekly Fine: \t" + reader.GetInt32(3).ToString());
+                        itemDetails.Add("Damage Fine: \t" + reader.GetInt32(4).ToString());
+                        itemDetails.Add("Condition: \t" + reader.GetString(5));
+                        itemDetails.Add("Number of Pages: \t" + reader.GetInt32(6).ToString());
+                        itemDetails.Add("Publisher: \t" + reader.GetString(7));
+                        itemDetails.Add("ISBN: \t\t" + reader.GetString(8));
+                    }
+                }
+
+            } else
+            {
+                item = (Movie)selectedItem;
+                _getItemMovieInfo.Parameters.Clear();
+                _getItemMovieInfo.Parameters.AddWithValue("@item_id", item.ID);
+
+                using (MySqlDataReader reader = _getItemMovieInfo.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        itemDetails.Add("Title: \t\t" + reader.GetString(1));
+                        itemDetails.Add((reader.GetBoolean(2)) ? "Available" : "Unavailable");
+                        itemDetails.Add("Weekly Fine: \t" + reader.GetInt32(3).ToString());
+                        itemDetails.Add("Damage Fine: \t" + reader.GetInt32(4).ToString());
+                        itemDetails.Add("Condition: \t" + reader.GetString(5));
+                        itemDetails.Add("Description: \t" + reader.GetString(6));
+                        itemDetails.Add("Duration: \t" + reader.GetString(7) + " hours");
+                        itemDetails.Add("Studio: \t\t" + reader.GetString(8));
+                        itemDetails.Add("Barcode number: \t" + reader.GetString(9));
+                    }
+                    reader.Close();
+                }
+
+            }
+
+            _getGenreInfo.Parameters.Clear();
+            _getGenreInfo.Parameters.AddWithValue("@item_id", item.ID);
+            using (MySqlDataReader reader = _getGenreInfo.ExecuteReader())
+            {
+                string genres = "";
+                if (!reader.Read())
+                {
+                    genres = "Unknown";
+                } else
+                {
+                    genres += reader.GetString(0) + ", ";
+                }
+                while (reader.Read())
+                { 
+                    genres += reader.GetString(0) + ", ";
+                }
+                itemDetails.Add("Genres: \t\t" + genres);
+            }
+
+            _getPeopleInfo.Parameters.Clear();
+            _getPeopleInfo.Parameters.AddWithValue("@item_id", item.ID);
+            using (MySqlDataReader reader = _getPeopleInfo.ExecuteReader())
+            {
+                while (reader.Read())
+                {             //role first _name  last name  born died twitter          
+                    itemDetails.Add(reader.GetString(0) + "\t" + reader.GetString(1) + " " + reader.GetString(2) 
+                        + "\tBorn: " + reader.GetString(3) +  "  \tDied: " + ((!reader.IsDBNull(4)) ? reader.GetString(4) : "-----") 
+                        + "\tTwitter handle: " + reader.GetString(5));
+                }
+            }
+                return itemDetails;
         }
     }
 }
