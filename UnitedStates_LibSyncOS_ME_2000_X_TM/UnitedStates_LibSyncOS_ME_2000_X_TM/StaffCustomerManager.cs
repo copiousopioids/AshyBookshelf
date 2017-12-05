@@ -20,8 +20,9 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
             uxStaffUsernameTextBox.Text = customer.Username;
             //this.AddDisplayItems(customer.fines.ToArray());
             this.AddDisplayItems(libraryController.getFines(customer.CustomerId).ToArray());
-            if (customer.ItemsCheckoutOut != null) 
-                uxStaffCheckedOutItemsListBox.Items.AddRange(customer.ItemsCheckoutOut.ToArray());
+            //if (customer.ItemsCheckoutOut != null) 
+            //    uxStaffCheckedOutItemsListBox.Items.AddRange(customer.ItemsCheckoutOut.ToArray());
+            uxStaffCheckedOutItemsListBox.Items.AddRange(libraryController.GetUserItemsCheckedOut(customer.CustomerId).ToArray());
         }
 
         public StaffCustomerManager(LibraryController controller)
