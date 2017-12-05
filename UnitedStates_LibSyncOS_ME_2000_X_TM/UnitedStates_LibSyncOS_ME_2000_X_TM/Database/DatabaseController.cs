@@ -72,7 +72,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string _selectItemsUnavailable_sql = "select title from Items where available=false";
         MySqlCommand _selectItemsUnavailable;
 
-        private string _showTotalAmtOwed_sql = "select sum(f.amount) from Fines f join Owes o on o.fine_id=f.fine_id where f.paid=false and o.c_id = @curUser_int";
+        private string _showTotalAmtOwed_sql = "select sum(f.amount) from Fines f join Owes o on o.fine_id=f.fine_id where f.paid=false and o.c_id = @curUser_int group by o.c_id";
         MySqlCommand _showTotalAmtOwed;
 
         private string _showAllFinesForUser_sql = "select f.fine_id, amount, paid, due_date, description from Fines f join Owes o on o.fine_id=f.fine_id where o.c_id=@curUser_int";
@@ -686,13 +686,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
                     trans.Rollback();
                     return false;
                 }
-
-                //MySqlCommand cmd = new MySqlCommand(insertInCI, _mysqlConnection);
-
-                //cmd.Transaction = trans;
-                //cmd.Parameters.AddWithValue("@c_id", loggedInCustomer.CustomerId);
-                //cmd.Parameters.AddWithValue("item_id", itemId);
-                //cmd.Parameters.AddWithValue("due_date", DateTime.UtcNow.AddDays(14));
 
 
 
@@ -1322,8 +1315,6 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             List<string> itemDetails = new List<string>();
             Item item;
 
-
-            MySqlCommand query;
             if (itemType == ItemType.Book)
             {
                 item = (Book)selectedItem;
