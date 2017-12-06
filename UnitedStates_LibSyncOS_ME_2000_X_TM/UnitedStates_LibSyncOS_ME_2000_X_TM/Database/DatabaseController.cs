@@ -10,23 +10,25 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
         private string mysqlConnectionString;
         private MySqlConnection _mysqlConnection;
 
-        private string _selectItemsByTitle_sql = "SELECT available, title, i.item_id from Items where title like @param1 ";
-        MySqlCommand _selectItemsByTitle;
+        //private string _selectItemsByTitle_sql = "SELECT available, title, i.item_id from Items where title like @param1 ";
+        //MySqlCommand _selectItemsByTitle;
         private string _selectBooksByTitle_sql = "select available, title, i.item_id from Books b join Items i on i.item_id=b.item_id where i.title like @param1";
         MySqlCommand _selectBooksByTitle;
         private string _selectMoviesByTitle_sql = "select available, title, i.item_id from Movies m join Items i on i.item_id=m.item_id where i.title like @param1";
         MySqlCommand _selectMoviesByTitle;
-        private string _selectItemsByGenre_sql = "select available, title, i.item_id from Items i left outer join Item_Genre ig on ig.item_id=i.item_id left outer join Genres g on g.genre_id=ig.genre_id where g.genre like @param1";
-        MySqlCommand _selectItemsByGenre;
+        //private string _selectItemsByGenre_sql = "select available, title, i.item_id from Items i left outer join Item_Genre ig on ig.item_id=i.item_id left outer join Genres g on g.genre_id=ig.genre_id where g.genre like @param1";
+        //MySqlCommand _selectItemsByGenre;
         private string _selectBooksByGenre_sql = "select available, title, i.item_id from Books b join Items i on i.item_id=b.item_id join Item_Genre ig on ig.item_id=i.item_id join Genres g on g.genre_id=ig.genre_id where g.genre like @param1";
         MySqlCommand _selectBooksByGenre;
         private string _selectMoviesByGenre_sql = "select available, title, i.item_id from Movies m join Items i on i.item_id=m.item_id join Item_Genre ig on ig.item_id=i.item_id join Genres g on g.genre_id = ig.genre_id where g.genre like @param1";
         MySqlCommand _selectMoviesByGenre;
-        private string _selectItemsByPerson_sql = "select available, title, i.item_id from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where p.first_name like @name_like or p.last_name like @name_like2";
-        MySqlCommand _selectItemsByPerson;
+        //private string _selectItemsByPerson_sql = "select available, title, i.item_id from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where p.first_name like @name_like or p.last_name like @name_like2";
+        //MySqlCommand _selectItemsByPerson;
         private string _selectBooksByPerson_sql = "select available, title, i.item_id from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where i.item_id in (select b.item_id from Books b) and p.first_name like @name_like or p.last_name like @name_like2";
         MySqlCommand _selectBooksByPerson;
+
         private string _selectMoviesByPerson_sql = "select available, title, i.item_id from Items i join People_Roles_Items pri on pri.item_id=i.item_id join People p on p.person_id=pri.person_id where i.item_id in (select m.item_id from Movies m) and p.first_name like @name_like or p.last_name like @name_like2";
+        MySqlCommand _selectMoviesByPerson;
 
         private string _getItemMovieInfo_sql = "select i.item_id,i.title,i.available,i.weekly_fine,i.damage_fine,c.condit"
             + ",m.description,m.duration,m.studio,m.barcode_no from Items i "
@@ -67,10 +69,10 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
             }
         }
 
-        MySqlCommand _selectMoviesByPerson;
+        //MySqlCommand _selectMoviesByPerson;
 
-        private string _selectItemsUnavailable_sql = "select title from Items where available=false";
-        MySqlCommand _selectItemsUnavailable;
+        //private string _selectItemsUnavailable_sql = "select title from Items where available=false";
+        //MySqlCommand _selectItemsUnavailable;
 
         private string _showTotalAmtOwed_sql = "select sum(f.amount) from Fines f join Owes o on o.fine_id=f.fine_id where f.paid=false and o.c_id = @curUser_int group by o.c_id";
         MySqlCommand _showTotalAmtOwed;
@@ -141,17 +143,17 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM.Database
 
         private void PrepareStatements()
         {
-            _selectItemsByTitle = new MySqlCommand(_selectItemsByTitle_sql, _mysqlConnection);
+            //_selectItemsByTitle = new MySqlCommand(_selectItemsByTitle_sql, _mysqlConnection);
             _selectBooksByTitle = new MySqlCommand(_selectBooksByTitle_sql, _mysqlConnection);
             _selectMoviesByTitle = new MySqlCommand(_selectMoviesByTitle_sql, _mysqlConnection);
-            _selectItemsByGenre = new MySqlCommand(_selectItemsByGenre_sql, _mysqlConnection);
+            //_selectItemsByGenre = new MySqlCommand(_selectItemsByGenre_sql, _mysqlConnection);
             _selectBooksByGenre = new MySqlCommand(_selectBooksByGenre_sql, _mysqlConnection);
             _selectMoviesByGenre = new MySqlCommand(_selectMoviesByGenre_sql, _mysqlConnection);
-            _selectItemsByPerson = new MySqlCommand(_selectItemsByPerson_sql, _mysqlConnection);
+            //_selectItemsByPerson = new MySqlCommand(_selectItemsByPerson_sql, _mysqlConnection);
             _selectBooksByPerson = new MySqlCommand(_selectBooksByPerson_sql, _mysqlConnection);
             _selectMoviesByPerson = new MySqlCommand(_selectMoviesByPerson_sql, _mysqlConnection);
 
-            _selectItemsUnavailable = new MySqlCommand(_selectItemsUnavailable_sql, _mysqlConnection);
+            //_selectItemsUnavailable = new MySqlCommand(_selectItemsUnavailable_sql, _mysqlConnection);
             _showTotalAmtOwed = new MySqlCommand(_showTotalAmtOwed_sql, _mysqlConnection);
             _showAllFinesForUser = new MySqlCommand(_showAllFinesForUser_sql, _mysqlConnection);
             _searchCardholders = new MySqlCommand(_searchCardholders_sql, _mysqlConnection);
