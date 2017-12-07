@@ -682,7 +682,7 @@ INSERT INTO `Items` (`item_id`, `title`, `available`, `weekly_fine`, `damage_fin
 (696, 'Alabama''s Ghost', b'1', 5, 10),
 (697, 'For Keeps', b'1', 5, 10),
 (698, 'High and the Mighty, The', b'1', 5, 10),
-(699, 'Greatest Story Ever Told, The', b'0', 5, 10),
+(699, 'Greatest Story Ever Told, The', b'1', 5, 10),
 (700, 'Distance', b'1', 5, 10),
 (701, 'The Legend of Bloody Jack', b'1', 5, 10),
 (702, 'How to Cook Your Life', b'1', 5, 10),
