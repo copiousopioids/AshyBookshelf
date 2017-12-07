@@ -150,6 +150,14 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
                 MessageBox.Show("Enter a genre and try again");
                 return false;
             }
+            try
+            {
+                var isbn = Convert.ToInt32(UXStaffBookISBN);
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Please enter isbn as a string of digits");
+                return false;
+            }
             return true;               
         }
     }

@@ -27,7 +27,7 @@ namespace UnitedStates_LibSyncOS_ME_2000_X_TM
 
         public StaffWindow()
         {
-            
+                        
             InitializeComponent();
             Screen s = Screen.FromControl(this);
             Point center = new Point(s.Bounds.Width/2,
