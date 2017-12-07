@@ -1,192 +1,315 @@
-insert into Item_Genre (genre_id, item_id) values (3, 58);
-insert into Item_Genre (genre_id, item_id) values (8, 8);
-insert into Item_Genre (genre_id, item_id) values (7, 81);
-insert into Item_Genre (genre_id, item_id) values (22, 59);
-insert into Item_Genre (genre_id, item_id) values (16, 17);
-insert into Item_Genre (genre_id, item_id) values (13, 22);
-insert into Item_Genre (genre_id, item_id) values (19, 89);
-insert into Item_Genre (genre_id, item_id) values (13, 8);
-insert into Item_Genre (genre_id, item_id) values (16, 98);
-insert into Item_Genre (genre_id, item_id) values (18, 78);
-insert into Item_Genre (genre_id, item_id) values (13, 29);
-insert into Item_Genre (genre_id, item_id) values (21, 66);
-insert into Item_Genre (genre_id, item_id) values (7, 29);
-insert into Item_Genre (genre_id, item_id) values (5, 40);
-insert into Item_Genre (genre_id, item_id) values (10, 75);
-insert into Item_Genre (genre_id, item_id) values (12, 80);
-insert into Item_Genre (genre_id, item_id) values (4, 42);
-insert into Item_Genre (genre_id, item_id) values (20, 2);
-insert into Item_Genre (genre_id, item_id) values (13, 79);
-insert into Item_Genre (genre_id, item_id) values (11, 28);
-insert into Item_Genre (genre_id, item_id) values (5, 60);
-insert into Item_Genre (genre_id, item_id) values (9, 82);
-insert into Item_Genre (genre_id, item_id) values (5, 70);
-insert into Item_Genre (genre_id, item_id) values (15, 54);
-insert into Item_Genre (genre_id, item_id) values (20, 36);
-insert into Item_Genre (genre_id, item_id) values (3, 74);
-insert into Item_Genre (genre_id, item_id) values (7, 7);
-insert into Item_Genre (genre_id, item_id) values (15, 57);
-insert into Item_Genre (genre_id, item_id) values (2, 49);
-insert into Item_Genre (genre_id, item_id) values (9, 78);
-insert into Item_Genre (genre_id, item_id) values (16, 95);
-insert into Item_Genre (genre_id, item_id) values (13, 73);
-insert into Item_Genre (genre_id, item_id) values (2, 94);
-insert into Item_Genre (genre_id, item_id) values (15, 53);
-insert into Item_Genre (genre_id, item_id) values (22, 33);
-insert into Item_Genre (genre_id, item_id) values (21, 70);
-insert into Item_Genre (genre_id, item_id) values (1, 71);
-insert into Item_Genre (genre_id, item_id) values (17, 9);
-insert into Item_Genre (genre_id, item_id) values (18, 73);
-insert into Item_Genre (genre_id, item_id) values (1, 31);
-insert into Item_Genre (genre_id, item_id) values (3, 36);
-insert into Item_Genre (genre_id, item_id) values (17, 47);
-insert into Item_Genre (genre_id, item_id) values (16, 91);
-insert into Item_Genre (genre_id, item_id) values (17, 72);
-insert into Item_Genre (genre_id, item_id) values (21, 62);
-insert into Item_Genre (genre_id, item_id) values (3, 43);
-insert into Item_Genre (genre_id, item_id) values (15, 70);
-insert into Item_Genre (genre_id, item_id) values (7, 83);
-insert into Item_Genre (genre_id, item_id) values (10, 33);
-insert into Item_Genre (genre_id, item_id) values (17, 81);
-insert into Item_Genre (genre_id, item_id) values (7, 84);
-insert into Item_Genre (genre_id, item_id) values (15, 93);
-insert into Item_Genre (genre_id, item_id) values (21, 13);
-insert into Item_Genre (genre_id, item_id) values (11, 96);
-insert into Item_Genre (genre_id, item_id) values (2, 63);
-insert into Item_Genre (genre_id, item_id) values (19, 54);
-insert into Item_Genre (genre_id, item_id) values (14, 2);
-insert into Item_Genre (genre_id, item_id) values (11, 20);
-insert into Item_Genre (genre_id, item_id) values (8, 61);
-insert into Item_Genre (genre_id, item_id) values (18, 74);
-insert into Item_Genre (genre_id, item_id) values (15, 29);
-insert into Item_Genre (genre_id, item_id) values (6, 93);
-insert into Item_Genre (genre_id, item_id) values (12, 32);
-insert into Item_Genre (genre_id, item_id) values (17, 85);
-insert into Item_Genre (genre_id, item_id) values (3, 96);
-insert into Item_Genre (genre_id, item_id) values (11, 46);
-insert into Item_Genre (genre_id, item_id) values (4, 39);
-insert into Item_Genre (genre_id, item_id) values (11, 31);
-insert into Item_Genre (genre_id, item_id) values (12, 42);
-insert into Item_Genre (genre_id, item_id) values (6, 21);
-insert into Item_Genre (genre_id, item_id) values (17, 52);
-insert into Item_Genre (genre_id, item_id) values (12, 69);
-insert into Item_Genre (genre_id, item_id) values (19, 24);
-insert into Item_Genre (genre_id, item_id) values (5, 39);
-insert into Item_Genre (genre_id, item_id) values (8, 73);
-insert into Item_Genre (genre_id, item_id) values (8, 52);
-insert into Item_Genre (genre_id, item_id) values (18, 51);
-insert into Item_Genre (genre_id, item_id) values (4, 12);
-insert into Item_Genre (genre_id, item_id) values (18, 32);
-insert into Item_Genre (genre_id, item_id) values (19, 16);
-insert into Item_Genre (genre_id, item_id) values (14, 76);
-insert into Item_Genre (genre_id, item_id) values (6, 27);
-insert into Item_Genre (genre_id, item_id) values (4, 66);
-insert into Item_Genre (genre_id, item_id) values (7, 10);
-insert into Item_Genre (genre_id, item_id) values (9, 12);
-insert into Item_Genre (genre_id, item_id) values (22, 80);
-insert into Item_Genre (genre_id, item_id) values (16, 90);
-insert into Item_Genre (genre_id, item_id) values (11, 4);
-insert into Item_Genre (genre_id, item_id) values (21, 56);
-insert into Item_Genre (genre_id, item_id) values (11, 77);
-insert into Item_Genre (genre_id, item_id) values (20, 20);
-insert into Item_Genre (genre_id, item_id) values (17, 34);
-insert into Item_Genre (genre_id, item_id) values (12, 59);
-insert into Item_Genre (genre_id, item_id) values (19, 60);
-insert into Item_Genre (genre_id, item_id) values (1, 70);
-insert into Item_Genre (genre_id, item_id) values (4, 6);
-insert into Item_Genre (genre_id, item_id) values (8, 51);
-insert into Item_Genre (genre_id, item_id) values (21, 61);
-insert into Item_Genre (genre_id, item_id) values (7, 24);
-insert into Item_Genre (genre_id, item_id) values (5, 92);
-insert into Item_Genre (genre_id, item_id) values (17, 8);
-insert into Item_Genre (genre_id, item_id) values (5, 84);
-insert into Item_Genre (genre_id, item_id) values (22, 63);
-insert into Item_Genre (genre_id, item_id) values (7, 38);
-insert into Item_Genre (genre_id, item_id) values (6, 30);
-insert into Item_Genre (genre_id, item_id) values (8, 15);
-insert into Item_Genre (genre_id, item_id) values (2, 19);
-insert into Item_Genre (genre_id, item_id) values (14, 38);
-insert into Item_Genre (genre_id, item_id) values (5, 73);
-insert into Item_Genre (genre_id, item_id) values (18, 75);
-insert into Item_Genre (genre_id, item_id) values (20, 22);
-insert into Item_Genre (genre_id, item_id) values (3, 37);
-insert into Item_Genre (genre_id, item_id) values (2, 91);
-insert into Item_Genre (genre_id, item_id) values (1, 62);
-insert into Item_Genre (genre_id, item_id) values (2, 16);
-insert into Item_Genre (genre_id, item_id) values (16, 84);
-insert into Item_Genre (genre_id, item_id) values (1, 99);
-insert into Item_Genre (genre_id, item_id) values (2, 15);
-insert into Item_Genre (genre_id, item_id) values (4, 45);
-insert into Item_Genre (genre_id, item_id) values (10, 18);
-insert into Item_Genre (genre_id, item_id) values (12, 73);
-insert into Item_Genre (genre_id, item_id) values (4, 11);
-insert into Item_Genre (genre_id, item_id) values (5, 26);
-insert into Item_Genre (genre_id, item_id) values (18, 33);
-insert into Item_Genre (genre_id, item_id) values (22, 32);
-insert into Item_Genre (genre_id, item_id) values (6, 79);
-insert into Item_Genre (genre_id, item_id) values (4, 60);
-insert into Item_Genre (genre_id, item_id) values (17, 21);
-insert into Item_Genre (genre_id, item_id) values (20, 28);
-insert into Item_Genre (genre_id, item_id) values (18, 31);
-insert into Item_Genre (genre_id, item_id) values (10, 66);
-insert into Item_Genre (genre_id, item_id) values (3, 98);
-insert into Item_Genre (genre_id, item_id) values (1, 90);
-insert into Item_Genre (genre_id, item_id) values (13, 69);
-insert into Item_Genre (genre_id, item_id) values (22, 55);
-insert into Item_Genre (genre_id, item_id) values (8, 7);
-insert into Item_Genre (genre_id, item_id) values (17, 55);
-insert into Item_Genre (genre_id, item_id) values (15, 47);
-insert into Item_Genre (genre_id, item_id) values (6, 70);
-insert into Item_Genre (genre_id, item_id) values (17, 20);
-insert into Item_Genre (genre_id, item_id) values (1, 8);
-insert into Item_Genre (genre_id, item_id) values (16, 27);
-insert into Item_Genre (genre_id, item_id) values (18, 90);
-insert into Item_Genre (genre_id, item_id) values (9, 90);
-insert into Item_Genre (genre_id, item_id) values (10, 72);
-insert into Item_Genre (genre_id, item_id) values (22, 38);
-insert into Item_Genre (genre_id, item_id) values (5, 8);
-insert into Item_Genre (genre_id, item_id) values (12, 98);
-insert into Item_Genre (genre_id, item_id) values (15, 35);
-insert into Item_Genre (genre_id, item_id) values (7, 27);
-insert into Item_Genre (genre_id, item_id) values (2, 75);
-insert into Item_Genre (genre_id, item_id) values (6, 99);
-insert into Item_Genre (genre_id, item_id) values (15, 19);
-insert into Item_Genre (genre_id, item_id) values (5, 50);
-insert into Item_Genre (genre_id, item_id) values (13, 89);
-insert into Item_Genre (genre_id, item_id) values (5, 45);
-insert into Item_Genre (genre_id, item_id) values (10, 8);
-insert into Item_Genre (genre_id, item_id) values (9, 34);
-insert into Item_Genre (genre_id, item_id) values (22, 21);
-insert into Item_Genre (genre_id, item_id) values (22, 56);
-insert into Item_Genre (genre_id, item_id) values (21, 81);
-insert into Item_Genre (genre_id, item_id) values (19, 87);
-insert into Item_Genre (genre_id, item_id) values (7, 90);
-insert into Item_Genre (genre_id, item_id) values (8, 47);
-insert into Item_Genre (genre_id, item_id) values (15, 36);
-insert into Item_Genre (genre_id, item_id) values (16, 99);
-insert into Item_Genre (genre_id, item_id) values (8, 83);
-insert into Item_Genre (genre_id, item_id) values (9, 85);
-insert into Item_Genre (genre_id, item_id) values (14, 20);
-insert into Item_Genre (genre_id, item_id) values (20, 19);
-insert into Item_Genre (genre_id, item_id) values (17, 44);
-insert into Item_Genre (genre_id, item_id) values (17, 17);
-insert into Item_Genre (genre_id, item_id) values (16, 47);
-insert into Item_Genre (genre_id, item_id) values (2, 8);
-insert into Item_Genre (genre_id, item_id) values (5, 32);
-insert into Item_Genre (genre_id, item_id) values (19, 17);
-insert into Item_Genre (genre_id, item_id) values (1, 30);
-insert into Item_Genre (genre_id, item_id) values (4, 68);
-insert into Item_Genre (genre_id, item_id) values (22, 83);
-insert into Item_Genre (genre_id, item_id) values (20, 5);
-insert into Item_Genre (genre_id, item_id) values (22, 96);
-insert into Item_Genre (genre_id, item_id) values (12, 25);
-insert into Item_Genre (genre_id, item_id) values (22, 16);
-insert into Item_Genre (genre_id, item_id) values (6, 17);
-insert into Item_Genre (genre_id, item_id) values (3, 22);
-insert into Item_Genre (genre_id, item_id) values (22, 78);
-insert into Item_Genre (genre_id, item_id) values (21, 99);
-insert into Item_Genre (genre_id, item_id) values (9, 65);
-insert into Item_Genre (genre_id, item_id) values (13, 38);
-insert into Item_Genre (genre_id, item_id) values (10, 78);
-insert into Item_Genre (genre_id, item_id) values (13, 52);
-insert into Item_Genre (genre_id, item_id) values (12, 76);
+INSERT INTO `Item_Genre` (`item_id`, `genre_id`) VALUES
+(8, 1),
+(30, 1),
+(31, 1),
+(62, 1),
+(70, 1),
+(71, 1),
+(90, 1),
+(99, 1),
+(231, 1),
+(281, 1),
+(417, 1),
+(496, 1),
+(535, 1),
+(569, 1),
+(770, 1),
+(869, 1),
+(8, 2),
+(15, 2),
+(19, 2),
+(49, 2),
+(63, 2),
+(75, 2),
+(91, 2),
+(94, 2),
+(161, 2),
+(194, 2),
+(428, 2),
+(719, 2),
+(912, 2),
+(1056, 2),
+(1065, 2),
+(1124, 2),
+(22, 3),
+(36, 3),
+(37, 3),
+(43, 3),
+(58, 3),
+(74, 3),
+(96, 3),
+(98, 3),
+(321, 3),
+(577, 3),
+(589, 3),
+(733, 3),
+(784, 3),
+(825, 3),
+(895, 3),
+(1102, 3),
+(6, 4),
+(39, 4),
+(42, 4),
+(45, 4),
+(60, 4),
+(66, 4),
+(68, 4),
+(134, 4),
+(506, 4),
+(775, 4),
+(1011, 4),
+(1063, 4),
+(1096, 4),
+(1106, 4),
+(1108, 4),
+(8, 5),
+(26, 5),
+(32, 5),
+(39, 5),
+(40, 5),
+(45, 5),
+(50, 5),
+(60, 5),
+(70, 5),
+(73, 5),
+(84, 5),
+(92, 5),
+(337, 5),
+(665, 5),
+(1014, 5),
+(1112, 5),
+(17, 6),
+(27, 6),
+(30, 6),
+(70, 6),
+(79, 6),
+(93, 6),
+(99, 6),
+(307, 6),
+(461, 6),
+(665, 6),
+(763, 6),
+(1011, 6),
+(1105, 6),
+(1111, 6),
+(1122, 6),
+(7, 7),
+(27, 7),
+(29, 7),
+(38, 7),
+(81, 7),
+(83, 7),
+(84, 7),
+(90, 7),
+(117, 7),
+(131, 7),
+(375, 7),
+(777, 7),
+(1014, 7),
+(1054, 7),
+(1119, 7),
+(7, 8),
+(8, 8),
+(15, 8),
+(47, 8),
+(51, 8),
+(52, 8),
+(61, 8),
+(73, 8),
+(83, 8),
+(640, 8),
+(831, 8),
+(1110, 8),
+(1125, 8),
+(34, 9),
+(65, 9),
+(78, 9),
+(82, 9),
+(85, 9),
+(90, 9),
+(169, 9),
+(326, 9),
+(445, 9),
+(634, 9),
+(645, 9),
+(856, 9),
+(8, 10),
+(18, 10),
+(33, 10),
+(66, 10),
+(72, 10),
+(75, 10),
+(78, 10),
+(109, 10),
+(543, 10),
+(873, 10),
+(1099, 10),
+(4, 11),
+(20, 11),
+(28, 11),
+(31, 11),
+(46, 11),
+(77, 11),
+(96, 11),
+(581, 11),
+(734, 11),
+(812, 11),
+(963, 11),
+(32, 12),
+(42, 12),
+(59, 12),
+(69, 12),
+(73, 12),
+(76, 12),
+(80, 12),
+(98, 12),
+(341, 12),
+(472, 12),
+(744, 12),
+(763, 12),
+(774, 12),
+(886, 12),
+(8, 13),
+(22, 13),
+(29, 13),
+(38, 13),
+(52, 13),
+(69, 13),
+(73, 13),
+(79, 13),
+(89, 13),
+(407, 13),
+(661, 13),
+(2, 14),
+(20, 14),
+(38, 14),
+(76, 14),
+(439, 14),
+(456, 14),
+(545, 14),
+(708, 14),
+(788, 14),
+(1013, 14),
+(1083, 14),
+(19, 15),
+(29, 15),
+(35, 15),
+(36, 15),
+(47, 15),
+(53, 15),
+(54, 15),
+(57, 15),
+(70, 15),
+(93, 15),
+(125, 15),
+(150, 15),
+(164, 15),
+(171, 15),
+(201, 15),
+(220, 15),
+(596, 15),
+(1049, 15),
+(17, 16),
+(27, 16),
+(47, 16),
+(84, 16),
+(90, 16),
+(91, 16),
+(95, 16),
+(98, 16),
+(99, 16),
+(330, 16),
+(618, 16),
+(648, 16),
+(8, 17),
+(9, 17),
+(17, 17),
+(20, 17),
+(34, 17),
+(44, 17),
+(47, 17),
+(52, 17),
+(55, 17),
+(72, 17),
+(81, 17),
+(85, 17),
+(133, 17),
+(150, 17),
+(194, 17),
+(454, 17),
+(640, 17),
+(720, 17),
+(753, 17),
+(784, 17),
+(815, 17),
+(860, 17),
+(31, 18),
+(32, 18),
+(33, 18),
+(51, 18),
+(73, 18),
+(74, 18),
+(75, 18),
+(78, 18),
+(90, 18),
+(282, 18),
+(605, 18),
+(708, 18),
+(1064, 18),
+(17, 19),
+(54, 19),
+(60, 19),
+(87, 19),
+(89, 19),
+(262, 19),
+(380, 19),
+(625, 19),
+(749, 19),
+(840, 19),
+(856, 19),
+(973, 19),
+(2, 20),
+(5, 20),
+(19, 20),
+(20, 20),
+(22, 20),
+(28, 20),
+(36, 20),
+(131, 20),
+(454, 20),
+(641, 20),
+(659, 20),
+(1087, 20),
+(56, 21),
+(61, 21),
+(62, 21),
+(66, 21),
+(70, 21),
+(81, 21),
+(99, 21),
+(109, 21),
+(321, 21),
+(370, 21),
+(543, 21),
+(592, 21),
+(770, 21),
+(780, 21),
+(799, 21),
+(866, 21),
+(32, 22),
+(33, 22),
+(38, 22),
+(55, 22),
+(56, 22),
+(59, 22),
+(63, 22),
+(78, 22),
+(80, 22),
+(83, 22),
+(96, 22),
+(159, 22),
+(288, 22),
+(338, 22),
+(509, 22),
+(813, 22),
+(1107, 22);
